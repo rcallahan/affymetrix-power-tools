@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+	
+	
+
+<h1>Affymetrix® PSI Data File Format</h1>
+		<h2>PSI FILE</h2>
+	
+
+ 
+	<p><b>Description</b></p>
+<p>The PSI, probe set information, file contains the probe set names and number of probe pairs for expression and genotyping arrays. This information is also stored in the CDF file and in the same order. The intension of this file is to quickly obtain the probe set names on an array without having to parse the entire CDF file.</p>
+
+<p><b>Format</b></p>
+<p>The format of the PSI file is ASCII text.</p>
+
+<p>The first line of the file contains the number of probe set names preceded by the string: "#Probe Sets: ".</p>
+
+<p>The remaining lines contain (tab separated) an unused number, the probe set name and the number of probe pairs in the probe set. The unused number in the first column is referred to as the unit number in the CDF file. This number is not used by any Affymetrix software.</p>
+
+			</div>
+			<div class="clr"></div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

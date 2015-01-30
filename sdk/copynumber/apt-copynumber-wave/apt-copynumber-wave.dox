@@ -1,0 +1,134 @@
+/**
+\page apt-copynumber-wave MANUAL: apt-copynumber-wave (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#quickstart">Quick Start</a></li>
+<li><a href="#example">Command line example for using this application</a></li>
+<li><a href="#runtimeperformance">Runtime Performance</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+This is the documentation for using apt-copynumber-wave to compute additional
+waves from log2 ratios belonging to a set of input CYCHP files. The application
+can be applied to CN reference (with waves) generated from reference samples 
+coming from CytoScanHD_Array.
+
+<a name="quickstart">
+\section QuickStart Quick Start
+
+The basic requirements for a run of apt-copynumber-wave are:
+
+-     A collection of CYCHP files to process. Note
+      that the program will run much faster if the CYCHP files are
+      located on a local disk as opposed to being read across a
+      network.
+
+-     The CN Reference input file.
+
+-     The CN Reference output file.
+
+The output will consist of a modified CN reference with additional wave added to the WaveCorrection data set.
+
+WARNING: apt-copynumber-wave will overwrite any existing output
+CN Reference file it finds. If you wish to keep existing results make sure to
+specify a different output directory name.
+
+NOTE: On windows the DOS prompt does not support wildcard expansion
+and the preferred method is to supply a text file with the path to the
+cychp files via the '--cychp-files' option (see below for details of file
+format).
+
+NOTE: The windows DOS prompt also does not allow a continuation of a
+command with the '\' character, unlike unix. So in the examples shown
+here the '\' character should be omitted and everything entered on a 
+single line.
+
+<a name="example">
+\section example Command line example for using this application. 
+
+\verbatim
+apt-copynumber-wave -v 4 \                             #verbose output level in the log file ranging from 1 (least details) to 4 (most details)
+    --cn-reference-input CytoScanHD_Array.na32.v3.REF_MODEL \  #specify the input CN reference that already have at least 1 or more waves and to be augmented from.   
+    --cn-reference-output CytoScanHD_Array.na32.v3.additional6waves.REF_MODEL \ #specify the output CN reference that contain augmented waves
+    --analysis additional-waves-reference-method.\     #analysis module to compute the additional wave using the input CYCHP files
+	additional-wave-count=6.\                      #number of waves need to be estimated from the input CYCHP files
+	trim=2.0.\                                     #trim parameter for absolute adjusted log2 ratios after each wave
+	percentile=0.75.\                              #percentile to use for each probeset in finding wave. E.g., 0.75 means 75-th percentile.
+	demean=false.\                                 #true: demean prior to finding each wave; false: otherwise
+	cn-qc-cutoff=0.35.\                            #only includes CYCHP files that have MAPD <= cn-qc-cutoff
+	selected-qc=snp-qc \                           #choose what SNP related QC for filtering input CYCHP files, supported QCs include snp-qc,contrast-qc, contrast-qc-nsp, raw-snp-qc and contrast-qc-rand
+	snp-qc-cutoff=0.\                              #only includes CYCHP files that have the selected SNP related QC >= snp-qc-cutoff
+	force=false.\                                  #true: Disable various checks including chip types; false: otherwise.
+	keep-temp-data=false.\                         #true: dump out intermediate data during apt processing; false: otherwise.
+	use-high-waviness-seg-count=true.\             #true: only includes CYCHP files that have waviness-seg-count > waviness-seg-count-cutoff;false: only includes CYCHP files that have waviness-seg-count <= waviness-seg-count-cutoff 
+	waviness-seg-count-cutoff=0.\                  #waviness-seg-count threshold that is used with "use-high-waviness-seg-count" option
+    --temp-dir mytempDIR \                             #specify the directory to hold tempory results
+    --cychp-files CYCHPFileList.txt       #an ASCII file that contains the full path of input cychp files for processing, where the first row of the file is "cychp_files" and each subsequent row corresponds to each cychp file
+\endverbatim
+
+<a name="runtimeperformance">
+\section RunTimePerformance Runtime Performance
+
+N/A
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-copynumber-wave.help.txt
+
+\section additional-waves-reference-method
+
+\verbatim
+additional-waves-reference-method:
+CopyNumber AdditionalWaves
+
+Parameters:
+ 'trim'                        Log2Ratio Trim value. [default '2.0']
+ 'percentile'                  High Percentile value. [default '0.75']
+ 'additional-wave-count'       Number of waves to add to the reference.
+                               [default '1']
+ 'demean'                      Demean the input to the SVD. [default
+                               'false']
+ 'cn-qc-cutoff'                If the CN QC values if over this cutoff
+                               then the sample fails QC. [default
+                               '0.27']
+ 'snp-qc-cutoff'               If the SNP QC values if below this cutoff
+                               then the sample fails QC. [default
+                               '1.1']
+ 'waviness-seg-count-cutoff'   The waviness seg count cutoff. [default
+                               '100']
+ 'use-high-waviness-seg-count' Use only those cychp files that have a
+                               waviness-seg-count > the cutoff if
+                               true, else use only those cychp files
+                               <= the cutoff. [default 'true']
+ 'force'                       Force the job to run even if there is a
+                               mismatch between the cychp files and
+                               the input CN reference. [default
+                               'false']
+ 'keep-temp-data'              If true, then do not delete the temporary
+                               data files used by the module.
+                               [default 'false']
+\endverbatim
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. Some question? For example:
+<pre>
+	example
+</pre>
+
+A. The answer.
+
+*/

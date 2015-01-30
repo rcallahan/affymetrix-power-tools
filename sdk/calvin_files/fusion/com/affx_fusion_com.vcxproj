@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FBFAA656-E5D0-47B0-89FE-9BF0DD5BB921}</ProjectGuid>
+    <RootNamespace>affx_fusion_com</RootNamespace>
+    <Keyword>AtlProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Dynamic</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Dynamic</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Dynamic</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Dynamic</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)affx_fusion_com.tlb</TypeLibraryName>
+      <HeaderFileName>affx_fusion_com.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>affx_fusion_com_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>affx_fusion_com_p.c</ProxyFileName>
+      <ValidateAllParameters>false</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;_USE_MEM_MAPPING_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\affx_fusion_com.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)affx_fusion_com.tlb</TypeLibraryName>
+      <HeaderFileName>affx_fusion_com.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>affx_fusion_com_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>affx_fusion_com_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;_USE_MEM_MAPPING_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\affx_fusion_com.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)affx_fusion_com.tlb</TypeLibraryName>
+      <HeaderFileName>affx_fusion_com.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>affx_fusion_com_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>affx_fusion_com_p.c</ProxyFileName>
+      <ValidateAllParameters>false</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;_USE_MEM_MAPPING_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\affx_fusion_com.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)affx_fusion_com.tlb</TypeLibraryName>
+      <HeaderFileName>affx_fusion_com.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>affx_fusion_com_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>affx_fusion_com_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;_USE_MEM_MAPPING_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\affx_fusion_com.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="affx_fusion_com.cpp" />
+    <ClCompile Include="BackgroundZoneInfoCOM.cpp" />
+    <ClCompile Include="BackgroundZoneTypeCOM.cpp" />
+    <ClCompile Include="COMStringUtils.cpp" />
+    <ClCompile Include="FGridCoordsCOM.cpp" />
+    <ClCompile Include="FPointCOM.cpp" />
+    <ClCompile Include="FusionBaseCallTypeCOM.cpp" />
+    <ClCompile Include="FusionCDFDataCOM.cpp" />
+    <ClCompile Include="FusionCDFFileHeaderCOM.cpp" />
+    <ClCompile Include="FusionCDFProbeGroupInformationCOM.cpp" />
+    <ClCompile Include="FusionCDFProbeInformationCOM.cpp" />
+    <ClCompile Include="FusionCDFProbeSetInformationCOM.cpp" />
+    <ClCompile Include="FusionCDFQCProbeInformationCOM.cpp" />
+    <ClCompile Include="FusionCDFQCProbeSetInformationCOM.cpp" />
+    <ClCompile Include="FusionCELDataCOM.cpp" />
+    <ClCompile Include="FusionCELFileEntryTypeCOM.cpp" />
+    <ClCompile Include="FusionCHPDataCOM.cpp" />
+    <ClCompile Include="FusionCHPDataRegCOM.cpp" />
+    <ClCompile Include="FusionCHPHeaderCOM.cpp" />
+    <ClCompile Include="FusionCHPLegacyDataCOM.cpp" />
+    <ClCompile Include="FusionCHPMultiDataDataCOM.cpp" />
+    <ClCompile Include="FusionCHPQuantificationDataCOM.cpp" />
+    <ClCompile Include="FusionCHPQuantificationDetectionDataCOM.cpp" />
+    <ClCompile Include="FusionExpressionProbeSetResultsCOM.cpp" />
+    <ClCompile Include="FusionForceCallTypeCOM.cpp" />
+    <ClCompile Include="FusionGenotypeProbeSetResultsCOM.cpp" />
+    <ClCompile Include="FusionPSIFileCOM.cpp" />
+    <ClCompile Include="FusionResequencingResultsCOM.cpp" />
+    <ClCompile Include="FusionTagValuePairTypeCOM.cpp" />
+    <ClCompile Include="FusionUniversalProbeSetResultsCOM.cpp" />
+    <ClCompile Include="ProbeSetMultiDataCopyNumberDataCOM.cpp" />
+    <ClCompile Include="ProbeSetMultiDataCopyNumberVariationRegionDataCOM.cpp" />
+    <ClCompile Include="ProbeSetMultiDataCytoRegionDataCOM.cpp" />
+    <ClCompile Include="ProbeSetMultiDataExpressionDataCOM.cpp" />
+    <ClCompile Include="ProbeSetMultiDataGenotypeDataCOM.cpp" />
+    <ClCompile Include="ProbeSetQuantificationDataCOM.cpp" />
+    <ClCompile Include="ProbeSetQuantificationDetectionDataCOM.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="affx_fusion_com_i.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="affx_fusion_com.def" />
+    <None Include="affx_fusion_com.rgs" />
+    <None Include="BackgroundZoneInfo.rgs" />
+    <None Include="BackgroundZoneType.rgs" />
+    <None Include="FGridCoords.rgs" />
+    <None Include="FPoint.rgs" />
+    <None Include="FusionBaseCallType.rgs" />
+    <None Include="FusionCDFData.rgs" />
+    <None Include="FusionCDFFileHeader.rgs" />
+    <None Include="FusionCDFProbeGroupInformation.rgs" />
+    <None Include="FusionCDFProbeInformation.rgs" />
+    <None Include="FusionCDFProbeSetInformation.rgs" />
+    <None Include="FusionCDFQCProbeInformation.rgs" />
+    <None Include="FusionCDFQCProbeSetInformation.rgs" />
+    <None Include="FusionCELDataCOM.rgs" />
+    <None Include="FusionCELFileEntryType.rgs" />
+    <None Include="fusionch.bin" />
+    <None Include="FusionCHPData.rgs" />
+    <None Include="FusionCHPDataReg.rgs" />
+    <None Include="FusionCHPHeader.rgs" />
+    <None Include="FusionCHPLegacyData.rgs" />
+    <None Include="FusionCHPMultiDataDataCOM.rgs" />
+    <None Include="FusionCHPQuantificationData.rgs" />
+    <None Include="FusionCHPQuantificationDetectionData.rgs" />
+    <None Include="FusionExpressionProbeSetResults.rgs" />
+    <None Include="FusionForceCallType.rgs" />
+    <None Include="FusionGenotypeProbeSetResults.rgs" />
+    <None Include="FusionPSIFile.rgs" />
+    <None Include="FusionResequencingResults.rgs" />
+    <None Include="FusionTagValuePairType.rgs" />
+    <None Include="FusionUniversalProbeSetResults.rgs" />
+    <None Include="ProbeSetMultiDataCopyNumberData.rgs" />
+    <None Include="ProbeSetMultiDataCopyNumberVariationRegionData.rgs" />
+    <None Include="ProbeSetMultiDataCopyNumberVariationRegionDataCOM.rgs" />
+    <None Include="ProbeSetMultiDataCytoRegionData.rgs" />
+    <None Include="ProbeSetMultiDataExpressionData.rgs" />
+    <None Include="ProbeSetMultiDataGenotypeData.rgs" />
+    <None Include="ProbeSetQuantificationData.rgs" />
+    <None Include="ProbeSetQuantificationDetectionData.rgs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="affx_fusion_com.idl">
+      <MkTypLibCompatible Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</MkTypLibCompatible>
+      <MkTypLibCompatible Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</MkTypLibCompatible>
+      <MkTypLibCompatible Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</MkTypLibCompatible>
+      <MkTypLibCompatible Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</MkTypLibCompatible>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BackgroundZoneInfoCOM.h" />
+    <ClInclude Include="BackgroundZoneTypeCOM.h" />
+    <ClInclude Include="COMStringUtils.h" />
+    <ClInclude Include="FGridCoordsCOM.h" />
+    <ClInclude Include="FPointCOM.h" />
+    <ClInclude Include="FusionBaseCallTypeCOM.h" />
+    <ClInclude Include="FusionCDFDataCOM.h" />
+    <ClInclude Include="FusionCDFFileHeaderCOM.h" />
+    <ClInclude Include="FusionCDFProbeGroupInformationCOM.h" />
+    <ClInclude Include="FusionCDFProbeInformationCOM.h" />
+    <ClInclude Include="FusionCDFProbeSetInformationCOM.h" />
+    <ClInclude Include="FusionCDFQCProbeInformationCOM.h" />
+    <ClInclude Include="FusionCDFQCProbeSetInformationCOM.h" />
+    <ClInclude Include="FusionCELDataCOM.h" />
+    <ClInclude Include="FusionCELFileEntryTypeCOM.h" />
+    <ClInclude Include="FusionCHPDataCOM.h" />
+    <ClInclude Include="FusionCHPDataRegCOM.h" />
+    <ClInclude Include="FusionCHPHeaderCOM.h" />
+    <ClInclude Include="FusionCHPLegacyDataCOM.h" />
+    <ClInclude Include="FusionCHPMultiDataDataCOM.h" />
+    <ClInclude Include="FusionCHPQuantificationDataCOM.h" />
+    <ClInclude Include="FusionCHPQuantificationDetectionDataCOM.h" />
+    <ClInclude Include="FusionExpressionProbeSetResultsCOM.h" />
+    <ClInclude Include="FusionForceCallTypeCOM.h" />
+    <ClInclude Include="FusionGenotypeProbeSetResultsCOM.h" />
+    <ClInclude Include="FusionPSIFileCOM.h" />
+    <ClInclude Include="FusionResequencingResultsCOM.h" />
+    <ClInclude Include="FusionTagValuePairTypeCOM.h" />
+    <ClInclude Include="FusionUniversalProbeSetResultsCOM.h" />
+    <ClInclude Include="ProbeSetMultiDataCopyNumberDataCOM.h" />
+    <ClInclude Include="ProbeSetMultiDataCopyNumberVariationRegionDataCOM.h" />
+    <ClInclude Include="ProbeSetMultiDataCytoRegionDataCOM.h" />
+    <ClInclude Include="ProbeSetMultiDataExpressionDataCOM.h" />
+    <ClInclude Include="ProbeSetMultiDataGenotypeDataCOM.h" />
+    <ClInclude Include="ProbeSetQuantificationDataCOM.h" />
+    <ClInclude Include="ProbeSetQuantificationDetectionDataCOM.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="affx_fusion_com.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="affx_fusion_com.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\file\lib-file-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-123436597814}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\util\lib-util-devnet.vcxproj">
+      <Project>{6812eb15-8e4d-49c0-a2d8-d50b8887a338}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib-calvin-devnet.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-490684076412}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib-fusion-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-384758609816}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

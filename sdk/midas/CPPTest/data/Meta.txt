@@ -1,0 +1,16 @@
+##
+## This file maps HuExon 1.0 st exon probesets to 
+## RefSeq transcripts where the exon probesets
+## are fully contained within the RefSeq transcripts.
+##
+#%create_date=Tue Oct 11 12:37:57 PDT 2005
+#%lib-set-name=HuEx-1_0-st
+#%lib-set-version=v2
+#%genome-species=Homo sapiens
+#%genome-version=hg16
+#%genome-version-ucsc=hg16
+#%genome-version-ncbi=34
+#%genome-version-create_date=2003 July
+probeset_id	probeset_list	gi	accession	description
+1	2590411 2609210 2616957 2391254	gi:21314660	gb:NM_014470	/DEF=Homo sapiens GTP-binding protein (RHO6), mRNA. /GEN=RHO6 /PROD=GTP-binding protein RHO6
+2	3499280 2807653	gi:21314663	gb:NM_014255	/DEF=Homo sapiens transmembrane protein 4 (TMEM4), mRNA. /GEN=TMEM4 /PROD=transmembrane protein 4

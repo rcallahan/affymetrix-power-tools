@@ -1,0 +1,246 @@
+##############################################################################
+#
+# cvs:affy/sdk/translation/README.APT_TRANSLATION_AUDIT_20090604_BRANCH
+#
+# 5 June 2009
+#
+# Mybrid Spalding
+#
+# mybrid_spalding@affymetrix.com
+#
+##############################################################################
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                           README
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+==================
+SECTIONS
+==================
+
+* CODE BRANCH APT_TRANSLATION_AUDIT_20090604_BRANCH
+* INTRODUCTION
+* REQUIREMENTS
+* NO ANNOTATION AUDIT
+* FILES
+* REFACTORING NOTES
+
+==================
+CODE BRANCH APT_TRANSLATION_AUDIT_20090604_BRANCH
+==================
+
+The code documented herein is not checked into the head or part of production.
+Instead the code is checked into the CVS branch below.
+
+Only the code in affy/sdk/translation was tagged with the branch below:
+
+APT_TRANSLATION_AUDIT_20090604_BRANCH
+
+==================
+INTRODUCTION
+==================
+
+This document was created to detail work that spanned approximately
+two weeks ending on June 2nd, 2009. The work involved creating a
+custom audit report of a new version of the translation table. The
+report was implemented using the C++ code base as opposed to some
+custom Perl script in order to take leverage much of the business
+logic in this translation code.
+
+This work also utilized the existing audit framework already
+implemented within the translation tool. A new audit type was created
+and registered within the file TranslationAudit.cpp. However, updates
+were required to the audit framework to better generalize the
+framework. Also, the translation code had changes made to provide new
+audit metrics.
+
+==================
+REQUIREMENTS
+==================
+
+The requirements were informal and spelled out in email that is
+provided below. Carsten, Elaine and Krzysztof all approved of this
+work.
+
+I just had a nice conversation with Elaine about what her and Carsten
+what you need. Seems that things are best described thusly. We really
+have two projects:
+
+1.) Project One: Ad hoc tool with limited capabilities for supporting
+a release on 6/4.
+2.) Project Two: General purpose tool for ongoing support.
+
+Given this then I’m recommending I work on Project One noted above,
+which includes a dual file audit, whereas Krzysztof asked me to only
+work on the single file audit. However, Elaine related to me that the
+one single file audit I have already is all that is needed for the
+release with one exception, I need to check for duplicate
+rows. Therefore we agreed on the following plan.
+
+1.) Code freeze 6/1. I need to have whatever I can get done ready by
+June 1st so that Elaine and Carsten have a few days to run the tool.
+2.) Mybrid runs the tool for the point release. I will manually run
+the tool per request for this point release.
+3.) No new markers or genes are being called out with respect to the
+annotation table.
+4.)	The code needs to check for duplicate rows within a file.
+5.)	Haplotype name changes.
+6.)	New Genes, with their haplotypes and markers.
+7.) Summary/Detail report. I still wanted some way to insure that the
+report matched the data. I may accidentally run the wrong version of a
+file with the same name, etc. The report will contain a copy of the
+input translation tables after the summary data.
+
+I should be able to get the above requirements ready by June 1st. Let
+me know if you want any other requirements for the ad hoc tool.
+
+Subject: Report Updates
+
+Hi! I just got off the phone with Carsten and we agreed on the
+following changes to the report based on two kinds of changes I was
+not taking into account.
+
+1.) Reference and Variant values switched. For markers where the
+reference and variant bases have been switched then I will report on
+such markers and I will switch the reference and variant on the
+original table to match the new table to insure I’m comparing like for
+like.
+
+2.) Haplotype indicator switches. Markers have the haplotype
+designation changed from ‘N’ to ‘Y’ and hence none of the alleles for
+the gene are equating. Again, I will switch the original table to
+match the new table to insure we can equate the two.
+
+This work will take an estimated two additional days, which would be
+this Friday. So I still should be ok with Monday as the day for the
+initial version of the report.
+
+
+======================
+NO ANNOTATION AUDIT
+======================
+
+Note that changes to annotation fields were not audited due to the
+June 1st deadline. Below is an email from Elaine with the specifics.
+
+Mybrid - Per your request, there will be some changes to the
+annotation fields in the tables.  Actually, there will be several in
+“Common Name” to make the naming convention more consistent. Since
+with the exception of the “Probe Set ID” and “Switch Design Strand to
+Report” fields, these don’t change how the tools work, I suggest we
+make the annotations auditing lower priority than the consistency
+checking of the haplotypes.  These are the annotation fields in the
+translation file:
+
+Reference Link  
+Probe Set ID       
+Switch Design Strand to Report 
+dbSNP RS ID       
+Defining               
+cDNA Nucleotide Position            
+Genome Position Change            
+Common Name
+
+Bottom line, if we don’t have the annotation checking tool for the
+June TT release, we are OK, I believe.
+
+Elaine
+
+======================
+FILES
+======================
+
+All files are relative to:
+affy/sdk/translation
+
+*** NEW  ****
+Lines  Name - Description
+
+1109 TranslationAudit20090604Release.cpp - All the code for the audit
+minus code added to the translation application.
+
+58 ADTOptions.cpp - Constructor  and destructor created to initialize
+audit data collection pointer.
+
+*** CHANGED  ****
+Lines  Name - Description
+
+131 ADTOptions.h - Added audit data collection structure
+"TranslationAudit *m_audit". Moved destructor and constructor to file.
+
+96 AnnotationTableModel.cpp - Schema changed to meet new schema, unrelated
+to this audit.
+
+805 CallSet.cpp, 113 CallSet.h - Added ignoreDuplicates to prohibit the program from stopping when duplicate haplotypes were detected.
+
+958 GeneCall.cpp - Added ignoreDuplicates flag functionality.
+
+
+126 RunTimeEnvironment.h - Added conviencance macro "sizeof_array". 
+ 
+
+403 TranslationAudit.cpp, 86 TranslationAudit.h - Framework changes to
+better generalize adding audits.
+
+939 TranslationCommonControl.cpp - Option additions and changes for the audit.
+
+615 TranslationEngine.cpp - Audit placement changes to better capture when
+is best to invoke audit.
+
+1559 TranslationInputTsvTableModel.cpp, 31 TranslationInputTsvTableModel.h -
+Added audit attributes.
+
+125 TranslationTable.h, 949 TranslationTable.cpp - Added significant
+audit and ignore duplicate haplotypes code.
+
+1230 TranslationTableModel.cpp - Swapped multiallelic assert for safe code
+replacement to all audit of a bad table.
+
+======================
+REFACTORING NOTES
+======================
+
+The code in TranslationAudit20090604Release.cpp is not suitable for
+production. Requirements were given in an ad hoc fashion and the code
+is lacking any formal design.
+
+Currently there are two competing paths with respect to the future of
+this code:
+
+1.) Throw away. The code would be considered throw away if in fact the
+generation of the translation table itself is automated. The audit
+process is necessary due to manual curation. However, the project to
+automate generation of the translation table has not been approved.
+
+2.) Ruseable report. Carsten wrote up a much more extensive set of
+requirements for a general purpose translation table/annotation
+release. These refactoring notes then only apply if this path is chosen.
+
+There exists the beginning of a design at the very beginning of the
+TranslationAudit20090604Release.cpp file. There is a class defined
+called "Messages". There are two kinds of messages, per file messages
+and combined file messages. There is a sub-class within the "Messages"
+class called "SingleFileMessages".
+
+Currently the messages use an associative array mapped by gene as a
+way index the reports by gene. However, the messages also need to be
+mapped by count overall. A better approach would be to have the map be
+just a positional index by gene nto some array of messages. Then an
+addition map index by overall count also built for array of
+messages. In other words, each message type should just be some array
+of string vectors. Then indexes built using maps by gene, count,
+etc. mapping to the position of the array of string vectors.
+
+The various audit routines in the file need to be refactored to
+the final implementation of the Messages class.
+
+The Messages class should be added to the TranslationAudit object such
+that the audit code added to the application code can write messages
+directly rather than indirectly currently using the auditItems object.
+
+The report routines should be rewritten completely to inline emitting
+the gene reports as the overall report is also emitted.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                           README
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

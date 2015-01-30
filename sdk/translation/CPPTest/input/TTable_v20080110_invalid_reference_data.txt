@@ -1,0 +1,4 @@
+Gene	Reference Link	AssayID	dbSNP	Defining	cDNA	Genomic	Change	External ID	Validated	Haplotype	Reference	Variant	A1	A2	A3	A4	A5	A6	A7	A8	A9	A10	A11	A12	A13	A14	A15	A16	A17	A18	A19	A20	A21	A22	A23	A24	A25	A26	A27	A28	A29
+ABCB1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	*14	A893S	A893T 	N44S	I829V	S400N	A599T	V801M																				
+ABCB1	NCBI dbSNP 	367417	rs10276036	N	Not in mRNA	162366A>G	Intron	MDR1_A-44G	Y	N	B	G																													
+ABCB1	NCBI dbSNP 	365848	rs2235012	N		163837G>C	L554L	rs2235012	N	N	G	C																													

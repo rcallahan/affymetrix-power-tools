@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE MAGE-ML SYSTEM "MAGE-ML.dtd">
+<MAGE-ML identifier="Affymetrix">
+	<BioMaterial_package>
+		<BioMaterial_assnlist>
+			<BioSource identifier="Affymetrix:BioSource:s_with_temp" name="s_with_temp">
+				<PropertySets_assnlist>
+					<NameValueType name="Sample Template Name" value="samp_temp" type="string"/>
+					<NameValueType name="Tissue Type" value="Skin" type="controlled"/>
+					<NameValueType name="Date" value="8-1-2002" type="date"/>
+					<NameValueType name="Time" value="12.30 PM" type="time"/>
+					<NameValueType name="Barcode" value="123123123" type="integer"/>
+				</PropertySets_assnlist>
+				<Characteristics_assnlist>
+					<OntologyEntry category="Affymetrix:Sample Project" value="s_proj"/>
+				</Characteristics_assnlist>
+				<MaterialType_assn>
+					<OntologyEntry category="Affymetrix:Material Type" value="s_type"/>
+				</MaterialType_assn>
+			</BioSource>
+		</BioMaterial_assnlist>
+	</BioMaterial_package>
+</MAGE-ML>

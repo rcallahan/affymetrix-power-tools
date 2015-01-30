@@ -1,0 +1,25 @@
+/**
+\page apt-matrix-diff MANUAL: apt-matrix-diff (\aptversion)
+
+\p apt-matrix-diff will check to see if two matrices contain the same values.
+This can be annoying to do with a regular diff as differences in
+precision and outputting functions can lead to representational
+differences for two numbers that are the same (i.e. 1.0 == 1).
+
+\section QuickStart Quick Start
+To compare tab-separated files file1.tab and file2.tab, use:
+
+\verbatim
+apt-matrix-diff -col-skip 1 -line-skip 1 file1.tab file2.tab
+\endverbatim
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-matrix-diff.help.txt
+
+*/

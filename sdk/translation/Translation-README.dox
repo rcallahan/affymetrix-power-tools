@@ -1,0 +1,290 @@
+//
+// cvs:affy/sdk/translation/Translation-README.dox ---
+//
+// $Id: Translation-README.dox,v 1.3 2009-01-13 17:59:56 mspald Exp $
+//
+
+/**
+ * @file   translation/Translation-README.dox
+ * @brief  A collection of doxygen pages in one file.
+ *         Read \link file-format-tsv the TsvFile docs \endlink more about TsvFile.
+ */
+
+/**
+@page extend-apt-dment-translation Extend: APT DMET Translation (\aptversion)
+
+<center><b>DRAFT</b></center>
+
+This document covers the process for extending the APT DMET Translation tool.
+The following topics are covered:
+
+ - Adding a new option. 
+ - Adding a new report. 
+ - Changing the translation table schema.
+ - Windows Console reporting
+
+ \section extend_option Extend Options
+
+Extending the options is covered here for the requirement of
+adding an option to support a new report. For illustrative purposes
+the boolean option "--example-report" is used where if the option is
+passed then a new report being added will be output.
+
+Adding an option entails the following tasks:
+
+ - Add a corresponding member attribute to the ADTOptions.h file.
+ - Set a simple default for booleans, integers, etc in the ADTOptions.h constructor.
+
+\verbatim
+  // ADTOptions.h
+  // REPORTING OPTIONS
+  bool m_exampleReport; // <-- NEW OPTION 
+  bool m_markerReport;
+  bool m_profile;
+  int  m_regression;
+  bool m_summaryReportSort;
+  int  m_verbosity;
+
+  ADTOptions() {
+    // Some defaults 
+    m_dmet2Calling                   = false;
+    m_enforceCompleteHaplotypeGroup  = false;
+    m_exampleReport                  = false;  // <-- NEW OPTION
+    m_ignoreUnknownAlleles           = false;
+    m_ignoreReportAllele             = false;
+    m_markerReport                   = false;
+    m_profile                        = false;
+    m_prototypeCHPFiles              = false;
+    m_streamType                     = ADT_EXPERIMENT_STREAM_TYPE_NULL;
+    m_summaryReportSort              = true;
+    m_useFirstDupAlleleDef           = false;
+    m_verbosity                      = 1;
+  };
+
+\endverbatim
+
+
+ - Define the option in TranslationCommonControl.cpp API, defineCommonOptions()
+
+\verbatim
+   opts->defineOption("", "marker-report", PgOpt::BOOL_OPT,
+                     " => Output DMET2 Marker Report.", "false");
+
+   // <-- NEW OPTION                     
+   opts->defineOption("", "example-report", PgOpt::BOOL_OPT,
+                     " => Example Report.", "false");
+                     
+\endverbatim                     
+
+ 
+ - Copy the PgOptions value to the ADTOptions member attribute you defined in TranslationCommonControl.cpp, setCommonOptions().
+
+\verbatim
+
+  adtOpts.m_markerReport = pgOpts->getBool("marker-report");
+  // <-- NEW OPTION
+  adtOpts.m_exampleReport = pgOpts->getBool("example-report");
+
+\endverbatim
+
+Once the above steps have been followed then the ADTOptions member
+attribute is available throughout all the translation code via the run
+time environment passed into most object methods. For the new exmaple
+"--example-report" option the new option is only accessed via the <pre>
+m_rte </pre> member attribute within the TranslationEngine itself. See
+the following example on extending reports to see the option in use.
+
+\section extend_report Extend Reports 
+
+Reports can be added by creating a report file and then registering the
+report in TranslationEngine.cpp. Examples below will use a new report
+named EXAMPLE  where files <pre> translation/EXAMPLEExperimentReport.h </pre>
+and <pre> translation/EXAMPLEExperimentReport.cpp </pre> have
+been created.
+
+ - Extend the ExperimentReport.h object.
+
+There are four virtual interfaces in the \link ExperimentReport.h
+ExperimentReport.h \endlink that when implemented will create the
+report once registered in the <pre> \link TranslationEngine.cpp
+TranslationEngine.cpp \endlink </pre> file.
+
+<pre> 2. close() </pre>:
+Typically just close the TsvFile being output. You can also sort the
+report after closing the file. For summary reports you will output
+the within report during close. There is no companion "open" because
+the open is considered part of the generate command. 
+
+<pre> 3. generate() </pre>:
+Called once per experiment CHP file. The report will
+be written as a stream. If you need to sort your report then you can do so
+in close. If you want to create a summary report then stuff the
+summary data in member attributes during generate. Open the TSV file
+with the first call to generate. 
+
+<pre> 4. name() </pre>:
+Return a simple string name for your report. Used for logging purposes by
+the TranslationEngine.
+
+<pre> 5. report_type() </pre>:
+You must add a new type to the ENUM in ExperimentReport.h and
+have your implementation return it.
+
+ - Add the header file 
+\verbatim
+#include "translation/RegressionExperimentReport.h"
+#include "translation/TranslationExperimentReport.h"
+#include "translation/MarkerExperimentReport.h"
+#include "transaltion/EXAMPLEExperimentReport.h"
+\endverbatim
+
+ - Create the report object. 
+
+\verbatim
+    // REPORT: factory, initialize reports in our report factory. 
+    if (m_rte.m_adtOpts.m_regression > 0) {
+      report.push_back(new RegressionExperimentReport());
+    }
+    if (m_rte.m_adtOpts.m_markerReport) {
+      report.push_back(new MarkerExperimentReport());
+    }
+    // EXTEND to add a new report using a new "--example-report" option.
+    // A check to insure this is a command line invocation is
+    // added to prevent the report from ever being created by the Windows
+    // console. 
+    if ( (m_controllerMask & C_CMDLINE) && m_rte.m_adtOpts.m_exampleReport) {
+        report.push_back(new EXAMPLEExperimentReport() );
+    }
+    
+\endverbatim
+
+\section extend_translation_table_schema Extend Translation Table Schema
+
+The most common task with respect to extending or modifying the translation
+tool is that of changing the translation schema.
+
+This section details what is involved in changing the column layout and
+what's allowed for data.
+
+The schema for the translation table is NOT in the header file.
+
+The schema for the translation table is in the SOURCE file,
+\link TranslationTableModel.cpp TranslationTable.cpp \endlink.
+
+There is a class defined to hold the schame named <pre> TittmColumnDefinition </pre> is in the \link TranslationInputTsvTableModel.h TranslationInputTsvTableModel.h \endlink header file.
+
+\verbatim
+
+class TittmColumnDefinition
+{
+public:
+  std::string  m_columnName;
+  bool         m_emptyOk;
+  int          m_index;
+  pcrecpp::RE  m_validRE;
+  pcrecpp::RE  *m_ignoreRE;
+};
+
+\endverbatim
+
+Looking at the TittmColumnDefinition class a schema is comprised of a
+name, an emptyOK indicator, a column order index, a validation regular
+expression and an ignore regular expression.
+
+These attributes of the schema were derived from the most common business
+changes whereby name changes, column order, data validation can all be
+accomplished by simply changing the schema.
+
+Both DMET2 and DMET3 translation tables are supported. Almost all fields
+exist between the two types and there is an API in the
+<pre> TranslationTableMoodel </pre> object which maps between the two
+such that most of the code is not DMET version specific.
+
+Changing the schema for the DMET3 table then involves keeping the map
+with the DMET2 columns for common fields.
+
+The simple case of changing the schema for the translation table is to
+add a new column that is specific to DMET3. To do this, simply update
+the schema in \link TranslationTableModel.cpp \endlink.
+
+For illustration purposes a new column named EXAMPLE is being added
+between the "Defining" and "cDNA" columns. The EXAMPLE column is
+a boolean indicatory and is set to only allow "Y" or "N" as legal data.
+
+Here is what was added:
+\verbatim
+  { std::string("EXAMPLE"), 1,  6, std::string("^(?:[YN])$"), NULL },
+\endverbatim
+
+Arguments listed are given in order to the constructors of the
+TittmColumnDefinitions member attributes. Specifically notice that
+the regular expression for validation is taking a string and not a
+regular expression. The string represention the regular expression
+is being passed to the pcrecpp::RE constructor.
+
+The first position is the name, in the example that is "EXAMPLE". The
+next position is the number '1', indicating that it is ok for the
+column to be empty. The '1' is followed by a '6' which is the column
+index order. Column index is a business requirement, not a technical
+requirement. The translation table can only contain predefined
+columns and they must be in a set order. This requirement is probably
+the only reason you find yourself reading this to begin with. The
+TsvFile object doesn't have any technical need for this to be the case.
+The '6' column index is followed by a string representing the
+PCRE (Perl Compatible Regular Expression) string. The regular
+expression states that only the letters "Y" and "N" are allowed.
+Finally, the last position is just "NULL", indicating there is no
+ignore regular expression to apply. If there were then a
+"new pcrecpp::RE()" would need to go in the sixth position.
+
+Simply adding the column is not enough. All columns below
+or after the inserted column must have the column indexes update
+as shown below. 
+
+\verbatim
+
+const TittmColumnDefinition TTM_DMET3_COLUMN_DEFINTIONS[] = { // m_columnName,        m_emptyOk, m_index, m_validRE
+  { std::string("Gene"),           0,  0, std::string("^[A-Z\\d]+$"), NULL },
+  { std::string("Reference Link"), 1,  1, std::string(".*"), NULL },
+  { std::string("Probe Set ID"),        1,  2,
+    std::string("^(?:Probe\\sSet\\sID)|(?:[_\\-\\w\\d]*\\d+)|(?:\\#.*)$"), NULL },
+  { std::string("Switch Design Strand to Report"), 1,  3, std::string("(?:Switch.Design.Strand.to.Report)|(?:[YN])|(?:\\#.*)$"), NULL },
+  { std::string("dbSNP RS ID"),          1,  4,
+    std::string("^(?:(?:rs\\d+[|;\\s]*)+|(?:N/?A)|(?:refSNP\\sID)|(?:dbSNP.RS.ID))$"),
+    NULL },
+  { std::string("Defining"),       1,  5,
+    std::string("^(?:(?:N)|(?:Defining)|(?:\\*?[>A-Za-z\\d\\-\\s\\+]+))$"), NULL },
+
+  // <- NEW COLUMN
+  { std::string("EXAMPLE"), 1,  6, std::string("^(?:[YN])$"), NULL },
+  { std::string("cDNA Nucleotide Position"), 1,  7, std::string(".*"), NULL },
+  { std::string("Genome Position"),        1,  8, std::string(".*"), NULL },
+  { std::string("Change"),         1,  9, std::string(".*"), NULL },
+  { std::string("Common Name"),    1,  10, std::string(".*"), NULL },
+  { std::string("Haplotype"),      1, 11,  std::string("(?:Haplotype)|(?:[YN])"), NULL },
+  { std::string("Reference"),      1, 12,
+    std::string("^(?:Reference)|(?:Minor Allele)|(?:Major Allele)|(?:[ACGT0]+)|(?:INS)|(?:DEL)|(?:-)$"), NULL },
+  { std::string("Variant"),        1, 13,
+    std::string("^(?:Variant)|(?:Minor Allele)|(?:Major Allele)|(?:[ACGT0]+)|(?:INS)|(?:DEL)|(?:-)$"), NULL },
+};
+
+\endverbatim
+
+
+Note that the columns "A1" - "ANN" are not list here. This is because
+the business decided they did want the number of "A1" - "ANN" columns to
+be dynamic. These are appended to the schema in the
+\link TranslationTableModel.cpp \endlink call back function in the
+constructor.
+
+Therefore if the column being added, or extended, is an "ANN" column then
+nothing needs to be done because these columns are dynamic.
+
+
+
+\section extend_windows_console reporting Extend Windows Console Reporting
+
+
+
+
+

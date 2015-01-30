@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.FusionPSIFile.1 = s 'FusionPSIFile Class'
+	{
+		CLSID = s '{84371ACD-6AF1-4C6A-B263-962C243F6C51}'
+	}
+	affx_fusion_com.FusionPSIFile = s 'FusionPSIFile Class'
+	{
+		CLSID = s '{84371ACD-6AF1-4C6A-B263-962C243F6C51}'
+		CurVer = s 'affx_fusion_com.FusionPSIFile.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {84371ACD-6AF1-4C6A-B263-962C243F6C51} = s 'FusionPSIFile Class'
+		{
+			ProgID = s 'affx_fusion_com.FusionPSIFile.1'
+			VersionIndependentProgID = s 'affx_fusion_com.FusionPSIFile'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

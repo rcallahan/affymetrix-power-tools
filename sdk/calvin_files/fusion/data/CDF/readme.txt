@@ -1,0 +1,1 @@
+These files are used by the file sdk unit testing framework.

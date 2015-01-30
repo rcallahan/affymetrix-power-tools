@@ -1,0 +1,83 @@
+/**
+   \page apt-cel-transformer MANUAL: apt-cel-transformer (\aptversion)
+
+   \section aptCelTransformer Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+apt-cel-transformer - Utility program for taking cel files and converting them
+using a ChipStream path and saving the results to a modified set of cel files.
+An example would include rma background subtracting and normalizing a set
+of cel files that could then be used in another application without those
+capabilities.
+
+
+
+<a name="options">
+\section manualOptions Options:
+
+   <!-- Do not edit this verbatim section. 
+   It will be replaced automatically w/ the results
+   of running this program with the -h option
+   --->
+
+\verbinclude apt-cel-transformer.help.txt
+
+   <a name="faq">
+   \section manFaq Frequently Asked Questions
+
+   Q. What is a probe_id? 
+
+   A. See the <a href="FAQ.html#probe_id_faq">FAQ item on probe IDs</a> for more info.
+
+   Q. The normalized results from apt-cel-transformer appear to be ignoring the --probe-norm-file option:
+   <pre>
+   apt-cel-transformer \
+   --probe-norm-file probe_ids.txt \
+   -c rma-bg,quant-norm.sketch=0.usepm=true.bioc=true \
+   -o transformed \
+   *.CEL
+   </pre>
+   A. The "usepm=true" is trumping the use of the --probe-norm-file specification as both are telling 
+   the quantile normalization to use a subset of the probes.
+
+   Q. I do not have a CDF file for the arrays I want to process. (WT based 
+   arrays have PGF/CLF files rather than CDF files)
+
+   A. You can still use this tool. Omit the CDF command line arg. Note that
+   you will not be able to use ChipStream methods which require chip
+   layout information. Most notably you cannot use the rma-bg method
+   and you cannot use the pm-only option to quant-norm.
+
+   Q. How is the mask section in the CEL file used?
+
+   A. It is not. The contents of this section of the CEL file are ignored.
+
+   Q. Where can I get more information about what can be provided with --chipstream?
+
+   A. See the "Data transformations" section of the options in the apt-probeset-summarize 
+   manual. You can use the --explain option to apt-probeset-summarize to get further
+   information on each of the transformation methods. 
+
+   Q. Can I compute gc-RMA values using APT.
+
+   A. No. APT (specifically apt-probeset-summarize) does not currently implment gc-RMA.
+
+   Q. Wild cards do not work on windows. For example:
+   <pre>
+   apt-cel-transformer ... *.CEL
+   </pre>
+
+   A. APT relies on the command shell to do the wild card expansion (ie bash shell on 
+   *NIX systems). The windows shell does not do wild card expansion, so there is no 
+   wild card expansion for APT when run from the windows shell. You may want to try 
+   a different windows shell or perhaps bash via cygwin.
+
+*/

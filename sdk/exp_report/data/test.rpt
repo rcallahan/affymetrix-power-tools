@@ -1,0 +1,60 @@
+Report Type:	Expression Report
+Date:          	08:28AM 05/23/2005
+______________________________________________________________________
+
+Filename:		hta_test_data.B12.CHP
+Probe Array Type:	U133AAofAv2
+Algorithm:		Statistical
+Probe Pair Thr:	8
+Controls:		Antisense
+______________________________________________________________________
+
+Alpha1:		0.05
+Alpha2:		0.065
+Tau:		0.015
+Noise (RawQ):	2.370
+Scale Factor (SF):	0.879
+TGT Value:		500
+Norm Factor (NF):	1.000
+______________________________________________________________________
+
+Background:
+	Avg: 333.23	Std: 7.71	Min: 314.60	Max: 358.90
+Noise:
+	Avg: 7.00	Std: 0.58	Min: 5.70	Max: 9.40
+Corner+
+	Avg: 464		Count: 512
+Corner-
+	Avg: 12208		Count: 512
+Central-
+	Avg: 16353		Count: 9
+Central+
+	Avg: 6353		Count: 9
+______________________________________________________________________
+
+The following data represents probe sets that exceed the probe pair threshold 
+and are not called "No Call".
+
+Total Probe Sets:	22944
+Number Present:	14015	61.1%
+Number Absent:	8649	37.7%
+Number Marginal:	280	1.2%
+
+Average Signal (P):	1013.5
+Average Signal (A):	43.8
+Average Signal (M):	191.1
+Average Signal (All):	637.9
+______________________________________________________________________
+
+Housekeeping Controls:
+Probe Set		Sig(5')	Det(5')	Sig(M')	Det(M')	Sig(3')	Det(3')	Sig(all)	Sig(3'/5')
+AFFX-HUMISGF3A/M97935	764.2	P	1479.7	P	3005.5	P	1749.80	3.93
+AFFX-HUMRGE/M10098	75.2	A	99.3	M	115.5	P	96.67	1.54
+______________________________________________________________________
+
+Spike Controls:
+Probe Set		Sig(5')	Det(5')	Sig(M')	Det(M')	Sig(3')	Det(3')	Sig(all)	Sig(3'/5')
+AFFX-Dap		13.2	P	0.7	M	2.5	A	5.48	0.19
+AFFX-Lys		8.9	NoCall	21.6	A	8.3	A	12.92	0.93
+______________________________________________________________________
+

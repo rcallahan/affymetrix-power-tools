@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.FGridCoords.1 = s 'FGridCoords Class'
+	{
+		CLSID = s '{F1A2DC17-3871-4189-9E3F-D3852387F0FF}'
+	}
+	affx_fusion_com.FGridCoords = s 'FGridCoords Class'
+	{
+		CLSID = s '{F1A2DC17-3871-4189-9E3F-D3852387F0FF}'
+		CurVer = s 'affx_fusion_com.FGridCoords.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F1A2DC17-3871-4189-9E3F-D3852387F0FF} = s 'FGridCoords Class'
+		{
+			ProgID = s 'affx_fusion_com.FGridCoords.1'
+			VersionIndependentProgID = s 'affx_fusion_com.FGridCoords'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

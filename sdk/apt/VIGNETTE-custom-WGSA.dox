@@ -1,0 +1,16 @@
+/**
+
+\page VIGNETTE-custom-WGSA VIGNETTES: Analysis of custom WGSA chips with Affymetrix Power Tools
+
+\date 2007-11-20
+
+\section content Contents
+
+- <a href="VIGNETTE-WGSA-single-sample-qc.html">Single chip QC analysis</a>
+- <a href="VIGNETTE-WGSA-clustering-without-priors.html">Genotype clustering with no SNP-specific priors</a>
+- <a href="VIGNETTE-WGSA-special-snps.html">Special treatment for sex-chromosome and mitochondrial SNPs</a>
+- <a href="VIGNETTE-WGSA-empirical-probe-ranking.html">Emprical ranking of probes</a> (to filter out distracting probes, or to identify the best probes to use for future chip designs).
+</a>
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

@@ -1,0 +1,3 @@
+IgnoreParameters
+MultiData.Genotype.Confidence
+MultiData.Genotype.Signal A

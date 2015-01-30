@@ -1,0 +1,12 @@
+cel_files	group_id	input_cel_file
+Sample1-1.median.ccel	Group1	Sample1-1.input.ccel
+Sample2-1.median.ccel	Group1	Sample2-1.input.ccel
+Sample3-1.median.ccel	Group1	Sample3-1.input.ccel
+Sample4-2.median.ccel	Group2	Sample4-2.input.ccel
+Sample5-2.median.ccel	Group2	Sample5-2.input.ccel
+Sample6-3.median.ccel	Group3	Sample6-3.input.ccel
+Sample7-3.median.ccel	Group3	Sample7-3.input.ccel
+Sample8-3.median.ccel	Group3	Sample8-3.input.ccel
+Sample9-3.median.ccel	Group3	Sample9-3.input.ccel
+Sample10-3.median.ccel	Group3	Sample10-3.input.ccel
+Sample11-3.median.ccel	Group3	Sample11-3.input.ccel

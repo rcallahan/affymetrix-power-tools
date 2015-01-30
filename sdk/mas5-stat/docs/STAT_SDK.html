@@ -1,0 +1,78 @@
+<html><head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<title>MAS5 Statistical Algorithm SDK</title>
+<LINK href="style.css" type=text/css rel=stylesheet>
+<base target="_self">
+</head>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#EE0000" ALINK="#808080" VLINK="#808080">
+<a name="stat_sdk"></a>
+
+<span class="header2">MAS5 STAT SDK - RELEASE 2</span><p>
+<span class="content">
+This document will outline the 
+high level public interfaces of the MAS5 Statistical (STAT) Algorithm 
+Application Programming Interfaces (APIs). For detailed information on the MAS5 
+algorithm, please refer to the
+<a href="http://www.affymetrix.com/support/technical/technotes/statistical_reference_guide.pdf" target="guide">Statistical 
+Algorithms Reference Guide</a> available on the Affymetrix web site.<P>
+
+<a name="release"></a><span class="header2">RELEASE NOTES</span><P>
+There are some differences with the implementation in this version of the MAS5 
+algorithm as compared to that in the MAS5 and GCOS software. The differences 
+include:<ul>
+	<li>This version does not implement probe masking.</li>
+	<li>For comparison analyses the baseline CEL file is input instead of a 
+	baseline CHP file.</li>
+	<li>Differences in the precision of the results may be observed due to 
+	differences in compilers and optimization settings.</li>
+	<li>MAS5 and GCOS software show signal results in its display with one significant digit 
+	and p-value with 6 significant digits.</li>
+</ul>
+<p>Release 1 of the SDK provided the ability to generate detection, signal, 
+p-values for an absolute analysis and change calls, change p-values and signal 
+log ratios for comparison analysis of expression arrays. This version was 
+developed and tested on a Windows XP system using MSVC++.NET 2003 and RedHat 
+Linux 8 using G++ version 3.0.</p>
+<p>Release 2 of the SDK provided the following changes:</p>
+<ul>
+	<li>Tested on using MSVC++.NET 2003 on Windows XP and G++ 3.3 on Apple Macintosh G5 System X 
+	and Cygwin (under Windows XP).</li>
+	<li>Use of the File Parser SDK release 2 using memory mapping techniques for 
+	CEL and CDF file access are used.</li>
+	<li>Added calculations for RawQ, background and noise average, standard 
+	deviation, minimum and maximum values and corner and central + and - average 
+	intensities.</li>
+</ul>
+<p>
+</P>
+<P>
+
+<a name="parameters"></a></span><span class="header2">PARAMETERS</span><span class="content">
+<P>
+The default parameters set in the source code are from the U133A array and for 
+the GCS3000 scanner.<P>&nbsp;<a name="constants"></a><span class="header2">CONSTANTS</span><P>There are several constants that may need to be defined to 
+enable compilation and execution on specific operating systems. These are :<br>
+<br>IS_BIG_ENDIAN - Define this value if the machine represents its data in big 
+endian format.<br><br>_INCLUDE_UNISTD_HEADER_ - Define this value if the UNISTD.H header file is used 
+by the C++ compiler on your machine.<p>WIN32 - Define this value if using the 
+MSVC++.NET compiler.<p>_USE_MEM_MAPPING_ - This value is used to indicate if 
+memory mapping should be used. The value is set within the source code. Memory 
+mapping is only implemented for BAR, BPMAP, CDF and CEL file reading. <br>
+<P>
+
+<a name="interfaces"></a><span class="header2">INTERFACE DEFINITIONS</span>
+<P>
+The interfaces below represent the interfaces to the statistical algorithm. Only the high level interfaces for this SDK are described in these documents. File access and detailed analysis and utility classes are not described.
+<p><a href="CExpStatAlgSettings.html">CExpStatAlgSettings</a> - This class provides storage for the algorithm parameters.
+<p><a href="AbsStatExpressionProbeSetResultType.html">AbsStatExpressionProbeSetResultType</a> - This type 
+provides storage for the absolute analysis results for a single probe set.</p>
+<p><a href="CompStatExpressionProbeSetResultType.html">CompStatExpressionProbeSetResultType</a> - This type 
+provides storage for the comparison analysis results for a single probe set.</p>
+<p><a href="CExpressionAlgorithmImplementation.html">CExpressionAlgorithmImplementation</a> - This class 
+provides the high level interfaces to run the expression analysis algorithm.</p>
+<p>&nbsp;</p>
+
+</span>
+
+</body>
+</html>

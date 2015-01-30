@@ -1,0 +1,25 @@
+/**
+\page apt-calvin-equivalent MANUAL: apt-calvin-equivalent (\aptversion)
+
+\p apt-calvin-equivalent will check to see if two Calvin files contain equivalent values.
+This can be annoying to do with a regular diff as differences in
+precision and compiler rounding errors can lead to representational
+differences for two numbers that are equivalent (i.e. 1.0 == 0.99999981).
+
+\section QuickStart Quick Start
+To compare Calvin binary files file1.cychp and file2.cychp, use:
+
+\verbatim
+apt-calvin-equivalent -i setIgnore.tsv -e 0.001 -f 0.0002 -c 0.9999 file1.cychp file2.cychp
+\endverbatim
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-calvin-equivalent.help.txt
+
+*/

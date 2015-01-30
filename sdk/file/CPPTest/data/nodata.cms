@@ -1,0 +1,8 @@
+[HEADER]
+Version=1
+Assay=Mapping
+ArrayCount=3
+SNPCount=0
+
+[DATA]
+Types=Mapping10K_Xba131	Mapping50K_Hind240	Mapping50K_Xba240

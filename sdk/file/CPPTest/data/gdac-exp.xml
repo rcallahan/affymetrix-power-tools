@@ -1,0 +1,57 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE MAGE-ML SYSTEM "MAGE-ML.dtd">
+<MAGE-ML identifier="Affymetrix">
+	<AuditAndSecurity_package>
+		<Contact_assnlist>
+			<Person identifier="Affymetrix:Person:ljevon" name="ljevon"/>
+		</Contact_assnlist>
+	</AuditAndSecurity_package>
+<Protocol_package>
+	<Software_assnlist>
+		<Software identifier="Affymetrix:Software:MAS">
+			<Type_assn>
+				<OntologyEntry category="Affymetrix:Software Type" value="Acquisition and analysis software"/>
+			</Type_assn>
+		</Software>
+	</Software_assnlist>
+</Protocol_package>
+<ArrayDesign_package>
+	<ArrayDesign_assnlist>
+		<PhysicalArrayDesign identifier="Affymetrix:PhysicalArrayDesign:Test3" name="Test3"/>
+	</ArrayDesign_assnlist>
+</ArrayDesign_package>
+<Array_package>
+	<Array_assnlist>
+		<Array identifier="Affymetrix:Array:e_with_temp">
+			<ArrayDesign_assnref>
+				<PhysicalArrayDesign_ref identifier="Affymetrix:PhysicalArrayDesign:Test3"/>
+			</ArrayDesign_assnref>
+			<Information_assnref>
+				<ArrayManufacture_ref identifier=""/>
+			</Information_assnref>
+		</Array>
+	</Array_assnlist>
+</Array_package>
+<BioAssay_package>
+	<BioAssay_assnlist>
+		<PhysicalBioAssay identifier="Affymetrix:PhysicalBioAssay:e_with_temp" name="e_with_temp">
+		</PhysicalBioAssay>
+	</BioAssay_assnlist>
+</BioAssay_package>
+<Experiment_package>
+	<Experiment_assnlist>
+		<Experiment identifier="Affymetrix:Experiment:e_with_temp" name="e_with_temp">
+			<PropertySets_assnlist>
+				<NameValueType name="Experiment Template Name" value="exp_temp" type="string"/>
+				<NameValueType name="PI" value="LJ" type="controlled"/>
+				<NameValueType name="Desc" value="GDAC Exporter test case" type="string"/>
+				<NameValueType name="Date" value="8-01-2002" type="date"/>
+				<NameValueType name="Time" value="1.45 AM" type="time"/>
+			</PropertySets_assnlist>
+			<ExperimentDesign_assn>
+				<ExperimentDesign/>
+			</ExperimentDesign_assn>
+		</Experiment>
+	</Experiment_assnlist>
+</Experiment_package>
+</MAGE-ML>

@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.FusionCHPQuantificationDetectionData.1 = s 'FusionCHPQuantificationDetectionData Class'
+	{
+		CLSID = s '{6F879EBD-6F16-4C85-A2BF-40BF71B70489}'
+	}
+	affx_fusion_com.FusionCHPQuantificationDetectionData = s 'FusionCHPQuantificationDetectionData Class'
+	{
+		CLSID = s '{6F879EBD-6F16-4C85-A2BF-40BF71B70489}'
+		CurVer = s 'affx_fusion_com.FusionCHPQuantificationDetectionData.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6F879EBD-6F16-4C85-A2BF-40BF71B70489} = s 'FusionCHPQuantificationDetectionData Class'
+		{
+			ProgID = s 'affx_fusion_com.FusionCHPQuantificationDetectionData.1'
+			VersionIndependentProgID = s 'affx_fusion_com.FusionCHPQuantificationDetectionData'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

@@ -1,0 +1,8 @@
+^/externals/pywavelets/trunk external/pywavelets
+^/externals/hdf5/trunk external/hdf5
+^/externals/newmat/trunk external/newmat
+^/externals/pcre/trunk external/pcre
+^/externals/sqlite/trunk external/sqlite
+^/externals/vld/trunk external/vld
+^/externals/xerces/trunk external/xerces
+^/externals/zlib/trunk external/zlib

@@ -1,0 +1,4 @@
+#This is a test of duplicate keys.
+#%key1=val1-1
+#%key2=val2-1
+#%key3=val3-1

@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>lib-calvin</ProjectName>
+    <ProjectGuid>{F0EBFEC9-9E42-4ACB-82EE-490684076412}</ProjectGuid>
+    <RootNamespace>calvin</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../../external/xerces/src/;../../../external/xerces/src/;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_USRDLL;_HAS_APT_VERBOSE_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../../external/xerces/src/;../../../external/xerces/src/;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../external/xerces/src/;../../../external/xerces/src/;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_USRDLL;_HAS_APT_VERBOSE_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../external/xerces/src/;../../../external/xerces/src/;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="utils\src\AffymetrixGuid.cpp" />
+    <ClCompile Include="array\src\ArrayAttributes.cpp" />
+    <ClCompile Include="array\src\ArrayAudit.cpp" />
+    <ClCompile Include="array\src\ArrayData.cpp" />
+    <ClCompile Include="array\src\ArrayMedia.cpp" />
+    <ClCompile Include="parsers\src\AuditFileReader.cpp" />
+    <ClCompile Include="writers\src\AuditFileWriter.cpp" />
+    <ClCompile Include="utils\src\Calvin.cpp" />
+    <ClCompile Include="writers\src\CalvinCelFileWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPFileBufferWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPFileUpdater.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPFileWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPMultiDataFileBufferWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPMultiDataFileUpdater.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPMultiDataFileWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPQuantificationDetectionFileBufferWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPQuantificationDetectionFileUpdater.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPQuantificationDetectionFileWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPQuantificationFileBufferWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPQuantificationFileUpdater.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPQuantificationFileWriter.cpp" />
+    <ClCompile Include="writers\src\CalvinCHPTilingFileWriter.cpp" />
+    <ClCompile Include="writers\src\CDFCntrlFileWriter.cpp" />
+    <ClCompile Include="writers\src\CDFCntrlProbeSetWriter.cpp" />
+    <ClCompile Include="data\src\CDFData.cpp" />
+    <ClCompile Include="parsers\src\CDFFileReader.cpp" />
+    <ClCompile Include="writers\src\CDFFileWriter.cpp" />
+    <ClCompile Include="data\src\CDFProbeGroupInformation.cpp" />
+    <ClCompile Include="data\src\CDFProbeInformation.cpp" />
+    <ClCompile Include="data\src\CDFProbeSetInformation.cpp" />
+    <ClCompile Include="writers\src\CDFProbeSetWriter.cpp" />
+    <ClCompile Include="data\src\CDFQCProbeInformation.cpp" />
+    <ClCompile Include="data\src\CDFQCProbeSetInformation.cpp" />
+    <ClCompile Include="data\src\CELData.cpp" />
+    <ClCompile Include="parsers\src\CelFileReader.cpp" />
+    <ClCompile Include="utils\src\checksum.cpp" />
+    <ClCompile Include="data\src\CHPBackgroundZone.cpp" />
+    <ClCompile Include="data\src\CHPData.cpp" />
+    <ClCompile Include="data\src\CHPExpressionEntry.cpp" />
+    <ClCompile Include="parsers\src\CHPFileReader.cpp" />
+    <ClCompile Include="data\src\CHPGenotypeEntry.cpp" />
+    <ClCompile Include="data\src\CHPMultiDataData.cpp" />
+    <ClCompile Include="parsers\src\CHPMultiDataFileReader.cpp" />
+    <ClCompile Include="data\src\CHPQuantificationData.cpp" />
+    <ClCompile Include="data\src\CHPQuantificationDetectionData.cpp" />
+    <ClCompile Include="parsers\src\CHPQuantificationDetectionFileReader.cpp" />
+    <ClCompile Include="parsers\src\CHPQuantificationFileReader.cpp" />
+    <ClCompile Include="data\src\CHPTilingData.cpp" />
+    <ClCompile Include="parsers\src\CHPTilingFileReader.cpp" />
+    <ClCompile Include="data\src\CHPUniversalEntry.cpp" />
+    <ClCompile Include="data\src\ColumnInfo.cpp" />
+    <ClCompile Include="writers\src\CopyNumberResultWriter.cpp" />
+    <ClCompile Include="array\src\CreateStep.cpp" />
+    <ClCompile Include="data\src\DataException.cpp" />
+    <ClCompile Include="data\src\DataGroup.cpp" />
+    <ClCompile Include="data\src\DataGroupHeader.cpp" />
+    <ClCompile Include="parsers\src\DataGroupHeaderReader.cpp" />
+    <ClCompile Include="writers\src\DataGroupHeaderUpdater.cpp" />
+    <ClCompile Include="writers\src\DataGroupHeaderWriter.cpp" />
+    <ClCompile Include="parsers\src\DataGroupReader.cpp" />
+    <ClCompile Include="writers\src\DataGroupWriter.cpp" />
+    <ClCompile Include="data\src\DataSet.cpp" />
+    <ClCompile Include="data\src\DataSetHeader.cpp" />
+    <ClCompile Include="parsers\src\DataSetHeaderReader.cpp" />
+    <ClCompile Include="writers\src\DataSetHeaderUpdater.cpp" />
+    <ClCompile Include="writers\src\DataSetHeaderWriter.cpp" />
+    <ClCompile Include="parsers\src\DataSetReader.cpp" />
+    <ClCompile Include="writers\src\DataSetUpdater.cpp" />
+    <ClCompile Include="writers\src\DataSetWriter.cpp" />
+    <ClCompile Include="data\src\DATData.cpp" />
+    <ClCompile Include="utils\src\DateTime.cpp" />
+    <ClCompile Include="parsers\src\DATFileReader.cpp" />
+    <ClCompile Include="writers\src\DATFileUpdater.cpp" />
+    <ClCompile Include="writers\src\DATFileWriter.cpp" />
+    <ClCompile Include="exception\src\DevelopmentException.cpp" />
+    <ClCompile Include="exception\src\ExceptionBase.cpp" />
+    <ClCompile Include="parsers\src\FileException.cpp" />
+    <ClCompile Include="data\src\FileHeader.cpp" />
+    <ClCompile Include="parsers\src\FileHeaderReader.cpp" />
+    <ClCompile Include="writers\src\FileHeaderUpdater.cpp" />
+    <ClCompile Include="writers\src\FileHeaderWriter.cpp" />
+    <ClCompile Include="parsers\src\FileInput.cpp" />
+    <ClCompile Include="writers\src\FileOutput.cpp" />
+    <ClCompile Include="utils\src\FileUtils.cpp" />
+    <ClCompile Include="writers\src\FileWriteException.cpp" />
+    <ClCompile Include="data\src\GenericData.cpp" />
+    <ClCompile Include="data\src\GenericDataHeader.cpp" />
+    <ClCompile Include="parsers\src\GenericDataHeaderReader.cpp" />
+    <ClCompile Include="writers\src\GenericDataHeaderUpdater.cpp" />
+    <ClCompile Include="writers\src\GenericDataHeaderWriter.cpp" />
+    <ClCompile Include="parsers\src\GenericFileReader.cpp" />
+    <ClCompile Include="writers\src\GenericFileUpdater.cpp" />
+    <ClCompile Include="writers\src\GenericFileWriter.cpp" />
+    <ClCompile Include="utils\src\GenoCallCoder.cpp" />
+    <ClCompile Include="exception\src\InterpretationException.cpp" />
+    <ClCompile Include="data\src\MemMapFile.cpp" />
+    <ClCompile Include="writers\src\MMDataSetDataWriter.cpp" />
+    <ClCompile Include="writers\src\MMDATFileWriter.cpp" />
+    <ClCompile Include="parameter\src\ParameterException.cpp" />
+    <ClCompile Include="parameter\src\ParameterFileData.cpp" />
+    <ClCompile Include="parsers\src\ParameterFileReader.cpp" />
+    <ClCompile Include="parameter\src\ParameterNameValueType.cpp" />
+    <ClCompile Include="array\src\PATAssignment.cpp" />
+    <ClCompile Include="data\src\ProbeSetMultiDataData.cpp" />
+    <ClCompile Include="parsers\src\SAXArrayHandlers.cpp" />
+    <ClCompile Include="parsers\src\SAXParameterFileHandlers.cpp" />
+    <ClCompile Include="parsers\src\SAXTemplateHandlers.cpp" />
+    <ClCompile Include="utils\src\StringUtils.cpp" />
+    <ClCompile Include="parsers\src\TextFileReader.cpp" />
+    <ClCompile Include="writers\src\TextFileWriter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils\src\AffymetrixGuid.h" />
+    <ClInclude Include="utils\src\AffyStlCollectionTypes.h" />
+    <ClInclude Include="array\src\ArrayAttributes.h" />
+    <ClInclude Include="array\src\ArrayAudit.h" />
+    <ClInclude Include="array\src\ArrayAuditActionTypes.h" />
+    <ClInclude Include="array\src\ArrayData.h" />
+    <ClInclude Include="writers\src\ArrayFileWriter.h" />
+    <ClInclude Include="array\src\ArrayId.h" />
+    <ClInclude Include="array\src\ArrayMedia.h" />
+    <ClInclude Include="writers\src\AuditFileWriter.h" />
+    <ClInclude Include="utils\src\Calvin.h" />
+    <ClInclude Include="writers\src\CalvinCelFileWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPFileBufferWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPFileUpdater.h" />
+    <ClInclude Include="writers\src\CalvinCHPFileWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPMultiDataFileBufferWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPMultiDataFileUpdater.h" />
+    <ClInclude Include="writers\src\CalvinCHPMultiDataFileWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPQuantificationDetectionFileBufferWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPQuantificationDetectionFileUpdater.h" />
+    <ClInclude Include="writers\src\CalvinCHPQuantificationDetectionFileWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPQuantificationFileBufferWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPQuantificationFileUpdater.h" />
+    <ClInclude Include="writers\src\CalvinCHPQuantificationFileWriter.h" />
+    <ClInclude Include="writers\src\CalvinCHPTilingFileWriter.h" />
+    <ClInclude Include="writers\src\CDFCntrlFileWriter.h" />
+    <ClInclude Include="writers\src\CDFCntrlProbeSetWriter.h" />
+    <ClInclude Include="writers\src\CDFFileWriter.h" />
+    <ClInclude Include="writers\src\CDFProbeSetWriter.h" />
+    <ClInclude Include="utils\src\checksum.h" />
+    <ClInclude Include="writers\src\CombinedDatConstants.h" />
+    <ClInclude Include="utils\src\Coords.h" />
+    <ClInclude Include="writers\src\CopyNumberResultWriter.h" />
+    <ClInclude Include="array\src\CreateStep.h" />
+    <ClInclude Include="data\src\DataException.h" />
+    <ClInclude Include="writers\src\DataGroupHeaderUpdater.h" />
+    <ClInclude Include="writers\src\DataGroupHeaderWriter.h" />
+    <ClInclude Include="writers\src\DataGroupWriter.h" />
+    <ClInclude Include="writers\src\DataSetHeaderAppend.h" />
+    <ClInclude Include="writers\src\DataSetHeaderUpdater.h" />
+    <ClInclude Include="writers\src\DataSetHeaderWriter.h" />
+    <ClInclude Include="writers\src\DataSetUpdater.h" />
+    <ClInclude Include="writers\src\DataSetWriter.h" />
+    <ClInclude Include="utils\src\DateTime.h" />
+    <ClInclude Include="writers\src\DATFileUpdater.h" />
+    <ClInclude Include="writers\src\DATFileWriter.h" />
+    <ClInclude Include="exception\src\ExceptionBase.h" />
+    <ClInclude Include="parsers\src\FileException.h" />
+    <ClInclude Include="writers\src\FileHeaderUpdater.h" />
+    <ClInclude Include="writers\src\FileHeaderWriter.h" />
+    <ClInclude Include="writers\src\FileOutput.h" />
+    <ClInclude Include="utils\src\FileUtils.h" />
+    <ClInclude Include="writers\src\FileWriteException.h" />
+    <ClInclude Include="writers\src\GenericDataHeaderUpdater.h" />
+    <ClInclude Include="writers\src\GenericDataHeaderWriter.h" />
+    <ClInclude Include="writers\src\GenericFileUpdater.h" />
+    <ClInclude Include="writers\src\GenericFileWriter.h" />
+    <ClInclude Include="utils\src\GenoCallCoder.h" />
+    <ClInclude Include="writers\src\GridControlFileWriter.h" />
+    <ClInclude Include="writers\src\MMDataSetDataWriter.h" />
+    <ClInclude Include="writers\src\MMDATFileWriter.h" />
+    <ClInclude Include="writers\src\MultiChannelCelFileCollater.h" />
+    <ClInclude Include="parameter\src\ParameterException.h" />
+    <ClInclude Include="array\src\PATAssignment.h" />
+    <ClInclude Include="utils\src\StringUtils.h" />
+    <ClInclude Include="utils\src\Subgrids.h" />
+    <ClInclude Include="writers\src\TemplateFileWriter.h" />
+    <ClInclude Include="writers\src\TextFileWriter.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

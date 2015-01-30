@@ -1,0 +1,34 @@
+;
+InitAugmentation:			0.1
+InitDefaultFeatureResponse:		1.0
+InitDefaultTargetResponse:		1.0
+SeaAttenuation:				0.005
+SeaOptConvergence:			0.000001
+SeaOptIteration:			2000
+PlierGmCutoff:				0.15
+PlierDifferentialFeaturePenalty:	0.001
+PlierDifferentialTargetPenalty:		0.000001
+PlierUseMMLikelihood:			1
+PlierUseInputModel:			0
+PlierFitFeatureResponse:		1
+PlierOptConvergence:			0.000001
+PlierOptIteration:			3000
+PlierOptDropMax:			3.0
+PlierOptLambdaLimit:			0.01
+PlierOptOptimizationMethod:		0
+FixPrecomputed:				0
+NumericalTolerance:			0
+SafetyZero:				0
+FixFeatureEffect:		false
+;
+; Data section
+; expected a line of MMs to go with the PMs
+data:
+4071	3742	3517
+503	377	321
+4231	4037	3615
+354	353	362
+6374	5431	5102
+1693	1436	1640
+
+

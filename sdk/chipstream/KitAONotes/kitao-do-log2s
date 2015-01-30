@@ -1,0 +1,217 @@
+#!/usr/bin/env perl
+#
+# /nfs/ss11/harley/Apt/work/apt-onzo-1/affy/sdk/chipstream/KitAONotes/kitao-do-log2s ---
+#
+# $Id$
+#
+
+#use strict;
+use File::Basename;
+use FileHandle;
+use Getopt::Long;
+use IO;
+
+# /nfs/falcon/AssayDev_Axiom/2010-06-07/AmpOptimizationBakeOff_rehyb_20100610_CEU/KitA_Cond1_cels.txt
+# /nfs/falcon/AssayDev_Axiom/2010-06-07/AmpOptimizationBakeOff_rehyb_20100610_CEU/KitO_Cond2_cels.txt
+
+$apt_cel_extract="/nfs/ss11/harley/Apt/work/apt-onzo-1/affy/sdk/output/amd64-pc-linux/bin/apt-cel-extract";
+
+#
+$opt_help=0;
+$opt_verbose=1;
+{
+  $|=1;
+
+  if (!GetOptions(
+         "help|h",
+         "verbose|v",
+         #
+         "fof=s",
+      )) {
+    usage(1);
+  }
+
+  # 
+  if ($opt_help) {
+    usage(0);
+  }
+
+  if ($opt_fof) {
+    $fh=FileHandle->new("$opt_fof")||die;
+    skip_hdr($fh);
+    while ($l=<$fh>) {
+      chomp($l);
+      ($name,$path,$suffix)=File::Basename::fileparse($l,".CEL");
+      cel_extract_Axiom_GW_Hu_SNP(cel_file=>$l,out_base=>$name);
+      kitao_do_log2s(file=>"${name}.channel0");
+    }
+  }
+  else {
+    foreach $arg (@ARGV) {
+      if ($arg=~m/.CEL/) {
+        ($name,$path,$suffix)=File::Basename::fileparse($arg,".CEL");
+        cel_extract_Axiom_GW_Hu_SNP(cel_file=>$arg,out_base=>$name);
+        kitao_do_log2s(file=>"${name}.channel0");
+      }
+      else {
+        kitao_do_log2s(file=>$arg);
+      }
+    }
+  }
+}
+
+sub usage {
+  print "
+   kitao-do-log2s ---
+
+   -h     = this help message.
+   -v     = be verbose in output
+
+EXAMPLE:
+   kitao-do-log2s
+";
+  exit(shift);
+}
+
+
+####################
+
+sub cel_extract_Axiom_GW_Hu_SNP {
+  my($lib); #
+  #$lib="/nfs/falcon/lib/release/Axiom_GW_Hu_SNP.r2";
+  # spf_file=>"$lib/Axiom_GW_Hu_SNP.r2.spf",
+  #return cel_extract(layout_file=>"$lib/Axiom_GW_Hu_SNP.r2.spf",
+  #                   sketch_file=>"$lib/Axiom_GW_Hu_SNP.r2.AxiomGT1.sketch",
+  #                   @_);
+  $lib="/nfs/falcon/lib/release/Axiom_GW_ASI_SNP.r2";
+  return cel_extract(layout_file=>"$lib/Axiom_GW_ASI_SNP.r2.cdf",
+                     sketch_file=>"$lib/Axiom_GW_ASI_SNP.r2.AxiomGT1.sketch",
+                     @_);
+};
+
+sub cel_extract {
+  my(%param)=@_;
+
+  $cel_file=$param{cel_file}||die;
+  $out_base=$param{out_base}||die;
+  #($out_base=$cel_file)=~s/\.CEL$//;
+  $tmp_base=$out_base.".tmp";
+
+  $layout_file=$param{layout_file};
+  if ($layout_file=~m/\.spf/) {
+    @layout_options=("--spf-file",$layout_file);
+  }
+  elsif ($layout_file=~m/\.cdf/) {
+    @layout_options=("--cdf-file",$layout_file);
+  }
+  else {
+    die "no match for layout file.";
+  }
+
+  #
+  unlink("$out_base.channel0","$out_base.channel1"."$out_base.out",
+         "$tmp_base.channel0","$tmp_base.channel1"."$tmp_base.out");
+  #
+  $cmd=[$apt_cel_extract,
+        "--force",
+        @layout_options,
+        "--analysis","quant-norm.sketch=50000,pm-only",
+        "--target-sketch-file",$param{sketch_file},
+        "--out-file","${tmp_base}",
+        "${cel_file}",
+        "2>&1 | tee ${tmp_base}.out"];
+  $cmdstr=join(" ",@{$cmd});
+  print "CMD: $cmdstr\n";
+  if (system($cmdstr)==0) {
+    rename("$tmp_base.channel0","$out_base.channel0");
+    rename("$tmp_base.channel1","$out_base.channel1");
+    rename("$tmp_base.out","$out_base.out");
+  }
+}
+
+####################
+
+sub skip_hdr {
+  my($fh)=shift;
+
+  while ($l=<$fh>) {
+    if ($l!~m/^\#/) {
+      last;
+    }
+  }
+}
+
+sub read_channel_file {
+  my($data)=shift;
+  my($file)=shift;
+  my($chan)=shift;
+  my($fh,$l,$probe_id,$probeset_id,$val,@col); #
+
+  print "IN: ",$file,"\n";
+
+  $fh=FileHandle->new("$file")||die;
+
+  skip_hdr($fh);
+
+  while ($l=<$fh>) {
+    chomp($l);
+    @col=split(/\t/,$l);
+    # 0         1 2 3           4           5             6     7
+    # probe_id	x	y	probe_type	probeset_id	probeset_type	block	NA19098_GenomeScan_KitA_Cond1_Norm_plt2_20100607_G02.CEL
+    $probe_id=$col[0];
+    $probeset_id=$col[4];
+    $val=$col[7];
+    $data->{$probeset_id}{$probe_id}[$chan]=$val;
+  }
+}
+
+
+sub kitao_do_log2s {
+  my(%param)=@_;
+  local($a,$b); #
+  my($channel0,$channel1,$data,$i0,$i1,$log2,$log2out,$out,$p_id,$pset_id,$val,@probe_ids,@probeset_ids); #
+
+  $channel0=$param{file};
+  if ($channel0!~m/channel0/) {
+    die "not channel0";
+  }
+  ($channel1=$channel0)=~s/channel0/channel1/;
+  ($log2out=$channel0)=~s/channel0/log2/;
+
+  $log2=log(2.0);
+
+  $data=+{};
+  read_channel_file($data,$channel0,0);
+  read_channel_file($data,$channel1,1);
+
+  #
+  $out=FileHandle->new("$log2out","w")||die;
+
+  print $out "#% channel0=$channel0\n";
+  print $out "#% channel1=$channel1\n";
+  print $out "#\n";
+  print $out join("\t","probeset_id","probe_id","chan0","chan1","log2(A+B)"),"\n";
+
+  @probeset_ids=sort({$a cmp $b} keys(%{$data}));
+  foreach $pset_id (@probeset_ids) {
+    @probe_ids=sort({$a <=> $b} keys(%{$data->{$pset_id}}));
+    foreach $p_id (@probe_ids) {
+      $i0=$data->{$pset_id}{$p_id}[0]||undef;
+      $i1=$data->{$pset_id}{$p_id}[1]||undef;
+      #
+      $val=undef;
+      if (defined($i0) and defined($i1)) {
+        $val=(log($i0+$i1)/$log2)/2.0;
+        $val=sprintf("%.6f",$val);
+      }
+      print $out join("\t",$pset_id,$p_id,$i0,$i1,$val),"\n";
+    }
+  }
+  #
+  $out->close();
+}
+
+
+# Local Variables:
+# mode: perl
+# End:

@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.BackgroundZoneType.1 = s 'BackgroundZoneType Class'
+	{
+		CLSID = s '{9C4E10D8-484E-4CB1-9702-32E9F48AA02C}'
+	}
+	affx_fusion_com.BackgroundZoneType = s 'BackgroundZoneType Class'
+	{
+		CLSID = s '{9C4E10D8-484E-4CB1-9702-32E9F48AA02C}'
+		CurVer = s 'affx_fusion_com.BackgroundZoneType.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9C4E10D8-484E-4CB1-9702-32E9F48AA02C} = s 'BackgroundZoneType Class'
+		{
+			ProgID = s 'affx_fusion_com.BackgroundZoneType.1'
+			VersionIndependentProgID = s 'affx_fusion_com.BackgroundZoneType'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

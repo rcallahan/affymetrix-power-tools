@@ -1,0 +1,66 @@
+# For research use only. Not for diagnostic purposes.
+#%ActivityFile=C:\Users\ljevon\Documents\GeneChip\dmet_lib\DMET_Plus.v1.20110913.generic.activity
+#%MetabolizerFile=C:\Users\ljevon\Documents\GeneChip\dmet_lib\DMET_Plus.v1.20110913.generic.metabolizer
+#%AlleleFile=C:\Users\ljevon\Documents\GeneChip\dmet_data\translations\translations_comprehensive.rpt
+#%PhenotypeCallDesc=UM (ultrarapid metabolizer), EM (extensive metabolizer), IM (intermediate metabolizer), PM (poor metabolizer)
+Index	CHP File	Gene	Phenotype Call	Known Call	Unknown Call	Interpretation Code
+0001-0020-01	anon_1.dmet.chp	CYP1A2	EM	*1F/*1F		UNIQ
+0001-0022-01	anon_1.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0001-0024-01	anon_1.dmet.chp	CYP2B6	EM	*1/*1		UNIQ
+0001-0029-01	anon_1.dmet.chp	CYP2D6	PM	*5/*5		UNIQ
+0002-0020-01	anon_2.dmet.chp	CYP1A2	EM	*1A/*1F		UNIQ
+0002-0022-01	anon_2.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0002-0024-01	anon_2.dmet.chp	CYP2B6	EM	*1/*1		UNIQ
+0002-0029-01	anon_2.dmet.chp	CYP2D6	PM	*5/*5		UNIQ
+0003-0020-01	Genomic3_47.dmet.chp	CYP1A2	EM	*1A/*1F		UNIQ
+0003-0022-01	Genomic3_47.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0003-0024-01	Genomic3_47.dmet.chp	CYP2B6	IM	*1/*15		UNIQ
+0003-0029-01	Genomic3_47.dmet.chp	CYP2D6	EM,IM	*1/*2,*2/*6	*1/UNK	NC/PRA/NA
+0004-0020-01	NA10838_09.dmet.chp	CYP1A2	EM	*1A/*1F		UNIQ
+0004-0022-01	NA10838_09.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0004-0024-01	NA10838_09.dmet.chp	CYP2B6	PM	*6/*6		UNIQ
+0004-0029-01	NA10838_09.dmet.chp	CYP2D6	IM	*2/*4	*1/UNK,*2/UNK,*4/UNK,*6/UNK,*10/UNK,UNK/UNK	NC/PRA/NA
+0005-0020-01	NA10838_27.dmet.chp	CYP1A2	EM	*1A/*1F		UNIQ
+0005-0022-01	NA10838_27.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0005-0024-01	NA10838_27.dmet.chp	CYP2B6	PM	*6/*6		UNIQ
+0005-0029-01	NA10838_27.dmet.chp	CYP2D6	IM	*2/*4	*1/UNK,*10/UNK,UNK/UNK	UNIQ+UNK
+0006-0020-01	NA12003_33.dmet.chp	CYP1A2	EM	*1F/*1F		UNIQ
+0006-0022-01	NA12003_33.dmet.chp	CYP2A6	EM	*1/*1,*1/*8,*8/*8		NC/PRA/NA
+0006-0024-01	NA12003_33.dmet.chp	CYP2B6	PM	*6/*6	*6/UNK,UNK/UNK	NC/PRA/NA
+0006-0029-01	NA12003_33.dmet.chp	CYP2D6	unknown		*1/UNK,*2/UNK,*4/UNK,*6/UNK,*10/UNK,UNK/UNK	UNDH
+0007-0020-01	NA12004_40.dmet.chp	CYP1A2	EM	*1A/*1F		UNIQ
+0007-0022-01	NA12004_40.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0007-0024-01	NA12004_40.dmet.chp	CYP2B6	IM	*1/*6	*4/UNK	UNIQ+UNK
+0007-0029-01	NA12004_40.dmet.chp	CYP2D6	IM	*2/*41		UNIQ
+0008-0020-01	NA18856_13.dmet.chp	CYP1A2	IM	*1A/*1L,*1C/*1F		MULT
+0008-0022-01	NA18856_13.dmet.chp	CYP2A6	IM	*1/*17		UNIQ
+0008-0024-01	NA18856_13.dmet.chp	CYP2B6	IM	*1/*6	*4/UNK	UNIQ+UNK
+0008-0029-01	NA18856_13.dmet.chp	CYP2D6	IM	*2/*29	*2/UNK,*29/UNK	NC/PRA/NA
+0009-0020-01	NA19131_16.dmet.chp	CYP1A2	EM	*1A/*1A		UNIQ
+0009-0022-01	NA19131_16.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0009-0024-01	NA19131_16.dmet.chp	CYP2B6	IM	*1/*6	*4/UNK	UNIQ+UNK
+0009-0029-01	NA19131_16.dmet.chp	CYP2D6	EM	*2/*2		UNIQ
+0010-0020-01	NA19143_08.dmet.chp	CYP1A2	EM	*1A/*1F		UNIQ
+0010-0022-01	NA19143_08.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0010-0024-01	NA19143_08.dmet.chp	CYP2B6	PM	*6/*6		UNIQ
+0010-0029-01	NA19143_08.dmet.chp	CYP2D6	IM	*2/*10	*1/UNK	UNIQ+UNK
+0011-0020-01	NA19192_18.dmet.chp	CYP1A2	IM	*1A/*1L,*1C/*1F		MULT
+0011-0022-01	NA19192_18.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0011-0024-01	NA19192_18.dmet.chp	CYP2B6	EM	*1/*1		UNIQ
+0011-0029-01	NA19192_18.dmet.chp	CYP2D6	EM	*1/*1		UNIQ
+0012-0020-01	NA19206_39.dmet.chp	CYP1A2	IM	*1A/*1L,*1C/*1F		MULT
+0012-0022-01	NA19206_39.dmet.chp	CYP2A6	EM	*1/*1		UNIQ
+0012-0024-01	NA19206_39.dmet.chp	CYP2B6	unknown	*1/*18		UNIQ
+0012-0029-01	NA19206_39.dmet.chp	CYP2D6	EM	*1/*1		UNIQ
+0013-0020-01	Plasmid Control A_24.dmet.chp	CYP1A2	unknown		*1A/UNK,*1C/UNK,*1F/UNK,*1L/UNK,*2/UNK,*3/UNK,*4/UNK,*5/UNK,*6/UNK,*7/UNK,*8/UNK,*11/UNK,*15/UNK,*16/UNK,UNK/UNK	NC/PRA/NA
+0013-0022-01	Plasmid Control A_24.dmet.chp	CYP2A6	unknown		UNK/UNK	NC/PRA/NA
+0013-0024-01	Plasmid Control A_24.dmet.chp	CYP2B6	unknown		UNK/UNK	NC/PRA/NA
+0013-0029-01	Plasmid Control A_24.dmet.chp	CYP2D6	unknown		UNK/UNK	NC/PRA/NA
+0014-0020-01	Plasmid Control B_36.dmet.chp	CYP1A2	unknown		UNK/UNK	NC/PRA/NA
+0014-0022-01	Plasmid Control B_36.dmet.chp	CYP2A6	unknown		UNK/UNK	NC/PRA/NA
+0014-0024-01	Plasmid Control B_36.dmet.chp	CYP2B6	unknown		*12/UNK,UNK/UNK	NC/PRA/NA
+0014-0029-01	Plasmid Control B_36.dmet.chp	CYP2D6	unknown			NC/PRA/NA
+0015-0020-01	Plasmid Control C_48.dmet.chp	CYP1A2	unknown		UNK/UNK	NC/PRA/NA
+0015-0022-01	Plasmid Control C_48.dmet.chp	CYP2A6	unknown		UNK/UNK	NC/PRA/NA
+0015-0024-01	Plasmid Control C_48.dmet.chp	CYP2B6	unknown		UNK/UNK	NC/PRA/NA
+0015-0029-01	Plasmid Control C_48.dmet.chp	CYP2D6	unknown		UNK/UNK	NC/PRA/NA

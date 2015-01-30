@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CBE8F567-BF05-4433-B68A-5930F88B84BD}</ProjectGuid>
+    <RootNamespace>libcopynumber</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\;..\..\;..\..\external\pcre;..\..\external\hdf5\src\;..\..\external\hdf5\windows\src\;..\..\external\newmat\;../external/xerces/src/;../../external/xerces/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XERCES_STATIC_LIBRARY;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\;..\..\;..\..\external\pcre;..\..\external\hdf5\src\;..\..\external\hdf5\windows\src\;..\..\external\newmat\;../external/xerces/src/;../../external/xerces/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XERCES_STATIC_LIBRARY;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Oi- %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\;..\..\;..\..\external\pcre;..\..\external\hdf5\src\;..\..\external\hdf5\windows\src\;..\..\external\newmat\;../external/xerces/src/;../../external/xerces/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XERCES_STATIC_LIBRARY;WIN32;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\;..\..\;..\..\external\pcre;..\..\external\hdf5\src\;..\..\external\hdf5\windows\src\;..\..\external\newmat\;../external/xerces/src/;../../external/xerces/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>XERCES_STATIC_LIBRARY;WIN32;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Data">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Xml">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Annotation.cpp" />
+    <ClCompile Include="ArrayLevel.cpp" />
+    <ClCompile Include="BinarySegmenter.cpp" />
+    <ClCompile Include="CNAnalysisEngine.cpp" />
+    <ClCompile Include="CNAnalysisMethod.cpp" />
+    <ClCompile Include="CNAnalysisMethodAllelePeaks.cpp" />
+    <ClCompile Include="CNAnalysisMethodAllelicDifference.cpp" />
+    <ClCompile Include="CNAnalysisMethodAllelicDifferenceCytoScan.cpp" />
+    <ClCompile Include="CNAnalysisMethodCancer.cpp" />
+    <ClCompile Include="CNAnalysisMethodChipstream.cpp" />
+    <ClCompile Include="CNAnalysisMethodCN.cpp" />
+    <ClCompile Include="CNAnalysisMethodCNCyto2.cpp" />
+    <ClCompile Include="CNAnalysisMethodCNCyto2Gender.cpp" />
+    <ClCompile Include="CNAnalysisMethodCNGender.cpp" />
+    <ClCompile Include="CNAnalysisMethodCNNeutralLOH.cpp" />
+    <ClCompile Include="CNAnalysisMethodCovariateLRAdjuster.cpp" />
+    <ClCompile Include="CNAnalysisMethodCovariateParams.cpp" />
+    <ClCompile Include="CNAnalysisMethodCovariateSignalAdjuster.cpp" />
+    <ClCompile Include="CNAnalysisMethodFactory.cpp" />
+    <ClCompile Include="CNAnalysisMethodGaussianSmooth.cpp" />
+    <ClCompile Include="CNAnalysisMethodGenotype.cpp" />
+    <ClCompile Include="CNAnalysisMethodKernelSmooth.cpp" />
+    <ClCompile Include="CNAnalysisMethodLog2Ratio.cpp" />
+    <ClCompile Include="CNAnalysisMethodLog2RatioCyto2.cpp" />
+    <ClCompile Include="CNAnalysisMethodLOH.cpp" />
+    <ClCompile Include="CNAnalysisMethodLOHCyto2.cpp" />
+    <ClCompile Include="CNAnalysisMethodLOHCytoScan.cpp" />
+    <ClCompile Include="CNAnalysisMethodMosaicism.cpp" />
+    <ClCompile Include="CNAnalysisMethodNoCall.cpp" />
+    <ClCompile Include="CNAnalysisMethodNormalDiploid.cpp" />
+    <ClCompile Include="CNAnalysisMethodReference.cpp" />
+    <ClCompile Include="CNAnalysisMethodSegment.cpp" />
+    <ClCompile Include="CNAnalysisMethodSegmentCN.cpp" />
+    <ClCompile Include="CNAnalysisMethodSegmentLOH.cpp" />
+    <ClCompile Include="CNCorrelationEngine.cpp" />
+    <ClCompile Include="CNCychp.cpp" />
+    <ClCompile Include="CNCytoEngine.cpp" />
+    <ClCompile Include="CNExperiment.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethod.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodCNLossLOHConcordance.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodCNNeutralLOHConcordance.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodDenovoCopyNumber.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodFactory.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodGenotypeConcordance.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodGenotypeDiscordance.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodHemizygousParentOfOrigin.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodHeteroUPD.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodIsoUPD.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodLOD.cpp" />
+    <ClCompile Include="CNFamilialAnalysisMethodSegmentOverlap.cpp" />
+    <ClCompile Include="CNFamilialEngine.cpp" />
+    <ClCompile Include="CNFamilialReporter.cpp" />
+    <ClCompile Include="CNFamilialReporterFamilial.cpp" />
+    <ClCompile Include="CNIntensityAdjustmentMethodHighPassFilter.cpp" />
+    <ClCompile Include="CNIntensityAdjustmentMethodPDNN.cpp" />
+    <ClCompile Include="CNLog2RatioAdjustmentMethodHighPassFilter.cpp" />
+    <ClCompile Include="CNLog2RatioAdjustmentMethodWaveCorrection.cpp" />
+    <ClCompile Include="CNLog2RatioData.cpp" />
+    <ClCompile Include="CNLog2RatioEngine.cpp" />
+    <ClCompile Include="CNProbe.cpp" />
+    <ClCompile Include="CNProbeSet.cpp" />
+    <ClCompile Include="CNReferenceEngine.cpp" />
+    <ClCompile Include="CNReferenceMethodAdditionalWaves.cpp" />
+    <ClCompile Include="CNReferenceMethodPDNN.cpp" />
+    <ClCompile Include="CNReferenceMethodWaveCorrection.cpp" />
+    <ClCompile Include="CNReporter.cpp" />
+    <ClCompile Include="CNReporterCnchp.cpp" />
+    <ClCompile Include="CNReporterCychp.cpp" />
+    <ClCompile Include="CNSegment.cpp" />
+    <ClCompile Include="CNSmoother.cpp" />
+    <ClCompile Include="CNTrisomyEngine.cpp" />
+    <ClCompile Include="CNWaveEngine.cpp" />
+    <ClCompile Include="CNWorkflowEngine.cpp" />
+    <ClCompile Include="..\..\external\pywavelets\common.c" />
+    <ClCompile Include="..\..\external\pywavelets\convolution.c" />
+    <ClCompile Include="CopyNumberHMM.cpp" />
+    <ClCompile Include="CytogeneticsTrioAnalysis.cpp" />
+    <ClCompile Include="DataBlock.cpp" />
+    <ClCompile Include="GKernel.cpp" />
+    <ClCompile Include="Indexer.cpp" />
+    <ClCompile Include="..\..\external\pywavelets\wavelets.c" />
+    <ClCompile Include="WaveletShrink.cpp" />
+    <ClCompile Include="..\..\external\pywavelets\wt.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArrayLevel.h" />
+    <ClInclude Include="CNAnalysisEngine.h" />
+    <ClInclude Include="CNAnalysisMethod.h" />
+    <ClInclude Include="CNAnalysisMethodAllelePeaks.h" />
+    <ClInclude Include="CNAnalysisMethodAllelicDifference.h" />
+    <ClInclude Include="CNAnalysisMethodAllelicDifferenceCytoScan.h" />
+    <ClInclude Include="CNAnalysisMethodCancer.h" />
+    <ClInclude Include="CNAnalysisMethodChipstream.h" />
+    <ClInclude Include="CNAnalysisMethodCN.h" />
+    <ClInclude Include="CNAnalysisMethodCNCyto2.h" />
+    <ClInclude Include="CNAnalysisMethodCNCyto2Gender.h" />
+    <ClInclude Include="CNAnalysisMethodCNGender.h" />
+    <ClInclude Include="CNAnalysisMethodCNNeutralLOH.h" />
+    <ClInclude Include="CNAnalysisMethodCovariateLRAdjuster.h" />
+    <ClInclude Include="CNAnalysisMethodCovariateParams.h" />
+    <ClInclude Include="CNAnalysisMethodCovariateSignalAdjuster.h" />
+    <ClInclude Include="CNAnalysisMethodFactory.h" />
+    <ClInclude Include="CNAnalysisMethodGaussianSmooth.h" />
+    <ClInclude Include="CNAnalysisMethodGenotype.h" />
+    <ClInclude Include="CNAnalysisMethodKernelSmooth.h" />
+    <ClInclude Include="CNAnalysisMethodLog2Ratio.h" />
+    <ClInclude Include="CNAnalysisMethodLog2RatioCyto2.h" />
+    <ClInclude Include="CNAnalysisMethodLOH.h" />
+    <ClInclude Include="CNAnalysisMethodLOHCyto2.h" />
+    <ClInclude Include="CNAnalysisMethodLOHCytoScan.h" />
+    <ClInclude Include="CNAnalysisMethodMosaicism.h" />
+    <ClInclude Include="CNAnalysisMethodNoCall.h" />
+    <ClInclude Include="CNAnalysisMethodNormalDiploid.h" />
+    <ClInclude Include="CNAnalysisMethodReference.h" />
+    <ClInclude Include="CNAnalysisMethodSegment.h" />
+    <ClInclude Include="CNAnalysisMethodSegmentCN.h" />
+    <ClInclude Include="CNAnalysisMethodSegmentLOH.h" />
+    <ClInclude Include="CNCorrelationEngine.h" />
+    <ClInclude Include="CNCychp.h" />
+    <ClInclude Include="CNCytoEngine.h" />
+    <ClInclude Include="CNExperiment.h" />
+    <ClInclude Include="CNFamilialAnalysisMethod.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodCNLossLOHConcordance.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodCNNeutralLOHConcordance.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodDenovoCopyNumber.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodFactory.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodGenotypeConcordance.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodGenotypeDiscordance.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodHemizygousParentOfOrigin.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodHeteroUPD.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodIsoUPD.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodLOD.h" />
+    <ClInclude Include="CNFamilialAnalysisMethodSegmentOverlap.h" />
+    <ClInclude Include="CNFamilialEngine.h" />
+    <ClInclude Include="CNFamilialReporter.h" />
+    <ClInclude Include="CNFamilialReporterFamilial.h" />
+    <ClInclude Include="CNIntensityAdjustmentMethodHighPassFilter.h" />
+    <ClInclude Include="CNIntensityAdjustmentMethodPDNN.h" />
+    <ClInclude Include="CNLog2RatioAdjustmentMethodHighPassFilter.h" />
+    <ClInclude Include="CNLog2RatioAdjustmentMethodWaveCorrection.h" />
+    <ClInclude Include="CNLog2RatioData.h" />
+    <ClInclude Include="CNLog2RatioEngine.h" />
+    <ClInclude Include="CNProbe.h" />
+    <ClInclude Include="CNProbeSet.h" />
+    <ClInclude Include="CNReferenceEngine.h" />
+    <ClInclude Include="CNReferenceMethodAdditionalWaves.h" />
+    <ClInclude Include="CNReferenceMethodPDNN.h" />
+    <ClInclude Include="CNReferenceMethodWaveCorrection.h" />
+    <ClInclude Include="CNReporter.h" />
+    <ClInclude Include="CNReporterCnchp.h" />
+    <ClInclude Include="CNReporterCychp.h" />
+    <ClInclude Include="CNSegment.h" />
+    <ClInclude Include="CNSmoother.h" />
+    <ClInclude Include="CNWaveEngine.h" />
+    <ClInclude Include="CNWorkflowEngine.h" />
+    <ClInclude Include="CopyNumberHMM.h" />
+    <ClInclude Include="CopyNumberNode.h" />
+    <ClInclude Include="CytogeneticsTrioAnalysis.h" />
+    <ClInclude Include="DataBlock.h" />
+    <ClInclude Include="Indexer.h" />
+    <ClInclude Include="MersenneTwister.h" />
+    <ClInclude Include="TransitionMatrix.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\external\hdf5\lib-hdf5.vcxproj">
+      <Project>{57698230-9e42-4acb-82ee-344535645123}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\external\pcre\lib-pcre.vcxproj">
+      <Project>{f75849c9-9e42-4acb-82ee-128594860999}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\external\xerces\lib-xerces.vcxproj">
+      <Project>{be750798-bb30-40e6-8866-1e7df278cc1a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\external\zlib\lib-zlib.vcxproj">
+      <Project>{f5866849-9e42-4acb-82ee-385739857238}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\apt\lib-sdk-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-333444298342}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\birdseed-dev\lib-birdseed-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-112332312998}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\birdseed-v1\lib-birdseed-v1-apt.vcxproj">
+      <Project>{f0ebfec9-1111-4444-5555-112332312998}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\calvin_files\lib-calvin-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-490684076412}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\calvin_files\lib-fusion-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-384758609816}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\chipstream\lib-chipstream-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-129847509899}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\file5\lib-file5.vcxproj">
+      <Project>{7c8ce5e3-704c-4b35-8985-23472904b489}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\file\lib-file-apt.vcxproj">
+      <Project>{f0ebfec9-9e42-4acb-82ee-123436597814}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\util\lib-util-apt.vcxproj">
+      <Project>{6812eb15-8e4d-49c0-a2d8-d50b8887a338}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

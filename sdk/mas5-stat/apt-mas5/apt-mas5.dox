@@ -1,0 +1,41 @@
+/**
+\page apt-mas5 MANUAL: apt-mas5 (\aptversion)
+
+\section mas5Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#quickstart">Quick Start - getting up and running.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+</ul>
+
+<a name="intro">
+\section mas5Intr Introduction
+
+apt-mas5 is a program to run the various MAS5 algorithms on 3'IVT
+expression arrays.
+
+<a name="quickstart">
+\section QuickStart Quick Start
+
+Foo
+
+<a name="options">
+\subsection manualOptions Options:
+    
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-mas5.help.txt
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. Foo
+
+A. Bar
+
+*/

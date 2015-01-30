@@ -1,0 +1,11 @@
+# For research use only. Not for diagnostic purposes.
+#%dmet3-report-guid=0000040480-1226102005-0893064352-1588776985-1881949453
+#%Program=apt-dmet-translation
+#%Version=1.0
+#%Date=Fri Nov  7 15:53:25 2008
+#%TranslationFile=CPPTest/data/DMET_Plus.r3.20081008.dc_translation.csv
+#%MarkerList=
+#%HaplotypeReportOption=
+#%GenotypeOverrideFile=
+CHP Filename	Gene	Common Name	Probe Set ID	Basecall	Override Comment	Reference Allele	Variant Allele
+NA11832__HAPMAP_01A_0807_WC_Pilot2_37.dmet.chp	CYP2C19	CYP2C19*9_431G>A(R144H)	AM_10064	G/A	DEBUG	G	A

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+			<h1>Affymetrix® GRC Data File Format</h1>
+
+			<h2>GRC FILE</h2>
+	
+
+ 
+			<p><b>Description</b></p>
+			<p>The GRC, grid control, file contains the set of feature coordinates associated with the B1 and B2 probes and unsynthesized features. The B1/B2 probes are those used for the checkerboard and border patterns. This file is used by the GCAST algorithm in the Tiling and HT software to determine those features that should be bright or dim and were not.</p>
+
+			<p><b>Format</b></p>
+			<p>The format of the GRC file is a binary file with data stored in big-endian format.</p>
+
+			<p>The contents of the GRC file as defined as follows:</p>
+			
+			<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Magic number. A value to identify the file type. 
+	The value is set to 129.</td>
+	<td height="14" width="141">char</td><td height="14" width="214">1 byte</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">The version 
+	number of the file. The version number is set to 1.</td><td height="14" width="141">
+	char</td><td height="14" width="214">
+	1 byte</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">The number of 
+	columns of features on the array.</td><td height="14" width="141">int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">4</td> <td height="14" width="70%">The number of 
+	rows of features on the array.</td><td height="14" width="141">int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">5</td> <td height="14" width="70%">The number of 
+	B2 probes on the array.</td><td height="14" width="141">int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">6</td> <td height="14" width="70%">The number of 
+	B1 probes on the array.</td><td height="14" width="141">int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">7</td> <td height="14" width="70%">The number of 
+	non-synthesized features on the array.</td><td height="14" width="141">
+	int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">8</td> <td height="14" width="70%">The X/Y 
+	coordinates of the B2 probes on the array.</td><td height="14" width="141">
+	Array of X (unsigned short), Y (unsigned short)</td><td height="14" width="214">
+	(2 bytes + 2 bytes) * #B2 probes.</td></tr>  
+<tr> <td height="14" width="38">9</td> <td height="14" width="70%">The X/Y 
+	coordinates of the B1 probes on the array.</td><td height="14" width="141">
+	Array of X (unsigned short), Y (unsigned short)</td><td height="14" width="214">
+	(2 bytes + 2 bytes) * #B1 probes.</td></tr>  
+<tr> <td height="14" width="38">10</td> <td height="14" width="70%">The X/Y 
+	coordinates of the non-synthesized probes on the array.</td><td height="14" width="141">
+	Array of X (unsigned short), Y (unsigned short)</td><td height="14" width="214">
+	(2 bytes + 2 bytes) * #non-synthesized features.</td></tr>  
+</tbody></table>
+			
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

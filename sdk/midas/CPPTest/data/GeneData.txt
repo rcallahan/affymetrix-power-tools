@@ -1,0 +1,11 @@
+#%guid=0000018941-1130630274-0424238335-1957747793-1714636915
+#%exec_guid=0000018941-1130630274-1681692777-0846930886-1804289383
+#%create_date=Sat Oct 29 16:57:54 2005
+#%cmd=./probeset-summarize -a pm-only,plier -c HuEx-1_0-st-v2.clf -p HuEx-1_0-st-v2.pgf -s map.refseq.txt -f huex_wta_breast_A.CEL huex_wta_breast_B.CEL huex_wta_breast_C.CEL huex_wta_heart_A.CEL huex_wta_heart_B.CEL huex_wta_heart_C.CEL 
+#%chip_type=HuEx-1_0-st-ta1
+#%lib_set_name=HuEx-1_0-st
+#%lib_set_version=v2
+############################################################
+probeset_id	Sample1-1.median.ccel	Sample2-1.median.ccel	Sample3-1.median.ccel	Sample4-2.median.ccel	Sample5-2.median.ccel	Sample6-3.median.ccel	Sample7-3.median.ccel	Sample8-3.median.ccel
+1	22.3	24.5	27.7	29.1	34.6	26.6	100.9	95.8
+2	26.9	32.6	38.6	100.5	160.4	210.6	240.6	193.4

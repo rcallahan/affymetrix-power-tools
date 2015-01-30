@@ -1,0 +1,18 @@
+#%chip_type=HuEx-1_0-st-v2
+#%chip_type=HuEx-1_0-st-v1
+#%chip_type=HuEx-1_0-st-ta1
+#%lib_set_version=v1-internal
+#%lib_set_name=HuEx-1_0-st
+#%create_date=Thu Aug 11 22:08:17 PDT 2005
+probeset_id	probeset_type	atom_id	probe_id	probe_type	gc_count	probe_length	probe_sequence
+4057134	control->bgp->antigenomic	70013	542	pm:st	4	25	TATTAAAATTAGAGCTATTAACAAT
+4086961	control->bgp->antigenomic	2313833	826	pm:st	9	25	TAGAGAACATAATTGCGCTACTTCT
+4086961	control->bgp->antigenomic	2313833	372	pm:st	9	25	CAAATAATGCAGCCTGTATAATGAG
+4057134	control->bgp->antigenomic	70013	228	pm:st	4	25	AACTTATCTAAATGCTATTAAAAAT
+4086961	control->bgp->antigenomic	2313833	922	pm:st	9	25	GACGATTGTCGCGTAATATAAACTT
+4086961	control->bgp->antigenomic	2313833	194	pm:st	9	25	ATTGTTATAGCTGCATGATCTATCG
+4057134	control->bgp->antigenomic	70013	694	pm:st	4	25	TGATATAATAAGCTAATTTGTTTAA
+4087585	control->bgp->antigenomic	2364699	804	pm:st	19	25	GCGGCCGCTGGCCATCCTGCCAGAC
+4087585	control->bgp->antigenomic	2364699	584	pm:st	19	25	CGGCGCATCGGGCGCAGCAGACACG
+4087585	control->bgp->antigenomic	2364699	458	pm:st	19	25	TCCGCGCCCATGCGCAGCTCCTGGC
+4087585	control->bgp->antigenomic	2364699	585	pm:st	19	25	CGGCGCATCGGCAGTGCGCAGGCGA

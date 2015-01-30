@@ -1,0 +1,12 @@
+#%Note='datasetFile.tsv' 10 rows, 2 cols
+#%header0=GroupName	TsvName
+SNPReference	EMSNParameters
+SNPReference	EMSNArray
+SNPReference	SNPReference
+Cyto2	AntigenomicProbes
+Cyto2	MedianSignals
+Cyto2	ProbeEffects
+Cyto2	SNPPosteriors
+Cyto2	SketchCN
+Cyto2	SketchSNP
+Cyto2	WaveCorretion

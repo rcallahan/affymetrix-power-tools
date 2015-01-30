@@ -1,0 +1,77 @@
+/**
+
+\page VIGNETTE-chp-file-output-differences VIGNETTES: CHP file differences between APT and EC/GTC
+
+\date 2007-06-27
+
+This information is current as of APT 1.8.1, EC 1.1, and GTC 1.0.
+
+Relative to the older information below, the new change is that APT
+generated AGCC CHP files from apt-probeset-summarize now include
+the various Chip Summary metrics with the EXCEPTION of the following:
+
+\verbatim
+- #P
+- %P
+- Signal(P)
+- #A
+- %A
+- Signal(A)
+- Signal(All)
+\endverbatim
+
+These are added by EC when doing an exon level analysis with the Exon Arrays.
+
+Note that the differences in MAS5 results noted below still apply, including
+various CHP file headers and Chip Summary metrics. Also, the differences between EC and APT
+with regard to exon level analysis and the inclusion of DABG p-values in addition to the
+signal summarization still apply.
+
+\section apt-20070627 Older information from 2007-06-27
+
+This information is current as of APT 1.8.0, EC 1.1, and GTC 1.0.
+
+There are no known differences in CHP file output between APT
+(specifically apt-probeset-genotype) and Genotyping Console (GTC).
+
+There are several known differences between the CHP file output
+of APT (specifically apt-probeset-summarize) and Expression Console (EC).
+
+EC uses the APT engine to generate initial CHP files, but then adds additional
+information to the CHP file headers. This will probably be folded into the
+APT engine in a later release. Known differences:
+
+- For analysis that include DABG analysis (ie exon level analysis) 
+  a single CHP file is created by EC combining algorithm parameters and 
+  summary metrics for both analysis. APT generates separate CHP files
+  for each analysis method (id DABG results are in their own CHP file).
+  - In EC, the text for the parameters for algorithm name, analysis text, 
+    quantification type and scale, if present, are combined 
+  - In EC, same-named summary metric values for pos_neg_auc 
+    for both the quantification analysis and DABG are always 
+    included.  The text for the metric from the DABG analysis 
+    is prepended with 'dabg_'. Other same-named summary metrics 
+    are included only if the values are different.  The text 
+    for the metric from the DABG analysis is prepended 
+    with 'dabg_'
+- EC writes the values in the report file into the CHP header. APT does not.
+- Expression values for control probesets listed in the QCC file are
+  added by EC into the CHP header.
+- For 3'IVT arrays, values are included by EC for raw corner 
+  (+ and -, avg and count) and raw central (avg and count).
+
+MAS5 Signal/Detection CHP files are a special case. In particular, EC uses
+a different implementation of MAS5 than that used in APT. This includes
+the CHP file writing code. See the apt-probeset-summarize manual (FAQ section)
+for more information about APT and MAS5. In general APT generated MAS5 CHP file 
+resuilts are not compatible with other applications which expect and MAS5 CHP file.
+
+APT generated CHP files (from apt-probeset-summarize) can be loaded into
+EC, however you will not be able to plot or view the various QC Array Metrics
+because they are not present in the CHP file header. Instead load the
+APT generated report txt file into Excel or some other suitable
+program for visualization and plotting.
+
+                            
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

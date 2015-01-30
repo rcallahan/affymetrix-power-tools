@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.FusionCDFQCProbeSetIn.1 = s 'FusionCDFQCProbeSetInformation Class'
+	{
+		CLSID = s '{B75F5A82-11F1-4E46-8C2B-BF541D67F911}'
+	}
+	affx_fusion_com.FusionCDFQCProbeSetInfo = s 'FusionCDFQCProbeSetInformation Class'
+	{
+		CLSID = s '{B75F5A82-11F1-4E46-8C2B-BF541D67F911}'
+		CurVer = s 'affx_fusion_com.FusionCDFQCProbeSetIn.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B75F5A82-11F1-4E46-8C2B-BF541D67F911} = s 'FusionCDFQCProbeSetInformation Class'
+		{
+			ProgID = s 'affx_fusion_com.FusionCDFQCProbeSetIn.1'
+			VersionIndependentProgID = s 'affx_fusion_com.FusionCDFQCProbeSetInfo'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

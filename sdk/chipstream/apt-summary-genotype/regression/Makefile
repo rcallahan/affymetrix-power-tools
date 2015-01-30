@@ -1,0 +1,47 @@
+#
+# cvs:affy/sdk/chipstream/apt-probeset-genotype/regression/Makefile ---
+#
+# $Id: Makefile,v 1.6 2009-10-16 18:20:21 mgilch Exp $
+#
+
+sdk_root:=../../..
+
+include ${sdk_root}/Makefile.defs
+
+# These are four executables 
+apg_exe:=apt-summary-genotype
+pgt_exe:=summary-genotype-test
+pgi_exe:=summary-genotype-quick-test
+pgv_exe:=summary-genotype-quick-test.valgrind
+
+# This is a variable representing all executables.  
+# Used for copying them from output directory for local use.
+all_exe:=${apg_exe} ${pgt_exe} ${pgi_exe} ${pgv_exe}
+
+# The variable sdk_exe is a list of the executables we want generated from cpp files in the present directory. 
+# The inclusion of the Makefile.defs and Makefile.post ensures that all local .cpp files are
+# compiled and that an executable is produced for all values in sdk_exe.  
+sdk_exe+=${pgt_exe} ${pgi_exe} ${pgv_exe}
+
+$(call sdk_define_exe,apt-rt-summary-genotype,apt-rt-summary-genotype.cpp)
+
+include ${sdk_makefile_post}
+
+copy_executables:${all_exe:%=${sdk_output_bin}/%} 
+	${CP} ${all_exe:%=${sdk_output_bin}/%} .
+
+# The following targets are defined in the Makefile.defs file and are invoked when the corresponding
+# target without the underscore  '_' is invoked from make.   
+_valgrind_run: copy_executables
+	./${pgv_exe}
+
+_integration_run: copy_executables
+	./${pgi_exe}
+
+_regression_run: copy_executables 
+	./${pgt_exe}
+
+_clean_run:
+	-rm -r test-generated
+
+

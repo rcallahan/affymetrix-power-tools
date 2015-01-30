@@ -1,0 +1,31 @@
+/**
+\page apt-tsv-join MANUAL: apt-tsv-join (\aptversion)
+
+\p apt-tsv-join will take multiple tab separated files and merge them into a single file.
+
+\section QuickStart Quick Start
+To merge several files using the same key, use:
+
+\verbatim
+apt-tsv-join -o data.txt -key=column-name -out-file=output.txt file1.txt file2.txt [...]
+\endverbatim
+
+Note that the first file will be streamed through line by line, while the later files will
+be indexed. Thus if you have only one large file, you probably want to specify this file first.
+
+The output columns will be in the same order as the input file order and the order within each
+of the input files. 
+
+Currently, only the first file can have the key duplicated. The key must be unique in all
+the other files to be joined.
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-tsv-join.help.txt
+
+*/

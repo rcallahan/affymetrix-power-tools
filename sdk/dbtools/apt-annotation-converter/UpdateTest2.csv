@@ -1,0 +1,7 @@
+#%array_type=test
+#%chip_type=UpdateTest
+#%dbsnp_version=666
+"Probe Set ID","A","B","C","Not In DB 2"
+"ID1","csv2 A1 Value","csv2 B1 Value","csv2 C1 Value","Not In DB 2 Value1"
+"CN_ID2","csv2 A2 Value","csv2 B2 Value","csv2 C2 Value","Not In DB 2 Value2"
+"ID3","csv2 A3 Value","csv2 B3 Value","csv2 C3 Value","Not In DB 2 Value3"

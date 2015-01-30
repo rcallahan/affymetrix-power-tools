@@ -1,0 +1,94 @@
+<html><head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<title>MAS5 Statistical Algorithm SDK</title>
+<LINK href="style.css" type=text/css rel=stylesheet>
+</head>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#EE0000" ALINK="#808080" VLINK="#808080">
+<span class="content">
+<P>
+<span class="header2">CompStatExpressionProbeSetResultType</span><blockquote>
+	<P>This structure provides storage for the comparison analysis results for a single probe set.</blockquote>
+<P>
+<span class="header3">Properties</span><blockquote>
+	<P><span class="content">float ChangePValue - A p-value that indicates the significance level of the 
+		Change call.<p>float SignalLogRatio - The change in expression level for a transcript between 
+		a baseline and an experiment array. This change is expressed as the log<span style="FONT-SIZE: 8pt; VERTICAL-ALIGN: sub">2</span> 
+		ratio.</p>float SignalLogRatioLow - The lower limit of the Log Ratio within a 95% confidence 
+		range.<p>float SignalLogRatioHigh - The upper limit of the Signal Log Ratio within a 95% 
+		confidence range.</p>unsigned short NumCommonPairs - The intersection of the probe pairs from the baseline 
+		and experiment that are used by the Statistical Expression algorithm to 
+		make the Change call in a comparison analysis.<p>unsigned char Change - The call that indicates the change in transcript level 
+		between a baseline and an experiment array.
+		See the constants below.
+&nbsp;</blockquote>
+<P>
+<span class="header3">Methods</span><blockquote>
+	<P><span class="content"></table>
+_CompStatExpressionProbeSetResultType operator= - A copy operator.
+
+&nbsp;</blockquote>
+<P>
+<span class="header3">Constants</span><blockquote>
+	<P>The following are constants defined to assist with the interpretation of the 
+above structure.<p>EXP_UNKNOWN_COMP_CALL_TYPE
+
+
+
+
+
+		- An unknown change call.</p>
+		EXP_INCREASE_CALL_TYPE
+
+
+
+
+
+		- An &quot;increase&quot; change call.<p>EXP_DECREASE_CALL_TYPE
+
+
+
+
+
+		- A &quot;decrease&quot; change call.</p>
+		EXP_INCREASE_MODERATE_CALL_TYPE
+
+
+
+
+
+		- A &quot;moderate increase&quot; change call.<p>EXP_DECREASE_MODERATE_CALL_TYPE
+
+
+
+
+
+		- A 
+		&quot;moderate decrease&quot; change call.</p>
+		EXP_NO_CHANGE_CALL_TYPE
+
+
+
+
+
+		- A &quot;no change&quot; chance call.<p>EXP_NO_COMP_CALL_TYPE
+
+
+
+
+
+		- A &quot;no call&quot; change call.</p>
+	const char *ExpressionCompCallString[] - String representation of the change call. Indexed by the 
+		&quot;Change&quot; property in the CompStatExpressionProbeSetResultType structure.</blockquote>
+
+
+
+
+
+<p>&nbsp;</p>
+
+
+
+
+
+</body>
+</html>

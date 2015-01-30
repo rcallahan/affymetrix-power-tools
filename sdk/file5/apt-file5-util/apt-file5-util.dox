@@ -1,0 +1,14 @@
+/**
+\page apt-file5-util MANUAL: apt-file5-util (\aptversion)
+
+<a name="options">
+\section manualOptions Options:
+
+<!-- Do not edit this verbatim section.
+It will be replaced automatically w/ the results
+of running this program with the -h option
+--->
+
+\verbinclude apt-file5-util.help.txt
+
+*/

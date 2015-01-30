@@ -1,0 +1,44 @@
+<html><head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<title>MAS5 Statistical Algorithm SDK</title>
+<LINK href="style.css" type=text/css rel=stylesheet>
+</head>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#EE0000" ALINK="#808080" VLINK="#808080">
+<span class="content">
+<P>
+<span class="header2">AbsStatExpressionProbeSetResultType</span><P>
+This structure provides storage for the absolute analysis results for a single probe set.<P>
+<span class="header3">Properties</span><blockquote>
+	float DetectionPValue - A p-value that indicates the significance level of the 
+		Detection call.<p>float Signal - A measure of the abundance of a transcript.</p>
+	unsigned short NumPairs - The number of probe pairs in the probe set.<p>unsigned short NumUsedPairs 
+	- (NumPairs - #masked probe pairs - #saturated MM probe 
+		pairs). This is the number of probe pairs used by the algorithm to make 
+		the detection call.</p>
+	unsigned
+		char Detection - The call in an absolute analysis that indicates if the 
+		transcript was present, absent, marginal or no call. See the constants 
+		below.</blockquote>
+
+	<P>
+<span class="header3">Methods</span><blockquote>
+	<P>_AbsStatExpressionProbeSetResultType operator= - A copy operator.</blockquote>
+
+<P>
+<span class="header3">Constants</span><blockquote>
+	<P>The following are constants defined to assist with the interpretation of the 
+above structure.
+	<p>EXP_PRESENT_CALL_TYPE - A &quot;present&quot; call.</p>
+
+		EXP_MARGINAL_CALL_TYPE - A &quot;marginal&quot; call.<p>EXP_ABSENT_CALL_TYPE 
+	- An &quot;absent&quot; call.</p>
+EXP_NO_ABS_CALL_TYPE - A &quot;no call&quot; call.<p>const char *ExpressionAbsCallString[] 
+	- String representation of the change call. Indexed by the 
+		&quot;Detection&quot; property in the 
+		AbsStatExpressionProbeSetResultType structure.</p>
+</blockquote>
+<p>&nbsp;</p>
+
+
+</body>
+</html>

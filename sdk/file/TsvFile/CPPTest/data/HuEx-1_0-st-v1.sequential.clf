@@ -1,0 +1,12 @@
+#%clf_format_version=1.0
+#%chip_type=HuEx-1_0-st-v1
+#%chip_type=HuEx-1_0-st-ta1
+#%lib_set_name=HuEx-1_0-st
+#%lib_set_version=v1-internal
+#%create_date=Wed Jun  1 16:28:12 2005
+#%rows=2560
+#%cols=2560
+#%sequential=1
+#%order=col_major
+#%header0=probe_id	x	y
+1	0	0

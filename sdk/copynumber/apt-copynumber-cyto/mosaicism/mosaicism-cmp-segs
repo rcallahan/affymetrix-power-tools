@@ -1,0 +1,195 @@
+#!/usr/bin/env python
+#
+# sdk/copynumber/apt-copynumber-cyto/mosaicism/mosaicism-cmp-segs ---
+#
+
+import optparse
+import os
+import pdb
+import re
+import subprocess
+import sys
+
+VERSION=""
+
+#
+def file_to_data(path):
+  fh=open(path,"r")
+  data=fh.read()
+  fh.close()
+  return data
+
+def diff_seg_files(files):
+  suffix1=".seg1.tsv"
+  for a in args:
+    if not a.endswith(suffix1):
+      continue
+    #
+    initial_file=a
+    initial_base=initial_file[0:-len(suffix1)]
+    initial_data=file_to_data(initial_file)
+    #
+    print initial_base
+    #
+    for s in [# "seg1", dont do seg1, as that is the original
+              "seg2", "segclean-1", "segclean-2", "segclean-3", "segclean-4", "segclean-5", "segclean-6"]:
+      f=initial_base+"."+s+".tsv"
+      d=file_to_data(f)
+      if d==initial_data:
+        #print "### same: ",f
+        pass
+      else:
+        print "### diff: ",f
+        subprocess.call(["diff","-u",initial_file,f])
+
+# R:   test-1-R-outdir-from-Bens-cychp/30NA13330_70NA07126_C04_MosaicismStudy_51pt0_CytoScanHD_CC_20110411.protoMosaicSeg
+# APT: out-1-apt-outdir/30NA13330_70NA07126_C04_MosaicismStudy_51pt0_CytoScanHD_CC_20110411.cyhd.cychp-g03-s00.tsv
+
+##########
+
+def read_tsv(path,pop_header=True):
+  fh=open(path,"r")
+  data=list()
+  for line in fh.readlines():
+    if line.startswith("#"):
+      continue
+    data.append(line[:-1].split("\t"))
+  #
+  if pop_header:
+    data=data[1:]
+  return data
+
+# R:
+# Chromosome  StartPosition           StopPosition            Mixture     Confidence  MarkerCount MeanMarkerDistance
+# 1           849467      170514181   0           0.012911452936957       138017      1229
+# 1           170517075   191724353   0.3         0.705589888945681       21521       985
+# APT:
+# SegmentID       Chromosome      StartPosition   StopPosition    MarkerCount     MeanMarkerDistance      State   Confidence
+# 1       1       849467  47598365        40860   1144    2.0000000000    0.2733511925
+# 2       1       47598537        47602124        8       512     1.0000000000    0.9411491752
+# 3       1       47603603        53559834        6116    974     2.0000000000    0.2722851634
+
+#def print_line(x_title,x_idx="",x_chr="",x_start="",
+
+def diff_apt_and_R_file(a_path,r_path):
+  print "a_path:",a_path
+  print "r_path:",r_path
+  #
+  if not os.path.isfile(a_path):
+    raise ValueError
+  if not os.path.isfile(r_path):
+    raise ValueError
+  #
+  a_data=read_tsv(a_path)
+  r_data=read_tsv(r_path)
+  #
+  #pdb.set_trace()
+  #
+  a_i=0
+  r_i=0
+  last_chr=None
+  while True:
+    a_row=None
+    a_chr=None
+    if a_i<len(a_data):
+      a_row=a_data[a_i]
+      a_chr=int(a_row[1])
+    r_row=None
+    r_chr=None
+    if r_i<len(r_data):
+      r_row=r_data[r_i]
+      r_chr=int(r_row[0])
+    #
+    if a_chr is None:
+      pass
+    elif r_chr is None:
+      pass
+    elif a_chr==r_chr:
+      pass
+    elif a_chr<r_chr:
+      r_row=None
+    else:
+      a_row=None
+    #
+    cur_chr=a_chr or r_chr
+    if last_chr!=cur_chr:
+      print "### chr=",cur_chr
+      last_chr=cur_chr
+    #
+    if a_row:
+      a_i+=1
+      print "A: %3d :"%(a_i),a_row[1:]
+    else:
+      print "A: "
+    if r_row:
+      r_i+=1
+      print "R: %3d :"%(r_i),r_row
+    else:
+      print "R:"
+    if not (a_row and \
+              r_row and \
+              a_row[1]==r_row[0] and \
+              a_row[2]==r_row[1] and \
+              a_row[3]==r_row[2]):
+      print "ERROR!"
+
+    #
+    if (a_i<len(a_data)) or (r_i<len(r_data)):
+      continue
+    break
+
+def diff_apt_and_R():
+  apt_out_dir="out-1-apt-outdir"
+  #r_out_dir="test-1-R-outdir-from-Bens-cychp"
+  r_out_dir="test-1-R-outdir-ok"
+  names=os.listdir(r_out_dir)
+  names.sort()
+  for name in names:
+    if not name.endswith(".protoMosaicSeg"):
+      continue
+    r_path=os.path.join(r_out_dir,name)
+    (base_name,exts)=name.split(".",1)
+    a_path=os.path.join(apt_out_dir,base_name+".cyhd.cychp-g03-s01.tsv")
+    #
+    diff_apt_and_R_file(a_path,r_path)
+
+##########
+
+#
+def main(raw_args):
+  usage = "usage: %prog [options] arg"
+  parser = optparse.OptionParser(usage=usage,
+                                 version=VERSION)
+  #
+  parser.add_option("-d", "--debug",
+                    dest="debug",default=0,type="int",
+                    help="")
+  parser.add_option("-v", "--verbose",
+                    dest="verbose",default=0,type="int",
+                    help="")
+  #
+  (options, args) = parser.parse_args(raw_args)
+  #
+
+  # For comparing APT segs to each other
+  # diff_seg_files(args)
+
+  # to compare the R output to the dumped cychp files.
+  # the dir names are encoded into the function.
+  # run:
+  #   make _test_1_R
+  #   make _test_1_apt _test_1_apt_export
+  # then:
+  #   ./mosaicism-cmp-segs
+  diff_apt_and_R()
+
+  #
+  return 0
+
+#
+if __name__ == "__main__":
+  sys.exit(main(sys.argv[1:]))
+
+# Local Variables:
+# mode: python
+# End:

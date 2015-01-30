@@ -1,0 +1,308 @@
+//
+// cvs:affy/sdk/file/TsvFile/TsvFile-README.dox ---
+//
+// $Id: TsvFile-README.dox,v 1.26 2009-01-28 03:29:30 harley Exp $
+//
+
+/**
+ * @file   TsvFile/TsvFile-README.dox
+ * @brief  A collection of doxygen pages in one file.
+ *         Read \link file-format-tsv the TsvFile docs \endlink more about TsvFile.
+ */
+
+/**
+@page file-format-tsv File Format: TSV (\aptversion)
+
+<center><b>DRAFT</b></center>
+
+TsvFile is a library for reading and writing files of data
+used in APT.  The simple format is "Format v1", in which the
+file is a table of Tab Seperated Values (TSV).  While the
+library gets its name from the default seperator of "tabs",
+the default can be changed to to commas to have a CSV
+reader, or even some other character.
+
+The second format is "v2", which allows child rows to follow
+the parent rows.  The child and parent rows are nested by
+the level of indentation.  This saves space by not repeating
+the data contained in the parent rows(s).
+
+Both the "v1" and "v2" formats permit comments and metadata
+headers to appear in the file.  The "v2" format requires
+"headerN" metadata to define the columns.
+
+For a quick start, look at the example programs:
+\link tsv-example.cpp tsv-example.cpp \endlink
+should be enough for common usage.
+
+Specialized readers may be built on top of the base TsvFile.
+See the \link file-format-pgf PGF file \endlink as an example.
+(A full list is at the end of this page.)
+
+\section tsv_features TsvFile Features
+
+The TsvFile library allows for:
+
+- reading headers 
+- reading data by lines or levels
+- writing headers and data
+- indexing the contents of the file by a column and searching the index.
+
+\section tsv_rules_general TsvFile Format Rules
+
+To be a proper TsvFile:
+
+- A TSV file may have DOS, *NIX, or MAC line endings Lines
+  end with "\n", "\r" or "\n\r".  ("\r\n" counts as two
+  lines.)  (CR=0x0d LF=0x0a)
+
+- A TSV file may contain headers, one per line, in the format "#%key=value"
+  - no leading whitespace is allowed (flush left)
+  - keys may appear more than once.
+
+- A TSV file may contain comments, which start with "#"
+  - no leading whitespace is allowed (flush left)
+
+- Consecutive field separators result in a zero-length string. ("")
+
+- Column labels are case sensitive
+
+- All the header lines must appear before the data.
+  Headers after the first data line are treated as comments.
+
+- The TSV file may contain zero or more lines of data.
+
+- When "m_optEscapeOk" is true, characters preceded by
+  "m_optEscapeChar" are escaped from their normal meaning.
+  "\"s at the end of a line escapes the EOL char.  (It is
+  not a line splice.)  The special excape chars are: 'a',
+  'n', 'r' & 't'.
+
+- Data may be quoted. Either single and double quotes may be
+  used and they must be in matched pairs.  Quoted data must
+  be on the same line.  Quotes without a matching close
+  quote stop at the end of the line.  Quotes appearing
+  inside of text quoted with the other quotes are normal
+  characters.
+
+- Blank lines are skipped by nextLevel(0).  (While they
+  could be considered as an empty line at level "0", most
+  users dont care for that.)  When nextLine() encounters a
+  blank line, m_lineLvl is set to TSV_LINE_BLANK and TSV_OK
+  is returned.
+
+- For ease of use, when reading a file without "#%header"
+  info, the first line is used as the header info and the
+  field separator character is set from the more common
+  separator character on that line.  (This can be turned off
+  with m_optAutoSenseSep and m_optHasColumnHeader.)
+
+- Leading and trailing whitespace is kept.
+  (set m_optAutoTrim to true to remove)
+
+- Quotes around data are removed.
+  (set m_optAutoDequote to false)
+
+- Field separator defaults to tab ('\\t'), but can be changed.
+  (m_optFieldSep='\\t')
+
+- Data columns beyond the columns listed in the headers are ignored.
+
+- Data lines which are short have zero length strings.  The
+  user may test for "isnull" which is set for missing
+  columns.
+
+- If there is no "header0" data, file is attempted to be
+  read as a normal (v1) Tsv file.
+
+\section tsv_rules_v1 TsvFile Format v1
+
+- No "header0" key present means the first data line is read and used for
+  column headers.
+
+\section tsv_rules_v2 TsvFile Format v2
+
+- A header line which defines the column names is
+  required. The key"header0" defines the topmost column order. 
+  Additional headers ("header1" to "headerN") may be provided to define the child rows.
+
+\verbatim
+#%header0=col1-label	col2-label	col3-label
+\endverbatim
+
+Multiple levels are indicated with multiple header lines where the
+trailing numerical digit indicates the level (top level is 0). So 
+for example, a PGF file (which is a valid TSV file) has 3 levels:
+
+\verbatim
+#%header0=probeset_id	type
+#%header1=	atom_id
+#%header2=		probe_id	type	gc_count	probe_length	interrogation_position	probe_sequence
+2590411	main
+	1
+		5402769	pm:st	12	25	13	CGAAGTTGTTCATTTCCCCGAAGAC
+\endverbatim
+
+\section tsv_implementation Parsing and Writing
+
+The official C++ parser used by affy can be found in APT under
+sdk/file/TsvFile/TsvFile.{h,cpp}. When possible, parsing and 
+writing of TSV files should be done using this code. 
+
+It should be noted that this Parser, with the default settings,
+will allow users to provide either a TSV or a CSV file.
+
+See \link file-format-tsv-notes TsvFile Design Notes \endlink for
+more implementation details.
+
+\section notes Notes
+
+The use of TSV files by the application usually imposes an expectation
+that certain columns (as enumerated in the column header line) be 
+present in the TSV file. For example, a cel list file for use in
+apt-probeset-summarize with the --cel-files option assumes that the
+TSV file has a "cel_files" column. No assumptions should be made about
+the column order and there may be other columns present which the
+software can ignore. 
+
+\section tsvExample1 Example 1
+
+As mentioned earlier, one example of a TSV file is the file
+provided to apt-probeset-summarize using the --cel-files
+option. This file must have a "cel_files" column.
+
+\verbatim
+#%date=Tue Sep 26 11:54:09 PDT 2006
+# These cel files are from the latin square study
+pool	cel_files	scanner
+1	sp1_a.cel	gcos1
+1	sp1_b.cel	gcos2
+1	sp1_c.cel	gcos3
+2	sp2_a.cel	gcos1
+2	sp2_b.cel	gcos2
+2	sp2_c.cel	gcos3
+\endverbatim
+
+Now the same file, but with the tabs explicitly enumerated:
+
+\verbatim
+#%date=Tue Sep 26 11:54:09 PDT 2006
+# These cel files are from the latin square study
+pool<tab>cel_files<tab>scanner
+1<tab>sp1_a.cel<tab>gcos1
+1<tab>sp1_b.cel<tab>gcos2
+1<tab>sp1_c.cel<tab>gcos3
+2<tab>sp2_a.cel<tab>gcos1
+2<tab>sp2_b.cel<tab>gcos2
+2<tab>sp2_c.cel<tab>gcos3
+\endverbatim
+
+\section related Related Pages
+
+- \link file-format-tsv-notes TsvFile Design Notes \endlink
+
+\section derived Files based on TsvFile
+
+   The best example of a derived format is the PGF file.
+
+- \link file-format-clf CLF File Format \endlink
+- \link file-format-pgf PGF File Format \endlink
+
+*/
+
+/**
+\page file-format-csv File Format: CSV (\aptversion)
+
+<center><b>DRAFT</b></center>
+
+CSV files are simple comma separated line oriented text files.
+Other than the change of field seperator and default quoting,
+they are the same as \link file-format-tsv TsvFile \endlink files.
+The same rules for TSV files apply to CSV files.
+
+\section csvExample1 Example 1
+
+The NetAffx annotation files are provided in CSV format. Below is
+a toy example of a NetAffx annotation file in CSV format.
+
+\verbatim
+#%create_date=Tue Jun 27 11:09:50 2006 PDT
+#%lib-set-name=HuEx-1_0-st
+#%lib-set-version=v2
+#%genome-species=Homo sapiens
+#%genome-version=hg17
+#%netaffx-annotation-date=2006-Jan
+#%netaffx-annotation-csv-version=1.7
+#%netaffx-annotation-url-mrna=www.affymetrix.com/analysis/netaffx/exon/rna.affx?pk=
+## probeset_id refers to the transcript cluster id, not the exon level probe set, and is required for ExACT software compatibility.
+"transcript_cluster_id","probeset_id","seqname","strand","start","stop","total_probes","gene_assignment","mrna_assignment","swissprot","unigene","GO_biological_process","GO_cellular_component","GO_molecular_function","pathway","protein_domains","protein_families"
+"7385707","7385707","chrX","-","144735330","144750034","8","---","---","---","---","---","---","---","---","---","---"
+\endverbatim
+
+*/
+
+/**
+@page file-format-tsv-notes Architecture: TsvFile Design Notes
+
+
+\section tsv_notes_intro TsvFile Design Notes
+
+This page discusses the details of TsvFile.
+
+
+\section tsv_performance TsvFile Performance
+
+TsvFile meets our needs for reading and writing our text
+data.  While it might be nice to have a binary format to
+avoid the need for all the getc and strtol calls, allowing
+users to simply edit the files is a big win.
+
+The main loop have the "if" clauses ordered by expected
+frequency.  This improves the speed by a couple percent, so
+do take care when adding a test to them.
+
+\section tsv_grammar TsvFile Grammar
+
+The grammar of a TsvFile is:
+
+\verbatim
+ws           = ( space | tab )*
+fs           = tab         (however the field seperator can be changed)
+eol          = ( cr | lf | cr lf)
+escaped_char = '\' char
+data_text    = ( non eol characters | escaped_char) *
+key_text     = data_text not including '='
+data_text    = data_text not including 'fs'
+
+comment_line := '#' text* eol
+
+data_line:= fs* text (fs text)* eol
+
+data_lines:= ( comment_line | data_line )*
+
+key_value_line:= '#%' ws key ws '=' text eol
+
+meta_lines:= ( key_value_line | comment_line )*
+
+column_header_line:= text ( fs text )* eol
+
+tsv_file_v1:=meta_lines* (meta_lines | column_header_line) data_lines
+
+tsv_file_v2:=meta_lines data_lines
+
+tsv_file:= tsv_file_v1 | tsv_file_v2
+
+\endverbatim
+
+\section tsv_todo TODO: Things which need to be done
+
+- Convert indexes from "multimap" to "map+vector"
+ (Reduce space used by keys and tree nodes)
+- Unique index Barf if duplicate found.
+- maybe make columns case-insensitive?
+
+*/
+
+// Local Variables:
+// mode: c++
+// End:

@@ -1,0 +1,24 @@
+/**
+\page apt-summary-vis MANUAL: apt-summary-vis (\aptversion)
+
+\p apt-summary-vis will create an IGB egr file from summary and annotation files.
+
+\section QuickStart Quick Start
+To generate an egr summary file, use:
+
+\verbatim
+apt-summary-vis -genome-position=filename summary_file [...]
+\endverbatim
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-summary-vis.help.txt
+
+\subsection genomePosition Genome Position File:
+
+*/

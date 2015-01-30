@@ -1,0 +1,8 @@
+#%create_date=2009-11-13 GMT-08:00 21:28:07
+#%chip_type=UpdateTest
+#%My_Var1=B3
+"Probe Set ID","B","C","Not In DB 2"
+"ID1","csv3 B1 Value","csv3 C1 Value","Not In DB 2 Value1"
+"ID2","csv3 B2 Value","csv3 C2 Value","Not In DB 2 Value2"
+"ID3","csv3 B3 Value","csv3 C3 Value","Not In DB 2 Value3"
+"ID4","csv3 B4 Value","csv3 C4 Value","Not In DB 2 Value4"

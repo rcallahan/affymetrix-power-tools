@@ -1,0 +1,3 @@
+MapParameter	MapEpsilon
+affymetrix-chipsummary-het_rate	0.038
+affymetrix-chipsummary-hom_rate	0.010

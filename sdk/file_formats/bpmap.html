@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+				<h1>Affymetrix&#174; BPMAP File Format</h1>
+ 
+		`		<h2>BPMAP FILE</h2>
+	
+
+ 
+				<p><b>Description</b></p>
+				<p>The BPMAP file contains information relating to the design of the Affymetrix tiling arrays.</p>
+
+				<p>Version 2 added the ability to a version, group and parameters associated with each sequence item.</p>
+
+				<p>Version 3 added the ability to store perfect match probes in addition to probe pairs.</p>
+
+				<p><b>Format</b></p>
+				<p>The format of the BPMAP file is a binary file with data stored in big-endian format. The following lists the sections and their order and placement in the file. The definition of each section is detailed below.</p>
+
+				<p class="indent">File Header<br /><br />
+    Sequence Description for sequence #1<br />
+    Sequence Description for sequence #2<br />
+    ...<br />
+    Sequence Description for sequence #N<br /><br />
+
+    Sequence Header for sequence #1<br />
+    Position Information for probe/probe pair #1 of sequence #1<br />
+    Position Information for probe/probe pair #2 of sequence #1<br />
+    ...<br />
+    Position Information for probe/probe pair #M of sequence #1<br /><br />
+
+    Sequence Header for sequence #2<br />
+    Position Information for probe/probe pair #1 of sequence #2<br />
+    Position Information for probe/probe pair #2 of sequence #2<br />
+    ...<br />
+    Position Information for probe/probe pair #M of sequence #2<br /><br />
+
+    ...</p>
+
+<p>Assuming there are N sequences and M_i probe pairs for sequence i.</p>
+
+<p><b>Section Definitions</b></p>
+
+<p><b>File Header</b></p>
+
+<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Magic number. A value to identify the file type. 
+	The value is set to 'PHT7\r\n\032\n'</td>
+	<td height="14" width="141">char</td><td height="14" width="214">8 bytes</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">The version 
+	number of the file. The version number is either 1.0, 2.0 or 3.0.<p>Due to a bug 
+	with the BPMAP file writer for early access arrays, this value may not be stored as a big endian 
+	float. To read this value:</p>
+	<blockquote>
+		<p>When on a big endian machine: read 4 bytes, swap the direction of the 
+	bytes, cast this to an integer, swap the bytes and cast to a float.</p><p>When on a little endian machine: read 4 bytes, cast the value as an 
+	integer, swap by bytes and cast to a float.</p></blockquote>
+	</td><td height="14" width="141">float</td><td height="14" width="214">
+	4 bytes</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">Number of 
+	sequences stored in the file.</td><td height="14" width="141">unsigned int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+</tbody></table>
+	<p><b>Sequence Description</b></p>
+	<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Length of the sequence name.</td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 bytes</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">Sequence name.</td>
+	<td height="14" width="141">char</td><td height="14" width="214">Specified 
+	by item #1.</td></tr> 
+<tr>
+	<td height="14" width="38">3</td> 
+	<td height="14" width="70%">Probe mapping type. <b>(only for version 3.0 and above files)</b><p>0 indicates a 
+	(PM/MM) probe 
+	pair tiling across the sequence.<br>
+	1 indicates a PM-only tiling across the sequence.</p></td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 
+	bytes</td>
+</tr>
+<tr>
+	<td height="14" width="38">4</td> 
+	<td height="14" width="70%">Sequence file offset. <b>(only for version 3.0 and above files)</b><p>
+	The offset (in bytes), from the beginning of the file, of the probe position information. This is intended to enable fast look-up 
+	ability.</p></td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 
+	bytes</td>
+</tr>
+<tr> <td height="14" width="38">5</td> <td height="14" width="70%">Number of 
+	probes/probe pairs in the sequence.</td><td height="14" width="141">unsigned 
+	int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">6</td> <td height="14" width="70%">Length of the 
+	group name <b>(only for version 2.0 and above files)</b></td><td height="14" width="141">
+	unsigned int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">7</td> <td height="14" width="70%">Group name<b> 
+	(only for version 2.0 and above files)</b></td><td height="14" width="141">char</td><td height="14" width="214">
+	Specified by item #4.</td></tr>  
+<tr> <td height="14" width="38">8</td> <td height="14" width="70%">Length of the 
+	version number <b>(only for version 2.0 and above files)</b></td><td height="14" width="141">
+	unsigned int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">9</td> <td height="14" width="70%">Version 
+	number <b>(only for version 2.0 and above files)</b></td><td height="14" width="141">
+	char</td><td height="14" width="214">
+	Specified by item #6</td></tr>  
+<tr> <td height="14" width="38">10</td> <td height="14" width="70%">Number of 
+	parameters <b>(only for version 2.0 and above files)</b></td><td height="14" width="141">
+	unsigned int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">11</td> <td height="14" width="70%">Parameters 
+	name/value. The number of parameters is specified by item #8.<b> (only for 
+	version 2.0 and above files).</b><p>Each parameter is defined as a pair of 
+	name/value strings where the strings are stored as the following:</p><li>unsigned 
+	int (4 bytes) - This is the length of string.</li>
+	<li>char (# characters defined by the length of the string) - This is the 
+	name of the string.</li> </td><td height="14" width="141">see the description.</td><td height="14" width="214">
+	see the description.</td></tr>  
+</tbody></table>
+				<p><b>Sequence Header</b></p>
+				<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Sequence ID</td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 bytes</td></tr>   
+</tbody></table>
+				<p><b>Position Information</b></p>
+				<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">X coordinate on array of the perfect match (PM) probe 
+	(note: array coordinates are 0 based).</td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 
+	bytes</td></tr> <tr> <td height="14" width="38">2</td> 
+	<td height="14" width="70%">Y coordinate on array of the PM probe</td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 
+	bytes</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">X coordinate 
+	on array of the mismatch probe (MM) probe <b>(only if the probe mapping type 
+	indicates PM/MM tiling)</b></td><td height="14" width="141">unsigned int</td><td height="14" width="214">4 bytes</td></tr>  
+<tr> <td height="14" width="38">4</td> <td height="14" width="70%">Y coordinate 
+	on array of the MM probe <b>(only if the probe mapping type indicates PM/MM 
+	tiling)</b></td><td height="14" width="141">unsigned int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">5</td> <td height="14" width="70%">Length of the 
+	PM probe (and MM if a pair).</td><td height="14" width="141">unsigned char</td><td height="14" width="214">
+	1 byte</td></tr>  
+<tr> <td height="14" width="38">6</td> <td height="14" width="70%">Probe 
+	sequence. The 25 base probe sequence is packed into a 7 byte character 
+	sequence.<p>Each byte represents up to 4 bases (so the format can handle 
+	probes of length up to 25bp).<br>
+	The first byte contains the first 4 bases of the probe.<br>
+	The first base of the probe is encoded in the two most significant bits of 
+	the first byte.<br>
+	The fourth base of the probe is encoded in the two least significant bits of 
+	the first byte.<br>
+	The conversion from each pair of bits to a DNA base is as follows: (0,1,2,3) 
+	-&gt; (A,C,G,T)</p></td><td height="14" width="141">char</td><td height="14" width="214">
+	7 bytes</td></tr>  
+<tr> <td height="14" width="38">7</td> <td height="14" width="70%">Match score. 
+	Note: The current BPMAP files are based on perfect match so the scores are 
+	1.<p>See the bug description in the&nbsp; version number field above.</p></td>
+	<td height="14" width="141">float</td><td height="14" width="214">4 bytes</td></tr>  
+<tr> <td height="14" width="38">8</td> <td height="14" width="70%">Position of 
+	the PM probe within the sequence. Note: The position is the 0-based position 
+	of the lower coordinate of the 25-mer aligned to the target.</td><td height="14" width="141">
+	unsigned int</td><td height="14" width="214">4 bytes</td></tr>  
+<tr> <td height="14" width="38">9</td> <td height="14" width="70%">1 if the 
+	matching target (not the probe) is on the forward strand, 0 if on the 
+	reverse.</td>
+	<td height="14" width="141">unsigned char</td><td height="14" width="214">1 
+	byte</td></tr>  
+</tbody></table>
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

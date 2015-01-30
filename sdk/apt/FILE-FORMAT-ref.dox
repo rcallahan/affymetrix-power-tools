@@ -1,0 +1,42 @@
+/**
+
+\page FILE-FORMAT-ref File Format: REF (\aptversion)
+
+Copynumber Reference format (REF) is a hdf5 binary representation of the data needed to run the copynumber single
+sample workflow.
+
+The intention is that ref will contain
+a CN5 data group which will have the target sketch, feature effects, and snp
+posteriors needed to run the probeset genotype engine on single samples, and produce
+the same results as if the single sample were run as part of the larger set of
+samples that were used to generate the reference file. In addition, the
+copynumber reference file will contain a Copynumber data group which will have
+a Parameters section to hold parameter values used to generate the reference
+file, and a Reference section used to hold the median values used in
+calculating the log2ratio and allelic difference used in the copynumber
+analysis.
+
+The file is structured as follows:
+
+- CN5
+    - Target-sketch
+        - (double) The interpolated sketch value.
+    - CN5.plier.feature-response
+        - Probeid (int) – The identifier of the probe.
+        - Feature effect (double) – The feature effect for the probe. This is multiplier that should be equal to or close to 1.0.	
+    - CN5.snp-posteriors
+        - Consists of the SnpId (string) and 16 double values per snp that define the model for each snp.
+- CopyNumber
+    - Parameters
+        - (string) Text values with a preceding '#\%' to indicate that the line is meta data.
+    - Reference
+        - ProbeSetName (string) – The name of the probe set.
+	- MedianSignal (double) – The median signal across all the samples used to generate the reference.
+	- XXMedianSignal (double) – The median signal across all the female samples used to generate the reference.
+	- YMedianSignal (double) – The median signal across all the male samples used to generate the reference.
+	- AAMedianSignal (double) – The median signal across all the samples used to generate the reference where this snp is called AA.
+	- ABMedianSignal (double) – The median signal across all the samples used to generate the reference where this snp is called AB.
+	- BBMedianSignal (double) – The median signal across all the samples used to generate the reference where this snp is called BB.
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>lib-chipstream</ProjectName>
+    <ProjectGuid>{F0EBFEC9-9E42-4ACB-82EE-129847509899}</ProjectGuid>
+    <RootNamespace>chipstream</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\external\pcre;..\..\external\hdf5\windows\src;..\..\external\newmat;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_USRDLL;_WINSOCKAPI_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\external\pcre;..\..\external\hdf5\windows\src;..\..\external\newmat;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_USRDLL;_WINSOCKAPI_;_SCL_SECURE_NO_WARNINGS;XERCES_STATIC_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\external\pcre;..\..\external\hdf5\windows\src;..\..\external\newmat;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_USRDLL;_WINSOCKAPI_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\external\pcre;..\..\external\hdf5\windows\src;..\..\external\newmat;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_USRDLL;_WINSOCKAPI_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<AdditionalOptions>/DAPT_VER_BAMBOO_BUILD="\"none\"" /DAPT_VER_RELEASE="\"1.16.1\"" /DAPT_VER_SVN_VERSION="\"57280:57281M\"" /DAPT_VER_SVN_URL="\"svn://svn.affymetrix.com/apt/projects/apt/branches/APT_1_16_1_BRANCH\""</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AdapterTypeNormTran.cpp" />
+    <ClCompile Include="AdjHomHiLoCelListener.cpp" />
+    <ClCompile Include="AnalysisStream.cpp" />
+    <ClCompile Include="AnalysisStreamExpPcaSel.cpp" />
+    <ClCompile Include="AnalysisStreamExpression.cpp" />
+    <ClCompile Include="AnalysisStreamExpSpectSel.cpp" />
+    <ClCompile Include="AnalysisStreamFactory.cpp" />
+    <ClCompile Include="AnalysisStreamGType.cpp" />
+    <ClCompile Include="apt-cel-transformer\CELTransformerEngine.cpp" />
+    <ClCompile Include="ArtifactReduction.cpp" />
+    <ClCompile Include="..\bboard\Bboard.cpp" />
+    <ClCompile Include="..\bboard\BboardBox.cpp" />
+    <ClCompile Include="..\bboard\BboardBoxRef.cpp" />
+    <ClCompile Include="..\bboard\BboardTypes.cpp" />
+    <ClCompile Include="BioTypes.cpp" />
+    <ClCompile Include="CelReader.cpp" />
+    <ClCompile Include="apt-summary-normalization\ChannelTwoPointNormalizationEngine.cpp" />
+    <ClCompile Include="ChipLayout.cpp" />
+    <ClCompile Include="ChipStream.cpp" />
+    <ClCompile Include="ChipStreamDataTransform.cpp" />
+    <ClCompile Include="ChipStreamFactory.cpp" />
+    <ClCompile Include="ChipSummary.cpp" />
+    <ClCompile Include="ClusterZ.cpp" />
+    <ClCompile Include="CnProbeGenderCelListener.cpp" />
+    <ClCompile Include="..\bboard\dao\Dao.cpp" />
+    <ClCompile Include="..\bboard\dao\Dao_TsvFile.cpp" />
+    <ClCompile Include="..\bboard\dao\DaoTypes.cpp" />
+    <ClCompile Include="..\bboard\dao\DaoUtil.cpp" />
+    <ClCompile Include="DataStore.cpp" />
+    <ClCompile Include="DiskIntensityMart.cpp" />
+    <ClCompile Include="DmListener.cpp" />
+    <ClCompile Include="DTFactory.cpp" />
+    <ClCompile Include="EmGenderCelListener.cpp" />
+    <ClCompile Include="EngineUtil.cpp" />
+    <ClCompile Include="apt-export-impute\ExportDataFilesEngine.cpp" />
+    <ClCompile Include="apt-export-impute\ExportImputeFormatEngine.cpp" />
+    <ClCompile Include="FileGenders.cpp" />
+    <ClCompile Include="FileInbred.cpp" />
+    <ClCompile Include="FileListFilterEngine.cpp" />
+    <ClCompile Include="FileRemovalEngine.cpp" />
+    <ClCompile Include="GcAdjust.cpp" />
+    <ClCompile Include="GcBg.cpp" />
+    <ClCompile Include="apt-geno-qc\GenoQC.cpp" />
+    <ClCompile Include="GenoSeed.cpp" />
+    <ClCompile Include="GenoSeedTxt.cpp" />
+    <ClCompile Include="apt-genotype-report\GenotypeExtendedReportEngine.cpp" />
+    <ClCompile Include="apt-genotype-report\GenotypeReportEngine.cpp" />
+    <ClCompile Include="apt-genotype-report\GenotypeReportFilterEngine.cpp" />
+    <ClCompile Include="apt-genotype-translation\GenotypeTranslationEngine.cpp" />
+    <ClCompile Include="GenoUtility.cpp" />
+    <ClCompile Include="HomHiLoCelListener.cpp" />
+    <ClCompile Include="IdxGroup.cpp" />
+    <ClCompile Include="IntensityMart.cpp" />
+    <ClCompile Include="IntensityReporter.cpp" />
+    <ClCompile Include="KitAOCelListener.cpp" />
+    <ClCompile Include="KitAODb.cpp" />
+    <ClCompile Include="apt-list-summary\ListSummaryEngine.cpp" />
+    <ClCompile Include="MatrixUtil.cpp" />
+    <ClCompile Include="MedNormTran.cpp" />
+    <ClCompile Include="MetaProbeset.cpp" />
+    <ClCompile Include="MmAdjust.cpp" />
+    <ClCompile Include="MultiChannelHomHiLoCelListener.cpp" />
+    <ClCompile Include="MultiChannelNonOverlapCelListener.cpp" />
+    <ClCompile Include="MultiQuantMethodListener.cpp" />
+    <ClCompile Include="apt-summary-normalization\OnePointNormalizationEngine.cpp" />
+    <ClCompile Include="PmAdjusterFactory.cpp" />
+    <ClCompile Include="PmAdjustTransform.cpp" />
+    <ClCompile Include="PmSumAdjust.cpp" />
+    <ClCompile Include="..\bboard\pnode\PN_Null.cpp" />
+    <ClCompile Include="..\bboard\pnode\Pnode.cpp" />
+    <ClCompile Include="..\bboard\pnode\PnodeFactory.cpp" />
+    <ClCompile Include="ProbeListFactory.cpp" />
+    <ClCompile Include="ProbeListStl.cpp" />
+    <ClCompile Include="ProbeSet.cpp" />
+    <ClCompile Include="apt-probeset-genotype\ProbesetGenotypeEngine.cpp" />
+    <ClCompile Include="apt-data-step\ProbesetGenotypeStageEngine.cpp" />
+    <ClCompile Include="apt-probeset-summarize\ProbesetSummarizeEngine.cpp" />
+    <ClCompile Include="PsBoard.cpp" />
+    <ClCompile Include="QCAnalysisOptions.cpp" />
+    <ClCompile Include="QCProbesetOptions.cpp" />
+    <ClCompile Include="QuantAvgDiff.cpp" />
+    <ClCompile Include="QuantBirdseed.cpp" />
+    <ClCompile Include="QuantBirdseedDev.cpp" />
+    <ClCompile Include="QuantBirdseedLegacy.cpp" />
+    <ClCompile Include="QuantBirdseedv1.cpp" />
+    <ClCompile Include="QuantBirdseedv2.cpp" />
+    <ClCompile Include="QuantBRLMM.cpp" />
+    <ClCompile Include="QuantDabg.cpp" />
+    <ClCompile Include="QuantGTypeMethod.cpp" />
+    <ClCompile Include="QuantIterPlier.cpp" />
+    <ClCompile Include="QuantLabelZ.cpp" />
+    <ClCompile Include="QuantLabelZIO.cpp" />
+    <ClCompile Include="QuantLabelZMulti.cpp" />
+    <ClCompile Include="QuantMedian.cpp" />
+    <ClCompile Include="QuantMethod.cpp" />
+    <ClCompile Include="QuantMethodExprCCCHPReport.cpp" />
+    <ClCompile Include="QuantMethodExprChipSummary.cpp" />
+    <ClCompile Include="QuantMethodExprCHPReport.cpp" />
+    <ClCompile Include="QuantMethodExprReport.cpp" />
+    <ClCompile Include="QuantMethodFactory.cpp" />
+    <ClCompile Include="QuantMethodGTypeCHPReport.cpp" />
+    <ClCompile Include="QuantMethodGTypeExprChipSummary.cpp" />
+    <ClCompile Include="QuantMethodGTypeReport.cpp" />
+    <ClCompile Include="QuantMethodMultiDataCCCHPReport.cpp" />
+    <ClCompile Include="QuantMethodReport.cpp" />
+    <ClCompile Include="QuantMethodReportListener.cpp" />
+    <ClCompile Include="QuantMethodRunReport.cpp" />
+    <ClCompile Include="QuantMethodTransform.cpp" />
+    <ClCompile Include="QuantPlier.cpp" />
+    <ClCompile Include="QuantPlierBase.cpp" />
+    <ClCompile Include="QuantRma.cpp" />
+    <ClCompile Include="QuantSea.cpp" />
+    <ClCompile Include="RmaBgTran.cpp" />
+    <ClCompile Include="apt-sample-snp-list\SampleSNPListEngine.cpp" />
+    <ClCompile Include="SelectFilesEngine.cpp" />
+    <ClCompile Include="SelfCreate.cpp" />
+    <ClCompile Include="SelfDoc.cpp" />
+    <ClCompile Include="SignalBackgroundCelListener.cpp" />
+    <ClCompile Include="SketchQuantNormTran.cpp" />
+    <ClCompile Include="SnpClusterStore.cpp" />
+    <ClCompile Include="SnpModelConverter.cpp" />
+    <ClCompile Include="SnpModelDb.cpp" />
+    <ClCompile Include="apt-snp-summary\SnpSummaryEngine.cpp" />
+    <ClCompile Include="apt-snp-summary\SnpSummaryReporter.cpp" />
+    <ClCompile Include="apt-snp-summary\SnpSummaryStats.cpp" />
+    <ClCompile Include="SparseMart.cpp" />
+    <ClCompile Include="SpecialSnps.cpp" />
+    <ClCompile Include="apt-summary-genotype\SummaryGenotypeEngine.cpp" />
+    <ClCompile Include="SummaryStats.cpp" />
+    <ClCompile Include="TsvReport.cpp" />
+    <ClCompile Include="apt-summary-normalization\TwoPointNormalizationEngine.cpp" />
+    <ClCompile Include="VariabilityScoreCelListener.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AdapterTypeNormTran.h" />
+    <ClInclude Include="AdjHomHiLoCelListener.h" />
+    <ClInclude Include="AnalysisInfo.h" />
+    <ClInclude Include="AnalysisStream.h" />
+    <ClInclude Include="AnalysisStreamExpPcaSel.h" />
+    <ClInclude Include="AnalysisStreamExpression.h" />
+    <ClInclude Include="AnalysisStreamExpSpectSel.h" />
+    <ClInclude Include="AnalysisStreamFactory.h" />
+    <ClInclude Include="AnalysisStreamGType.h" />
+    <ClInclude Include="apt-cel-transformer\CELTransformerEngine.h" />
+    <ClInclude Include="AptTypes.h" />
+    <ClInclude Include="ArtifactReduction.h" />
+    <ClInclude Include="BioTypes.h" />
+    <ClInclude Include="CelListener.h" />
+    <ClInclude Include="CelReader.h" />
+    <ClInclude Include="CelStatListener.h" />
+    <ClInclude Include="ChipLayout.h" />
+    <ClInclude Include="ChipStream.h" />
+    <ClInclude Include="ChipStreamDataTransform.h" />
+    <ClInclude Include="ChipStreamFactory.h" />
+    <ClInclude Include="ChipSummary.h" />
+    <ClInclude Include="ClusterZ.h" />
+    <ClInclude Include="CnProbeGenderCelListener.h" />
+    <ClInclude Include="CumulativeStats.h" />
+    <ClInclude Include="DataStore.h" />
+    <ClInclude Include="DataTransform.h" />
+    <ClInclude Include="DiskIntensityMart.h" />
+    <ClInclude Include="DmListener.h" />
+    <ClInclude Include="EmGenderCelListener.h" />
+    <ClInclude Include="EngineUtil.h" />
+    <ClInclude Include="FileGenders.h" />
+    <ClInclude Include="FileInbred.h" />
+    <ClInclude Include="FileListFilterEngine.h" />
+    <ClInclude Include="FileRemovalEngine.h" />
+    <ClInclude Include="GcAdjust.h" />
+    <ClInclude Include="GcBg.h" />
+    <ClInclude Include="GenderCalls.h" />
+    <ClInclude Include="GenderCelListener.h" />
+    <ClInclude Include="GenoSeed.h" />
+    <ClInclude Include="GenoSeedTxt.h" />
+    <ClInclude Include="GenoUtility.h" />
+    <ClInclude Include="HomHiLoCelListener.h" />
+    <ClInclude Include="IdxGroup.h" />
+    <ClInclude Include="InbredStatus.h" />
+    <ClInclude Include="IntensityMart.h" />
+    <ClInclude Include="IntensityReader.h" />
+    <ClInclude Include="IntensityReporter.h" />
+    <ClInclude Include="IntensityTransformer.h" />
+    <ClInclude Include="MatrixUtil.h" />
+    <ClInclude Include="MedNormTran.h" />
+    <ClInclude Include="MetaProbeset.h" />
+    <ClInclude Include="MmAdjust.h" />
+    <ClInclude Include="MultiChannelHomHiLoCelListener.h" />
+    <ClInclude Include="MultiChannelNonOverlapCelListener.h" />
+    <ClInclude Include="MultiQuantMethodListener.h" />
+    <ClInclude Include="PmAdjuster.h" />
+    <ClInclude Include="PmAdjusterFactory.h" />
+    <ClInclude Include="PmOnlyAdjust.h" />
+    <ClInclude Include="PmSumAdjust.h" />
+    <ClInclude Include="ProbeList.h" />
+    <ClInclude Include="ProbeListFactory.h" />
+    <ClInclude Include="ProbeListStl.h" />
+    <ClInclude Include="ProbeSet.h" />
+    <ClInclude Include="PsBoard.h" />
+    <ClInclude Include="QCAnalysisOptions.h" />
+    <ClInclude Include="QCProbesetOptions.h" />
+    <ClInclude Include="QuantAvgDiff.h" />
+    <ClInclude Include="QuantBirdseed.h" />
+    <ClInclude Include="QuantBirdseedDev.h" />
+    <ClInclude Include="QuantBirdseedLegacy.h" />
+    <ClInclude Include="QuantBirdseedv1.h" />
+    <ClInclude Include="QuantBirdseedv2.h" />
+    <ClInclude Include="QuantBRLMM.h" />
+    <ClInclude Include="QuantDabg.h" />
+    <ClInclude Include="QuantExprMethod.h" />
+    <ClInclude Include="QuantGTypeMethod.h" />
+    <ClInclude Include="QuantIterPlier.h" />
+    <ClInclude Include="QuantLabelZ.h" />
+    <ClInclude Include="QuantLabelZIO.h" />
+    <ClInclude Include="QuantLabelZMulti.h" />
+    <ClInclude Include="QuantMedian.h" />
+    <ClInclude Include="QuantMethod.h" />
+    <ClInclude Include="QuantMethodExprCCCHPReport.h" />
+    <ClInclude Include="QuantMethodExprChipSummary.h" />
+    <ClInclude Include="QuantMethodExprCHPReport.h" />
+    <ClInclude Include="QuantMethodExprReport.h" />
+    <ClInclude Include="QuantMethodFactory.h" />
+    <ClInclude Include="QuantMethodGTypeChipSummary.h" />
+    <ClInclude Include="QuantMethodGTypeCHPReport.h" />
+    <ClInclude Include="QuantMethodGTypeExprChipSummary.h" />
+    <ClInclude Include="QuantMethodGTypeReport.h" />
+    <ClInclude Include="QuantMethodMultiDataCCCHPReport.h" />
+    <ClInclude Include="QuantMethodReport.h" />
+    <ClInclude Include="QuantMethodReportListener.h" />
+    <ClInclude Include="QuantMethodRunReport.h" />
+    <ClInclude Include="QuantMethodSamplerReport.h" />
+    <ClInclude Include="QuantMethodSqlExprReport.h" />
+    <ClInclude Include="QuantMethodSqlGTypeReport.h" />
+    <ClInclude Include="QuantPlier.h" />
+    <ClInclude Include="QuantPlierBase.h" />
+    <ClInclude Include="QuantPlierParams.h" />
+    <ClInclude Include="QuantRma.h" />
+    <ClInclude Include="QuantSea.h" />
+    <ClInclude Include="RmaBgTran.h" />
+    <ClInclude Include="SelectFilesEngine.h" />
+    <ClInclude Include="SelfCreate.h" />
+    <ClInclude Include="SelfDoc.h" />
+    <ClInclude Include="SignalBackgroundCelListener.h" />
+    <ClInclude Include="SketchQuantNormTran.h" />
+    <ClInclude Include="SparseMart.h" />
+    <ClInclude Include="SpecialSnps.h" />
+    <ClInclude Include="SpfReader.h" />
+    <ClInclude Include="SummaryStats.h" />
+    <ClInclude Include="TableReader.h" />
+    <ClInclude Include="TsvReport.h" />
+    <ClInclude Include="VariabilityScoreCelListener.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\external\pcre\lib-pcre.vcxproj">
+      <Project>{f75849c9-9e42-4acb-82ee-128594860999}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

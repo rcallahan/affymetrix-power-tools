@@ -1,0 +1,521 @@
+/**
+\page apt-probeset-genotype MANUAL: apt-probeset-genotype (\aptversion)
+
+\section brlmmContent Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#quickstart">Quick Start - getting up and running.</a></li>
+  <ul>
+  <li><a href="#quickstartAxiomGT1">Running Axiom &tm; GT1 (Axiom &tm; chips)</a></li>
+  <li><a href="#quickstartbirdseed">Running Birdseed (SNP6.0 chips)</a></li>
+  <li><a href="#quickstartbrlmm-p">Running BRLMM-P (SNP5.0 chips)</a></li>
+  <li><a href="#quickstartbrlmm">Running BRLMM (Mapping 500K and preceeding chips)</a></li>
+  <li><a href="#quickstartsubset">Analysis of a subset of SNPs</a></li>
+  <li><a href="#quickstartchpfiles">A note about the CHP file format</a></li>
+  </ul>
+<li><a href="#support">Support.</a></li>
+<li><a href="#reportFile">The Report File - explanation of contents.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+<li><a href="#advanced">Advanced Topics</a></li>
+  <ul>
+  <li><a href="#chpformat">CHP file format - Same format, different values to DM genotyping CHPs.</a></li>
+  <li><a href="#analysisconcept">Custom Analyses - how to vary the way calls are made.</a></li>
+  <li><a href="#transformations">Clustering transformations - different possible clustering spaces.</a></li>
+  </ul>
+</ul>
+
+<a name="intro">
+\section brlmmIntr Introduction
+
+apt-probeset-genotype is a program for making genotype calls from
+Affymetrix SNP microarrays.  It currently implements three different
+genotype calling algorithms:
+
+<ul>
+  <li>
+    BRLMM (pronounced "B-realm") - a model based approach similar to
+    the RLMM (pronounced "realm") model developed by Nusrat Rabbee and Terry
+    Speed but with a Bayesian
+    extension, hence the "B".  Currently requires seed genotypes for every SNP
+    and sample analyzed which it obtains via the DM algorithm, hence it requires
+    the presence of MisMatch (MM) probes. [brlmm]
+  </li><li>
+    BRLMM-P - a model-based approach which performs 1-dimensional clustering
+    by fitting a Gaussian mixture model.  No requirement for seed genotypes,
+    hence can run on SNP chips without MM probes. BRLMM-P Plus is a variation
+    on this method. [brlmm-p]
+  </li><li>
+    Birdseed (v1) - a model-based clustering method which fits a Gaussian mixture
+    model in 2-dimensional (signalA,signalB) space. Signal processing prior
+    to the EM clustering is as in BRLMM and BRLMM-P.  Fitting is performed
+    by Expectation Maximization (EM) and there is no requirement for MM probes.
+    "%birdseed" and "birdseed-v1" are aliased to the same thing as seen below
+    regarding analysis strings. [birdseed-v1 or %birdseed]
+  </li><li>
+    Birdseed (v2) - like Birdseed v1 but with improved handling of SNP-specific
+    models.  Birdseed v1 uses SNP-specific models as starting points from which
+    to begin EM iteration.  In Birdseed v2 the models are used in a
+    pseudo-Bayesian fashion, limiting the possibility of arriving at a
+    genotype clustering that is very different to the supplied models.
+    [birdseed-v2]
+  </li><li>
+    Birdseed (dev) - the most recently incorporated development version of
+    %birdseed from The Broad Institute. The actual anlaysis run by the
+    "birdseed-dev" analysis string may change over time as the %birdseed method
+    evolves.  [birdseed-dev]
+  </li>
+</ul>
+
+APT implements the Birdseed v1 algorithm, developed in collaboration with the
+Broad Institute, which Affymetrix has validated and supports for use with the
+SNP 6.0 array.  APT also implements the BRLMM-P algorithm, which Affymetrix
+has validated and supports for the SNP 5.0 array.
+
+Additionally, a newer version of Birdseed accessed using --analysis birdseed-v2
+option and the latest development edition of the Birdseed algorithm
+accessed via the use of the --analysis birdseed-dev option are implemented.  Affymetrix is
+not currently supporting the newer birdseed-v2 and birdseed-dev methods,
+in contrast with the supported methods described above.
+Moreover, the SNP priors and lists of "qualified" SNPs for Birdseed-dev are not
+currently available from Affymetrix for either SNP 5.0 or 6.0.  Further
+information and support files for Birdseed-dev and Birdseed-v2 are available
+from the Broad Institute
+(<a href="http://www.broad.mit.edu/mpg/birdsuite/">http://www.broad.mit.edu/mpg/birdsuite/</a>).
+
+Future APT updates are expected to migrate improvements currently available
+via the birdseed-dev option into methods supported in the same manner as the
+rest of APT methods
+
+As %birdseed, brlmm and brlmm-p are model based algorithms they need to be run
+on multiple CEL files at once to estimate probe effect and SNP cluster parameters.
+For Mapping 500K data it is advisable to run on at least 50 distinct samples
+(excluding replicates) and ideally on about 100.  For Genome-Wide Human SNP
+5.0 and 6.0 arrays it is advisable to cluster with at least 44 genetically
+distinct samples, though adding more will continue to be of benefit in
+particular for correctly calling rare genotypes.
+
+<a name="quickstart">
+\section QuickStart Quick Start
+
+We illustrate the most basic way to run apt-probeset-genotype with some examples.
+
+The basic requirements for a run of apt-probeset-genotype are:
+  - A collection of CEL files to process. Note that the program will run <em>much faster</em> if the
+    CEL files are located on a local disk as opposed to being read across a network.  For better
+    overall performance it is advisable to filter CEL files, running the analysis
+    only on those passing a certain specification based on the per-sample QC metric.
+    For Mapping 500K data the recommended per-chip spec is a call rate of 93% using DM at
+    a threshold of 0.33.  For Genome-Wide Human SNP 5.0 and 6.0 chips the corresponding qc
+    threshold is a QC call rate of at least 86%.
+  - The CDF file corresponding to the array type of the CELs.  CDF files can be downloaded from
+    http://www.affymetrix.com/support/technical/libraryfilesmain.affx
+  - A chrX (500K, GenomeWide SNP 5.0) file consisting of the SNP IDs for all
+    non-pseudo-autosomal chrX SNPs on the array.  These files can be downloaded
+    from the Affymetrix product page at http://www.affymetrix.com
+  - A specialSNPs (GenomeWide SNP 6.0) file consisting of the SNP IDs for all
+    SNPs with non-diploid copy number (chrX, chrY, Mitochondria). These files can be
+    downloaded from the Affymetrix product page at http://www.affymetrix.com
+  - For Birdseed, BRLMM-P, and BRLMM-P Plus a model file consisting of SNP-specific priors
+    specifying for each SNP where the 3 genotype clusters are likely to be located.
+  - A directory where results will be stored.  For this example it is
+    called 'results_dir'
+
+WARNING: apt-probeset-genotype will overwrite any existing output files it finds.  If you wish
+to keep existing results make sure to specify a different output directory name.
+
+WARNING: Model files are algorithm specific. Birdseed model files must be used with the Birdseed analysis method and BRLMM-P model files
+with the brlmm-p method.
+
+NOTE: On windows the DOS prompt does not support wildcard
+expansion and the preferred method is to supply a text file with the
+path to the cel files via the '--cel-files' option (see below for
+details of file format).
+
+NOTE: The windows DOS prompt also does not allow a
+continuation of a command with the '\' character, unlike unix. So in the examples below
+the '\' character should be omitted and everything entered on a single line.
+
+<a name="quickstartAxiomGT1">
+\section Running Axiom &tm; GT1 (Axiom &tm; chips)
+
+The command below runs the Axiom &tm; GT1 algorithm on Axiom &tm; arrays.  For full details on the use of Axiom &tm; GT1 in apt-probeset-genotype refer to the vignette on <a href="VIGNETTE-Axiom-probeset-genotype.html">genotype clustering for Axiom &tm; arrays</a>.
+
+\verbatim
+  apt-probeset-genotype \
+    --analysis-files-path /library/file/path \
+    --xml-file Axiom_GW_Hu_SNP.r2.apt-probeset-genotype.AxiomGT1.xml \
+    --out-dir out \
+    --cel-files cel_file_list.txt
+\endverbatim
+
+<a name="quickstartbirdseed">
+\subsection QuickStartBirdseed Running Birdseed (GenomeWide SNP 6.0 chips)
+
+On unix systems a basic command using the default parameters to do a run on SNP6.0 data using %birdseed (v2) would look like:
+
+\verbatim
+apt-probeset-genotype \
+  -o results_dir \
+  -c GenomeWideSNP_6.cdf \
+  --set-gender-method cn-probe-chrXY-ratio \
+  --chrX-probes GenomeWideSNP_6.chrXprobes \
+  --chrY-probes GenomeWideSNP_6.chrYprobes \
+  --special-snps GenomeWideSNP_6.specialSNPs \
+  --read-models-birdseed GenomeWideSNP_6.birdseed-v2.models \
+  -a birdseed-v2 \
+  *.CEL
+\endverbatim
+
+Note in particular the use of the option "-a birdseed-v2" which specifies that the Birdseed calling algorithm
+should be used (the default is brlmm, which won't work on a chip without MM probes such as the 5.0 and 6.0 chips).
+
+Also see the important notes regarding birdseed-v1, birdseed-v2, and birdseed-dev in the <a href="#intro">introduction</a> above.
+
+The following will give you the older %birdseed (v1) behavior:
+
+\verbatim
+apt-probeset-genotype \
+  -o results_dir \
+  -c GenomeWideSNP_6.cdf \
+  --special-snps GenomeWideSNP_6.specialSNPs \
+  --read-models-birdseed GenomeWideSNP_6.birdseed.models \
+  -a birdseed \
+  *.CEL
+\endverbatim
+
+
+<a name="quickstartbrlmm-p">
+\subsection QuickStartBrlmmP Running BRLMM-P (GenomeWide SNP 5.0 chips)
+
+On unix systems a basic command using the default parameters to do a run on SNP5.0 data would look like:
+
+\verbatim
+apt-probeset-genotype \
+  -o results_dir \
+  -c GenomeWideSNP_5.cdf \
+  --chrX-snps GenomeWideSNP_5.chrx \
+  --read-models-brlmmp GenomeWideSNP_5.models \
+  -a brlmm-p \
+  *.CEL
+\endverbatim
+
+Note in particular the use of the option "-a brlmm-p" which specifies that the BRLMM-P calling algorithm
+should be used (the default is brlmm, which won't work on a chip without MM probes such as the 5.0 chips).
+
+<a name="quickstartbrlmm">
+\subsection QuickStartBRLMM Running BRLMM (Mapping 500K and preceeding chips)
+
+On unix systems a basic command using the default parameters to do a run on Mapping 500K data would look like:
+
+\verbatim
+apt-probeset-genotype \
+  -o results_dir \
+  -c Mapping250K_Sty.cdf \
+  --chrX-snps Mapping250K_Sty.chrx \
+  *.CEL
+\endverbatim
+
+The output will consist of a report file with some summary statistics
+about each chip analyzed and a pair of tab-delimited text files with
+suffixes .calls.txt and .confidences.txt containing the genotype calls
+and their associated confidences.
+
+On windows a command equivalent to the example above for Mapping 500K would look like:
+
+\verbatim
+apt-probeset-genotype -c Mapping250K_Sty.cdf --chrX-snps Mapping250K_Sty.chrx  -o results_dir  --cel-files cel_file_list.txt
+\endverbatim
+
+For Mapping 500K chips apt-probeset-genotype runs 100 CELs in 1-2 hours on a 3GHz 2Mb RAM machine using local disk.
+
+<a name="quickstartsubset">
+\section subset Analyzing a subset of the SNPs
+
+Building upon the examples above, here is an example in which only a subset of SNPs are
+analyzed and the results are written to a text table of genotype calls and a text table of
+call confidences.  The subset of SNPs to be analyzed is specified in a tab-delimited text file
+called subset_sty.txt, which must contain a column named 'probeset_id'.
+
+\verbatim
+apt-probeset-genotype \
+  -s subset_sty.txt \
+  -c Mapping250K_Sty.cdf \
+  --chrX-snps Mapping250K_Sty.chrx \
+  -o results_dir \
+  --list-sample \
+  *.CEL
+\endverbatim
+
+Note: Note that the --list-sample option is required when subsets are used with the (default) BRLMM analyses and should be omitted for other analysis types. For BRLMM, by default the number of probes used for generating priors is 10,000. If a subset of less than 10,000 probes is used, use the --prior-size option to specify a number less than or equall to the subset size.
+
+See the apt-probeset-summarize manual for an more complete example of running an analysis on a compute farm.
+
+<a name="quickstartchpfiles">
+\section chpFiles A note about the CHP file format
+
+In previous versions of apt-probeset-genotype the default output format for genotype calls was the XDA CHP format (also known as GCOS CHP format).  For the GenomeWide SNP 5.0, SNP 6.0 and subsequent WGSA products the use of the XDA CHP format is strongly discouraged, instead we recommend the newer AGCC CHP format.  To help avoid accidental use of the XDA CHP format the defaults for output format have been changed to produce tab-delimited text tables of calls and confidences.  The creation of the text table output can be supressed with the --no-table-output option and the two CHP output formats can be selected with the --xda-chp-output and --cc-chp-output options.
+
+The reason that the XDA CHP format is discouraged for the GenomeWide SNP 5.0 chips is that it doesn't contain entries for SNP IDs, the identity of a SNP is inferred from its order in the file.  In the case of the GenomeWide SNP 5.0 chips there are some SNPs that are not part of the default library file which some advanced users may choose to explore.  This leads to the possibility of generating CHP files containing different SNP lists, something not well supported by the XDA CHP format.  The AGCC CHP format has a slot for SNP IDs and thus is safer to use with chips for which users may be looking at different SNP lists.
+
+For SNP 6.0 XDA CHP file format output is not allowed at all.
+
+Details on the contents of the CHP files for various calling algorithms can be found <a href="#chpformat">below</a>, and a full description of the XDA and AGCC CHP formats can be found in a <a href="gcos-agcc/index.html">local copy</a> of the Affymetrix Developer's Network file format documentation.
+
+<a name="support">
+\section brlmmSupport Support
+
+Support for APT is handled through the Affymetrix Developer Network. Specifically, questions, problems, feature requests, and other inquiries should be made through either the <a href="http://www.affymetrix.com/community/forums/forum.jspa?forumID=43">APT User Form</a> or the Developer Network email address, <a href="mailto:devnet@affymetrix.com">devnet@affymetrix.com</a>. (If you get an Internal Server Error when accessing the forum, try clearing your cookies for affymetrix.com.) To get emails updates about APT or to view previous APT announcements see the <a href="http://www.affymetrix.com/community/forums/forum.jspa?forumID=43">APT User Form</a>.<p>
+APT is not supported through the Affymetrix call center, Field Application Specialists, or the standard Affymetrix Technical support channels.<p>
+If you encounter an issue please make sure to collect the following information and report the problem to
+devnet@affymetrix.com
+ - Contents of program log file (a file called apt-probeset-genotype.log is created in
+   the output directory.
+ - Program output - cut and paste everything that the program reports to the screen.
+ - The specific command used.
+ - Type of machine (operating system, amount of memory).
+
+<a name="reportFile">
+\section reportFile The Report File
+
+apt-probeset-genotype creates a summary report file in the output directory with file name extension '.report.txt'.
+The report file contains some summary information about each chip analyzed and is useful in getting a quick
+overview of the CELs analyzed.  The format of the file is tab-delimited text with a header line followed by a
+line for each CEL file analyzed.  The columns are all explained below, most users will be mainly interested in
+the first few entries.  The additional entries are provided as potentially useful metrics to track and
+identify outlier chips and are expected to be mainly of interest to advanced users.  The column entries are:
+
+ -# \b cel_files:                                         CEL file name.
+ -# \b computed_gender:                                   Estimated gender.
+ -# \b call_rate:                                         BRLMM/BRLMM-P/Birdseed call rate at the default or user-specified threshold.
+ -# \b het_rate:                                          Percentage of SNPs called AB (i.e. the heterozygosity).
+ -# \b hom_rate:                                          Percentage of SNPs called AA or BB (i.e. the homozygosity).
+ -# \b cluster_distance_mean:                             Average distance to the cluster center for the called genotype.
+ -# \b cluster_distance_stdev:                            Standard deviation of the distance to the cluster center for the called genotype.
+ -# \b raw_intensity_mean:                                Average of the raw PM probe intensities.
+ -# \b raw_intensity_stdev:                               Standard deviation of the raw PM probe intensities.
+ -# \b allele_summarization_mean:                         Average of the allele signal estimates (log2 scale).
+ -# \b allele_summarization_stdev:                        Standard deviation of the allele signal estimates (log2 scale).
+ -# \b allele_deviation_mean:                             Average of the absolute difference between the log2 allele signal estimate and its median across all chips.
+ -# \b allele_deviation_stdev:                            Standard deviation of the absolute difference between the log2 allele signal estimate and its median across all chips.
+ -# \b allele_mad_residuals_mean:                         Average of the median absolute deviation (MAD) between observed probe intensities and probe intensities fitted by the model.
+ -# \b allele_mad_residuals_stdev:                        Standard deviation of the median absolute deviation (MAD) between observed probe intensities and probe intensities fitted by the model.
+ -# \b em-cluster-chrX-het-contrast_gender:               Gender estimate based on estimated heterozygosity on chrX.
+ -# \b em-cluster-chrX-het-contrast_gender_chrX_het_rate: Estimated heterozygosity on chrX.
+ -# \b cn-probe-chrXY-ratio_gender_meanX:                 Average intensity of chrX CN probes.
+ -# \b cn-probe-chrXY-ratio_gender_meanY:                 Average intensity of chrY CN probes.
+ -# \b cn-probe-chrXY-ratio_gender_ratio:                 Ratio of average chrY CN probe intensity to average chrX CN probe intensity.
+ -# \b cn-probe-chrXY-ratio_gender:                       Gender estimate based on ratio of chrY to chrX average CN probe intensities.
+
+<a name="options">
+\subsection manualOptions Options:
+    
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-probeset-genotype.help.txt
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. What is a probe_id?
+
+A. See the <a href="FAQ.html#probe_id_faq">FAQ item on probe IDs</a> for more info.
+
+Q. The program died with an error message like "Assertion failed: A->probes.size()
+   == 2, file ../DmListener.cpp."  What does this mean?
+
+A. This is symptomatic of trying to run BRLMM for a SNP with no MM probes.  In its
+   typical mode of running BRLMM relies on DM to generate intital seed calls, and
+   the DM algorithm requires MM probes.
+
+Q. The program died with an error message like "DmListener::getGenoCall() - Can't find
+   genotypes for name: SNP_A-1780432".  What does this mean?
+
+A. This is symptomatic of having specified the wrong chrX file for the analysis.
+   In order to reduce the likelihood of accidentally using the wrong chrX file
+   apt-probeset-genotype checks to make sure that all the SNPs specified in the chrX file
+   are present on the chips being analyzed.  If it finds a SNP present in the chrX file
+   that is not identified in the CDF file it will die with the above message.  Note that
+   if you want to bypass the requirement of a chrX file you can use the --no-gender-force option.
+
+Q. The program died and I got an error message saying "Killed".  What does this mean and what can I do?
+
+A. Linux has a "feature" that it will promise more memory than it actually has
+   in the hope that many programs won't actually be using all their memory at once.
+   However, if linux does run short of memory it will start killing programs
+   arbitrarily. You can read more about linux's OOM (out of memory) killer at at
+   <a href="http://lwn.net/Articles/104179/">LWN.net</a>.
+
+Q. Why does apt-probeset-genotype require information regarding SNPs on chromosomes X/Y/Mito?
+
+A. The SNPs on chromosome X are evaluated separately for XX (female) and XY (male)
+   individuals as the intensity estimates for the males will generally be lower
+   on X due to one missing chromosome. The prior is also adjusted to remove the
+   het center as XY individuals should only have hom calls on the X chromosome.
+   For BRLMM analyses gender is estimated using the method employed in the GTYPE
+   software: individuals are called male if less than 7.5% of the snps on X are
+   called as hets by the initial DM calls using a .33 confidence threshold.  For
+   BRLMM-P gender is estimated by use of an Expectation Maximiation (EM) algorithm
+   on the PM probes for chrX SNPs to estimate the het rate.
+
+Q. How is the mask section in the CEL file used?
+
+A. It is not. The contents of this section of the CEL file are ignored.
+
+Q. How can I find out more information about the analysis string:
+<pre>
+    quant-norm.sketch=50000,pm-only,brlmm-p.CM=1.bins=100.K=2.SB=0.003.MS=0.05
+</pre>
+
+A. Start with the included manual for apt-probeset-genotype. Usage information is also provided
+   if you run apt-probeset-genotype without any arguments. Lastly, use the "--explain" option
+   for more information about particular analysis methods. IE:
+<pre>
+    apt-probeset-genotype --explain brlmm-p
+</pre>
+
+Q. Wild cards do not work on windows. For example:
+<pre>
+    apt-probeset-genotype ... *.CEL
+</pre>
+
+A. APT relies on the command shell to do the wild card expansion (ie bash shell on
+   *NIX systems). The windows shell does not do wild card expansion, so there is no
+   wild card expansion for APT when run from the windows shell. You may want to try
+   a different windows shell or perhaps bash via cygwin. See the --cel-files option
+   as an alternative to specify CEL files for analysis.
+
+<a name="advanced">
+\section manAdvanced Advanced Topics
+
+<a name="chpformat">
+\subsection chpFormat CHP File format.
+
+This section explains the contents of CHP files for the various algorithms.  For details on the formats or for an explanation of why the XDA CHP format is not supported for some chip types, see <a href="#quickstartchpfiles">above</a>.
+
+\subsubsection chpFormatXDA XDA CHP file format
+
+The XDA CHP file format is only supported for the BRLMM algorithm applied to the 100K or 500K arrays.  Historically the genotyping XDA CHP file is closely tied to the DM model and while BRLMM uses the same format for backward compatibility it is important to note that the interpretation of some fields is different.  Below are the names of the fields and corresponding
+BRLMM values that are stored in them.
+
+ - GenotypeCall: (6,7,8,11) correspond to (AA,BB,AB,NoCall) respectively.
+ - Confidence: Value between 0 and 1. The ratio of the distance to the closest cluster to the second closest cluster. Lower values are more confident.
+ - pvalue_AA: Mahalanobis distance to AA cluster.
+ - pvalue_AB: Mahalanobis distance to AB cluster.
+ - pvalue_BB: Mahalanobis distance to BB cluster.
+ - pvalue_NN: Not valid for BRLMM, value FLT_MAX inserted as placeholder.
+
+The following parameters are saved in the CCHPFileHeader object:
+ - het-mult: Het multiplier.
+ - iterations: Number of BRLMM iterations.
+ - iter-thresh: Maximum score used during BRLMM iterations.
+ - K: Scaling parameter in transformations.
+ - transform: Which transformation was used for A & B allele.
+ - prior-weight: Number of pseudocounts used as weight for prior.
+ - prior-mincall: Minimum number of observations for seeing each AA,AB,BB cluster to be used in prior. Minimum is 2 as can't get variance for less than 2.
+ - lowprecision: Were summary values rounded off before transforming. This is only used for regression testing to be compatible with an R prototype.
+
+A complete explanation of the XDA CHP file format can be found in a <a href="gcos-agcc/index.html">local copy</a> of the Affymetrix Developer's Network file format documentation.
+
+\subsubsection chpFormatAGCC AGCC CHP file format
+
+The AGCC CHP format consists of a header followed by a data section.  The header section contains a large amount of information including the software version and the full set of parameters used in the clustering analysis.  The data section consists of a matrix with a row for each SNP.  The columns are:
+
+ - probeset_id: The SNP identifier.  SNPs with the "AFFX" prefix are control SNPs.
+ - genotype_call: (6,7,8,11) correspond to (AA,BB,AB,NoCall) respectively.
+ - genotype_confidence: for BRLMM, BRLMM-P and Birdseed this is a value between 0 and 1, with lower values corresponding to greater confidence.
+ - clustering_space_x_value: x value for plotting sample in clustering space.
+ - clustering_space_y_value: y value for plotting sample in clustering space.
+ - forced_call: reveals what the call would have been had no threshold on genotype_confidence been applied.
+
+Use of the clustering_space_x_value and clustering_space_y_value fields allows for plotting the data in the space that was used to perform the clustering.  For BRLMM and BRLMM-P the x-value is 'transformed contrast' and the y-value is 'signal strength' - see the <a href="http://www.affymetrix.com/support/technical/whitepapers/brlmm_whitepaper.pdf">BRLMM</a> and <a href="http://www.affymetrix.com/support/technical/whitepapers/brlmmp_whitepaper.pdf">BRLMM-P</a> whitepapers for more detail.  For Birdseed (see <a href="http://www.broad.mit.edu/mpg/birdsuite/">http://www.broad.mit.edu/mpg/birdsuite/</a>) this is A-signal va B-signal (linear scale, post quantile normalization and allele-specific median-polish).
+
+A complete explanation of the AGCC CHP file format can be found in a <a href="gcos-agcc/index.html">local copy</a> of the Affymetrix Developer's Network file format documentation.
+
+<a name="analysisconcept">
+\subsection concepts Custom Analyses:
+
+While aliases for common analysis such as brlmm with default
+parameters are provided it is possible to construct custom analyses on
+the command line. There are both program options and analysis
+parameters that can be set to affect the results. Most people are
+familiar with the standard method for setting program options, but
+the specification of the analysis method and its parameters in apt-probeset-genotype
+works a little differently.
+The method for setting custom parameters to
+the analysis involves supplying a text representation of the analysis
+and parameters desired.  This enables
+flexibility as each piece of an analysis is
+self-contained and they can be (almost) arbitrarily combined. Note
+that when using a custom analysis rather than an alias it is necessary
+to specify the entire analysis and not acceptable to pass custom
+parameters to the alias. For example, if you wanted to change the
+number of iterations brlmm performs you would have to specify
+'quant-norm.sketch=50000,pm-only,brlmm.iterations=1' rather than just
+typing 'brlmm.iterations=1'
+
+The current full default brlmm analysis is:
+'quant-norm.sketch=50000,pm-only,brlmm' where there can be multiple
+chipstream modules (in this case a single quant-norm) separated by
+commas and the last two entries are the pm adjuster
+(pm-only) and quantification method (brlmm). Parameters to a
+particular step in the analysis are supplied in key=value pairs and
+separated by periods. For example 'quant-norm.sketch=50000' indicates
+that the chips should be quantile normalized and that a sketch (subset
+of total data) of size 50000 should be used to do the
+normalization. Using a sketch can significantly reduce the amount of
+memory needed with minimal impact on normalization values. To do
+quantile normalization with just the PM probes and resolve ties in the
+same manner as bioconductor's RMA version of quantile normalization
+you would specify 'quant-norm.sketch=50000.bioc=true.usepm=true'.  All
+of the parameters possible can be seen by using the --explain option
+in conjunction with the name of the module (i.e. apt-probeset-genotype
+--explain quant-norm).
+
+So a few examples custom analyses would be:
+
+'pm-only,brlmm.transform=rvt' - No normalization, use rvt space for clustering in blrmm.
+
+'med-norm,pm-mm,brlmm.het-mult=.9' - Do a median normalization, use a PM-MM adjustment
+for probes and a het multiplier of .9 to try and balance hom/het calls.
+
+'rma-bg,quant-norm.sketch=50000.usepm=true.bioc=true,pm-only,blrmm.K=4.tranform=CCS' - Do an RMA style
+background subtraction followed by an RMA style quantile normalization using a subset of 50000 data
+points followed by brlmm in CCS (contrast centers space) space with K = 4.
+
+Use the --explain option to get more information on what
+parameters are available for the various methods. For example,
+"--explain brlmm", "--explain brlmm-p", and "--explain birdseed".
+
+<a name="transformations">
+\subsection brlmmTrans Clustering Space Transformations:
+
+There are a number of different transformations that are implemented
+for different spaces which can be specified via the transform
+parameter to brlmm and are detailed below. For all of these
+transformations \f$A\f$ and \f$B\f$ denote the intensity of the A and
+B alleles respectively as estimated by the quantification method
+(such as plier or RMA). \f$X\f$ and \f$Y\f$ denote the new coordinates that
+\f$A\f$ and \f$B\f$ will be transformed into.
+
+- \b CCS = Contrast Centers Stretch: <br>
+  \f$ X = asinh(K * (A-B)/(A+B)) / asinh(K) \f$ <br>
+  \f$ Y = log_2(A + B) \f$ <br>
+
+- \b CES = Contrast Extremes Stretch: <br>
+  \f$ X = sinh(K * (A-B)/(A+B)) / sinh(K) \f$ <br>
+  \f$ Y = log_2(A + B) \f$ <br>
+
+- \b MvA = Minus Vs Average <br>
+  \f$ X = log_2(A) - log_2(B) \f$ <br>
+  \f$ Y = (log_2(A) + log_2(B)) / 2 \f$ <br>
+
+- \b RvT = R vs Theta (polar coordinates) <br>
+  \f$ X = atan(A/B) \f$ <br>
+  \f$ Y = ln(\sqrt{A^2 + B^2}) \f$ <br>
+
+*/

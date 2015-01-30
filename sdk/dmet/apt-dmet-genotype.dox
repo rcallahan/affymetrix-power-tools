@@ -1,0 +1,118 @@
+/**
+\page apt-dmet-genotype MANUAL: apt-dmet-genotype (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#quickStart">Quick Start - getting up and running.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#clusteringMode">Clustering Mode - dynamic vs static</a></li>
+<li><a href="#subEngineParams">Sub-Engine Parameters - fine control over the analysis sub engines</a></li>
+</ul>
+
+<a name="quickStart">
+\section quickStart Quick Start:
+
+\subsection quickStartGenomic Genomic Samples in Single Sample Mode (Static Clustering):
+
+Here is a basic example of analyzing genomic samples in single sample mode 
+(static clustering) using the command line apt-dmet-genotype. 
+\verbatim
+    apt-dmet-genotype \ 
+        --cdf-file=DMET_Plus.v1.cdf  \
+        --chrX-probes=DMET_Plus.v1.chrXprobes  \
+        --chrY-probes=DMET_Plus.v1.chrYprobes  \
+        --special-snps=DMET_Plus.v1.specialSNPs  \
+        --reference-input=DMET_Plus.v1.genomic.ref.a5 \
+        --cn-region-gt-probeset-file=DMET_Plus.v1.cn-gt.ps  \
+        --probeset-ids=DMET_Plus.v1.genomic.gt.ps  \
+        --region-model=DMET_Plus.v1.cn-region-models.txt  \
+        --probeset-model=DMET_Plus.v1.cn-probeset-models.txt \
+        --cc-chp-output \
+        --sample-type=genomic  \
+        --probeset-ids-reported=consent.txt  \
+        --cel-files=cel_files.txt  \
+        --out-dir=results
+\endverbatim
+
+\subsection quickStartPlasmids Plasmid Control Samples in Single Sample Mode (Static Clustering):
+
+Single sample mode (static clustering) on plasmid controls requires the following changes:
+\verbatim
+        --reference-input=DMET_Plus.v1.plasmid.ref.a5 \
+        --probeset-ids=DMET_Plus.v1.plasmid.gt.ps  \
+        --sample-type=plasmid \
+\endverbatim
+and one addition:
+\verbatim
+        --run-cn-engine=false
+\endverbatim
+
+\subsection quickStartDynamic Genomic Samples in Multi-Sample Mode (Dynamic Clustering):
+
+Multi-sample mode (dynamic clustering) on genomic samples requires the following additions:
+\verbatim
+        --reference-output=foo.a5 \
+        --batch-name=cluster-run-1
+\endverbatim
+Where batch-name is any unique name for the batch of cel files clustered together.
+
+<a name="options">
+\section manualOptions Options:
+
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-dmet-genotype.help.txt
+
+<a name="clusteringMode">
+\section clusteringMode Dynamic vs Static Clustering
+
+apt-dmet-genotype allows one to do both static and dynamic clustering. With dynamic clustering, the 
+genotype calling algorithm will update cluster centers, variance, etc... before making genotype calls. In 
+static clustering mode, the priors (cluster centers, variance, etc...) are not updated and genotype 
+calls are based on the original input.
+
+Dynamic clustering is enabled with the use of the --reference-output option. With this option, dynamic 
+clustering is used. Without this option static clustering is used.
+
+When using --reference-output, you must also provide a batch name using the --batch-name option.
+
+WARNING: The resulting reference file when using --reference-output is not currently 
+suitable for use with the --reference-input option. This may change in a later release.
+
+WARNING: You should always provide a input reference file, regardless of whether you are doing 
+dynamic or static clustering.
+
+<a name="subEngineParams">
+\section subEngineParams Sub-Engine Parameter Specification
+
+apt-probeset-genotype allows users to pass options directly into the sub-engines it calls. These sub engines are:
+
+- ProbesetSummarizeEngine: Used to generate probeset signal values for use in copynumber calculations
+- DmetCopyNumberEngine: Used to compute copynumber calls
+- ProbesetGenotypeEngine: Used to compute genotype calls
+- DmetCHPWriter: Used to write out the final chp files
+
+One can specify these parameters on the command line by separating them from other parameters with "--". For example
+
+\verbatim
+
+  apt-probeset-genotype --cdf-file=....  ...  \
+     -- [ProbesetSummarizeEngine options] -- [DmetCopyNumberEngine options]
+     -- [ProbesetGenotypeEngine options] -- [DmetCHPWriter options]
+
+\endverbatim
+
+See apt-engine-wrapper for getting more information about what options are available for each engine. 
+For example, adding the following to the end of your apt-dmet-genotype command line:
+
+\verbatim
+   -- --summaries=true --feat-effects -- --text-output -- --table-output --feat-effects --summaries
+\endverbatim
+
+Will result in additional text output from the first three analysis engines.
+
+*/

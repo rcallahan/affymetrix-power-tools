@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+				<h1>Affymetrix® XDA CHP Data File Format</h1>
+
+		  	<h2>CHP FILE</h2>
+	
+
+ 
+	  	<p><b>Description</b></p>
+<p>The CHP file of the format described in this document was used to store expression, resequencing and genotyping results from algorithms implemented in the GCOS 1.2, 1.3 and 1.4 and BRLMM Analysis Tool software applications.</p>
+
+<p><b>Format</b></p>
+<p>The format of this CHP file is a binary file created for faster access and smaller file size. The values in the file are stored in little-endian format.</p>
+
+<p>The file contents are defined by:</p>
+
+<table> 
+<tbody><tr>
+	<th><b>Item</b></th>
+	<th><b>Description</b></th>
+	<th><b>Type</b></th>
+</tr> 
+<tr>
+	<td height="14" width="110">1</td>
+	<td height="14" width="70%">Magic number. Always set to 65.</td>
+	<td height="14" width="214">integer</td>
+</tr>
+<tr>
+	<td height="14" width="110">2</td>
+	<td height="14" width="70%">Version number.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">3</td>
+	<td height="14" width="70%">The 
+number of columns of cells on the array.</td>
+	<td height="14" width="214">unsigned short</td>
+</tr> 
+<tr>
+	<td height="14" width="110">4</td>
+	<td height="14" width="70%">The 
+number of rows of cells on the array.</td>
+	<td height="14" width="214">unsigned short</td>
+</tr> 
+<tr>
+	<td height="14" width="110">5</td>
+	<td height="14" width="70%">The 
+number of units in the array not including QC units. The term unit is an internal 
+term which means probe set.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">6</td>
+	<td height="14" width="70%">The number of QC units.</td>
+	<td height="14" width="214">integer</td>
+</tr>
+<tr>
+	<td height="14" width="110">7</td>
+	<td height="14" width="70%">Results type. Values are:<p>0 
+    - Expression<br>
+    1 - Genotyping<br>
+    2 - Resequencing<br>
+    3 - Universal (tag arrays)<br></p></td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">8</td>
+	<td height="14" width="70%">Prog ID string length.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">9</td>
+	<td height="14" width="70%">Prog ID of COM component that created the file.</td>
+	<td height="14" width="214">char [length defined above]</td>
+</tr> 
+<tr>
+	<td height="14" width="110">10</td>
+	<td height="14" width="70%">CEL file length.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">11</td>
+	<td height="14" width="70%">CEL file used to create the CHP file.</td>
+	<td height="14" width="214">char [length defined above]</td>
+</tr> 
+<tr>
+	<td height="14" width="110">12</td>
+	<td height="14" width="70%">Probe array type string length.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">13</td>
+	<td height="14" width="70%">Probe array type.</td>
+	<td height="14" width="214">char [length defined above]</td>
+</tr> 
+<tr>
+	<td height="14" width="110">14</td>
+	<td height="14" width="70%">Algorithm string length.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">15</td>
+	<td height="14" width="70%">Algorithm name.</td>
+	<td height="14" width="214">char [length defined above]</td>
+</tr> 
+<tr>
+	<td height="14" width="110">16</td>
+	<td height="14" width="70%">Algorithm version string length.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">17</td>
+	<td height="14" width="70%">Algorithm version.</td>
+	<td height="14" width="214">char [length defined above]</td>
+</tr> 
+<tr>
+	<td height="14" width="110">18</td>
+	<td height="14" width="70%">Number of algorithm parameters.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">19</td>
+	<td height="14" width="70%">Algorithm parameters. The following is defined 
+    for each parameter:<p>Parameter name length - integer<br>
+    Parameter name - char [length defined above]<br>
+    Parameter value length - integer<br>
+    Parameter value - char [length defined above]</p></td>
+	<td height="14" width="214">see description</td>
+</tr> 
+<tr>
+	<td height="14" width="110">20</td>
+	<td height="14" width="70%">Number of summary statistic parameters.</td>
+	<td height="14" width="214">integer</td>
+</tr> 
+<tr>
+	<td height="14" width="110">21</td>
+	<td height="14" width="70%">Summary statistics (such as "RawQ"). The following is defined 
+    for each statistic:<p>Statistic name length - integer<br>
+    Statistic name - char [length defined above]<br>
+    Statistic value length - integer<br>
+    Statistic value - char [length defined above]</p></td>
+	<td height="14" width="214">see description</td>
+</tr> 
+<tr>
+	<td height="14" width="110">22</td>
+	<td height="14" width="70%">Total number of zones used for the background 
+	calculation.</td>
+	<td height="14" width="214">integer</td>
+</tr>
+<tr>
+	<td height="14" width="110">23</td>
+	<td height="14" width="70%">The smooth factor used in the background 
+	calculation.</td>
+	<td height="14" width="214">float</td>
+</tr>
+<tr>
+	<td height="14" width="110">24</td>
+	<td height="14" width="70%">Background zone information. This following 
+	items are repeated for each zone:<p>The features X coordinate - float<br>
+	The features Y coordinate - float<br>
+	The background value - float</p></td>
+	<td height="14" width="214">see description</td>
+</tr>
+<tr>
+	<td height="14" width="110">25</td>
+	<td height="14" width="70%">Size, in bytes, of each results object stored in the file.</td>
+	<td height="14" width="214">integer</td>
+</tr>
+<tr>
+	<td height="14" width="110">26</td>
+	<td height="14" width="70%">Resequencing results (only stored in file if the 
+    results type is set to resequencing (2)):<p>Called sequence length - integer<br>
+    Called sequence - char [length defined above]<br>
+    Base call scores - float [length defined above]</p><p>The remaining items are 
+	stored in version 2 and above files.</p><p>Force calls length - integer<br>Force calls array [length defined above] 
+	: The force calls are an 
+	array of:</p><blockquote>
+		<p>Index to the called sequence array (zero based) - integer<br>Force call at the index position - char<br>Reason for the force call - 
+	unsigned char</p></blockquote>
+	<p>Original calls length - integer<br>Original calls 
+	array [length defined above] : The original calls array is an array of base 
+	calls called by the algorithm that were replaced by user edited calls. The 
+	edited calls are stored in the called sequence array while the original call 
+	is stored here. The original calls are an array of:</p><blockquote>
+		<p>Index to the called 
+	sequence array (zero based) - integer<br>Call at the index position - char<br>
+	</p></blockquote>
+    </td>
+	<td height="14" width="214">see description</td>
+</tr>
+<tr>
+	<td height="14" width="110">27</td>
+	<td height="14" width="70%">An indicator to the type of expression analysis 
+	(only stored in file if the results type is set to expression (0)). 
+	The possible values are:<p>0 - Absolute analysis using the empirical 
+	algorithm (MAS 4).<br>
+	1 - Comparison analysis using the empirical algorithm (MAS4).<br>
+	2 - Absolute analysis using the statistical (MAS5) or PLIER algorithms.<br>
+	3 - Comparison analysis using the statistical (MAS5) or PLIER algorithms.</p></td>
+	<td height="14" width="214">unsigned char</td>
+</tr>
+<tr>
+	<td height="14" width="110">28</td>
+	<td height="14" width="70%">Expression results for each unit (only stored in 
+    file if the results type is set to expression (0)):<p>Non-empirical results:</p><p>
+    Detection - unsigned char<br>Detection p-value - float<br>Signal - float<br>
+    Number of pairs - unsigned short<br>Number of pairs used - unsigned short<br>
+    Change - unsigned char*<br>Change p-value - float*<br>Signal Log Ratio - float*<br>
+    Signal Log Ratio Low - float*<br>Signal Log Ratio High - float*<br>Common Pairs 
+    - unsigned short*</p><p>* only stored if comparison analysis was performed.</p></td>
+	<td height="14" width="214">see description</td>
+</tr> 
+<tr>
+	<td height="14" width="110">29</td>
+	<td height="14" width="70%">Genotyping results for each unit (only stored in 
+    file if the results type is set to genotyping (1)):<p>Call - unsigned char 
+    (see above for numeric values)<br>
+    Confidence - float<br>
+    RAS1 (for 10K arrays) or p-value AA call (for 100K arrays) - float<br>
+    RAS2 (for 10K arrays) or p-value AB call (for 100K arrays) - float<br>
+    p-value BB call (for 100K arrays) - float<br>
+    p-value No Call call (for 100K arrays) - float</p></td>
+	<td height="14" width="214">see description</td>
+</tr> 
+<tr>
+	<td height="14" width="110">30</td>
+	<td height="14" width="70%">Tag array results for each unit (only stored in 
+    file if the results type is set to universal (3)):<p>Background value - float</p></td>
+	<td height="14" width="214">see description</td>
+</tr> 
+</tbody></table>
+
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

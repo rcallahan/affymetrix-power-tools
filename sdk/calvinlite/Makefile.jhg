@@ -1,0 +1,49 @@
+#
+# /nfs/ss11/harley/Apt/work/apt-1/sdk/apt2/calvinlite/Makefile.jhg ---
+#
+
+_default: _make _test
+
+acu_exe:=../../output/amd64-pc-linux/bin/apt-calvinlite-util
+
+_cp:
+	cp /export/ada8/bliu/TMP/*.CEL .
+
+_make:
+	make -f Makefile
+
+_test: _test_1
+
+_test_1:
+	cp NA18503_B1_ReffileR1_CytoScanHD_QY_20101117.CEL foo.CEL
+	${acu_exe} --tsv-export foo.CEL
+
+_test_2:
+	-rm foo.CEL foo.CEL.changed
+	cp NA18503_B1_ReffileR1_CytoScanHD_QY_20101117.CEL foo.CEL
+	${acu_exe} --change-param-substr foo.CEL CytoScanHD_Array Yoyodyne_Array
+	${acu_exe} --tsv-export foo.CEL.changed
+
+# this changes the UUID which is not a KEY=VAL.
+_test_3:
+	-rm foo.CEL
+	cp NA18503_B1_ReffileR1_CytoScanHD_QY_20101117.CEL foo.CEL
+	${acu_exe} \
+	  --change-param \
+	  foo.CEL \
+	'0000034916-1290141473-0000006334-0000018467-0000000041' \
+	'0000039727-1328754626-1726397229-0568689536-0970240541' \
+	'en-US' \
+	'klingon-KA'
+	${acu_exe} --tsv-export foo.CEL.changed
+	-diff -u foo.CEL-gdh.tsv foo.CEL.changed-gdh.tsv
+
+_test_4:
+	-rm foo.CEL
+	cp NA18503_B1_ReffileR1_CytoScanHD_QY_20101117.CEL foo.CEL
+	${acu_exe} \
+	--set-param \
+	foo.CEL \
+	program-id   XXXXXXXXX \
+	program-name ${acu_exe} 
+	${acu_exe} --tsv-export foo.CEL.changed

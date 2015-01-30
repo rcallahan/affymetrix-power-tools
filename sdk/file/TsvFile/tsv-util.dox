@@ -1,0 +1,13 @@
+/**
+\page tsv-util MANUAL: tsv-tuil (\aptversion)
+
+<a name="options">
+\section manualOptions Options:
+
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+\verbinclude tsv-util.help.txt
+
+*/

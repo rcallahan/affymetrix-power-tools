@@ -1,0 +1,31 @@
+/**
+\page apt-cdf-export MANUAL: apt-cdf-export (\aptversion)
+
+\p apt-cdf-export will output the probe set information stored in a CDF file.
+
+\section QuickStart Quick Start
+To dump output the probe set information stored in a CDF file, use:
+
+\verbatim
+apt-cdf-export -c myCdfFile.cdf -ps probeset1 -ps probeset2 -ps probeset3 ...
+\endverbatim
+or
+\verbatim
+apt-cdf-export -c myCdfFile.cdf
+\endverbatim
+
+for all probesets.
+
+<b>Note:</b> This application is available for Linux and OS X platforms only, and has not been tested on Windows
+platforms.
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-cdf-export.help.txt
+
+*/

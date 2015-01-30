@@ -1,0 +1,201 @@
+#!/usr/bin/env perl
+#
+# /nfs/ss11/harley/Apt/work/apt-genoqc-1/affy/sdk/chipstream/apt-geno-qc/apt-geno-cmp-output ---
+#
+# $Id: apt-geno-cmp-output,v 1.1 2009-08-08 03:47:25 harley Exp $
+#
+
+#use strict;
+use Getopt::Long;
+use File::Basename;
+use FileHandle;
+
+$cname_suffixes=[
+  # signal
+  ["AT_B_IQR"         , "B_IQR_AT"]      , 
+  ["AT_B"             , "B_AT"]          , 
+  ["AT_FLD"           , "FLD_AT"]        , 
+  ["AT_SBR"           , "SBR_AT"]        , 
+  ["AT_S_IQR"         , "S_IQR"]         , 
+  ["AT_S"             , "S_AT"]          , 
+  ["A_signal_mean"    , "signal_mean_A"] , 
+  ["AsignalToTsignal" , ""]              , 
+  ["C_signal_mean"    , "signal_mean_C"] , 
+  ["GC_B_IQR"         , ""]              , 
+  ["GC_B"             , "B_GC"]          , 
+  ["GC_FLD"           , "FLD_GC"]        , 
+  ["GC_SBR"           , "SBR_GC"]        , 
+  ["GC_S_IQR"         , "S_IQR_GC"]      , 
+  ["GC_S"             , "S_GC"]          , 
+  ["G_signal_mean"    , "signal_mean_G"] , 
+  ["GsignalToCsignal" , ""]              , 
+  ["T_signal_mean"    , "signal_mean_T"] ,
+  # DishQC
+  ["DQC"                  , "DQC"] , 
+  ["median_diff_over_iqr" , ""] , 
+  #["AT_median"            , ""] , 
+  #["GC_median"            , ""] , 
+  ["log_diff_qc"          , "logDiffQC"] , 
+
+  ];
+
+#
+$opt_help=0;
+$opt_verbose=1;
+$opt_debug=0;
+{
+  $|=1;
+
+  if (!GetOptions(
+         "help|h",
+         "verbose|v",
+         "debug|d",
+         #
+       )) {
+    usage(1);
+  }
+
+  # 
+  if ($opt_help) {
+    usage(0);
+  }
+
+  if (!@ARGV) {
+    usage(1);
+  }
+
+  #
+  $fn1=shift(@ARGV);
+  $fn2=shift(@ARGV)||$fn1.".ref";
+
+  $tsv1=tsvOpen(file=>$fn1);
+  $tsv2=tsvOpen(file=>$fn2);
+
+  #
+  #$map_cidx1_cidx2=+{};
+  $map_cidx1_cidx2=[];
+
+  #
+ LOOP_CNAME:
+  $cidx1=-1;
+  foreach $cname1 (@{$tsv1->{cidx_to_cname}}) {
+    $cidx1++;
+  LOOP_PAIR:
+    foreach $pair (@{$cname_suffixes}) {
+      $pair_suffix=$pair->[0];
+      #print "$cname1 $pair_suffix :";
+      $cname1_len=length($cname1);
+      if (substr($cname1,$cname1_len-length($pair_suffix)) eq $pair_suffix) {
+        #
+        $cname1_base=substr($cname1,0,-(length($pair_suffix)+1));
+        $cname2_prefix=$pair->[1];
+        $cname2=$cname2_prefix."_".$cname1_base;
+
+        $cidx2=$tsv2->{cname_to_cidx}{$cname2}||-1;
+        if ($cidx2==-1) {
+          $cidx2=$tsv2->{cname_to_cidx}{$cname1}||-1;
+        }
+        #
+        #$map_cidx1_cidx2->{$cidx1}=$cidx2;
+        $map_cidx1_cidx2->[$cidx1]=$cidx2;
+        #
+        if ($opt_debug==1) {
+          #print "$cname1 == $cname1_base $pair_suffix == $cname2\n";
+          print "$cname1 / $cidx1 == $cname2 / $cidx2\n";
+        }
+        #
+        last LOOP_PAIR;
+      }
+    }
+  }
+  
+  $print_order=[sort(@{$tsv1->{cidx_to_cname}})];
+ 
+ #
+  while (1) {
+    $row1=[split(/\t/,$line1=$tsv1->{fh}->getline())];
+    $row2=[split(/\t/,$line2=$tsv2->{fh}->getline())];
+    #
+    if (($line1 eq "") && ($line2 eq "")) {
+      last;
+    }
+    #
+    print "TEST: $line1\n";
+    print "REF:  $line2\n";
+
+    #
+    foreach $cname1 (@{$print_order}) {
+      $cidx1=$tsv1->{cname_to_cidx}{$cname1};
+      $cidx2=$map_cidx1_cidx2->[$cidx1];
+      #print "CIDX1-CIDX2: $cidx1-$cidx2\n";
+      if ($cidx2<=0) {
+        next;
+      }
+      #
+      $cname1=$tsv1->{cidx_to_cname}[$cidx1];
+      $data1=$row1->[$cidx1];
+      $cname2=$tsv2->{cidx_to_cname}[$cidx2];
+      $data2=$row2->[$cidx2];
+      #
+      $diff=$data1-$data2;
+      #
+      $fmt_str="%-50s"; $fmt_float="%12.8f";
+      printf("$fmt_str   $fmt_float\n",$cname1,$data1);
+      printf("  $fmt_str $fmt_float $fmt_float\n",$cname2,$data2,$diff);
+    }
+    #
+    print "\n----------\n\n";
+  }
+}
+
+sub tsvOpen {
+  my(%param)=@_;
+  #global($opt_debug); #
+  my($col,$line); #
+  my($cidx,$cname); #
+
+  my($self)=+{};
+  $self->{fh}=FileHandle->new($param{file})||die "Cant open '$param{file}'";
+
+  do {
+    $line=$self->{fh}->getline()||die "Error reading from '$param{file}'";
+  } while ($line=~/^\#/);
+
+  chomp($line);
+  $self->{cidx_to_cname}=[split(/\t/,$line)];
+
+  $self->{cname_to_cidx}=+{};
+  $cidx=0;
+  foreach $cname (@{$self->{cidx_to_cname}}) {
+    $self->{cname_to_cidx}{$cname}=$cidx++;
+  }
+
+  if ($opt_debug==1) {
+    foreach $cname (@{$self->{cidx_to_cname}}) {
+      print $cname,"\n";
+    }
+    foreach $cname (sort(keys(%{$self->{cname_to_cidx}}))) {
+      print $cname,"==",$self->{cname_to_cidx}{$cname},"\n";
+    }
+  }
+
+  return $self;
+}
+  
+
+sub usage {
+    print "
+   jhg-cmp-results ---
+
+   -h     = this help message.
+   -v     = be verbose in output
+
+EXAMPLE:
+   jhg-cmp-results
+";
+    exit(shift);
+}
+
+# Local Variables:
+# mode: perl
+# End:

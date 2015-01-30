@@ -1,0 +1,6 @@
+probe_id	x	y	probe_type	probeset_id	probeset_type	block	huex_cerebellum.CEL	huex_heart.CEL	huex_muscle.CEL
+126	29	3	pm	2653130	Expression	0	245	27	34
+517	4	16	pm	3442624	Expression	0	154	34	53
+988	27	30	pm	3499280	Expression	0	5	-15	-104
+944	15	29	pm	3499280	Expression	0	-592	-28	-130
+477	28	14	pm	3506497	Expression	0	3178	1790	4179

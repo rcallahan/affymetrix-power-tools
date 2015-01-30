@@ -1,0 +1,11 @@
+#
+# affy/sdk/chipstream/Makefile.affy ---
+#
+
+### compile the files I am working on first.
+JHG_QUICK:=ProbeListStl ProbeListFactory ChipLayout
+_jhg_quick: ${JHG_QUICK:%=${sdk_output_obj}/%.o} _build_obj
+
+# build apt-geno-qc without building the rest of the programs.
+_jhg_apt_geno_qc: _build_lib
+	cd apt-geno-qc && ${MAKE} _test_kit_ao_1

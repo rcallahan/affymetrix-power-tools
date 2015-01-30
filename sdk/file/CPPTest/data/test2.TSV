@@ -1,0 +1,6 @@
+#%chip_type=test-array							
+#%version=1.0							
+probeset_id	probeset_name	seqname	strand	start	start	tier	depth
+2964366	80657362_s_at	chr12	-	64044816	64045217	est	1
+3202114	80657364_s_at	chr12	-	64045729	64045960	est	1
+3284993	80657368_s_at	chr12	-	64046255	64046357	ensGene_est_fl_genscan_genscanSubopt_mrna_twinscan	13

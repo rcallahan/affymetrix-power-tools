@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{57698230-9E42-4ACB-82EE-344535645123}</ProjectGuid>
+    <RootNamespace>hdf5</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\zlib;.\src;.\windows\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\zlib;.\src;.\windows\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\zlib;.\src;.\windows\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\zlib;.\src;.\windows\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\H5.c" />
+    <ClCompile Include="src\H5A.c" />
+    <ClCompile Include="src\H5AC.c" />
+    <ClCompile Include="src\H5B.c" />
+    <ClCompile Include="src\H5Bcache.c" />
+    <ClCompile Include="src\H5C.c" />
+    <ClCompile Include="src\H5D.c" />
+    <ClCompile Include="src\H5Dcompact.c" />
+    <ClCompile Include="src\H5Dcontig.c" />
+    <ClCompile Include="src\H5Defl.c" />
+    <ClCompile Include="src\H5Dio.c" />
+    <ClCompile Include="src\H5Distore.c" />
+    <ClCompile Include="src\H5Dmpio.c" />
+    <ClCompile Include="src\H5Dselect.c" />
+    <ClCompile Include="src\H5Dtest.c" />
+    <ClCompile Include="src\H5E.c" />
+    <ClCompile Include="src\H5F.c" />
+    <ClCompile Include="src\H5FD.c" />
+    <ClCompile Include="src\H5Fdbg.c" />
+    <ClCompile Include="src\H5FDcore.c" />
+    <ClCompile Include="src\H5FDfamily.c" />
+    <ClCompile Include="src\H5FDlog.c" />
+    <ClCompile Include="src\H5FDmpi.c" />
+    <ClCompile Include="src\H5FDmulti.c" />
+    <ClCompile Include="src\H5FDsec2.c" />
+    <ClCompile Include="src\H5FDstdio.c" />
+    <ClCompile Include="src\H5FL.c" />
+    <ClCompile Include="src\H5Fmount.c" />
+    <ClCompile Include="src\H5FO.c" />
+    <ClCompile Include="src\H5FS.c" />
+    <ClCompile Include="src\H5Fsfile.c" />
+    <ClCompile Include="src\H5Fsuper.c" />
+    <ClCompile Include="src\H5G.c" />
+    <ClCompile Include="src\H5Gent.c" />
+    <ClCompile Include="src\H5Gname.c" />
+    <ClCompile Include="src\H5Gnode.c" />
+    <ClCompile Include="src\H5Gstab.c" />
+    <ClCompile Include="src\H5Gtest.c" />
+    <ClCompile Include="src\H5Gtraverse.c" />
+    <ClCompile Include="src\H5HG.c" />
+    <ClCompile Include="src\H5HGdbg.c" />
+    <ClCompile Include="src\H5HL.c" />
+    <ClCompile Include="src\H5HLdbg.c" />
+    <ClCompile Include="src\H5HP.c" />
+    <ClCompile Include="src\H5I.c" />
+    <ClCompile Include="src\H5MF.c" />
+    <ClCompile Include="src\H5MM.c" />
+    <ClCompile Include="src\H5O.c" />
+    <ClCompile Include="src\H5Oattr.c" />
+    <ClCompile Include="src\H5Obogus.c" />
+    <ClCompile Include="src\H5Ocache.c" />
+    <ClCompile Include="src\H5Ocont.c" />
+    <ClCompile Include="src\H5Odtype.c" />
+    <ClCompile Include="src\H5Oefl.c" />
+    <ClCompile Include="src\H5Ofill.c" />
+    <ClCompile Include="src\H5Olayout.c" />
+    <ClCompile Include="src\H5Omtime.c" />
+    <ClCompile Include="src\H5Oname.c" />
+    <ClCompile Include="src\H5Onull.c" />
+    <ClCompile Include="src\H5Opline.c" />
+    <ClCompile Include="src\H5Osdspace.c" />
+    <ClCompile Include="src\H5Oshared.c" />
+    <ClCompile Include="src\H5Ostab.c" />
+    <ClCompile Include="src\H5P.c" />
+    <ClCompile Include="src\H5Pdcpl.c" />
+    <ClCompile Include="src\H5Pdxpl.c" />
+    <ClCompile Include="src\H5Pfapl.c" />
+    <ClCompile Include="src\H5Pfcpl.c" />
+    <ClCompile Include="src\H5Ptest.c" />
+    <ClCompile Include="src\H5R.c" />
+    <ClCompile Include="src\H5RC.c" />
+    <ClCompile Include="src\H5RS.c" />
+    <ClCompile Include="src\H5S.c" />
+    <ClCompile Include="src\H5Sall.c" />
+    <ClCompile Include="src\H5Shyper.c" />
+    <ClCompile Include="src\H5SL.c" />
+    <ClCompile Include="src\H5Smpio.c" />
+    <ClCompile Include="src\H5Snone.c" />
+    <ClCompile Include="src\H5Spoint.c" />
+    <ClCompile Include="src\H5Sselect.c" />
+    <ClCompile Include="src\H5ST.c" />
+    <ClCompile Include="src\H5Stest.c" />
+    <ClCompile Include="src\H5T.c" />
+    <ClCompile Include="src\H5Tarray.c" />
+    <ClCompile Include="src\H5Tbit.c" />
+    <ClCompile Include="src\H5Tcommit.c" />
+    <ClCompile Include="src\H5Tcompound.c" />
+    <ClCompile Include="src\H5Tconv.c" />
+    <ClCompile Include="src\H5Tcset.c" />
+    <ClCompile Include="src\H5Tenum.c" />
+    <ClCompile Include="src\H5Tfields.c" />
+    <ClCompile Include="src\H5Tfixed.c" />
+    <ClCompile Include="src\H5Tfloat.c" />
+    <ClCompile Include="windows\src\h5tinit.c" />
+    <ClCompile Include="src\H5Tnative.c" />
+    <ClCompile Include="src\H5Toffset.c" />
+    <ClCompile Include="src\H5Topaque.c" />
+    <ClCompile Include="src\H5Torder.c" />
+    <ClCompile Include="src\H5Tpad.c" />
+    <ClCompile Include="src\H5Tprecis.c" />
+    <ClCompile Include="src\H5TS.c" />
+    <ClCompile Include="src\H5Tstrpad.c" />
+    <ClCompile Include="src\H5Tvlen.c" />
+    <ClCompile Include="src\H5V.c" />
+    <ClCompile Include="src\H5Z.c" />
+    <ClCompile Include="src\H5Zdeflate.c" />
+    <ClCompile Include="src\H5Zfletcher32.c" />
+    <ClCompile Include="src\H5Zshuffle.c" />
+    <ClCompile Include="src\H5Zszip.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

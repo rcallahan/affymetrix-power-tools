@@ -1,0 +1,28 @@
+Affymetrix GeneChip Experiment Information
+Version	1
+
+[Sample Info]
+Chip Type	Mapping10K_Xba131
+Chip Lot	
+Operator	sgelle
+Sample Type	
+Description	
+Project	
+Comments	
+Solution Type	
+Solution Lot	
+
+[Fluidics]
+Protocol	
+Station	
+Module	
+Hybridize Date	
+
+[Scanner]
+Pixel Size	
+Filter	
+Scan Temperature	
+Scan Date	
+Scanner ID	
+Number of Scans	
+Scanner Type	M18

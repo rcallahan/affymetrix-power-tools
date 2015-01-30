@@ -1,0 +1,20 @@
+Gene	Reference Link	AssayID	dbSNP	Defining	cDNA	Genomic	Change	External ID	Validated	Haplotype	Reference	Variant	A1	A2	A3	A4	A5	A6	A7	A8	A9	A10	A11	A12	A13	A14	A15	A16	A17	A18	A19	A20	A21	A22	A23	A24	A25	A26	A27	A28	A29
+ABCB1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	*14	A893S	A893T 	N44S	I829V	S400N	A599T	V801M																				
+(ABCB1	NCBI dbSNP 	366793	rs2214102	N	5'UTR	113063G>A	5'UTR	MDR1_A-1G	N	N	G	A																													
+ABCB1	NCBI dbSNP 	36z7673	rs9282564	*14	61A>G	113124A>G	N21D	MDR1star14_A61G	Y	N	A	G		G																											
+ABCB1	NCBI dbSNP 	368263	rs203=2582	N	2677G>T	181946G>T	A893S	rs2032582	Y	N	G	T			T																										
+ABCB1	NCBI dbSNP 	368263	rs2032582	O	2677G>A	181946G>A	A893T 	rs2032582	Y	N	G	A				A																									
+ABCB1	NCBI dbSNP 	367497	rs1202183	N	549A>G	127581A>G	N44S	rs1202183	N	N	A	G					G																								
+ABCB1	NCBI dbSNP 	366580	rs2032581	N	290-3A>G	181754A>G	I829V	rs2032581	N	N	A	G						G																							
+ABCB1	NCBI dbSNP 	367495	rs2229109	N	1617G>A	162755G>A	S400N	rs2229109	N	N	G	A							A																						
+ABCB1	NCBI dbSNP 	366795	rs2235036	N	2213G>A	167293G>A	A599T	rs2235036	M	N	G	A								A																					
+ABCB1	NCBI dbSNP 	367092	rs2235039	N	2819G>A	176710G>A	V801M	rs2235039	N	X	G	A									A																				
+ABCB1	NCBI dbSNP 	367417	rs10276036	N	Not in mRNA	162366A>G	Intron	MDR1_A-44G	Y	N	B	G																													
+ABCB1	NCBI dbSNP 	366581	rs1128503	N		162963C>T	G412G	rs1128503	Y	N	C	T																													
+ABCB1	NCBI dbSNP 	366577	rs1045642	N		203919C>T	I1145I	rs1045642	Y	N	C	T																													
+ABCB1	NCBI dbSNP 	367088	rs2235033	N	Not in mRNA	163421T>C	Intron	rs2235033	Y	N	T	C																													
+ABCB1	NCBI dbSNP 	367607	rs1128501	N	Not in mRNA	147030G>T	Intron	rs1128501	N	N	G	T																													
+ABCB1	NCBI dbSNP 	367564	rs1128502	N		147031A>T	G185G	rs1128502	N	N	A	T																													
+ABCB1	NCBI dbSNP 	367606	rs17064	N			UTR	rs17064	N	N	A	T																													
+ABCB1	NCBI dbSNP 	366792	rs2032588	N	Not in mRNA	163121A>T	Intron	rs2032588	N	N	C	T																													
+ABCB1	NCBI dbSNP 	365848	rs2235012	N		163837G>C	L554L	rs2235012	N	N	G	C																													

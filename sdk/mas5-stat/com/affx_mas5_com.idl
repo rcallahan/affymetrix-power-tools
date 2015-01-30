@@ -1,0 +1,45 @@
+// affx_mas5_com.idl : IDL source for affx_mas5_com
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (affx_mas5_com.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(828BEF73-1BEF-42DC-AC2B-57753C2FFFB1),
+	dual,
+	nonextensible,
+	helpstring("IMAS5 Interface"),
+	pointer_default(unique)
+]
+interface IMAS5 : IDispatch{
+	[id(1), helpstring("method RunAbsoluteAnalysis")] HRESULT RunAbsoluteAnalysis([in] BSTR celFile, [in] BSTR chpFile, [in] BSTR cdfFile, [out,retval] VARIANT_BOOL* pVal);
+	[id(2), helpstring("method RunComparisonAnalysis")] HRESULT RunComparisonAnalysis([in] BSTR celFile, [in] BSTR baselineFile, [in] BSTR chpFile, [in] BSTR cdfFile, [out,retval] VARIANT_BOOL* pVal);
+	[propget, id(3), helpstring("property Error")] HRESULT Error([out, retval] BSTR* pVal);
+	[propput, id(4), helpstring("property SaveToLegacyFile")] HRESULT SaveToLegacyFile([in] VARIANT_BOOL newVal);
+    [propput, id(5), helpstring("property AlgorithmParameterFile")] HRESULT AlgorithmParameterFile([in] BSTR newVal);
+    [propput, id(6), helpstring("property ReportControlsParameterFile")] HRESULT ReportControlsParameterFile([in] BSTR newVal);
+    [propput, id(7), helpstring("property ProgramName")] HRESULT ProgramName([in] BSTR newVal);
+    [propput, id(8), helpstring("property ProgramCompany")] HRESULT ProgramCompany([in] BSTR newVal);
+    [propput, id(9), helpstring("property ProgramId")] HRESULT ProgramId([in] BSTR newVal);
+};
+[
+	uuid(3EAD1EAF-453E-4627-BB2C-DDFC2B08FC57),
+	version(1.0),
+	helpstring("affx_mas5_com 1.0 Type Library")
+]
+library affx_mas5_comLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(D820FD1F-1A58-44A6-A68D-EEEC3AC48FCE),
+		helpstring("MAS5 Class")
+	]
+	coclass MAS5
+	{
+		[default] interface IMAS5;
+	};
+};

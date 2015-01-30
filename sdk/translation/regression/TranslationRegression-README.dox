@@ -1,0 +1,151 @@
+////////////////////////////////////////////////////////////////
+//
+// Copyright (C) 2008 Affymetrix, Inc.
+//
+// This program is free software; you can redistribute it and/or modify 
+// it under the terms of the GNU General Public License (version 2) as 
+// published by the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful, 
+// but WITHOUT ANY WARRANTY; without even the implied warranty of 
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+// General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License 
+// along with this program;if not, write to the 
+// 
+// Free Software Foundation, Inc., 
+// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+//
+////////////////////////////////////////////////////////////////
+/**
+ * @file   translation/regression/TranslationRegression-README.dox
+ * @author Mybrid Spalding
+ * @date   Fri Jun  6 11:19:52 PDT 2008
+ * @brief  Regression notes. 
+ */
+
+/**
+   
+@page regression-apt-dment-translation Regression: APT DMET Translation (\aptversion)
+
+<center><b>DRAFT</b></center>
+
+Last updated 13 November 2008
+
+\section contents Contents
+<ol>
+<li><a href="#introduction">Introduction</a>
+<li><a href="#directory_move">Directory Move</a>
+<li><a href="#dmet2_algorithm_testing">DMET2 Algorithm Testing</a>
+<ol>
+<li><a href="#dmet2_algorithm_testing_regression_object">Regression Report Object</a>
+</ol>
+<li><a href="#dmet3_report_testing">DMET3 Report Testing</a>
+<ol>
+<li><a href="#dmet3_report_testing_comprehensive">Comprehensive Report Test Cases</a>
+<li><a href="#dmet3_report_testing_summary">Summary Report Test Cases</a>
+<li><a href="#dmet3_report_testing_uncalled">Uncalled Report Test Cases</a>
+<li><a href="#dmet3_report_testing_marker">Marker Report Test Cases</a>
+<li><a href="#dmet3_report_testing_override">Override Report Test Cases</a>
+<li><a href="#dmet3_report_testing_complex">Complex Test Cases</a>
+</ol>
+</ol>
+
+<hr>
+\section introduction Introduction
+
+In general, running "make regression" in the top level "translation"
+directory will run the tests and give a pass/fail message as with the
+typical regression run.
+
+\section directory_move Directory Move 
+
+The data directory needs to be moved.
+
+The data directory currently reside under the regression source code
+"input" directory ("translation/regression/input").  Root privileges
+not available to me are required to move these directories to the
+typical regression data storage path.
+
+See: affy/sdk/regression-data/data/README.txt
+\verbatim
+     To prevent accidental updates to this data, it is owned by
+     root. To add data to this directory, you will need to login
+     to a "root-permitted" (no_squash_root) host such as
+     "oratino" to modify the data.
+\endverbatim
+
+Once the input is moved to the final regression place then the \c INPUT_DIR
+constant in the \link translation/regression/ATDRegression.h ATDRegression.h \endlink header
+file will need to be change.
+
+
+<hr>
+<a name="dmet2_algorithm_testing"></a>
+\section dmet2_algorithm_testing DMET2 Algorithm Testing
+
+
+DMET3 C++ was first ported from DMET2 Perl code. As such the DMET3 C++
+code was necessarily regression tested against the output of the DMET2 Perl
+code. It was decided to make this a permanent test going forward as
+the DMET3 algorithm does not differ with respect to the call logic except
+with copy number and marker override. Therefore
+algorithm regression uses DMET2 Genotype Short Report input data
+as well as a DMET2 translation table. DMET2 uses no annotation file.
+
+<a name="dmet2_algorithm_testing_regression_object"></a>
+\subsection regression_report_object Regression Report Object
+
+In order to avoid failing regression tests due to report requirements
+changing then a special regression report object was created as part of the
+translation code base:
+
+\verbatim
+translation/RegressionExperimentReport.[h,cpp]
+\endverbatim
+
+This report only outputs the call data with none of the annotation data
+required by all the reports. 
+
+
+<hr>
+
+<a name="dmet3_report_testing"></a>
+\section dmet3_report_testing DMET3 Report Testing 
+
+DMET3 Reporting is primarily concerned with report testing as the
+alogorithm is tested using DMET2 data.
+
+There are three report types for DMET3: comprehensive, summary and uncalled.
+In addition these reports can be augmented using report options. The two
+most common report options are use of a marker list and an override file.
+
+There are other report options but these are not exercised or visible in
+the DMET Console and so are out of scope at this time.
+
+<a name="dmet3_report_testing_comprehensive"></a>
+\subsection comprehensive_report_test_cases Comprehensive Report Test Cases
+
+<a name="dmet3_report_testing_summary"></a>
+\subsection summary_report_test_cases Summary Report Test Cases
+
+<a name="dmet3_report_testing_uncalled"></a>
+\subsection uncalled_report_test_cases Uncalled Report Test Cases
+
+<a name="dmet3_report_testing_marker"></a>
+\subsection marker_report_test_cases Marker Report Test Cases
+
+<a name="dmet3_report_testing_override"></a>
+\subsection override_report_test_cases Override Report Test Cases
+
+<a name="dmet3_report_testing_complex"></a>
+\subsection complex_test_cases Complex Test Cases
+
+
+*/
+
+// Local Variables:
+// mode: c++
+// End:
+

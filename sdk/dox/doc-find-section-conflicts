@@ -1,0 +1,179 @@
+#!/usr/bin/env perl
+#
+# /nfs/ss11/harley/Exact/apt-file5-1/affy/sdk/apt/doc-find-section-conflicts ---
+#
+# $Id: doc-find-section-conflicts,v 1.5 2007-11-12 20:08:24 harley Exp $
+#
+
+#use strict;
+use Getopt::Long;
+use File::Basename;
+
+#
+$opt_help=0;
+$opt_verbose=0;
+$opt_debug=0;
+{
+  $|=1;
+
+  if (!GetOptions(
+         "help|h",
+         "verbose|v",
+         #
+         "stdin",
+         "debug",
+      )) {
+    usage(1);
+  }
+
+  # 
+  if ($opt_help) {
+    usage(0);
+  }
+
+  $data=+{};
+
+  if ($opt_stdin) {
+    while ($file=<STDIN>) {
+      chomp($file);
+      scan_file($file,$data);
+    }
+  }
+  else {
+    foreach $arg (@ARGV) {
+      scan_file($arg,$data);
+    }
+  }
+
+  # page names should alwasy be unique.
+  check_pages($data);
+  # do sections have to be unique? Or just unique on the page?
+  # check_sections($data);
+}
+
+sub scan_file {
+  my($file)=shift;
+  my($data)=shift;
+
+  $file_sections=+{};
+
+  if ($data->{files}{$file}) {
+    print "### scanned '$file' already!...\n";
+    return;
+  }
+
+  $data->{files}{$file}++;
+  
+  open(F,$file)||die "cant read '$file',";
+
+  if ($opt_verbose) {
+    print "SCAN: $file\n";
+  }
+  $line=0;
+  while ($l=<F>) {
+    $line++;
+    if ($l=~m/[\\@](section|subsection|page)\s+(\S+)/) {
+      $kind=$1;
+      $name=$2;
+      #
+      if ($opt_debug) {
+        print "match: F='$file' K='$kind' N='$name'\n";
+      }
+      # save page matches for later.
+      if ($kind eq 'page') {
+        push(@{$data->{matches}{$1}{$2}},[$file,$line]);
+      }
+      else {
+        push(@{$file_sections->{$name}},[$file,$line]);
+      }
+    }
+  }
+  close(F);
+
+  #
+  foreach $name (sort(keys(%{$file_sections}))) {
+    $len=$#{$file_sections->{$name}};
+    if (1<=$len) {
+      foreach $file_line (@{$file_sections->{$name}}) {
+        print_err($file_line->[0],$file_line->[1],"duplicate section:",$name);
+      }
+    }
+  }
+}
+
+##########
+
+sub check_pages {
+  my($data)=shift;
+  my($cnt,$file,$file_line,$line,$page_name,$pages); #
+
+  $pages=$data->{matches}{page};
+  
+  foreach $page_name (sort(keys(%{$pages}))) {
+    #
+    $len=$#{$pages->{$page_name}};
+    #print "PN: ",$page_name," ",$len,"\n";
+    if (1<=$len) {
+      foreach $file_line (sort(@{$pages->{$page_name}})) {
+        $file=$file_line->[0];
+        $line=$file_line->[1];
+        #
+        print_err($file,$line,"Duplicate page:",$page_name);
+      }
+    }
+  }
+}
+
+sub check_sections {
+  my($data)=shift;
+
+  my($cnt,$file,$file_line,$kind,$line,$name); #
+
+  foreach $kind (sort(keys(%{$data->{matches}}))) {
+    if ($opt_verbose==1) {
+      print $kind,":\n";
+    }
+    foreach $name (sort(keys(%{$data->{matches}{$kind}}))) {
+      if ($opt_verbose==1) {
+        print "\t",$name, ":\n";
+      }
+      #
+      $len=$#{$data->{matches}{$kind}{$name}};
+      foreach $file_line (@{$data->{matches}{$kind}{$name}}) {
+        $file=$file_line->[0];
+        $line=$file_line->[1];
+        #
+        if ($opt_verbose==1) {
+          print "\t\t",$file,":",$line,"\n";
+        }
+        if (1<=$len) {
+          print_err($file,$line,"Duplicate section:",$kind,$name);
+        }
+      }
+    }
+  }
+}
+
+sub print_err {
+  my($file)=shift;
+  my($line)=shift;
+  
+  print $file,":",$line,":",join(" ",@_),"\n";
+}
+
+sub usage {
+  print "
+   doc-find-section-conflicts ---
+
+   -h     = this help message.
+   -v     = be verbose in output
+
+EXAMPLE:
+   doc-find-section-conflicts
+";
+  exit(shift);
+}
+
+# Local Variables:
+# mode: perl
+# End:

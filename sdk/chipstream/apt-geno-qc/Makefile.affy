@@ -1,0 +1,55 @@
+#
+# affy/sdk/chipstream/apt-geno-qc/Makefile.affy ---
+#
+
+# "Makefile.affy" is for affy-only targets and tests.
+# This makefile should not be part of an APT release.
+
+##########
+
+apt_geno_qc_exe:=${sdk_output_bin}/apt-geno-qc
+
+_test_kit_ao: _test_kit_ao_1
+
+# gdb=gdb --args
+# --kit-ao-file ./kit-ao-probeset-pc1.txt \
+#
+lib_dir:=/nfs/falcon/lib/release/internal/Genome_Scan.v1
+
+_test_kit_ao_1: ${apt_geno_qc_exe}
+	-rm test-kit-ao-1.txt
+	${gdb} 
+	valgrind --tool=memcheck -v --leak-check=full --show-reachable=yes \
+	${apt_geno_qc_exe} \
+	  --reagent-kit-discriminator ../CPPTest/input/kit-ao/kit-ao-probeset-pc1.txt \
+	  --target-sketch ${lib_dir}/Genome_Scan.v1.AxiomGT1.sketch \
+	  --spf-file    ${lib_dir}/Genome_Scan.v1.spf \
+	  --qca-file    ${lib_dir}/Genome_Scan.v1.qca \
+	  --qcc-file    ${lib_dir}/Genome_Scan.v1.qcc \
+	  --out-file    ./test-kit-ao-1.txt \
+	  --cel-files   ./kit-o-cels-3.txt | tee test-kit-ao-1.stdout
+
+_test_156: ${apt_geno_qc_exe}
+	-rm test-156.out test-156.stdout
+	${gdb} ${apt_geno_qc_exe} \
+	  --reagent-kit-discriminator ../CPPTest/input/kit-ao/kit-ao-probeset-pc1.txt \
+	  --target-sketch ${lib_dir}/Genome_Scan.v1.AxiomGT1.sketch \
+	  --spf-file    ${lib_dir}/Genome_Scan.v1.spf \
+	  --qca-file    ${lib_dir}/Genome_Scan.v1.qca \
+	  --qcc-file    ${lib_dir}/Genome_Scan.v1.qcc \
+	  --out-file    ./test-156.out \
+	  --cel-files   ./test-156-cel-files.txt | tee test-156.stdout
+
+axiom_lib:=../../regression-data/data/lib/Axiom_GW_Hu_SNP
+axiom_base:=Axiom_GW_Hu_SNP
+
+_axiom_200_test: ${apt_geno_qc_exe}
+	-rm -rf ${@}
+	valgrind --tool=memcheck -v ${apt_geno_qc_exe} \
+	  --target-sketch ${axiom_lib}/${axiom_base}.r2.AxiomGT1.sketch \
+	  --spf-file      ${axiom_lib}/${axiom_base}.r2.spf \
+	  --qca-file      ${axiom_lib}/${axiom_base}.s3.qca \
+	  --qcc-file      ${axiom_lib}/${axiom_base}.s3.qcc \
+	  --out-file    ./${@}-out \
+	  Copyof200Files_Axiom/NA18570_AxiomGWASHuSNP1_20090715_CHBJPT_T02_E03_v250.CEL
+#	  Copyof200Files_Axiom/*

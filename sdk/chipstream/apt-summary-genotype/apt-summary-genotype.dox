@@ -1,0 +1,60 @@
+/**
+\page apt-summary-genotype MANUAL: apt-summary-genotype (\aptversion)
+
+\section aptSummaryGenotype Contents
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-summary-genotype.help.txt
+
+<a name="genderFile">
+\section genders Genders File
+
+The genders file is a TSV file (tab separated) with a header line followed by data
+lines. The header must contain a "cel_files" column and a "gender" column. The 
+values in the "cel_files" column must match up with the headers in the allele
+summary file. Here is an example:
+
+\verbatim
+cel_files       gender
+NA06985_GW5_C.CEL       female
+NA06991_GW5_C.CEL       female
+NA06993_GW5_C.CEL       male
+NA06994_GW5_C.CEL       male
+NA07000_GW5_C.CEL       female
+\endverbatim
+
+<a name="alleleSummaryFile">
+\section summaries Allele Summaries File
+
+The allele summaries file is a TSV file (tab separated) with a header line followed by data
+lines. The header must contain a "probeset_id" column in the first column followed by
+a column for each sample. There are two rows for each SNP. The first row is the allele
+summaries (estimates) for the A allele. The second row is the summaries for the B allele.
+This is further indicated by the suffix "-A" and "-B" to the probeset ID in the first
+column.  Here is an example:
+
+\verbatim
+probeset_id     NA06985_GW5_C.CEL       NA06991_GW5_C.CEL       NA06993_GW5_C.CEL
+SNP_A-1780520-A 221.77864       229.52002       200.68078
+SNP_A-1780520-B 808.69278       910.90927       732.87915
+SNP_A-1780618-A 369.83269       723.96987       530.21800
+SNP_A-1780618-B 825.04576       764.62659       644.88729
+\endverbatim
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. What is the minimum input?
+
+A. You can run the program with only an allele summary file. In this
+   senario all genders are assumed unknown (which BRLMM-P treats as
+   female) and all SNPs are considered diploid.
+
+*/

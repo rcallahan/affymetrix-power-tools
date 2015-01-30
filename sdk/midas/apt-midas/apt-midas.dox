@@ -1,0 +1,90 @@
+/**
+\page apt-midas MANUAL: apt-midas (\aptversion)
+
+\p apt-midas is a program for computing an alternative splicing score
+based on the MiDAS method described in the Affymetrix
+<a href="http://www.affymetrix.com/support/technical/whitepapers.affx">
+Alternative Transcript Analysis Methods for Exon Arrays</a>
+whitepaper.
+
+\section QuickStart Quick Start
+Most users will just want to compute MiDAS p-values using:
+
+\verbatim
+apt-midas -c celfiles.txt -g gene-plier.summary.txt -e exon-plier.summary.txt -m meta-probeset.full.txt -o apt-midas-results
+\endverbatim
+
+Where \c -c specifies a cel group file, \c -g specifies a gene level signal
+estimate file, \c -e specifies an exon level signal estimate file, \c -m
+specifies a meta-probeset file to match the exon level data with the gene level
+data, and \c -o specifies an output directory.
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-midas.help.txt
+
+\subsection CEL Group File
+
+The CEL group file is used to define which results are to be grouped together for the
+MiDAS ANOVA test. The file is a text file with at least two columns: cel_files, group_id.
+The cel_files column should contain values that correspond to the headers in the summary files.
+The group_id is an arbitrary value where rows with the same group_id value are grouped together.
+Here is an example:
+
+\verbatim
+cel_files       group_id
+brain-rep1.cel  brain
+brain-rep2.cel  brain
+brain-rep3.cel  brain
+heart-rep1.cel  heart
+heart-rep2.cel  heart
+heart-rep3.cel  heart
+\endverbatim
+
+\section manFaq Frequently Asked Questions
+
+Q. What meta-probeset file(s) should I use.
+
+A. A good starting point is to use the core or extended
+   meta probeset file along with the IterPlier method
+   to generate gene level signal estimates. You can then
+   use the full meta probeset file with MiDAS. In other words,
+   use the more conservative meta probeset list to generate
+   gene level estimates, but then compute MiDAS p-values for
+   all exons associated with the transcript clusters in your
+   gene level signal estimate file regardless of how speculative
+   the content is.
+
+Q. What is the Log Stabilization Factor For?
+
+A. This factor (default 8) acts to stabilize the variance and
+   helps to prevent inflated p-values for low or un-expressed
+   probesets. The default is based on using PLIER signal
+   summaries. You may want to use a lower value, or not log
+   transform, if you are using RMA signal summaries.
+
+Q. When would I want to not log transform?
+
+A. The default is to log transform the signal estimates. This
+   works well for PLIER input which is not already log transformed.
+   If you are using RMA signal estimates as input, then you probably
+   want to turn off the log transformation.  The Log Stabilization
+   Factor is ignored when log transformation is turned off.
+
+Q. What are the normalized intensities?
+
+A. These are the exon by sample fitted values (ie values for samples in the
+   same group for the same exon are identical). The values are also scaled to
+   a max of 0 by subtracting the largest observed fitted value for a given exon
+   over all the sample groups. 
+
+Q. In MIDAS result are the p values after multiple test correction? 
+
+A. No. No multiple testing correction is applied. 
+
+*/

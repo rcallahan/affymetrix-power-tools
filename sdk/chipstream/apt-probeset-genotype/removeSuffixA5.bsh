@@ -1,0 +1,50 @@
+#!/bin/bash
+
+if [ "${#}" != "2" ]
+then
+  echo "Usage: $0 fileToConvert  FeatureEffectsHDF5GroupName"
+  echo "To use this script you must have a copy or a link the the apt-file5-util in the run directory."
+  echo "To find the HDF5 group name:  h5dump -A <feature effects file name> | grep -i group" 
+  exit 1
+fi
+
+if(! [ -f apt-file5-util ] )
+then
+  echo "To use this script you must have a copy or a link to the binary \"apt-file-util\" in the run directory."
+  exit 1
+fi
+
+if [ -f originalFEfile.txt.translated ]
+then 
+  rm originalFEfile.txt.translated
+fi
+
+if [ -f originalFEfile.txt ]
+then 
+  rm originalFEfile.txt
+fi
+
+ 
+echo "Processing $1 ..."
+
+echo "Creating text version of the HDF5 feature effects file."
+
+apt-file5-util --to-tsv -o originalFEfile.txt --tsv-name=$2 $1  
+
+echo "Translating text version of feature effects file."
+if sed 's/\(^[A-Za-z0-9_-\.\t]*\)-[A-Z0-9][ \t]/\1\t/' originalFEfile.txt  > originalFEfile.txt.translated.tmp
+then
+  mv originalFEfile.txt.translated.tmp originalFEfile.txt.translated
+else 
+  echo "Command failed.  Temporary text output left in originalFEfile.txt.translated.tmp"
+  exit 1
+fi
+
+echo "Creating HDF5 version of translated feature effects file."
+apt-file5-util  --to-tsv5 -o "$1.translated" --tsv-name=$2  originalFEfile.txt.translated 
+
+rm originalFEfile.txt.translated
+rm originalFEfile.txt
+
+
+

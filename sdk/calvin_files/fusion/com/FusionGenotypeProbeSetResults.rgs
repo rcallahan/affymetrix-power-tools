@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.FusionGenotypeProbeSe.1 = s 'FusionGenotypeProbeSetResults Class'
+	{
+		CLSID = s '{5DCBDFFB-92DD-4D3E-AF04-C74B05845535}'
+	}
+	affx_fusion_com.FusionGenotypeProbeSetR = s 'FusionGenotypeProbeSetResults Class'
+	{
+		CLSID = s '{5DCBDFFB-92DD-4D3E-AF04-C74B05845535}'
+		CurVer = s 'affx_fusion_com.FusionGenotypeProbeSe.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {5DCBDFFB-92DD-4D3E-AF04-C74B05845535} = s 'FusionGenotypeProbeSetResults Class'
+		{
+			ProgID = s 'affx_fusion_com.FusionGenotypeProbeSe.1'
+			VersionIndependentProgID = s 'affx_fusion_com.FusionGenotypeProbeSetR'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

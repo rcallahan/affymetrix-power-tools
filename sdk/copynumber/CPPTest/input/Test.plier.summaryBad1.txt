@@ -1,0 +1,101 @@
+#%guid=0000065447-1206555954-0000028717-0000002288-0000026332
+#%affymetrix-algorithm-param-apt-engine=ProbesetGenotypeEngine
+#%affymetrix-algorithm-param-apt-program-name=apt-copynumber-workflow.exe
+#%affymetrix-algorithm-param-apt-command-line=C:\apt_test\apt-copynumber-workflow.exe -v 3 --mem-usage 0 --block-size 2000000 --adapter-type-normalization true --report-snps true --report-cnchp true --call-copynumber false --create-reference true --reference-file C:\apt_test\BatchTest\error1\CNReference.a5 --normalization-type 1 --set-analysis-name Test --probeset-ids C:\apt_test\GenomeWideSNP_6.probeset-ids.txt --cdf-file C:\apt_test\GenomeWideSNP_6.cdf --qca-file C:\apt_test\GenomeWideSNP_6.qca --qcc-file C:\apt_test\GenomeWideSNP_6.qcc --chrX-probes C:\apt_test\GenomeWideSNP_6.chrXprobes --chrY-probes C:\apt_test\GenomeWideSNP_6.chrYprobes --special-snps C:\apt_test\GenomeWideSNP_6.specialsnps --netaffx-snp-annotation-file C:\apt_test\GenomeWideSNP_6.na23.annot.csv --netaffx-cn-annotation-file C:\apt_test\GenomeWideSNP_6.cn.na23.annot.csv -o C:\apt_test\BatchTest\error1\ C:\apt_test\cels\NA06985_GW6_C.CEL c:\apt_test\cels\NA06991_GW6_C.CEL C:\apt_test\cels\NA06993_GW6_C.CEL C:\apt_test\cels\NA06994_GW6_C.CEL C:\apt_test\cels\NA07000_GW6_C.CEL 
+#%affymetrix-algorithm-param-apt-exec-guid=0000065375-1206555798-0000004594-0000015211-0000013728
+#%affymetrix-algorithm-param-apt-analysis-guid=0000065447-1206555954-0000028717-0000002288-0000026332
+#%affymetrix-algorithm-param-apt-time-str=Wed Mar 26 11:23:18 2008
+#%affymetrix-algorithm-param-apt-version=NON-OFFICIAL-RELEASE
+#%affymetrix-algorithm-param-apt-cvs-id=Id: apt-copynumber-workflow.cpp,v 1.00 2007/10/16 22:12:31 wshort Exp$
+#%affymetrix-algorithm-param-apt-free-mem=9932835225
+#%affymetrix-algorithm-param-apt-opt-chip-type=GenomeWideSNP_6
+#%affymetrix-algorithm-param-apt-opt-probe-count=6892960
+#%affymetrix-algorithm-param-apt-opt-force=true
+#%affymetrix-algorithm-param-apt-opt-block-size=2000000
+#%affymetrix-algorithm-param-apt-opt-mem-usage=1331
+#%affymetrix-algorithm-param-apt-opt-out-dir=C:\apt_test\BatchTest\error1
+#%affymetrix-algorithm-param-apt-opt-cc-md-chp-out-dir=
+#%affymetrix-algorithm-param-apt-opt-xda-chp-out-dir=
+#%affymetrix-algorithm-param-apt-opt-cdf-file=GenomeWideSNP_6.cdf
+#%affymetrix-algorithm-param-apt-opt-ps-list-file=GenomeWideSNP_6.probeset-ids.txt
+#%affymetrix-algorithm-param-apt-opt-kill-list=
+#%affymetrix-algorithm-param-apt-opt-cel-count=5
+#%affymetrix-algorithm-param-apt-opt-cel-1=NA06985_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-2=NA06991_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-3=NA06993_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-4=NA06994_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-5=NA07000_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-analysis-name=Test
+#%affymetrix-algorithm-param-apt-opt-set-analysis-name=Test
+#%affymetrix-algorithm-param-apt-opt-analysis-spec=adapter-type-norm.StyOnlySnpRatio=0.8287.NspOnlySnpRatio=0.796.NspOnlyCnRatio=1.4218.NspBothSnpRatio=0.9954.NspBothCnRatio=1.6392,quant-norm.sketch=-1.bioc=false.lowprecision=false.usepm=false.target=0.doavg=false.subsetmd5=d41d8cd98f00b204e9800998ecf8427e,pm-only,brlmm-p.K=2.transform=CCS.lowprecision=false.KX=4.KH=0.2.KXX=0.KAH=0.KHB=0.V=10.AAM=0.66.ABM=0.BBM=-0.66.AAV=0.005.ABV=0.01.BBV=0.005.COMVAR=1.HARD=2.SB=0.003.CM=1.MS=0.05.bins=100.hints=0.override=0.mix=1.bic=0.lambda=1.wobble=0.0001.copyqc=0.CP=16.em_thresh=0.05.em_cutoff=0.5.gender_cutoff=0.1,
+#%affymetrix-algorithm-param-apt-opt-feat-effect-file=
+#%affymetrix-algorithm-param-apt-opt-target-sketch-file=
+#%affymetrix-algorithm-param-apt-opt-do-residuals=false
+#%affymetrix-algorithm-param-apt-opt-do-feature-effects=false
+#%affymetrix-algorithm-param-apt-opt-write-sketch=false
+#%affymetrix-algorithm-param-apt-opt-a5-write-sketch=true
+#%affymetrix-algorithm-param-apt-opt-set-gender-method=cn-probe-chrXY-ratio
+#%affymetrix-algorithm-param-apt-opt-chrXProbeFile=C:\apt_test\GenomeWideSNP_6.chrXprobes
+#%affymetrix-algorithm-param-apt-opt-chrYProbeFile=C:\apt_test\GenomeWideSNP_6.chrYprobes
+#%affymetrix-algorithm-param-apt-opt-read-priors-brlmm=
+#%affymetrix-algorithm-param-apt-opt-initial-calls=false
+#%affymetrix-algorithm-param-apt-opt-output-summaries=true
+#%affymetrix-algorithm-param-apt-opt-list-sample=false
+#%affymetrix-algorithm-param-apt-opt-write-prior=false
+#%affymetrix-algorithm-param-apt-opt-chrX-file=
+#%affymetrix-algorithm-param-apt-opt-chrX-snps=
+#%affymetrix-algorithm-param-apt-opt-no-gender-force=false
+#%affymetrix-algorithm-param-apt-opt-special-snps=GenomeWideSNP_6.specialsnps
+#%affymetrix-algorithm-param-apt-opt-compute-prior=1000
+#%affymetrix-algorithm-param-apt-opt-norm-size=0
+#%affymetrix-algorithm-param-apt-opt-dm-thresh=0.17
+#%affymetrix-algorithm-param-apt-opt-dm-het-mult=0
+#%affymetrix-algorithm-param-apt-opt-read-genders=
+#%affymetrix-algorithm-param-apt-opt-model-file-brlmm=
+#%affymetrix-algorithm-param-apt-opt-model-file-brlmmp=
+#%affymetrix-algorithm-param-apt-opt-model-file-birdseed=
+#%affymetrix-algorithm-param-apt-opt-genotypes-file=
+#%affymetrix-algorithm-param-apt-opt-dm-calls-out=false
+#%affymetrix-algorithm-param-apt-opt-qmethod-spec=plier.optmethod=1
+#%affymetrix-algorithm-param-apt-opt-genotype-only=false
+#%affymetrix-algorithm-param-quantification-name=brlmm-p
+#%affymetrix-algorithm-param-quantification-version=1.0
+#%affymetrix-algorithm-param-quantification-scale=linear
+#%affymetrix-algorithm-param-quantification-type=signal
+#%affymetrix-algorithm-param-min-thresh=-inf
+#%affymetrix-algorithm-param-max-thresh=0.05
+#%affymetrix-algorithm-param-gender_method_used=cn-probe-chrXY-ratio
+probeset_idTest	NA06985_GW6_C.CEL	NA06991_GW6_C.CEL	NA06993_GW6_C.CEL	NA06994_GW6_C.CEL	NA07000_GW6_C.CEL
+CN_473963	910.12465	748.59993	725.67939	1105.52870	919.08064
+CN_473964	2526.12672	2712.75172	2269.56373	3033.91554	2588.29908
+CN_473965	2353.00074	2381.56349	1753.14967	2552.48951	2344.34254
+CN_473981	675.94960	858.12501	441.52369	851.93635	792.93000
+CN_473982	1594.53431	1590.85902	1195.71241	1476.57521	1552.90016
+CN_497981	2980.38063	4226.42726	2133.41578	3698.50758	3667.16920
+CN_517763	5155.51661	4086.49659	4243.42189	4643.44825	5260.33790
+CN_502615	478.65751	619.35829	700.21388	879.07887	472.11418
+CN_502613	1192.51503	1349.09120	885.58284	1358.43434	1423.79445
+CN_502614	541.40223	1186.37220	822.67030	1797.99769	1474.68214
+CN_502616	171.48204	566.59559	635.09504	920.47102	496.92671
+CN_502842	734.38997	1131.68678	898.21370	1588.43763	1341.75843
+CN_502843	1861.63319	2032.42738	1447.92152	2053.79518	2346.89137
+CN_466171	1397.31666	1465.61696	1167.21998	1296.59291	1630.15858
+CN_468414	397.62068	359.77928	585.27858	432.86479	448.24705
+CN_468412	153.49498	274.81529	226.28653	122.91102	155.71016
+CN_468413	1194.69752	1512.03138	1078.59181	1292.89723	1591.40248
+CN_470565	162.52577	300.08244	251.63209	155.20080	178.11345
+CN_468424	1775.00660	1766.30751	1689.12648	1709.35658	1913.47059
+CN_468425	1281.57838	1352.61024	1122.40101	1277.43434	2045.18690
+CN_460512	428.99235	265.89323	340.23509	331.25303	389.58879
+CN_460513	474.09144	445.88762	531.79231	487.12938	634.56221
+SNP_A-8575125-A	3405.73292	3766.02955	3523.36647	3605.60084	3009.25880
+SNP_A-8575125-B	270.22658	233.33801	329.59046	287.13729	248.07261
+SNP_A-8575115-A	345.31737	236.38373	294.88215	321.00686	113.65192
+SNP_A-8575115-B	3949.07336	4789.00355	3545.14507	4857.45379	449.64373
+SNP_A-8575371-A	1136.82704	1154.63209	1350.93422	926.10725	1121.97023
+SNP_A-8575371-B	3156.51873	3344.15480	2694.75523	2849.98361	3784.90400
+CN_524192	1886.85048	2855.95314	2492.81520	2171.78859	2307.44630
+CN_496034	1986.79042	2241.19117	2231.64161	2328.84010	1995.75648
+CN_500339	2525.77345	2406.40358	2045.22279	2448.31251	2402.07350
+CN_502639	381.09040	343.60481	333.50215	331.38188	449.11537
+

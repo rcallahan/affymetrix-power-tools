@@ -1,0 +1,86 @@
+#num_probe_sets	345
+
+#probe_set_name	Pae_16SrRNA_s_at
+#probe_set_type	expression
+#num_groups	1
+
+#group_index	0
+#group_name	Pae_16SrRNA_s_at
+#direction	Antisense
+#num_cells	32
+#cell_header	x	y	expos	pbase	tbase	atom
+111	79	0	t	a	0
+111	80	0	a	a	0
+19	19	1	a	t	1
+19	20	1	t	t	1
+95	39	2	t	a	2
+95	40	2	a	a	2
+18	55	3	a	t	3
+18	56	3	t	t	3
+25	113	4	t	a	4
+25	114	4	a	a	4
+56	19	5	a	t	5
+56	20	5	t	t	5
+84	77	6	t	a	6
+84	78	6	a	a	6
+6	25	7	g	c	7
+6	26	7	c	c	7
+48	67	8	c	g	8
+48	68	8	g	g	8
+34	27	9	t	a	9
+34	28	9	a	a	9
+32	23	10	g	c	10
+32	24	10	c	c	10
+117	59	11	a	t	11
+117	60	11	t	t	11
+13	71	12	t	a	12
+13	72	12	a	a	12
+118	5	13	a	t	13
+118	6	13	t	t	13
+19	25	14	a	t	14
+19	26	14	t	t	14
+93	81	15	c	g	15
+93	82	15	g	g	15
+
+#probe_set_name	AFFX-Athal-Actin_5_r_at
+#probe_set_type	expression
+#num_groups	1
+
+#group_index	0
+#group_name	AFFX-Athal-Actin_5_r_at
+#direction	Antisense
+#num_cells	32
+#cell_header	x	y	expos	pbase	tbase	atom
+25	51	0	c	g	0
+25	52	0	g	g	0
+80	23	1	c	g	1
+80	24	1	g	g	1
+105	75	2	a	t	2
+105	76	2	t	t	2
+65	87	3	t	a	3
+65	88	3	a	a	3
+104	73	4	t	a	4
+104	74	4	a	a	4
+28	101	5	c	g	5
+28	102	5	g	g	5
+85	115	6	t	a	6
+85	116	6	a	a	6
+113	115	7	g	c	7
+113	116	7	c	c	7
+12	69	8	t	a	8
+12	70	8	a	a	8
+26	117	9	t	a	9
+26	118	9	a	a	9
+41	67	10	t	a	10
+41	68	10	a	a	10
+68	87	11	t	a	11
+68	88	11	a	a	11
+29	101	12	c	g	12
+29	102	12	g	g	12
+112	115	13	t	a	13
+112	116	13	a	a	13
+52	61	14	t	a	14
+52	62	14	a	a	14
+76	57	15	g	c	15
+76	58	15	c	c	15
+

@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+	
+	
+
+<h1>Affymetrix® Tiling Analysis Software CHP File Format</h1>
+
+		<h2>TILING ANALYSIS SOFTWARE CHP FILE</h2>
+	
+
+ 
+	
+
+<p><b>Description</b><p>
+<p>The Tiling Analysis Software stores the resulting signal and p-values from its one and two sample analysis into a CHP file following the <a href="http://www.affymetrix.com/genechip/developer">Command Console generic data file format specifications</a>. Older versions of the Tiling Analysis Software used the <a href="http://www.affymetrix.com/genechip/developer">BAR file format</a> to store the signal and p-values.</p>
+
+<p><b>CHP File Contents</b><p>
+<p>The Command Console generic data file format is broken down into a header and data sections. Below are the items that are stored in the tiling CHP file for each section of the file.</p>
+
+<p><b>Generic Data Header</b></p>
+
+    <p>The data type identifier is set to "affymetrix-tiling-analysis"</p>
+
+    <p>The following table defines the parameters stored in the CHP file header. These are the parameters used by the tiling algorithm to calculate the signal and p-values:</p>
+	
+	<table>
+			<tbody><tr>
+				<th><b>Parameter Name</b></th>
+				<th><b>Definition</b></th>
+			</tr>
+			<tr>
+			<td>Param-file_type</td>
+			<td>Describes the data stored in the data matrix. This is a string 
+			with the following possible values:<p>"signal" - indicates that the data in 
+		the matrix are the calculated signal value.</p>
+			<p>"p-value" - indicates that the data in the matrix are the calculated 
+		p-values.</p></td>
+			</tr>
+			<tr>
+			<td>Param-scale</td>
+			<td>Describes the scale of the data in the matrix. This is a string 
+			with the following possible values:<p>"Linear" - indicates linear 
+			scale for either the signal or p-values.</p><p>"Log10" - indicates the 
+			log base 10 scale for the signal values.</p><p>"Log2" - indicates the 
+			log base 2 scale for the signal values.</p><p>"-10Log10" - indicates the 
+			-10 * log base 10 scale for the p-values.</p></td>
+			</tr>
+			<tr>
+				<td>Param-genomic_map</td>
+				<td>The BPMAP file used in the analysis. This is a string value.</td>
+			</tr>
+			<tr><td>Param-Bandwidth</td>
+			<td>The bandwidth used in the analysis. This is a integer value.</td>
+			</tr>
+			<tr><td>Param-TailType</td>
+			<td>The tail type used in the analysis. This is a string with 
+			the following possible values:<p>"OneSidedLower" - indicating a one 
+			sided lower test.</p>
+			<p>"OneSideUpper" or "OneSidedUpper" - indicating a one sided upper test.</p>
+			<p>"TwoSided" - indicating a two sided test.</p></td>
+			</tr>
+			<tr>
+			<td>Param-probe_coordinate_convention</td>
+			<td>Indicates if the file contains positions that are relative to 
+			the center or left of the probe. This is a string with the following 
+			possible values:<p>"0_indexed_center" - indicates that the position 
+			is relative to the center of the probe.</p>
+			<p>If this value is missing the position is assumed to be relative 
+			to the left of the probe.</p></td>
+			</tr>
+			<tr>
+			<td>Algorithm-Name</td>
+			<td>The name of the algorithm that created the CHP file results.</td>
+			</tr>
+			<tr>
+			<td>Algorithm-Version</td>
+			<td>The algorithms version number.</td>
+			</tr>
+			<tr>
+			<td>NumberSequences</td>
+			<td>The number of sequences stored in the CHP file.</td>
+			</tr>
+		</tbody></table>
+		
+		    <p>The data section is further broken down into data groups. Only one data group will exist in the file. Each sequence item will be stored in a separate sequence item within the one data group. The data group is define as:</p>
+
+<p><b>Data Group</b></p>
+
+    <p class="indent"><b>Name</b></p>
+
+    <p class="indent">The name of the data group will be "Tiling Results".</p>
+
+    <p class="indent"><b>Data Set</b></p>
+
+    <p class="indent">Each data group will contain one data set per sequence item.</p>
+
+<p><b>Data Set</b></p>
+
+    <p class="indent"><b>Name</b></p>
+
+    <p class="indent">The data set name will be the 0 based index of the sequence item in the group.</p>
+
+    <p class="indent"><b>Parameters</b></p>
+	
+	<table>
+			<tbody><tr>
+				<th><b>Parameter Name</b></th>
+				<th><b>Definition</b></th>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td>The sequence name.</td>
+			</tr>
+			<tr>
+				<td>GroupName</td>
+				<td>The name of the group which the sequence is a member (for 
+			example, often specifies organism)</td>
+			</tr>
+			<tr><td>Version</td>
+			<td>The sequence version.</td>
+			</tr>
+			<tr>
+			<td>probeset_type</td>
+			<td>Indicates the type of the probe set. This is a string with the 
+			following possible values:<p>"tiling" - indicates a probe set used 
+			to interrogate a sequence.</p>
+			<p>The origin of this value comes from the BPMAP file used in the 
+			analysis. This value will only appear in the CHP file if the 
+			associated BPMAP file contained the parameter. Other values may 
+			exist within the BPMAP file, but the current implementation of the 
+			Tiling Analysis Software only analyzes sequences where the 
+			probeset_type is set to "tiling".</p></td>
+			</tr>
+			</tbody></table>
+			
+			<p>Additional parameters (taken from the BPMAP file) may be stored in the parameter section. CHP files generated from the Tiling Analysis Software will extract the parameters from the BPMAP file and copy them to the CHP file.</p>
+
+<p><b>Column Definitions</b></p>
+
+<p>There will only be two columns of data in each data set. The first column defines the genomic position and is stored as an integer value. The second column is either the signal or p-value (as defined in the generic data header parameters) and is stored as a floating point value.</p>
+
+<table>
+			<tbody><tr>
+				<th><b>Column Type</b></th>
+				<th><b>Column Name</b></th>
+			</tr>
+			<tr>
+				<td>Int</td>
+				<td>Genomic Position</td>
+			</tr>
+			<tr>
+				<td>Float</td>
+				<td>p-value</td>
+			</tr>
+		</tbody></table>
+		
+		<p><b>Data Matrix</b></p>
+
+<p>The data matrix contains only two columns, as described above. Each row in the matrix will correspond to a single genomic position in the sequence item.</p>
+
+			</div>
+			<div class="clr"></div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_mas5_com.MAS5Params.1 = s 'MAS5Params Class'
+	{
+		CLSID = s '{964BB35F-9A1E-445E-9009-CEC975894B16}'
+	}
+	affx_mas5_com.MAS5Params = s 'MAS5Params Class'
+	{
+		CLSID = s '{964BB35F-9A1E-445E-9009-CEC975894B16}'
+		CurVer = s 'affx_mas5_com.MAS5Params.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {964BB35F-9A1E-445E-9009-CEC975894B16} = s 'MAS5Params Class'
+		{
+			ProgID = s 'affx_mas5_com.MAS5Params.1'
+			VersionIndependentProgID = s 'affx_mas5_com.MAS5Params'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{3EAD1EAF-453E-4627-BB2C-DDFC2B08FC57}'
+		}
+	}
+}

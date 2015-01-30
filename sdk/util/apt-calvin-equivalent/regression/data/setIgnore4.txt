@@ -1,0 +1,2 @@
+IgnoreParameters
+MultiData.Genotype

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+					
+	
+
+<h1>Affymetrix® TPMAP File Format</h1>
+ 
+		<h2>TPMAP FILE</h2>
+	
+
+ 
+	<p><b>Description</b></p>
+<p>The TPMAP (text probe map) Version 3 file format is used to store the relationship between (PM,MM) probe pairs or PM probes (PM only array) and positions on a set of sequences of interest.</p>
+
+<p>Each sequence of interest must be identified by a "Sequence Group Name" (e.g., Species or organism), "Version" (e.g., build of genome database) and "Target sequence name" (e.g., chromosome).</p>
+
+<p><b>Format</b></p>
+<p>The format is plain text.
+
+<p>Probes in the same Group Name, Version and Target sequences occur in blocks with all entries having the same target sequence name. The first such block must be headed by two lines giving Group Name and Version (any successive blocks without these pairs will inherit them):</p>
+
+<p>#seq_group_name group_name<br />
+#version version</p>
+
+<p>and then optional tag/value pairs (see below). Fields are whitespace delimited and fields after the first two can be present and will be ignored.</p>
+
+<p>There is a row corresponding to every instance of a (PM,MM) probe pair or a PM probe aligning to a target sequence. Probe sequence is the synthesis sequence of the probe on the chip in 5'-3' orientation. It is the reverse complement of the target sequence.</p>
+
+<p>Each row consists of the following 6-9 whitespace-separated entries:</p>
+
+   <p class="indent">1. Probe sequence (must be in [acgtACGT], length must be in [1,27], all probes must have same length).<br />
+   2. Alignment strand indicator: 1 or t or T or + if target (not probe!) is on top strand, 0 or f or F or - otherwise<br />
+   3. Target sequence name<br />
+   4. Alignment position in target sequence (0-based, lower coordinate of alignment)<br />
+   5. X coordinate of PM probe in array (0-based)<br />
+   6. Y coordinate of PM probe in array (0-based)</p>
+   <br />
+
+<p>For a PM Only sequence block:</p>
+
+   <p class="indent">7. Optional Match Score - float between 0.0 and 1.0</p>
+   <br />
+
+<p>For a PM and MM sequence block:</p>
+
+   <p class="indent">7. X coordinate of MM probe in array (0-based)<br />
+   8. Y coordinate of MM probe in array (0-based)<br />
+   9. Optional Match Score - float between 0.0 and 1.0</p>
+
+<p>Mixtures of PM only probes and PM/MM probe pairs are not supported within a sequence block</p>
+
+<p>Tag/value support is added of the form:</p>
+
+   <p class="indent">#tag value</p>
+
+<p>where tag and value are strings. The string naming the tag will not include the leading '#'. Any lines with '#' alone as the first non-whitespace string are treated as comments.</p>
+
+<p>If the Match Score is absent then it will be set to 1.0.</p>
+
+<p><b>Example</b></p>
+<p>Below is a sample tpmap file:</p>
+
+    <code>#seq_group_name HS1 (Required Line, whitespace delimited using default std::cin, only first 2 fields used).<br />
+    #version 11_Nov_2005 (Required Line, as above)<br />
+    #tag1 value1 (Optional tag/value line, white space delimited, leading # stripped from tagname)<br />
+    #tag2 value2 (Another example of a tag/value optional line)<br /><br />
+
+    # this line is ignored because of white space after the #, empty lines are ignored too<br /><br />
+
+    GCCCTGTTGTCTCTTACCCGGATGT f chr2 28 1112 2013 1112 2014<br />
+    AATAGCCCTCATGTACGTCTCCTCC f chr2 1 1290 1449 1290 1450<br />
+    AATAGCCCTCATGTACGTCTCCTCC f chr2 1 1291 1449 1291 1450<br />
+    AATAGCCCTCATGTACGTCTCCTCC f chr2 1 1292 1449 1292 1450<br />
+    GGAGGAGACGTACATGAGGGCTATT t chr2 1 1466 949 1466 950<br /><br />
+
+    # this sequence block inherits the group_name and version and other tags<br />
+    GTAATGGAGGGTAAGTTGAGAGACA t chr1 107 1729 1497 1729 1498<br />
+    GGTAATGGAGGGTAAGTTGAGAGAC t chr1 108 509 1397 509 1398<br />
+    TAGGGCTGTGTTAGGGTAGTGTTAG t chr1 64 1745 1095 1745 1096<br />
+    GGTAATGGAGGGTAAGTTGAGAGAC t chr1 108 510 1397 510 1398<br />
+    CACTACCCTAACACAGCCCTAATCT f chr1 68 991 1953 991 1954<br />
+    GGTTAGATTAGGGCTGTGTTAGGGT t chr1 72 295 1987 295 1988<br />
+    GTCTCTCAACTTACCCTCCATTACC f chr1 108 355 1437 355 1438<br />
+    GTCTCTCAACTTACCCTCCATTACC F chr1 108 354 1437 354 1438<br /><br />
+
+    # a PMOnly block with a match score in line 2<br />
+    GTAGAGAGATGGATGGTGGTTGGGA t chr3 474 2305 1565<br />
+    TAAGTAGAGAGATGGATGGTGGTTG 1 chr3 477 1297 981 .9<br />
+    TAAGTAGAGAGATGGATGGTGGTTG t chr3 477 1298 981<br />
+    AGTAAGTAGAGAGATGGATGGTGGT t chr3 479 631 779<br />
+    TAGTAAGTAGAGAGATGGATGGTGG t chr3 480 843 1211<br />
+    TAGTAAGTAGAGAGATGGATGGTGG t chr3 480 844 1211<br />
+    TAGTAAGTAGAGAGATGGATGGTGG t chr3 480 845 1211<br />
+    TAGTAAGTAGAGAGATGGATGGTGG t chr3 480 846 1211<br />
+    GTAGTAAGTAGAGAGATGGATGGTG t chr3 481 1397 1011<br />
+    GTTGGTGGTAGTAAGTAGAGAGATG t chr3 488 2520 1035<br />
+    GACGGTGGGTTGGTGGTAGTAAGTA t chr3 496 1000 2453<br /><br />
+
+    #seq_group_name B_subtilis<br />
+    #version 1/1/00:11am<br />
+    #tag1 controls<br />
+    # has a match score in first line<br />
+    CACACCCTAACACTACCCTAACACT 0 chr1 356 1069 1943 3069 1944 0.8<br />
+    ACCCTAACACTACCCTAACACTACC f chr1 359 2059 2371 2059 2372<br />
+    GGGTAGTGTTAGGGTAGTGTTAGGG t chr1 360 1704 2249 1704 2250<br />
+    TAGGGTAGTGTTAGGGTAGTGTTAG T chr1 2012000111 1996 2209 1996 2210<br /><br />
+
+
+    # ###### Explanation of the sequence blocks:<br />
+    # There is a row corresponding to every instance of a (PM,MM) probe pair or a PM probe aligning<br />
+    # to a target sequence. Each row consists of the following 6-9 whitespace-separated entries:<br /><br />
+
+    # 1 Probe sequence (must be in [acgtACGT], length must be in [1,27], all probes must have same length)<br />
+    # 2 Alignment strand indicator: 1 or t or T if target (not probe!) is on top strand, 0 or f or F otherwise<br />
+    # 3 Target sequence name<br />
+    # 4 Alignment position in target sequence (0-based, lower coordinate of alignment)<br />
+    # 5 X coordinate of PM probe in array (0-based)<br />
+    # 6 Y coordinate of PM probe in array (0-based)<br />
+    # For a PM Only sequence block:<br />
+    # 7 Optional Match Score - float between 0.0 and 1.0, represents how well seq matches target<br />
+    # For a PM and MM sequence block:<br />
+    # 7 X coordinate of MM probe in array (0-based)<br />
+    # 8 Y coordinate of MM probe in array (0-based)<br />
+    # 9 Optional Match Score - float between 0.0 and 1.0<br />
+    #<br />
+    # Mixtures of PM only probes and PM/MM probe pairs are not supported within a sequence block</code>
+
+			</div>
+			<div class="clr"></div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

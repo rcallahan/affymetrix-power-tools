@@ -1,0 +1,9 @@
+; affx_mas5_com.def : Declares the module parameters.
+
+LIBRARY      "affx_mas5_com.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

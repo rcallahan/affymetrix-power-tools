@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TemplateFile SYSTEM "ArraySetAndTemplateFile.dtd">
+<TemplateFile GUID="987-987-987" Type="affymetrix-calvin-template" CreatedBy="ljevon" Version="1.0" CreatedDateTime="8/12/2005 9:00AM">
+	<UserAttributes>
+		<UserAttribute Name="Genus" Type="String" Required="Yes" DefaultValue="Unknown"/>
+		<UserAttribute Name="Species" Type="String"/>
+		<UserAttribute Name="Strain/Line" Type="String"/>
+		<UserAttribute Name="Individual" Type="String"/>
+		<UserAttribute Name="Sample Provider" Type="String"/>
+		<UserAttribute Name="Sex" Type="SingleControl">
+			<Control Value="Male"/>
+			<Control Value="Female"/>
+			<Control Value="Unknown"/>
+			<Control Value="Other"/>
+		</UserAttribute>
+		<UserAttribute Name="Age" Type="String"/>
+		<UserAttribute Name="Developmental State" Type="String"/>
+		<UserAttribute Name="Tissue" Type="String"/>
+		<UserAttribute Name="Cell Type" Type="String"/>
+		<UserAttribute Name="Genetic Modifications" Type="String"/>
+		<UserAttribute Name="Genetic Characteristics" Type="String"/>
+		<UserAttribute Name="Disease State" Type="String"/>
+		<UserAttribute Name="Reference to Clinical Data" Type="String"/>
+		<UserAttribute Name="Growth Conditions" Type="String"/>
+		<UserAttribute Name="in vivo Treatments" Type="String"/>
+		<UserAttribute Name="Tissue Harvesting Method" Type="String"/>
+		<UserAttribute Name="Extract Method" Type="String"/>
+		<UserAttribute Name="Molecule Type" Type="String"/>
+		<UserAttribute Name="Amplification" Type="String"/>
+		<UserAttribute Name="Amount" Type="String"/>
+		<UserAttribute Name="Label" Type="String"/>
+		<UserAttribute Name="Label Incorporation" Type="String"/>
+	</UserAttributes>
+</TemplateFile>

@@ -1,0 +1,8 @@
+#%create_date=Wed Jun  1 16:28:12 2005
+probeset_id	type	probeset_name
+2653130	main	205912855_st
+3442624	main	204848070_x_st
+3506497	main	203742039_x_st
+4056235	normgene->exon->poor-support-at	205759683_s_at
+4057134	control->bgp->antigenomic	AdditionalGC4_st
+4087585	control->bgp->antigenomic	AdditionalGC19_st

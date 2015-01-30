@@ -1,0 +1,43 @@
+/**
+
+\page VIGNETTE-Mouse-WGSA-sampleqc VIGNETTES: Mouse Diversity Genotyping Array Sample Quality Control
+
+\date 2009-12-9
+
+\section content Contents
+
+- <a href="#intro">Introduction</a>
+- <a href="#sample">Sample QC for Classic Strains</a>
+- <a href="#other">Sample QC for Other Strains</a>
+
+\section intro Introduction
+
+The Mouse Diversity Genotyping Array is designed for high-density, genome-wide profiling of single nucleotide polymorphisms (SNPs) and copy number variation (CNV) segments.  This cutting-edge research tool provides more than 100 times the SNP coverage than any other available mouse array, permitting high resolution mapping, genomic analysis, association studies, etc.
+
+Since BRLMM-P Plus is a model based, clustering algorithm, outlier samples will affect the overall performance of the experiment.
+
+\section sample Sample QC for Classic Strains
+
+The following procedure has been developed to identify samples with low call rates in experiments with only classic laboratory mouse strains.
+
+If desired, sample data is available on the 
+<a href="http://www.affymetrix.com/estore/browse/products.jsp?productId=prod100002&categoryId=cat30008&productName=Affymetrix%26%23174%3B-Mouse-Diversity-Genotyping-Array#1_3"> Affymetrix Mouse Diversity Genotyping Array product page</a>, Technical Documentation tab.
+
+The first step is to perform a preliminary round of genotyping detailed in the <a href="VIGNETTE-Mouse-WGSA-genotyping.html">Mouse Diversity Genotyping Array Clustering Analysis Vignette</a>.
+
+The resulting call rates for each sample can be found in quant-norm.pm-only.brlmm-p.report.txt.  Samples with a call rate of less than 94% should be removed from the study.
+
+After removal of these samples, the remaining samples can be genotyped as per the instructions in the <a href="VIGNETTE-Mouse-WGSA-genotyping.html">Mouse Diversity Genotyping Array Clustering Analysis Vignette</a>.
+
+\section other Sample QC for Other Strains
+
+This array is designed to genotype classic laboratory Mouse strains.  Strains that are phylogenetically distant from classic strains may have lower call rates due to the presence of additional off-target variation within the probes, so a specific call rate threshold may not be appropriate.
+
+For this reason, outlier samples within each study need to be identified.  If reference information for all samples is available, outlier samples can be identified by generating a plot of Sample Call Rate versus Sample Concordance. If the samples are known to be inbred lines, a plot of Sample Call Rate versus Sample Het Rate will identify outliers. Sample Call Rates and Het Rates are output in the Report file. If reference information is not available, outlier samples can be identified by reviewing the Sample Call Rates.
+
+Perform a preliminary round of genotyping detailed in the <a href="VIGNETTE-Mouse-WGSA-genotyping.html">Mouse Diversity Genotyping Array Clustering Analysis Vignette</a>.
+
+Outlier samples should be removed from the study.  After removal of these samples, the remaining samples can be genotyped as per the instructions in the <a href="VIGNETTE-Mouse-WGSA-genotyping.html">Mouse Diversity Genotyping Array Clustering Analysis Vignette</a>.
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

@@ -1,0 +1,275 @@
+#
+# /nfs/ss11/harley/Exact/exact-config-2/affy/sdk/Makefile.post ---
+#
+# $Id: Makefile.post,v 1.28 2009-10-15 23:54:52 harley Exp $
+#
+
+# Define three targes to bring these libraries up to date.
+# Dont build the executlables -- save that for the second pass.
+#_build_libaffyutil:
+#	${MAKE} -C ${sdk_root}/util _build_obj _build_lib
+#
+#_build_libaffyfile:
+#	${MAKE} -C ${sdk_root}/file _build_obj _build_lib
+#
+#_build_libaffycalvin:
+#	${MAKE} -C ${sdk_root}/calvin_files _build_obj _build_lib
+
+# If "Makefile.affy" exists include it.
+# These makefiles have paths and programs which arent ready to be released.
+# See 'http://jira.ev.affymetrix.com:8080/browse/APT-821'
+ifneq ($(wildcard Makefile.affy),)
+include Makefile.affy
+endif
+
+### Read dependency info
+
+# read in all the dependency files - Make is smart enough to generate them
+# Check we arent removing them so we dont generate what is being removed
+ifneq ($(findstring clean_depend,${MAKECMDGOALS}),clean_depend)
+  # might not be any to include...
+  ifneq ($(wildcard ${sdk_output_dep}/*.d),)
+    include $(wildcard ${sdk_output_dep}/*.d)
+  endif
+endif
+
+### Make output dirs
+$(sort ${sdk_output_dirs}):
+	mkdir -p ${@}
+
+### Do recursion
+
+# do the subdirs with Makefiles unless told otherwise
+ifeq ($(origin sdk_subdirs),undefined)
+  m2_subdirs:=$(dir $(wildcard */Makefile))
+else
+  m2_subdirs:=${sdk_subdirs}
+endif
+
+# Targets are normally recursive.
+# With an "_" prefix, they are non-recursive
+# Targets with a "__" prefix are internal sequencing targets
+
+# There might be a directory with the same name,
+# prepend "_subdir_" to avoid conflicts.
+m2_subdirs_targ:=${m2_subdirs:%=_subdir_%}
+
+.PHONY: _subdirs ${m2_subdirs_targ}
+
+_subdirs: ${m2_subdirs_targ}
+
+${m2_subdirs_targ}:
+	cd ${@:_subdir_%=%} && ${MAKE} -f Makefile ${MAKECMDGOALS} "valgrind_opts=${valgrind_opts}" "database_opts=${database_opts}"
+
+##  targets for the three passes
+
+# pass_obj -- build objects and libraries.
+m2_subdirs_pass_obj_targ:=${m2_subdirs:%=_subdir_pass_obj_%}
+${m2_subdirs_pass_obj_targ}:
+	cd ${@:_subdir_pass_obj_%=%} && ${MAKE} -f Makefile build_pass_obj
+_subdirs_pass_obj: ${m2_subdirs_pass_obj_targ}
+
+# pass_exe -- executables
+m2_subdirs_pass_exe_targ:=${m2_subdirs:%=_subdir_pass_exe_%}
+${m2_subdirs_pass_exe_targ}:
+	cd ${@:_subdir_pass_exe_%=%} && ${MAKE} -f Makefile build_pass_exe
+_subdirs_pass_exe: ${m2_subdirs_pass_exe_targ}
+
+##########
+
+# Instead, require people to register the unit test themselves
+## If found, this has a "main()" for CPPUnit
+#T_cppmain_cpp:=$(wildcard CPPMain.cpp)
+#
+#ifeq ($(origin sdk_cppunit_exe),undefined)
+#  # Presence of CPPMain marks this as a CPPUnit test directory.
+#  ifneq ($(wildcard CPPMain.cpp),)
+#    T_cpp_all:=$(wildcard *.cpp)
+#    T_cpp_exe:=$(filter %Test.cpp,${T_cpp_all})
+#    T_cpp_obj:=$(filter-out ${T_cpp_exe} ${T_cppmain_cpp},${T_cpp_all})
+#  endif
+#else
+#   # just do what was asked.
+#   T_cpp_exe:=${sdk_cppunit_exe:%=%.cpp}
+#endif
+#T_exe:=${T_cpp_exe:%.cpp=%}
+
+# If this is set, then init some vars
+ifeq (${with_cppunit},1)
+  m2_cppunit_path:=$(shell type -p cppunit-config)
+  ifeq (${m2_cppunit_path},)
+    $(warning "unable to find 'cppunit-config'.")
+    $(error   "Add it to the path or run './configure --without-cppunit'")
+  endif
+  m2_cppunit_cflags:=$(shell cppunit-config --cflags)
+  m2_cppunit_lflags:=$(shell cppunit-config --libs)
+  m2_cppunit_run_check:=_m2_cppunit_run_check
+endif
+
+_show_vars:
+	@echo "=== Important Makefile variables:"
+	@echo "  sdk_cpp_cflags          = ${sdk_cpp_cflags}"
+	@echo "  sdk_cpp_lflags          = ${sdk_cpp_lflags}"
+	@echo "  sdk_output_top          = ${sdk_output_top}"
+	@echo "  sdk_output_bin          = ${sdk_output_bin}"
+	@echo "  sdk_output_obj          = ${sdk_output_obj}"
+	@echo "  sdk_output_lib          = ${sdk_output_lib}"
+	@echo "  sdk_output_test         = ${sdk_output_test}"
+	@echo "  APT_TEST_DIR            = ${APT_TEST_DIR}"
+	@echo "  sdk_depend_paths        = ${sdk_depend_paths}"
+	@echo "  with_cppunit            = ${with_cppunit}"
+	@echo "  with_prebuilt_flags     = ${with_prebuilt_flags}"
+	@echo "  install_prefix          = ${install_prefix}"
+	@echo "  install_exec_prefix     = ${install_exec_prefix}"
+	@echo "  install_exec_bin        = ${install_exec_bin}"
+	@echo "  install_exec_lib        = ${install_exec_lib}"
+
+# Generate cppunit test rules
+$(foreach exe,$(sort ${T_exe}),$(call sdk_define_check_exe,${exe},${exe}.cpp ${T_cppmain_cpp}))
+
+# how to build and install them...
+$(foreach exe,$(sort ${sdk_exe}),$(call sdk_define_exe,${exe},${exe}.cpp))
+# dont install by default.
+# $(foreach exe,$(sort ${sdk_exe}),$(call sdk_define_install_exe,${exe}))
+
+
+###
+
+ifeq ($(origin sdk_cpp_lib),undefined)
+  # Dont include cppunit tests
+  F_cpp_ignore:=$(sort ${T_cppmain_cpp} ${T_cpp_all} ${m2_cpp_list} ${m2_check_cpp_list} ${sdk_cpp_ignore})
+  F_cpp_obj:=$(filter-out ${F_cpp_ignore},$(wildcard *.cpp) $(wildcard *.c))
+else
+  F_cpp_obj:=${sdk_cpp_lib}
+endif
+
+# Generate object rules
+$(foreach obj,$(sort ${F_cpp_obj}),$(call sdk_define_obj,${obj}))
+
+###
+
+# Only update the library if we have stuff to put into it
+ifneq (${m2_obj_list},)
+_build_lib+=${sdk_lib_path}
+
+# @todo in addtion to the pre-ranlib cp try and make this atomic with a "mv"
+${sdk_lib_path}: ${m2_obj_list} | ${sdk_output_lib}
+	-cp $@.pre-ranlib $@
+	ar -crv $@ ${m2_obj_list}
+	cp $@ $@.pre-ranlib
+	ranlib $@
+	sleep 1 # add a delay
+
+endif
+
+### Standard targets
+
+.PHONY: _depend
+.PHONY: _build _build_obj _build_lib _build_exe _check_exe
+.PHONY: _check _check_exe _check_run
+.PHONY: _regression _regression_exe _regression_run
+.PHONY: _integration _integration_exe _integration_run
+.PHONY: _clean _clean_depend _clean_obj _clean_lib _clean_exe _clean_run
+.PHONY: _install _install_exe _install_lib
+.PHONY: _relinkobj
+
+### The recursive targets
+m2_recursive_targets:=depend build check regression integration clean clean_depend install relinkobj
+.PHONY: ${m2_recursive_targets}
+
+#${m2_recursive_targets}: %: _% _subdirs
+
+# build is split into two passes
+build: ${sdk_output_dirs} ${_build} build_pass_obj build_pass_exe
+# The first pass walks the dirs to make objects and libraries
+build_pass_obj: ${_build_pass_obj} _depend _build_obj _build_lib _subdirs_pass_obj
+# The second pass make executables
+build_pass_exe: ${_build_pass_exe} _build_exe _check_exe _subdirs_pass_exe
+
+# * bring the objects up to date
+# * touch them to be newer than the library.
+# * then invoke _build_lib in a sub-make.
+_relinkobj: _build_obj _relinkobj_touch_obj _relinkobj_lib
+_relinkobj_touch_obj:
+	$(if ${m2_obj_list},touch ${m2_obj_list},@echo "# relink: No objects")
+
+# This make has already figured out the dep list for what to
+# add to the library. It is now out of date, run a submake
+# which will use the updated times.
+_relinkobj_lib:
+	make -f Makefile _build_lib
+
+# these dont have seperate passes -- just go down recursively
+# dont use 'build_pass_*' as we dont want to walk the tree many times.
+check:        build _check _subdirs
+check_quick:  _subdirs_pass_check
+relinkobj:    _relinkobj _subdirs
+regression:   build _regression _subdirs
+integration:  build _integration _subdirs
+valgrind:  build _valgrind  _subdirs
+clean:        _clean _subdirs
+clean_depend: _clean_depend _subdirs
+install:      _install _subdirs
+
+### the local targets
+_depend: ${_depend}
+
+# local
+_build: ${sdk_output_dirs} ${_build} _depend _build_obj _build_lib _build_exe _check_exe
+_build_obj: ${_build_obj}
+_build_lib: ${_build_lib}
+_build_exe: ${_build_exe}
+
+_check: _check_exe _check_run
+_check_exe: ${_check_exe}
+_check_run: ${_check_run}
+
+_build_exes: _build_exe _build_exe
+
+_regression: _regression_exe _regression_run
+_regression_exe: ${_regression_exe}
+_regression_run: ${_regression_run}
+
+_integration: _regression_exe _integration_exe _integration_run
+_integration_exe: ${_integration_exe}
+_integration_run: ${_integration_run}
+
+_valgrind: _regression_exe _valgrind_exe _valgrind_run
+_valgrind_exe: ${_valgrind_exe}
+_valgrind_run: ${_valgrind_run}
+
+# We can only install if we have an installation prefix.
+# Of course, you could run programs from ${sdk_output_bin}
+ifdef install_prefix
+_install: ${sdk_install_dirs} _install_lib _install_exe ${_install}
+_install_exe: ${_install_exe} | ${install_share_bin} ${install_exec_bin}
+_install_lib: ${_install_lib} | ${install_exec_lib}
+_install_doc: ${_install_doc} | ${install_doc}
+
+else
+# complain we dont have a place for it.
+_install _install_exe _install_lib:
+	$(error install_prefix is not set. Run "./configure --help")
+endif
+
+#
+_clean: _clean_obj _clean_exe _clean_check_exe _clean_run
+
+_clean_depend: ${_clean_depend}
+	-$(if $(wildcard ${m2_dep_list}),rm -f ${m2_dep_list},@echo "# clean: No depends")
+_clean_exe: ${_clean_exe}
+	-$(if $(wildcard ${m2_exe_list}),rm -f ${m2_exe_list},@echo "# clean: No executables")
+_clean_obj: ${_clean_obj}
+	-$(if $(wildcard ${m2_obj_list}),rm -f ${m2_obj_list},@echo "# clean: No objects")
+_clean_check_exe: ${_clean_check_exe}
+	-$(if $(wildcard ${m2_check_exe_list}),rm -f ${m2_check_exe_list},@echo "# clean: No check executables")
+_clean_run: ${_clean_run}
+
+# quickly rm the APT stuff, leaving the 3rd party stuff alone.
+_clean_quick _quick_clean:
+	rm -f ${sdk_output_obj}/*.o
+	rm -f ${sdk_output_lib}/libaffy*
+
+# Local Variables:
+# mode: makefile
+# End:

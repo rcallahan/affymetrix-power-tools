@@ -1,0 +1,34 @@
+#
+# /affy/sdk/chipstream/apt-probeset-genotype/Makefile.affy ---
+#
+
+lib:=${sdk_root}/regression-data/data/lib
+data:=${sdk_root}/regression-data/data
+apt_probeset_genotype:=${sdk_output_bin}/apt-probeset-genotype
+
+_jhg_test: _jhg_test_build _jhg_test_run _jhg_test_dump
+
+_jhg_test_build:
+	cd .. && make _build_lib
+	make
+
+./fas_cel_files.txt: Makefile
+	perl -pe 's/^\.\.\///' < ${data}/probeset-genotype/GenomeWideSNP_6/fas_cel_files.txt > ${@}
+
+_jhg_test_run: ./fas_cel_files.txt
+	${apt_probeset_genotype} \
+	  --cc-chp-output \
+	  --table-output \
+	  --analysis brlmm-p \
+	  --use-disk=false \
+	  --special-snps ${lib}/GenomeWideSNP_6/GenomeWideSNP_6.specialSNPs \
+	  --cdf-file ${lib}/GenomeWideSNP_6/GenomeWideSNP_6.cdf \
+	  --read-models-brlmmp  ${lib}/GenomeWideSNP_6/GenomeWideSNP_6.brlmm-p.models \
+	  -o ${@} \
+	  --cel-files ./fas_cel_files.txt
+
+_jhg_test_dump:
+	${sdk_output_bin}/apt-calvinlite-util --tsv-export _jhg_test_run/cc-chp/NA06985_GW6_C.brlmm-p.chp
+
+_jhg_snpqc_run: _jhg_test_build
+	./jhg-snpqc-run

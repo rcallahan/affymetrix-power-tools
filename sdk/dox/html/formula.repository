@@ -1,0 +1,15 @@
+\form#0:$ ExpAngleDist(\vec{x},\vec{y}) = e^{-1 * (1 - cos(\theta))/2\sigma^2} $
+\form#1:$ cos(\theta) = \frac{ \vec{x}^t \cdot \vec{y}}{\|\vec{x}\|\|\vec{y}\|} $
+\form#2:$ angleDist(\vec{x},\vec{y}) = cos(\theta) = \frac{ \vec{x}^t \cdot \vec{y}}{\|\vec{x}\|\|\vec{y}\|} $
+\form#3:$A$
+\form#4:$B$
+\form#5:$X$
+\form#6:$Y$
+\form#7:$ X = asinh(K * (A-B)/(A+B)) / asinh(K) $
+\form#8:$ Y = log_2(A + B) $
+\form#9:$ X = sinh(K * (A-B)/(A+B)) / sinh(K) $
+\form#10:$ X = log_2(A) - log_2(B) $
+\form#11:$ Y = (log_2(A) + log_2(B)) / 2 $
+\form#12:$ X = atan(A/B) $
+\form#13:$ Y = ln(\sqrt{A^2 + B^2}) $
+\form#14:$ index = (y*NumColumns) + x $

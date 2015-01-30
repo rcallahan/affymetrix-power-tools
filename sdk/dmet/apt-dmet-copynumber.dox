@@ -1,0 +1,16 @@
+/**
+\page apt-dmet-copynumber MANUAL: apt-dmet-copynumber (\aptversion)
+
+\section aptDmetCopynumber Contents
+
+<a name="options">
+\subsection manualOptions Options:
+    
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-dmet-copynumber.help.txt
+
+*/

@@ -1,0 +1,11 @@
+#%create_date=Wed Jan  4 15:59:28 2006
+#%create_date=Wed Jan  4 16:02:14 2006
+cel_files	group_id	input_cel_file
+data1/Sample1-1.median.ccel	Group1	data1/Sample1-1.input.ccel
+data1/Sample2-1.median.ccel	Group1	data1/Sample2-1.input.ccel
+data1/Sample3-1.median.ccel	Group1	data1/Sample3-1.input.ccel
+data1/Sample4-2.median.ccel	Group2	data1/Sample4-2.input.ccel
+data1/Sample5-2.median.ccel	Group2	data1/Sample5-2.input.ccel
+data1/Sample6-3.median.ccel	Group3	data1/Sample6-3.input.ccel
+data1/Sample7-3.median.ccel	Group3	data1/Sample7-3.input.ccel
+data1/Sample8-3.median.ccel	Group3	data1/Sample8-3.input.ccel

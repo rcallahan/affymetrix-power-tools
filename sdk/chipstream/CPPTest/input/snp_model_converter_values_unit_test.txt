@@ -1,0 +1,102 @@
+#For diagnostic purposes only.
+#%chip-type=multi-value-different-header-name
+#%affymetrix-algorithm-param-apt-opt-chip-type=multi-value-same-header-name
+#%affymetrix-algorithm-param-apt-engine=ProbesetGenotypeEngine
+#%affymetrix-algorithm-param-apt-program-name=apt-probeset-genotype
+#%affymetrix-algorithm-param-apt-command-line=./apt-probeset-genotype --cc-chp-output --table-output --analysis birdseed --special-snps ../../../regression-data/data/idata/lib/GenomeWideSNP_6/GenomeWideSNP_6.specialSNPs --spf-file ../../../regression-data/data/idata/lib/GenomeWideSNP_6/GenomeWideSNP_6.SNP_A-4232288.spf --read-models-birdseed ../../../regression-data/data/idata/lib/GenomeWideSNP_6/GenomeWideSNP_6.birdseed.models -o out --write-models --cel-files ../../../regression-data/data/idata/p-geno/GenomeWideSNP_6/fas_cel_files.txt
+#%affymetrix-algorithm-param-apt-exec-guid=470910a4-6206-4ba8-d6db-9d66ec906f5e
+#%affymetrix-algorithm-param-apt-analysis-guid=74c1c5f8-20ea-46ab-8b76-c7acefb3c24f
+#%affymetrix-algorithm-param-apt-time-str=Mon Mar 29 11:37:57 2010
+#%affymetrix-algorithm-param-apt-version= svn://svn.ev.affymetrix.com/apt/projects/apt/trunk/affy/sdk r12866:13008M 
+#%affymetrix-algorithm-param-apt-cvs-id=svn://svn.ev.affymetrix.com/apt/projects/apt/trunk/affy/sdk r12866:13008M
+#%affymetrix-algorithm-param-apt-free-mem=109322865868
+#%affymetrix-algorithm-param-apt-opt-chip-type=GenomeWideSNP_6
+#%affymetrix-algorithm-param-apt-opt-probe-count=29241
+#%affymetrix-algorithm-param-apt-opt-force=false
+#%affymetrix-algorithm-param-apt-opt-out-dir=out
+#%affymetrix-algorithm-param-apt-opt-cc-md-chp-out-dir=
+#%affymetrix-algorithm-param-apt-opt-xda-chp-out-dir=
+#%affymetrix-algorithm-param-apt-opt-cdf-file=
+#%affymetrix-algorithm-param-apt-opt-ps-list-file=
+#%affymetrix-algorithm-param-apt-opt-kill-list=
+#%affymetrix-algorithm-param-apt-opt-temp-dir=out/temp
+#%affymetrix-algorithm-param-apt-opt-use-disk=true
+#%affymetrix-algorithm-param-apt-opt-diskCache=50
+#%affymetrix-algorithm-param-apt-opt-cel-count=19
+#%affymetrix-algorithm-param-apt-opt-cel-1=NA06985_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-2=NA06993_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-3=NA07000_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-4=NA07019_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-5=NA07029_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-6=NA07056_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-7=NA07345_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-8=NA10830_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-9=NA10831_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-10=NA10839_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-11=NA10855_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-12=NA10857_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-13=NA10860_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-14=NA10863_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-15=NA11881_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-16=NA11882_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-17=NA11993_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-18=NA12003_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-19=NA12004_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-analysis-name=birdseed
+#%affymetrix-algorithm-param-apt-opt-set-analysis-name=
+#%affymetrix-algorithm-param-apt-opt-analysis-spec=quant-norm.sketch=50000.bioc=false.lowprecision=false.usepm=false.target=0.doavg=false.subsetmd5=d41d8cd98f00b204e9800998ecf8427e,pm-only,birdseed.conf-threshold=0.1.correction-factor=-1.0.std_slope=0.062.epsilon=0.001.eps=0.00000000000000022204.var_start=1.1.cluster_distance_ratio_cutoff=0.85.merged_cluster_threshold=.025.small_cluster_weight_threshold=0.01.low_hom_weight_fraction=0.5.low_hom_sample_inflation=100.starting_cluster_weight=0.05.small_cluster_penalty=10.0.expected_wingspan_ratio=1.15.unbalanced_wingspan_penalty=5.0.min_covar=-0.7.max_covar1=0.9.max_covar2=0.95.covar_floor_decay=8.low_covar_threshold=1.0.low_covar_penalty=15.0.wing_length_delta_penalty=50.0.bic_weight=1.0.final_weight_min=0.333.cluster_variance_regularization_factor=1.0.var_mult=1.2.hom_hom_penalty=2.1.mono_het_penalty=10.two_cluster_low_observation_penalty_factor=1000000.relative_distance_confidence_weight=0.8.std_inflection_point=4.0.mean_dist2=1.25.lambda3=15.0.max_iter=50.allow_unlikely_clusters=true,
+#%affymetrix-algorithm-param-apt-opt-feat-effect-file=
+#%affymetrix-algorithm-param-apt-opt-target-sketch-file=
+#%affymetrix-algorithm-param-apt-opt-reference-profile-file=
+#%affymetrix-algorithm-param-apt-opt-do-residuals=false
+#%affymetrix-algorithm-param-apt-opt-do-feature-effects=false
+#%affymetrix-algorithm-param-apt-opt-write-sketch=false
+#%affymetrix-algorithm-param-apt-opt-write-profile=false
+#%affymetrix-algorithm-param-apt-opt-a5-write-sketch=false
+#%affymetrix-algorithm-param-apt-opt-set-gender-method=
+#%affymetrix-algorithm-param-apt-opt-chrXProbeFile=
+#%affymetrix-algorithm-param-apt-opt-chrYProbeFile=
+#%affymetrix-algorithm-param-apt-opt-read-priors-brlmm=
+#%affymetrix-algorithm-param-apt-opt-initial-calls=false
+#%affymetrix-algorithm-param-apt-opt-output-summaries=false
+#%affymetrix-algorithm-param-apt-opt-list-sample=false
+#%affymetrix-algorithm-param-apt-opt-write-prior=false
+#%affymetrix-algorithm-param-apt-opt-chrX-file=
+#%affymetrix-algorithm-param-apt-opt-chrX-snps=
+#%affymetrix-algorithm-param-apt-opt-no-gender-force=false
+#%affymetrix-algorithm-param-apt-opt-special-snps=GenomeWideSNP_6.specialSNPs
+#%affymetrix-algorithm-param-apt-opt-compute-prior=10000
+#%affymetrix-algorithm-param-apt-opt-norm-size=0
+#%affymetrix-algorithm-param-apt-opt-dm-thresh=.17
+#%affymetrix-algorithm-param-apt-opt-dm-het-mult=0
+#%affymetrix-algorithm-param-apt-opt-read-genders=
+#%affymetrix-algorithm-param-apt-opt-read-inbred=
+#%affymetrix-algorithm-param-apt-opt-model-file-brlmm=
+#%affymetrix-algorithm-param-apt-opt-model-file-brlmmp=
+#%affymetrix-algorithm-param-apt-opt-model-file-birdseed=GenomeWideSNP_6.birdseed.models
+#%affymetrix-algorithm-param-apt-opt-genotypes-file=
+#%affymetrix-algorithm-param-apt-opt-dm-calls-out=false
+#%affymetrix-algorithm-param-apt-opt-qmethod-spec=plier.optmethod=1
+#%affymetrix-algorithm-param-apt-opt-genotype-only=true
+#%affymetrix-algorithm-param-quantification-name=birdseed
+#%affymetrix-algorithm-param-quantification-version=1.1
+#%affymetrix-algorithm-param-quantification-scale=linear
+#%affymetrix-algorithm-param-quantification-type=signal
+#%affymetrix-algorithm-param-min-thresh=-inf
+#%affymetrix-algorithm-param-max-thresh=0.1
+#%affymetrix-algorithm-param-gender_method_used=em-cluster-chrX-het-contrast
+SNP_A-1984828-2;951.04 381.871 7471.51 2071.62 4962.37 0.65;709.288 965.904 5277.17 2515.01 10355 0.3;424.846 1464.56 4263.25 3602.01 26292.1 0.05
+SNP_A-2002017-2;759.49 169.775 9111.96 -129.868 699.826 0.526316;490.492 511.477 3832.91 -120.838 1440.36 0.368421;183.074 846.379 1406.56 -84.6165 1924.63 0.105263
+SNP_A-4213170-2;1084.06 409.553 7895.69 687.304 1226.96 0.105263;701.717 621.108 6258.72 904.384 2680.05 0.315789;307.853 825.175 4306.35 1251.99 7464.81 0.578947
+SNP_A-2012629-2;596.204 147.851 6101.67 1171.53 552.446 0.368418;317.435 225.207 9436.52 2553.65 1697.26 0.473687;141.677 399.701 2755.2 1199.59 1282.78 0.157895
+SNP_A-2031752-2;672.911 140.633 5311.57 290.14 761.373 0.736842;410.799 364.686 2336.26 335.506 2314.64 0.210526;216.507 715.685 909.944 220.382 2564.14 0.0526316
+SNP_A-2112455-2;932.835 169.556 16223.5 644.477 12620.4 0.05;734.331 740.786 12679.4 785.291 23975.5 0.05;262.715 1226.7 4172.57 463.058 25332 0.9
+SNP_A-2158471-2;1291 247.751 31621 1843.25 7704.71 0.648007;709.596 702.428 83072.7 7371.72 46907.8 0.301993;50 1091.59 43649.9 5637.19 52204.4 0.05
+SNP_A-2204133-2;1217.6 210.177 11313.3 -91.5909 2096.34 0.526316;730.545 878.927 4641.99 -108.135 7121.57 0.368421;197.144 1141.45 1179.06 -49.6899 5920.3 0.105263
+SNP_A-4232448-2;1265.39 269.165 14541.9 931.569 3577.95 0.8;789.199 734.395 12557 921.045 4050.45 0.15;183.067 1066.81 5894.87 1151.35 13482.3 0.05
+SNP_A-2232485-2;1348.01 242.279 7598.95 -447.589 3999.77 0.157895;913.844 556.634 5928.06 -651.176 10852.1 0.631579;191.822 907.344 581.885 -239.722 14983.3 0.210526
+SNP_A-1784964-2;686.27 0.00707107 244916 4.35454e-32 7.0559e-36 0.9;521.316 0.0210761 338253 2.0074e-17 1.08571e-06 0.05;284.923 0.0295568 318104 3.12551e-17 2.79871e-06 0.05
+SNP_A-1823460-2;1197.84 206.912 24401.1 4508.11 5886.52 0.05;855.362 720.399 7481.59 2549.03 6138.13 0.15;499.319 1234.84 11948.6 5965.8 21052.3 0.8
+SNP_A-4255282-2;1306.08 291.307 6859.98 1017.39 1708.59 0.0526316;1057.73 882.635 7933.62 2488.88 8841.45 0.526316;452.894 1240.67 4855.33 2333.76 12702.3 0.421053
+SNP_A-1923554-2;1154.94 50 214577 281033 407836 0.05;736.544 559.306 189531 234075 320318 0.802646;231.162 1041.76 64249.3 142426 349833 0.147354
+SNP_A-4261919-2;819.918 267.991 7965.75 1063.03 2319.07 0.9;673.338 956.715 1581.51 432.508 1933.61 0.05;475.571 1527.83 3276.98 1746.98 15224.9 0.05

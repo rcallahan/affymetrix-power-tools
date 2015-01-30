@@ -1,0 +1,218 @@
+#!/bin/bash
+#
+# /nfs/ss11/harley/Apt/work/apt-genoqc-1/affy/sdk/chipstream/apt-geno-qc/jhg-run-1 ---
+#
+# $Id: jhg-run-1,v 1.2 2009-08-21 02:33:08 harley Exp $
+#
+
+# @todo: Alans comment about having the 'AT' and 'GC' channels taken from 
+#        the spf file vs just read from the qcc file.
+
+if [ "${1}" = "-echo" ]
+then
+  shift
+  echo="echo"
+fi
+
+if [ "${1}" = "-gdb" ]
+then
+  shift
+  gdb="gdb --args"
+fi
+
+if [ "$1" = "-both" ]
+then
+  ./jhg-run-1
+  ./jhg-run-1 -jhg-ref
+  exit 0
+fi
+
+REF_AGQ=/nfs/falcon/usr/ylu/APT_SRC/eric_branch/affy/sdk-exe/output/amd64-pc-linux/bin/apt-geno-qc
+JHG_REF_AGQ=/nfs/ss11/harley/Apt/work/eric-multi-channel-1/affy/sdk/output/${CPUCOMSYS}/bin/apt-geno-qc
+
+# a copy of "/nfs/falcon/sw/test/apt-geno-qc.20090522/run.sh"  
+if [ 1 = 0 ]
+then
+  #AGQ=/nfs/falcon/usr/ylu/APT_SRC/eric_branch/affy/sdk-exe/output/amd64-pc-linux/bin/apt-geno-qc
+
+  LIB=/nfs/falcon/lib
+  #
+  #qca_file=$LIB/HTFalconScreening_07/QCA/HT_falcon_screen_07_v1.qca
+  #qca_file=ORIG/HT_falcon_screen_07_v1_mchomhilo.qca
+  qca_file=ORIG/HT_falcon_screen_07_v1_mcdishqc.qca
+  #
+  $REF_AGQ \
+    -f \
+    --multichannel=true \
+    --spf-file      $LIB/HTFalconScreening_07/CDF/HT_falcon_screen_07_QC.spf \
+    --channel-file  $LIB/HTFalconScreening_07/CDF/HT_falcon_screen_07_QC.cf \
+    --qcc-file      $LIB/HTFalconScreening_07/QCC/HT_falcon_screen_07_v1.qcc \
+    --qca-file      ${qca_file} \
+    --target-sketch $LIB/Sketch.From.RVL_training.txt \
+    -o out-orig.txt \
+    --cel-files ./HTFalconScreening_07/cel.single_channel.txt
+  #
+  exit 0
+fi
+
+###
+
+AGQ=../../output/${CPUCOMSYS}/bin/apt-geno-qc
+
+if [ 1 = 0 ]
+then
+  # rm ${AGQ}
+  # build_pass_obj
+  (cd .. ; make _build_lib )
+  make ${AGQ}
+fi
+
+###
+
+if [ 1 = 0 ]
+then
+  #
+  TEST_DIR="./HTFalconScreening_07"
+  LIB=${TEST_DIR}
+  out_txt=out.txt
+  rm ${out_txt}
+  #
+  date
+  time $AGQ \
+    --spf-file      $LIB/HT_falcon_screen_07_QC.spf \
+    --qcc-file      $LIB/HT_falcon_screen_07_v1.qcc \
+    --qca-file      $LIB/HT_falcon_screen_07_v1.qca \
+    --target-sketch $LIB/Sketch.From.RVL_training.txt \
+    --channel-file  $LIB/HT_falcon_screen_07_QC.cf \
+    -o ${out_txt} \
+    --cel-files $LIB/cel.multi_channel.txt # >& run-dishqc-new.out
+  #
+  date
+  grep SIGNALS run-dishqc-new.out > run-dishqc-new-signals.out
+fi
+
+###
+
+# New: /nfs/falcon/usr/jgollu/Axiom/QC/mc_apt-geno-qc_test/geno-qc_mc_test_axiom_T03_plate298.txt
+# Old: /nfs/falcon/usr/jgollu/Axiom/QC/T03_plate298/qc/agcc_cel_analysis/geno-qc-Axiom_T03_plate298_090716.txt
+if [ 1 = 1 ]
+then
+  #
+  TEST_DIR=test-axiom-1
+  LIB="/nfs/falcon/lib/Axiom/multi_channel_nodups"
+  JGOLLU_DIR=/nfs/falcon/usr/jgollu/Axiom/QC/mc_apt-geno-qc_test
+  #cel_files=${JGOLLU_DIR}/axiom_T03_plate298_cel_list.txt
+  #cel_files=${TEST_DIR}/cel_list_01.txt
+  cel_files=${TEST_DIR}/cel_list_05.txt
+  #cel_files=${TEST_DIR}/cel_list_10.txt
+  out_txt=out-axiom-1.txt
+
+  #qca_file=${LIB}/qc/Axiom_GW_Hu_SNP.qca
+  qca_file=${TEST_DIR}/Axiom_GW_Hu_SNP-test.qca
+
+  qcc_file=${LIB}/qc/Axiom_GW_Hu_SNP.qcc
+  #qcc_file=${TEST_DIR}/qc/Axiom_GW_Hu_SNP.qcc.new-spf
+
+  spf_file=${LIB}/qc/Axiom_GW_Hu_SNP_QC.spf
+  # When the channel file isnt given, use the info from
+  # the spf file. (Probeset type #9) AFFX-NP-11078531A	9	1
+  # --channel-file ${LIB}/qc/Axiom_GW_Hu_SNP_QC.cf \
+  #spf_file=${LIB}/qc/Axiom_GW_Hu_SNP_QC.spf
+  #spf_file=${LIB}/Axiom_GW_Hu_SNP.2blk.ctrl.probesets.v4.spf
+
+  channel_file=${LIB}/qc/Axiom_GW_Hu_SNP_QC.cf
+  channel_file_arg="--channel-file ${channel_file}"
+
+  stdout_file="out-stdout.log"
+
+  #
+  if [ "${1}" = "-ref" ]
+  then
+    AGQ="${REF_AGQ} --multichannel=true"
+    out_txt="${out_txt}.ref"
+    qca_file="${qca_file}.ref"
+    cel_files="${cel_files}.ref"
+    stdout_file="${stdout_file}.ref"
+  fi
+
+  if [ "${1}" = "-jhg-ref" ]
+  then
+    shift
+    AGQ="${JHG_REF_AGQ} --multichannel=true"
+    out_txt="${out_txt}.jhg-ref"
+    qca_file="${qca_file}.ref"
+    cel_files="${cel_files}.ref"
+    stdout_file="${stdout_file}.jhg-ref"
+  fi
+
+  if [ "${1}" = "-new-spf" ]
+  then
+    shift
+    spf_file=${LIB}/Axiom_GW_Hu_SNP.v4.spf
+    qcc_file=${TEST_DIR}/Axiom_GW_Hu_SNP.qcc.new-spf
+    channel_file=""
+    channel_file_arg=""
+    out_txt="${out_txt}.new-spf"
+    stdout_file="${stdout_file}.new-spf"
+  fi
+
+  if [ "${1}" = "-silver" ]
+  then
+    echo "SILVER ${1}"
+    shift
+    #
+    spf_file=${LIB}/Axiom_GW_Hu_SNP.silver.spf
+    qcc_file=${TEST_DIR}/Axiom_GW_Hu_SNP.qcc.new-spf
+    channel_file=""
+    channel_file_arg=""
+    out_txt="${out_txt}.sliver"
+    stdout_file="${stdout_file}.sliver"
+  fi
+
+  library_file_arg="--spf ${spf_file}"
+
+  if [ "${1}" = "-cdf" ]
+  then
+    shift
+    #
+    channel_file_arg=""
+    cdf_file="${LIB}/Axiom_GW_Hu_SNP.cdf"
+    library_file_arg="--cdf-file ${cdf_file}"
+  fi
+
+  #
+#  if [ "${echo}" = "echo" ]
+#  then
+#    head -10 ${spf_file} ${qcc_file} ${channel_file}
+#  fi
+  
+  #
+  rm ${out_txt}
+  #
+  #time 
+  ${echo} ${gdb} \
+  ${AGQ} \
+   -f \
+   -v 4 \
+   ${channel_file_arg} \
+   ${library_file_arg} \
+   --target-sketch /nfs/falcon/lib/Sketch.From.RVL_training.txt \
+   --qcc-file ${qcc_file} \
+   --qca-file ${qca_file} \
+   --cel-files ${cel_files} \
+   -o ${out_txt}
+  #>& ${stdout_file}
+
+  #
+  if [ -f "${out_txt}" ]
+  then
+    ./apt-geno-cmp-output ${out_txt} ./out-axiom-1.txt.ref
+  fi
+
+fi
+
+# cp ../../output/${CPUCOMSYS}/bin/apt-geno-qc ../../../../${CPUCOMSYS}/bin
+
+# Local Variables:
+# mode: ksh
+# End:

@@ -1,0 +1,14 @@
+#
+# cvs:affy/sdk/plier/AFFY-README ---
+#
+# $Id: AFFY-README,v 1.2 2005-04-04 18:41:59 harley Exp $
+#
+
+   This is the Affymetrix Plier SDK source.  It is under the
+GNU licence and available from the web site.  The
+description of what this code does can be found there.
+
+NOTE: Users should not use "iaffyplier" directly.  Use
+      "caffyplier" as defined in "affyplier.h"
+
+http://www.affymetrix.com/support/developer/plier_sdk/index.affx

@@ -1,0 +1,18 @@
+#This data is for testing the indexing
+#%header0=key	val
+
+
+1	101
+2	202
+3	303
+# comment line
+4	404
+5	505
+6	606
+# blank line follows
+
+7	707
+8	808
+9	909
+
+

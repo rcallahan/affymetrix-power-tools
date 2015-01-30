@@ -1,0 +1,9 @@
+#This is a test of duplicate keys.
+#We have duplicate keys in this file.
+#%key1=val1-1
+#%key2=val2-1
+#%key2=val2-2
+#%key3=val3-1
+#%key3=val3-2
+#%key3=val3-3
+#%key4=val4-1

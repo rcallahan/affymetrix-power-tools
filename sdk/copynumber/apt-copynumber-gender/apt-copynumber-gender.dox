@@ -1,0 +1,32 @@
+/**
+\page apt-copynumber-gender MANUAL: apt-copynumber-gender (\aptversion)
+
+<a name="intro">
+\section intro Introduction
+
+apt-copynumber-gender is a program for providing rapid gender calling
+of samples based on raw intensity signals. It calculates the ratio
+of mean Y-chromosome intensity to mean X-chromosome intensity and provides
+a prediction of Male, Female or Unknown based on a pair of cut-off values.
+
+Output is a tab delimited file with columns for CEL file name, gender call and
+mean Y/mean X ratio.
+
+Note that gender calls may not be as accurate as those provided by more in-depth analysis pipelines,
+such as apt-copynumber-cyto, which are based on normalized signals or copynumber analysis.
+apt-copynumber-gender is intended to provide a quick pre-screening of gender for normal, high quality
+samples, prior to applying more time consuming analysis pipelines.
+
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-copynumber-gender.help.txt
+
+
+*/

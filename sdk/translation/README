@@ -1,0 +1,390 @@
+##############################################################################
+#
+# cvs:affy/sdk/translation/README.txt
+#
+# 19 September 2008
+#
+# Mybrid Spalding
+#
+# mybrid_spalding@affymetrix.com
+#
+##############################################################################
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                           README
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+==================
+SECTIONS
+==================
+
+* INTRODUCTION
+* USAGE
+* DMET2 CHANGES
+* DESIGN: FILES
+* DESIGN: MODELS
+* DESIGN: ANNOTATION FILE
+* DESIGN: IMPORTANT MODEL DESIGN NOTE
+* DESIGN: VIEWS
+* DESIGN: CONTROLLERS
+* NOTES:  TEST DATA
+
+==================
+INTRODUCTION
+==================
+
+Welcome to the DMET 3.0, Allele Translation Tool Design Document
+
+This file documents high-level design and implementation of
+apt-dmet-translation tool.
+
+History with respect to conversion from DMET2 Perl code to C++ is
+provided.
+
+The tool takes as input the results of DMET3 experiments and then
+translates the results to allele calls such as "*1/*5" for makers and
+Haplotype groups. That's it. The translation table used for
+translation contains links to web pages that provide further
+information on what the gene allele calls signify.
+
+The DMET3 translation tool builds on the DMET2 tool and represents
+significant reporting requirements, but the translation itself remains
+mostly unchanged excepting with copy number 0. Now any gene in the
+translation table can be designated with copy number 0 information
+whereas DMET2 was limited to just CYP2D6.
+
+
+Unit of Work
+
+The input experiments contain records of probe sets where the probe
+sets may be grouped into haplotype groups. This eliminates making the
+probe set the atomic unit of work. However, there are no experiment
+dependencies.  That is to say, data from one experiment has no impact
+on reporting for any other experiment. Therefore the translation tool
+minimal unit of work is the experiment. The input to the translation
+tool main loop will be all the probe set records for an experiment.
+
+foreach experiment
+   experiment -> translation tool -> report
+
+end for
+
+To conserve memory, experiments are streamed. This means report files
+will appear on disk after the very first experiment is translated.
+The DMET 3.0 console program deletes the report files on cancel, but
+the command line tool does not. This means that if 1,000 of 3,000 CHP
+files before an abort happens at the command line, then the reports
+will contain the data for the 1,000 experiments processed.
+
+Data
+
+Each gene in the input translation table contains one Haplotype group
+and possibly many SNPs. The experiment files are compared with the
+translation table to determine the allele calls.  In addition, an
+annotation file is required to translate the floating point numbers
+within the CHP file to the respective text names.
+
+
+
+
+==================
+USAGE
+==================
+
+Comprehensive usage for the program can be found by invoking the
+program with "--help" option.
+
+In addition, full documentation can be found at the following URL:
+
+http://www.affymetrix.com/support/developer/powertools/changelog/apt-dmet-translation.html
+
+Required Inputs
+
+The inputs to the program consist of three data files:
+1.) DMET3 supplied file: Translation table (table delimited).
+2.) Experiment file(s): CHP file(s) or a single Genotype Short Report
+with all experiments.
+3.) Experiment file: Annotation file (csv format).
+
+Outputs
+
+The program outputs 3 reports and one log.
+
+1.) apt-dmet-translation.log: exceptions and summary information by
+  default.
+
+2.) *_comprehensive.rpt: Each probe set in the translation table is
+    output in translation table order.
+
+3.) *_summary.rpt: A pruned version of the comprehensive report.
+
+4.) *_uncalled.rpt: No Call and Possible Rare Allele markers are
+reported in a format suitable for feedback as input into the
+translation tool using the "--genotype-override-file" option.
+
+==================
+DMET2 CHANGES
+==================
+
+
+This document incorporates the following changes from DMET 2.0.
+
+  a.) Perl to C++ conversion
+  b.) Elimination of the SQLite database. 
+  c.) Intelligent filter of AssayIDs where collapsing the haplotype by
+      eliminating an allele leads to multiple calls.
+  d.) New reporting via a combined and summary report. 
+  e.) Expanded translation table.
+
+The C++ conversion from Perl will first be completed and tested to
+meet complete DMET 2.0 requirements. The DMET 2.0 Perl script output
+will be used to validate the C++ code before implementation of the new
+requirements for DMET 3.0 are incorporated.
+
+This design captures all DMET 3.0 requirements. Given the DMET 3.0
+requirements are changes to the reporting, DMET 2.0 requirements then
+there is no conflict between first coding to DMET 2.0 functionality
+using a DMET 3.0 design.
+
+experiment data call sets
+for markers and haplotype groups.
+
+
+apt-dmet-translation.cpp        | Control: command line program
+ATDOptions.h                    | Model  : command line/console options
+CallElement.cpp                 | Model    translation business object
+CallElement.h                   | Model  : translation business object 
+CallResults.cpp                 | Model  : translation business object
+CallResults.h                   | Model  : translation business object
+CallSet.cpp                     | Model  : translation business object
+CallSet.h                       | Model  : input file as in memory table
+CopyNumberTableModel.cpp        | Model  : input file as in memory table
+CopyNumberTableModel.h          | Model  : input file as in memory table
+ExperimentGeneResults.cpp       | Model  : report business object 
+ExperimentGeneResults.h         | Model  : report business object
+ExperimentReport.cpp            | Model  : report business object
+ExperimentReport.h              | Model  : report business object
+ExperimentResults.cpp           | Model  : report business object
+ExperimentResults.h             | Model  : report business object
+GeneCall.cpp                    | Model  : translation business object
+GeneCall.h                      | Model  : translation business object
+GenotypeOverrideTableModel.cpp  | Model  : input file as in memory table
+GenotypeOverrideTableModel.h    | Model  : input file as in memory table
+GenotypeTableModel.cpp          | Model  : input file as in memory stream
+GenotypeTableModel.h            | Model  : input file as in memory stream
+MarkerExperimentReport.cpp      | View   : DMET2 only report view
+MarkerExperimentReport.h        | View   : DMET2 only report view 
+MarkerListModel.cpp             | Model  : input file as in memory table
+MarkerListModel.h               | Model  : input file as in memory table
+Profile.cpp                     | View   : profile the code
+Profile.h                       | View   : profile the code
+RegressionExperimentReport.cpp  | View   : report view
+RegressionExperimentReport.h    | View   : report view
+RunTimeEnvironment.cpp          | Model  : global run time variables. 
+RunTimeEnvironment.h            | Model  : global run time variables. 
+SampleInfoTableModel.cpp        | Model  : input file as in memory table
+SampleInfoTableModel.h          | Model  : input file as in memory table
+TranslationCommonControl.cpp    | Control: common to all controllers 
+TranslationCommonControl.h      | Control: common to all controllers 
+TranslationEngine.cpp           | Control: switched by controller type
+TranslationEngine.h             | Control: switched by controller type
+TranslationExperimentReport.cpp | View   : report view
+TranslationExperimentReport.h   | View   : report view
+TranslationInputStreamTableModel.cpp
+                                | Model  : in memory stream base class
+TranslationInputStreamTableModel.h
+                                | Model  : in memory stream base class
+TranslationInputTsvTableModel.cpp
+                                | Model  : in memory table base class
+TranslationInputTsvTableModel.h | Model  : in memory table base class
+TranslationTable.cpp            | Model  : translation business object
+TranslationTable.h              | Model  : translation business object   
+TranslationTableModel.cpp       | Model  : input file as in memory table
+TranslationTableModel.h         | Model  : input file as in memory table
+
+
+
+=====================
+DESIGN: MODELS
+=====================
+
+The modeling goes through a work flow as illustrated below:
+
+Work flow:
+
+   file/vector -> in memory table/stream -> translation business
+   object -> report business object -> report view object -> TSV file
+   object.
+
+Whether input data is being read from in memory vectors as passed in
+by the DMET console, or whether the more common case of the data as is
+input by file the data is cached into memory as a table as a "vector of
+vector of strings" .
+
+   vector< vector < strings > > m_rows
+
+The base object that contains this vector is
+"TranslationInputTsvTableModel".  All input data then is first modeled
+using this object and this object is passed in as the base model to the
+constructor of the all business objects.  The business objects have a
+layer of abstraction then between them and the input file format,
+albeit TSV or CHP. There is a slight twist on this model with the
+experiment data. Experiment data is too large to fit into memory
+reasonably, therefore experiment data is only cached one experiment at
+a time. There is a different model "TransationInputStreamTableModel",
+but in principle is is identical to "TranslationInputTsvTableModel".
+
+For "TranslationInputTsvTableModel" the same design principle applies
+whereby the data is cached in memory as a table of "vector of vector
+of strings" called "m_rows".  The key difference with this model and
+"TranslationInputTsvTableModel" is that data is streamed in only one
+experiment at a time and hence as this model is used to get the next
+experiment's worth of data it will do so dynamically by flushing the
+previous experiment data set.
+
+All files with respective models using the "m_rows" string table
+end with the name "TableModel.cpp". There are fourteen of
+these such files.
+
+Moving on, looking back at the work flow above it shows that once the
+input data is cached as rows of strings in memory then the data is
+transformed into business objects suitable for translation process.
+
+Translation is the process of marrying the translation table with the
+experiment data. This is reflected in two business objects called
+"TranslationTable" and "GeneCall". Both of these models are containers
+of "CallSet" objects. A "CallSet" is comprised of "CallElements" and
+special operators. Initially sets of "CallElement" were represented as
+the C++ "set" template, but business logic is required to compare the
+sets of "CallElement" objects.
+
+A "CallElement" simply stated represents either a row in the
+translation table or a row in the CHP file. A "CallSet" is comprised
+of one "CallElement" for SNPs. A "CallSet" is comprised of multiple
+rows represented as "CallElements" for haplotype groups. Creating a
+hap call fundamentally means comparing experiment "CallSets" with the
+"CallSets" defined in the translation table and reporting on the
+matches, including matching "wild cards" in the case of no calls or
+possible rare alleles.
+
+The "CallElement" ,"CallSet", "TranslationTable" and "GeneCall"
+objects represent eight model files used to perform translation.
+
+Next up in the work flow are the report objects created by the
+translation business objects.
+
+The report objects are "CallResults", "ExperimentGeneResults",
+"ExperimentResults".
+
+The fundamental report business object is "CallResults". This object
+is returned by the "GeneCall" upon a successful call. The
+"CallResults" parallels the "CallSet" in structure in that it
+represent the rows in the experiment CHP file that matched a hap call.
+
+The "ExperimentGeneResults" is a container for all "CallResults" per
+experiment gene.
+
+The "ExperimentResults" object is a convenience object for which there
+is only ever one of. This singleton represents the collection of all
+"ExperimentGeneResults" for a particular experiment.
+
+====================================
+DESIGN: ANNOTATION FILE
+====================================
+
+The annotation file is not read into memory like the other input files.
+The annotation file is only used as a parameter to the
+"GenoCallCoder" object constructor.
+
+
+====================================
+DESIGN: IMPORTANT MODEL DESIGN NOTE
+====================================
+
+The translation report object "CallResults" is intended to be used by
+future DMET console display (view).
+
+
+The initial design the translation tool did not have a report object
+model being returned by translation, but rather just a vector of
+strings to be reported in the "Known Call" and "Unknown Calls" in the
+reports.  All other values in reporting are derived from the
+translation table.
+
+However, at a design review meeting for the translation tool the point
+was made that future requirements for the DMET console may someday
+utilize a view of just the translation results without any reporting.
+
+Therefore the requirement was given that translation must return all
+the data involved in making a translation call in addition to
+returning the hap calls. Results returned by the "GeneCall" object
+were changed from a vector of hap call strings to the existing
+"CallResults" object.  The "CallResults" object contains all the
+translation table and experiment "CallSet" data used to produce the
+hap call and are suitable for presenting translation data and
+resulting hap calls at some future data.
+
+
+
+=====================
+DESIGN: VIEWS
+=====================
+
+The views are reports and the reports used for business are the
+comprehensive, summary and uncalled reports.
+
+The summary and uncalled reports are simply projections of the
+comprehensive report and so all the reports are generated from the
+same view object "TranslationExperimentReport".
+
+There is a regression report view that is used for the expressed
+purpose of regression testing and produces no business valued.  The
+regression report is "RegressionExperimentReport".
+
+The final report is the DMET2 marker report. This report has been
+deprecated and will most likely be removed. It's primary utility was
+for reproducing DMET2 reports during the first phase of Perl to C++
+conversion. The marker report object is "MarkerExperimentReport".
+
+
+=====================
+DESIGN: CONTROLLERS
+=====================
+
+There are two controllers, the command line and the DMET Console.
+
+The DMET Console controller controls the translation tool via COM and
+a DLL.
+
+Informatics has gone with a new "BaseEngine" controller design where
+the controllers make calls to "engine.run()" after initializing the
+engine. The "BaseEngine" controller for the translate engine is called
+"TranslateEngine". This object is initialized using flags "C_CMDLINE"
+and "C_CONSOLE" to switch between the two controller behaviors. For
+testing purposes both flags can be passed at the command line for
+testing console behavior.
+
+The "TranslateEngine" object contains a the main "run" loop in
+addition to some minor controller dependent methods. Any code that
+requires switching between command line or console behavior is to go
+in "TranslateEngine".
+
+The other control object is "TranslateCommonControl". As the name
+implies this control object contains only code common to all
+controllers. This object mostly has initializing code for the command
+line and console run-time inputs.
+
+
+
+=====================
+NOTES: TEST DATA
+=====================
+
+The unit test and regression data is in the "translation"
+directory of the APT regression data:
+
+/nfs/bioinformatics/apt/test-data/regression-data/translation
+
+The very old input files have been removed from CVS and are
+archived.  Contact the CVS admin to get them if you need to
+check out and run the very old code.

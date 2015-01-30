@@ -1,0 +1,50 @@
+/**
+\page apt-cel-extract MANUAL: apt-cel-extract (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#QuickStart">Quick Start</a></li>
+<li><a href="#options">Program Options - command line options</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+\p apt-cel-extract will extract probe level intensities from cel files.
+This program memory maps all the cel files from which intensities will
+be extracted. As a result, there is an upper limit on the number of
+cel files that can be extracted at the same time. The practical 
+limit appears to be 25 cel files on a Windows XP 32-bit computer
+with 2Gb of memory.
+
+<a name="QuickStart">
+\section QuickStart Quick Start
+To extract probe level intensities from cel files, use:
+
+\verbatim
+apt-cel-extract -o out.txt [-c chip.clf -p chip.pgf] [-d chip.cdf] \
+  --probeset-ids=norm-exon.txt --probeset-ids=norm-intron.txt \
+  --probe-ids=antigenomic.bgp *.cel
+\endverbatim
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-cel-extract.help.txt
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. What is a probe_id? 
+
+A. See the <a href="FAQ.html#probe_id_faq">FAQ item on probe IDs</a> for more info.
+
+*/

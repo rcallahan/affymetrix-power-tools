@@ -1,0 +1,31 @@
+/**
+\page apt-snp-compare MANUAL: apt-snp-compare (\aptversion)
+
+\p apt-snp-compare will compares the results of a snp prediction
+method to a known results set. It takes as arguments a matrix file
+of predicted genotypes (the query) and a matrix file of predicted
+genotypes (the target) and computes some summary statistics describing
+how well the query matches the the target. Matrix files should be tab
+separated, with the first column being snp identifiers and the first
+row a header of 'probeset_id' followed by by chip names.
+Columns and rows do not have to be matched; the program will determine
+the genotypes to compare, using row and column identifiers.
+
+\section QuickStart Quick Start
+To compare the results of a snp prediction method to known results
+
+\verbatim
+apt-snp-compare snp-predictions.mtx snp-known.mtx
+\endverbatim
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-snp-compare.help.txt
+
+*/

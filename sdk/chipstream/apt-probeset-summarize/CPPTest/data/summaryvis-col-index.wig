@@ -1,0 +1,182 @@
+# guid = 0000010946-1148574965-1634141744-0708050598-1418706377
+# exec_guid = 0000010946-1148574965-1899255671-2040842055-1298075684
+# exec_version = NON-OFFICIAL-RELEASE $Id: summaryvis-col-index.wig,v 1.1 2006-05-25 16:29:11 pklost Exp $
+# create_date = Thu May 25 09:36:05 2006
+# cmd = apt-summary-vis -o ./output/summaryvis-col-index.wig -g ./data/HuEx-1_0-st-v2.annot.hg16.subset.csv -wiggle-col-index 36 ./data/exon.summary.txt ./data/exon.summary0.txt ./data/exon.summary1.txt 
+############################################################
+# genome_pos_file_name = ./data/HuEx-1_0-st-v2.annot.hg16.subset.csv
+# genome_pos_file_netaffx_annotation_csv_version = 1.1
+# genome_pos_file_create_date = Thu Jan  5 11:59:53 PDT 2006
+# genome_pos_file_lib_set_name = HuEx-1_0-st
+# genome_pos_file_lib_set_version = v2
+# genome_pos_file_genome_species = Homo sapiens
+# genome_pos_file_genome_version = hg16
+# genome_pos_file_genome_version_ucsc = hg16
+# genome_pos_file_genome_version_ncbi = 34
+# genome_pos_file_genome_version_create_date = 2003 July
+############################################################
+# file0_name = ./data/exon.summary.txt
+# file0_guid = 0000008635-1147465503-0655288913-0260172332-1489521149
+# file0_exec_guid = 0000008635-1147465503-1723228888-0762909110-1077155963
+# file0_exec_version = apt-1.4.0 $Id: summaryvis-col-index.wig,v 1.1 2006-05-25 16:29:11 pklost Exp $
+# file0_create_date = Fri May 12 13:18:36 2006
+# file0_cmd = apt-probeset-summarize -a pm-gcbg,iter-plier -a pm-gcbg,plier -o now -report -p HuEx-1_0-st-v2.pgf -c HuEx-1_0-st-v2.clf -b antigenomic.bgp -f huex_wta_lung_A.CEL huex_wta_cerebellum_A.CEL huex_wta_heart_A.CEL huex_wta_kidney_A.CEL huex_wta_liver_A.CEL huex_wta_muscle_A.CEL huex_wta_pancreas_A.CEL huex_wta_prostate_A.CEL huex_wta_spleen_A.CEL huex_wta_testes_A.CEL huex_wta_thyroid_A.CEL huex_wta_tissue_mix1_A.CEL huex_wta_tissue_mix2_A.CEL huex_wta_tissue_mix3_A.CEL huex_wta_tissue_mix4_A.CEL
+# file0_chip_type = HuEx-1_0-st-v2
+# file0_lib_set_name = HuEx-1_0-st
+# file0_lib_set_version = v2
+############################################################
+# file1_name = ./data/exon.summary0.txt
+# file1_guid = 0000008635-1147465503-0655288913-0260172332-1489521149 0
+# file1_exec_guid = 0000008635-1147465503-1723228888-0762909110-1077155963 0
+# file1_exec_version = apt-1.4.0 $Id: summaryvis-col-index.wig,v 1.1 2006-05-25 16:29:11 pklost Exp $ 0
+# file1_create_date = Fri May 12 13:18:36 2006 0
+# file1_cmd = apt-probeset-summarize -a pm-gcbg,iter-plier -a pm-gcbg,plier -o now -report -p HuEx-1_0-st-v2.pgf -c HuEx-1_0-st-v2.clf -b antigenomic.bgp -f huex_wta_lung_A.CEL huex_wta_cerebellum_A.CEL huex_wta_heart_A.CEL huex_wta_kidney_A.CEL huex_wta_liver_A.CEL huex_wta_muscle_A.CEL huex_wta_pancreas_A.CEL huex_wta_prostate_A.CEL huex_wta_spleen_A.CEL huex_wta_testes_A.CEL huex_wta_thyroid_A.CEL huex_wta_tissue_mix1_A.CEL huex_wta_tissue_mix2_A.CEL huex_wta_tissue_mix3_A.CEL huex_wta_tissue_mix4_A.CEL  0
+# file1_chip_type = HuEx-1_0-st-v2 0
+# file1_lib_set_name = HuEx-1_0-st 0
+# file1_lib_set_version = v2 0
+############################################################
+# file2_name = ./data/exon.summary1.txt
+# file2_guid = 0000008635-1147465503-0655288913-0260172332-1489521149 1
+# file2_exec_guid = 0000008635-1147465503-1723228888-0762909110-1077155963 1
+# file2_exec_version = apt-1.4.0 $Id: summaryvis-col-index.wig,v 1.1 2006-05-25 16:29:11 pklost Exp $ 1
+# file2_create_date = Fri May 12 13:18:36 2006 1
+# file2_cmd = apt-probeset-summarize -a pm-gcbg,iter-plier -a pm-gcbg,plier -o now -report -p HuEx-1_0-st-v2.pgf -c HuEx-1_0-st-v2.clf -b antigenomic.bgp -f huex_wta_lung_A.CEL huex_wta_cerebellum_A.CEL huex_wta_heart_A.CEL huex_wta_kidney_A.CEL huex_wta_liver_A.CEL huex_wta_muscle_A.CEL huex_wta_pancreas_A.CEL huex_wta_prostate_A.CEL huex_wta_spleen_A.CEL huex_wta_testes_A.CEL huex_wta_thyroid_A.CEL huex_wta_tissue_mix1_A.CEL huex_wta_tissue_mix2_A.CEL huex_wta_tissue_mix3_A.CEL huex_wta_tissue_mix4_A.CEL  1
+# file2_chip_type = HuEx-1_0-st-v2 1
+# file2_lib_set_name = HuEx-1_0-st 1
+# file2_lib_set_version = v2 1
+############################################################
+# genome_version = hg16
+# score0 = huex_wta_cerebellum_A.CEL
+# score1 = huex_wta_heart_A.CEL
+# score2 = huex_wta_kidney_A.CEL
+# score3 = huex_wta_liver_A.CEL
+# score4 = huex_wta_lung_A.CEL
+# score5 = huex_wta_muscle_A.CEL
+# score6 = huex_wta_pancreas_A.CEL
+# score7 = huex_wta_prostate_A.CEL
+# score8 = huex_wta_spleen_A.CEL
+# score9 = huex_wta_testes_A.CEL
+# score10 = huex_wta_thyroid_A.CEL
+# score11 = huex_wta_tissue_mix1_A.CEL
+# score12 = huex_wta_tissue_mix2_A.CEL
+# score13 = huex_wta_tissue_mix3_A.CEL
+# score14 = huex_wta_tissue_mix4_A.CEL
+# score15 = huex_wta_cerebellum_A0.CEL
+# score16 = huex_wta_heart_A0.CEL
+# score17 = huex_wta_kidney_A0.CEL
+# score18 = huex_wta_liver_A0.CEL
+# score19 = huex_wta_lung_A0.CEL
+# score20 = huex_wta_muscle_A0.CEL
+# score21 = huex_wta_pancreas_A0.CEL
+# score22 = huex_wta_prostate_A0.CEL
+# score23 = huex_wta_spleen_A0.CEL
+# score24 = huex_wta_testes_A0.CEL
+# score25 = huex_wta_thyroid_A0.CEL
+# score26 = huex_wta_tissue_mix1_A0.CEL
+# score27 = huex_wta_tissue_mix2_A0.CEL
+# score28 = huex_wta_tissue_mix3_A0.CEL
+# score29 = huex_wta_tissue_mix4_A0.CEL
+# score30 = huex_wta_cerebellum_A1.CEL
+# score31 = huex_wta_heart_A1.CEL
+# score32 = huex_wta_kidney_A1.CEL
+# score33 = huex_wta_lung_A1.CEL
+# score34 = huex_wta_muscle_A1.CEL
+# score35 = huex_wta_pancreas_A1.CEL
+# score36 = huex_wta_prostate_A1.CEL
+# score37 = huex_wta_spleen_A1.CEL
+# score38 = huex_wta_thyroid_A1.CEL
+# score39 = huex_wta_tissue_mix1_A1.CEL
+# score40 = huex_wta_tissue_mix2_A1.CEL
+# score41 = huex_wta_tissue_mix3_A1.CEL
+# score42 = huex_wta_tissue_mix4_A1.CEL
+track type=wiggle_0 name="huex_wta_pancreas_A1.CEL"
+chr1 1091598 1092535 151
+chr1 1196974 1197005 1791
+chr1 4385063 4385358 1
+chr1 44227340 44227413 81
+chr1 51597465 51597542 4331
+chr1 53098163 53098187 1
+chr1 98892507 98892542 71
+chr1 184281100 184281130 9931
+chr1 211759850 211759879 31
+chr1 224813324 224813393 181
+chr1 229039494 229039590 21
+chr2 112631438 112631464 161
+chr2 128837633 128837738 731
+chr2 135258479 135258952 51
+chr2 148982272 148982313 61
+chr2 182186122 182186242 51
+chr2 233446801 233446898 241
+chr2 238466446 238466475 241
+chr3 7707945 7708008 31
+chr3 37019426 37019574 231
+chr3 45038023 45038058 8171
+chr3 115497885 115497986 91
+chr4 140996748 140996812 11
+chr4 152721859 152722144 41
+chr5 2386813 2386921 431
+chr5 13629434 13629498 61
+chr5 15989509 15989812 11
+chr5 40801826 40802026 1
+chr5 55151242 55151294 71
+chr5 79485434 79485460 1
+chr5 127201777 127201825 61
+chr5 134439706 134440412 151
+chr5 135728918 135728947 31
+chr5 154266637 154266708 141
+chr5 179328429 179328513 51
+chr6 20600165 20600201 41
+chr6 33828319 33828345 1
+chr6 80432067 80432245 191
+chr6 129818448 129818817 21
+chr7 7122476 7122600 51
+chr7 22947550 22947588 51
+chr7 39997902 39997927 91
+chr7 113588236 113588295 191
+chr7 142583130 142583205 81
+chr8 5881313 5881398 301
+chr8 17994880 17995099 61
+chr8 70818271 70818685 361
+chr8 116382042 116382734 141
+chr9 8475570 8475598 31
+chr9 67211862 67212012 21
+chr9 129675411 129676440 491
+chr9 136357359 136357450 2411
+chr10 8619012 8619051 31
+chr10 26804690 26804828 141
+chr10 35701217 35701703 1
+chr10 36087357 36087463 41
+chr10 85922373 85923369 51
+chr10 87896050 87896439 151
+chr10 92923220 92923263 201
+chr10 97575655 97577547 21
+chr11 6204520 6204573 291
+chr11 50291174 50291202 1
+chr12 6830441 6830598 41
+chr12 9896290 9896488 31
+chr12 45458360 45458395 2601
+chr12 46095189 46095281 31
+chr12 82215375 82215402 21
+chr12 110595940 110596034 181
+chr13 41569743 41569783 1
+chr13 41956224 41956277 61
+chr13 100288325 100288350 11
+chr13 108994738 108994811 891
+chr14 65821625 65821730 1831
+chr16 64926429 64926515 31
+chr16 77863119 77863175 801
+chr16 78657320 78657367 411
+chr17 5890647 5890703 81
+chr17 44502151 44502219 211
+chr18 19124132 19124175 81
+chr19 42609128 42609159 41
+chr19 55466930 55467039 51
+chr19 55632759 55632786 1
+chr19 60586631 60586674 771
+chr19 61411964 61412025 41
+chr20 10243992 10244167 271
+chr20 48374563 48374647 1141
+chr22 47184369 47184410 881
+chrX 24395474 24395589 11
+chrX 127440878 127440919 11
+chrY 27677557 27677652 1

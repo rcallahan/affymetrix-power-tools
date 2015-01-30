@@ -1,0 +1,10 @@
+#%create_date=2009-11-13 GMT-08:00 17:23:17
+#%annotati___on_row_count=Gopa!
+#%array_type=test
+#%dbsnp_version=666
+#%My_Var1=B1
+#%chip_type=UpdateTest
+#%netaffx-annotation-netaffx-build=30
+"Probe Set ID","A","C","D","Not In DB 1","Int_Test","Start","Stop"
+"SNP_ID1","csv1 A1 Value","csv1 C1 Value","csv1 D1 Value","Not In DB 1 Value1","555",555,---
+"ID2","csv1 A2 Value","csv1 C2 Value","csv1 D2 Value","Not In DB 1 Value2","69",---,555

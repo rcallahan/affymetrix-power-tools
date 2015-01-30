@@ -1,0 +1,10 @@
+#%lib_set_name=HuEx-1_0-st
+#%lib_set_version=v2
+#%chip_type=HuEx-1_0-st-v2
+#%chip_type=HuEx-1_0-st-v1
+#%chip_type=HuEx-1_0-st-ta1
+#%create_date=Thu Aug 11 22:08:17 PDT 2005
+probeset_id	type	probeset_name
+10	control->affx	AFFX-BioB-3_at
+40	control->affx	AFFX-BioB-5_at
+60	control->affx	AFFX-BioB-M_at

@@ -1,0 +1,630 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+				<h1>Affymetrix&#174; CDF Data File Format</h1>
+
+				<h2>CDF FILE</h2>
+
+<p><b>Description</b></p>
+<p>The CDF file describes the layout for an Affymetrix GeneChip array. An array may contain Expression, Genotyping, CustomSeq, Copy Number and/or Tag probe sets. All probe set names within an array are unique. Multiple copies of a probe set may exist on a single array as long as each copy has a unique name.</p>
+
+<p>The information below will describe the following versions:</p>
+
+    <ul>
+		<li><a href="#CDF_TEXT">ASCII text format</a> is used by the MAS and GCOS 1.0 software. This was also known as the ASCII version.</li>
+		<li><a href="#CDF_XDA">XDA format</a> is used by the GCOS 1.2 and above software. This was also known as the binary or XDA version.</li>
+	</ul>
+
+<p><b><a name="CDF_TEXT">ASCII Text Format</a></b></p>
+<p>The format of this CDF file is an ASCII text file similar to the Windows INI format.</p>
+
+<p>The file is divided up into sections. The start of each section is defined by a line containing a section name enclosed in square braces. The section names are: "CDF", "Chip", "QCI" (where I ranges from 1 to the number of QC probe sets), "Unit<i> J</i>" (where J is an internal index to uniquely distinguish probe sets),  and "Unit<i> J</i>_Block<i> K</i>" (where J and K are internal indices used to distinguish subsets of a probe set). The data in each section is of the format TAG=VALUE.</p>
+
+<p>The "CDF" section contains the version number of the file. The TAGS are:</p>
+
+<table>
+                    <tbody>
+                      <tr>
+                        <th><b>TAG</b></th>
+                        <th><b>Description</b></th>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Version</td>
+                        <td height="14" width="70%">The version number.
+Should always be set to "GC1.0", "GC2.0", "GC3.0", "GC4.0", "GC5.0", or "GC6.0".
+This
+document describes GC3.0, GC4.0, GC5.0, and GC6.0 version CDF files.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> GUID</td>
+                        <td height="14" width="70%">The unique identifier of the CDF.
+(Only available in version 6)</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> md5</td>
+                        <td height="14" width="70%">The integrity md5 of the CDF.
+(Only available in version 6)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+				  
+				  <p>The "Chip" section contains the following TAGS:</p>
+				  
+				  <table>
+                    <tbody>
+                      <tr>
+                        <th><b>TAG</b></th>
+                        <th><b>Description</b></th>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Name</td>
+                        <td height="14" width="70%">The name of the
+array. This item is not used by the software.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> ChipType</td>
+                        <td height="14" width="70%">The probe array type. 
+Multiple entries may exist. (Only available in version 6)</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Rows</td>
+                        <td height="14" width="70%">The number of rows
+of cells on the array.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Cols</td>
+                        <td height="14" width="70%">The number of
+columns of cells on the array.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumberOfUnits</td>
+                        <td height="14" width="70%">The number of units
+in the array not including QC units. For CustomSeq arrays, there are
+2 units: Unit1 contains the probes interrogating a sense target and
+Unit2 contains the probes interrogating an anti-sense target. For all
+other array types, there exists one unit per probe set.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> MaxUnit</td>
+                        <td height="14" width="70%">Each unit is given
+a unique number. This value is the maximum of the unit numbers of all
+the units in the array (not including QC units).</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumQCUnits</td>
+                        <td height="14" width="70%">The number of QC
+units. QC units are defined in version 2 and above. CustomSeq arrays do
+not contain any QC units.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> ChipReference</td>
+                        <td height="14" width="70%">Used for CustomSeq,
+HIV and P53 arrays only. This is the reference sequence displayed by
+the Affymetrix software. The sequence may contain spaces. This value is
+defined for version 2 and above.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+				  
+				  <p>The next set of sections where the name begins with "QC" define the QC units or probe sets in the array. There are NumQCUnits (from the Chip section) QC sections.</p> 
+				  
+				  <p>Each section name is a combination of "QC" and an index ranging from 1 to NumQCUnits-1 and will be listed sequentially. QC units are defined for version 2 and above.</p> 
+				  
+				  <p>Each section contains the following TAGS:</p>
+				  
+				  <table>
+                    <tbody>
+                      <tr>
+                        <th><b>TAG</b></th>
+                        <th><b>Description</b></th>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Type</td>
+                        <td height="14" width="70%">Defines the type of
+QC probe set. The defined types are:
+                        <p>0 - Unknown<br>
+1 - Checkerboard Negative<br>
+2 - Checkerboard Positive<br>
+3 - Hybridization Negative<br>
+4 - Hybridization Positive<br>
+5 - Text Features Negative<br>
+6 - Text Features Positive<br>
+7 - Central Negative <br>
+8 - Central Positive<br>
+9 - Gene Expression Negative<br>
+10 - Gene Expression Positive<br>
+11 - Cycle Fidelity Negative<br>
+12 - Cycle Fidelity Positive<br>
+13 - Central Cross Negative<br>
+14 - Central Cross Positive<br>
+15 &ndash; Cross Hyb Negative<br>
+16 &ndash; Cross Hyb Positive</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumberCells</td>
+                        <td height="14" width="70%">The number of cells
+in the probe set.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> CellHeader</td>
+                        <td height="14" width="70%">Defines the data
+contained in the subsequent lines, separated by tabs.
+                        <p>For all QC probe set types:<br>
+                        <strong>X</strong> - The X coordinate of the
+cell.<br>
+                        <strong>Y</strong> - The Y coordinate of the
+cell.<br>
+                        <strong>PROBE</strong> - The probe sequence of
+the cell. Typically set to "N".<br>
+                        <strong>PLEN</strong> - The number of bases in
+the probe sequence.<br>
+                        <strong>ATOM</strong> - An index used to group
+multiple cells.<br>
+                        <strong>INDEX</strong> - An index used to look
+up the corresponding cell data in the CEL file.</p>
+                        <p>The final data items are dependent on the
+type of the QC probe set:<br>
+                        <strong>MATCH</strong> - A boolean flag
+indicating a perfect match probe. For types: 7 - Central Negative, 8 -
+Central Positive, 9 - Gene Expression Negative,
+10 - Gene Expression Positive<br>
+                        <strong>BG</strong> - A boolean flag indicating
+a background (blank) cell. For types: 9 - Gene Expression Negative, 10
+- Gene Expression Positive<br>
+                        <strong>CYCLES</strong> - This item is always a
+list of 0's separated by a tab. There are as many 0's as number of
+bases in the probe sequence (PLEN). For types: 11 - Cycle Fidelity
+Negative, 12 - Cycle
+Fidelity Positive</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Cell<i>i</i></td>
+                        <td height="14" width="70%">This contains the
+information about a cell that belongs to the probe set. The value of <i>i</i>
+in the tag ranges from 1 to the number of cells in the probe set
+and will be listed sequentially. The values in each line depend on the
+CellHeader.
+The values are separated by
+tabs.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+				  
+				<p>The next set of sections where the name begins with "Unit" define the probes that are a member of the unit (probe set). Each unit is divided into subsections termed "Blocks" which are referred to as "groups" in the Files SDK documentation.</p>
+
+<p>Each section name is a combination of "Unit" and an index. There is no meaning to the index value. Immediately following the "Unit" section there will be the "Block" sections for that unit before the next unit is defined.</p>
+
+<p>Each "Unit" section contains the following TAGS: </p>
+				  
+				  <table>
+                    <tbody>
+                      <tr>
+                        <th><b>TAG</b></th>
+                        <th><b>Description</b></th>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Name</td>
+                        <td height="14" width="70%">The name of the
+unit. The probe set name for Genotyping, Copy Number, Polymorphic
+Marker and Multichannel Marker units or "NONE" for all other unit types.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Direction</td>
+                        <td height="14" width="70%">Defines if the
+probes are interrogating a sense target or anti-sense target (1 -
+sense, 2 - anti-sense, 3 - both).</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumAtoms</td>
+                        <td height="14" width="70%">The number of atoms
+in the entire probe set. This TAG name contain two values after the
+equal sign. The first is the number of atoms and the second (if found)
+is the number of cells
+in each atom. An atom is a probe quartet for CustomSeq units and a
+probe pair for all other unit types. </td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumCells</td>
+                        <td height="14" width="70%">The number of cells
+in the entire probe set. Probe pairs contain 2 cells and probe quartets
+contain 4 cells.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> UnitNumber</td>
+                        <td height="14" width="70%">An arbitrary index
+value for the probe set.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> UnitType</td>
+                        <td height="14" width="70%">Defines the type of
+unit (0 - Unknown, 1 - CustomSeq, 2 - Genotyping, 3 - Expression, 7 -
+Tag/GenFlex, 8 - Copy Number, 9 - Genotyping Control, 10 - Expression
+Control, 11 - Polymorphic Marker, 12 - Multichannel Marker). An array
+may
+contain units of
+varying types.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumberBlocks</td>
+                        <td height="14" width="70%">The number of
+blocks or groups in the probe set. </td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> MutationType</td>
+                        <td height="14" width="70%">Used for Genotyping
+units only in defining the type of polymorphism (0 - substitution, 1 -
+insertion, 2 - deletion). This value is available in version 2 and
+above.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+				  
+				  <p>After the "Unit" section follows the  "Unit_Block" sections. There are as many "Unit_Block" sections as defined by NumberBlocks. A block will list the probes as its members.</p>
+
+<p>The TAGS are:</p>
+
+<table>
+                    <tbody>
+                      <tr>
+                        <th><b>TAG</b></th>
+                        <th><b>Description</b></th>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Name</td>
+                        <td height="14" width="70%">The name of the
+block. For Genotyping units this is the allele. For Polymorphic Marker
+and Multichannel
+Marker units this is "None". For all other unit types this is the name
+of the
+probe set. </td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> BlockNumber</td>
+                        <td height="14" width="70%">An index to the
+block.</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">Wobble<br>
+                        </td>
+                        <td style="vertical-align: top;">The wobble
+situation for Polymorphic Marker and Multichannel Marker units in the
+block.
+Only available in
+version 4, 5, and 6.<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">Allele<br>
+                        </td>
+                        <td style="vertical-align: top;">The allele
+code for Polymorphic Marker and Multichannel Marker units in the block.
+Only
+available in
+version 4, 5, and 6.</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">Channel<br>
+                        </td>
+                        <td style="vertical-align: top;">The channel
+code for multichannel microarray platform. Only available in version 5 and 6.<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">RepType<br>
+                        </td>
+                        <td style="vertical-align: top;">The probe
+replication type (0 - unknown, 1 - different probe sequences, 2 - some
+probe sequences are identical, 3 - all probe sequences are identical)
+for probe set groups used under multichannel microarray platform. Only
+available in version 5 and 6.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumAtoms</td>
+                        <td height="14" width="70%">The number of atoms
+in the block.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> NumCells</td>
+                        <td height="14" width="70%">The number of cells
+in the block.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> StartPosition</td>
+                        <td height="14" width="70%">The position of the
+first atom.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> StopPosition</td>
+                        <td height="14" width="70%">The position of the
+last atom.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Direction</td>
+                        <td height="14" width="70%">Used for
+Genotyping, Polymorphic Marker
+and Multichannel
+Marker units only in defining whether the probes are interrogating a
+sense
+target or anti-sense target (0 - no direction, 1 - sense, 2 -
+anti-sense). This value is available in version 3 and above.</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> CellHeader</td>
+                        <td height="14" width="70%">Defines the data
+contained in the subsequent lines, separated by tabs. The values are:
+                        <p><strong>X</strong>- The X coordinate of the
+cell.<br>
+                        <strong>Y</strong> - The Y coordinate of the
+cell.<br>
+                        <strong>PROBE</strong>- The probe sequence of
+the cell. Typically set to "N".<br>
+                        <strong>FEAT</strong> - Unused string.<br>
+                        <strong>QUAL</strong> - The probe set name plus
+the allele for Genotyping units. The probe set name for all other unit
+types.<br>
+                        <strong>EXPOS</strong> - Ranges from 0 to the
+NumAtoms - 1 for Expression units. For all other unit types, provides
+relative positional information for the probe.<br>
+                        <strong>PLEN</strong> - The length of probe
+sequence. Only available in version 4, 5, and 6.<br>
+                        <strong></strong><strong>POS</strong> - An
+index to the base position within the probe where the mismatch occurs.<br>
+                        <strong>CBASE</strong> - Not used.<br>
+                        <strong>PBASE</strong> - The probe base at the
+substitution position.<br>
+                        <strong>TBASE</strong> - The base of the target
+where the probe interrogates at the substitution position.<br>
+                        <strong>ATOM</strong> - An index used to group
+probe pairs or quartets. For Expression, identical to EXPOS.<br>
+                        <strong>INDEX</strong> - An index used to look
+up the corresponding cell data in the CEL file.<br>
+                        <strong>GROUP</strong> - The physical grouping
+of probe on the array. Only available in version 4, 5, and 6.<br>
+                        </p>
+                        <p>The following are only available in version
+2 and above:<br>
+                        <strong>CODONIND</strong> - Always set to -1<br>
+                        <strong>CODON</strong> -Always set to -1<br>
+                        <strong>REGIONTYPE</strong> - Always set to 99<br>
+                        <strong>REGION</strong> - Always set to a blank
+character</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110"> Cell<i>i</i></td>
+                        <td height="14" width="70%">This contains the
+information about a cell that belongs to the block. The value of <i>i</i>
+in the tag ranges from 1 to the number of cells in the block. The
+values in each line depend on the CellHeader. The values are separated
+by tabs.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+				  
+				  <p><b><a name="CDF_XDA">XDA Format</a></b></p>
+<p>The format of this CDF file is a binary file created for faster access and smaller file size. The values in the file are stored in little-endian format.</p>
+
+<p>The file contents are defined by:</p>
+
+<table>
+                    <tbody>
+                      <tr>
+                        <th><b>Item</b></th>
+                        <th><b>Description</b></th>
+                        <th><b>Type</b></th>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">1</td>
+                        <td height="14" width="70%">Magic number.
+Always set to 67.</td>
+                        <td height="14" width="214">integer</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">2</td>
+                        <td height="14" width="70%">Version number.
+Should set to 1, 2, 3, or 4.<br>
+                        </td>
+                        <td height="14" width="214">integer</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">3</td>
+                        <td height="14" width="70%">The length of the GUID, an unique identifier of the CDF.
+(Only available in version 4)<br>
+                        </td>
+                        <td height="14" width="214">unsigned integer</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">4</td>
+                        <td height="14" width="70%">GUID, the unique identifier of the CDF.
+(Only available in version 4)<br>
+                        </td>
+                        <td height="14" width="214">char[length defined above]</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">5</td>
+                        <td height="14" width="70%">The integrity md5 of the CDF.
+(Only available in version 4)<br>
+                        </td>
+                        <td height="14" width="214">char[32]</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">6</td>
+                        <td height="14" width="70%">The number of probe array types.
+(Only available in version 4)<br>
+                        </td>
+                        <td height="14" width="214">unsigned char</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">7</td>
+                        <td height="14" width="70%">The length of probe array type.
+(Only available in version 4)<br>
+                        </td>
+                        <td height="14" width="214">unsigned integer</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">8</td>
+                        <td height="14" width="70%">The probe array type.
+(Only available in version 4)<br>
+                        </td>
+                        <td height="14" width="214">char[length defined above]</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">9</td>
+                        <td height="14" width="70%">The length and value of probe array type 
+as described in Item 7 and 8 respectively if there is more than one entry.
+(Only available in version 4)<br>
+                        </td>
+                        <td height="14" width="214">(unsigned integer + char[length defined]) * (# of probe array types - 1)</td>
+                      </tr>
+                       <tr>
+                        <td height="14" width="110">10</td>
+                        <td height="14" width="70%">The number of
+columns of cells on the array.</td>
+                        <td height="14" width="214">unsigned short</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">11</td>
+                        <td height="14" width="70%">The number of rows
+of cells on the array.</td>
+                        <td height="14" width="214">unsigned short</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">12</td>
+                        <td height="14" width="70%">The number of units
+in the array not including QC units. The term unit is an internal term
+which means probe set.</td>
+                        <td height="14" width="214">integer</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">13</td>
+                        <td height="14" width="70%">The number of QC
+units.</td>
+                        <td height="14" width="214">integer</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">14</td>
+                        <td height="14" width="70%">The length of the
+CustomSeq reference sequence.</td>
+                        <td height="14" width="214">integer</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">15</td>
+                        <td height="14" width="70%">The CustomSeq
+reference sequence.</td>
+                        <td height="14" width="214">char[ length
+defined above]</td>
+                      </tr>
+                      <tr>
+                        <td height="12" width="110">16</td>
+                        <td height="12" width="70%">The probe set name.
+The UNIT name for CustomSeq, Genotyping, Polymorphic Marker, and
+Multichannel Marker. The BLOCK name for
+Expression.</td>
+                        <td height="12" width="214">char[64] * (# of
+units)</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">17</td>
+                        <td height="14" width="70%">File position for
+the start of each QC unit information block.</td>
+                        <td height="14" width="214">integer * (# of QC
+units)</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">18</td>
+                        <td height="14" width="70%">File position for
+the start of each unit information block.</td>
+                        <td height="14" width="214">integer * (# of
+units)</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">19</td>
+                        <td height="14" width="70%">QC information,
+repeated for each QC unit:
+                        <p> Type - unsigned short<br>
+Number of probes - integer</p>
+                        <p>Probe information, repeated for each probe
+in the QC unit:</p>
+X coordinate - unsigned short<br>
+Y coordinate - unsigned short<br>
+Probe length - unsigned char<br>
+Perfect match flag - unsigned char<br>
+Background probe flag - unsigned char<br>
+                        </td>
+                        <td height="14" width="214">see description</td>
+                      </tr>
+                      <tr>
+                        <td height="14" width="110">20</td>
+                        <td height="14" width="70%">Unit information,
+repeated for each unit:
+                        <p>UnitType - unsigned short (1 - Expression, 2
+- Genotyping, 3 - CustomSeq, 4 - Tag, 5 - Copy Number, 6 - Genotyping
+Control, 7 - Expression Control, 8 - Polymorphic Marker, 9 -
+Multichannel Marker)<br>
+Direction - unsigned char<br>
+Number of atoms - integer<br>
+Number of blocks - integer (always 1 for Expression units)<br>
+Number of cells - integer<br>
+Unit number (probe set number) - integer<br>
+Number of cells per atom - unsigned char</p>
+                        <p>Block information, repeated for each block
+in the unit:</p>
+                        <p>Number of atoms - integer<br>
+Number of cells - integer<br>
+Number of cells per atom - unsigned char<br>
+Direction - unsigned char<br>
+The position of the first atom - integer<br>
+&lt;unused integer value&gt; - integer<br>
+The block name - char[64]<br>
+Wobble situation - unsigned short (only available in version 2, 3, and 4)<br>
+Allele code - unsigned short (only available in version 2, 3, and 4)<br>
+Channel - unsigned char (only available in version 3 and 4)<br>
+RepType - unsigned char (0 - unknown, 1 - different probe sequences,
+2 - some probe sequences are identical, 3 - all probe sequences are
+identical) (Only available in version 3 and 4) </p>
+                        <p>Cell information, repeated for each cell in
+the block:</p>
+                        <p>Atom number - integer<br>
+X coordinate - unsigned short<br>
+Y coordinate - unsigned short<br>
+Index position (relative to sequence for CustomSeq, Genotyping, Copy
+Number, Polymorphic Marker, and Multichannel Marker units, for
+Expression
+units this value is the atom number)
+- integer<br>
+Base of probe at substitution position - char<br>
+Base of target at interrogation position - char<br>
+Length of probe sequence - unsigned short (only available in version 2, 3, and 4)<br>
+Physical grouping of probe - unsigned short (only available in version
+2, 3, and 4)<br>
+                        </p>
+                        </td>
+                        <td height="14" width="214">see description</td>
+                      </tr>
+                    </tbody>
+                  </table>
+				  
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

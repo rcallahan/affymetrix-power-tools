@@ -1,0 +1,215 @@
+/**
+
+\page VIGNETTE-WGSA-empirical-probe-ranking VIGNETTES: Empirical Performance Ranking of Probes for Genotyping with the Whole Genome Sampling Assay
+
+\date 2007-01-08
+
+\section content Contents
+
+- <a href="#intro">Introduction</a>
+- <a href="#method">Methodology</a>
+- <a href="#example">Example Usage</a>
+- <a href="#summary">Summary review</a>
+- <a href="#bugs">Known Bugs</a>
+
+\section intro Introduction
+
+Empirical probe ranking for genotyping arrays is sometimes referred to as 'selecting the optimal probe'.  For well-behaving probe sets, there is often little functional difference between the high-performing probes, so the ranking obtained is likely a chance function of the data.  In such circumstances this procedure is perhaps better described as 'avoiding poor probes'.  
+
+Although the Genome Wide SNP 5.0 Array selected probes that were 'unpaired', i.e. consisted of different sequences for the A-allele and the B-allele (naturally they are always different in the SNP position), we have found that this strategy is less effective than always selecting paired probes, as was done for the Genome Wide SNP 6.0 Array.  We therefore have written the software to select paired-probes only.  This increases manufacturing efficiency, improves resistance to spatial gradients and sequence-based responses to assay conditions, and empirically leads to superior performance.  Please bear this condition in mind if any ranking of probes is hand-tuned.
+
+With that warning aside, empirical probe ranking consists of four basic steps
+- Extracting individual probe-pair intensity information
+- Conducting a logistic regression between the individual information and the genotypes obtained from the full probe-set (preferably as informed by reference information using the 'hints' feature - see <a href="VIGNETTE-WGSA-clustering-without-priors.html#supervised">here</a> for guidance on supervised clustering)
+- Summarizing the logistic regression results as quality parameters
+- Writing out all the summary results to a file for selection of one or more probe-pairs to represent the SNP.  All summary values are written out, rather than a 'single best', so that the distribution of quality can be compared.
+
+At the user level, this is done by using <a href="http://www.affymetrix.com/support/technical/whitepapers/brlmmp_whitepaper.pdf">BRLMM-P</a> for performing the genotype calling, simply adding the line '--select-probes' to the input to apt-probeset-genotype.  This sets the flag indicating that the user wishes to regress individual probes against the results from the full probeset, and all the above steps are executed automatically.  There are some complexities which will be described below for obtaining best results.
+
+Note that this functionality has not been extensively tested and should be considered experimental.  Use of this functionality should be accompanied by a judicious amount of spot-checking of the results to make sure they look reasonable.
+
+This methodology has been extended slightly (still experimental) to function with 'apt-summary-genotype', for selection of individual probe-sets that work well.  In this case, the method analyzes the full-set contrast values as though they were a single probe and evaluates the logistic regression model fit.  Caution:  Model fits obtained from different called genotypes are not necessarily comparable across probe-sets that evaluate the same underlying marker.  In such a case, use the 'override' command to ensure that the same reference genotypes are used for all probe-sets being compared.
+
+\section method Methodology
+
+For each probeset, we call genotypes using the analysis string provided to brlmm-p.  This should be tuned for the best performance possible on the array, because these internally generated genotypes will be treated as the reference information.  One of the most useful tunings is to construct a 'hints' file which provides explicit labelings of data points as one genotype or another, for those experiments where such reference information is available.  This generally resolves ambiguities in cluster location, even if only a few hints are available.  See the vignette on <a href="VIGNETTE-WGSA-clustering-without-priors.html#supervised">clustering without priors</a> for guidance on how to use the hints functionality.
+
+Second, for each matched pair A-allele and B-allele probe (un-matched pairs are suboptimal for many reasons), we generate a 1-dimensional contrast value for each cel file.  The contrast value is a monotonic transformation of the quantity (A-B)/(A+B) where A and B are the normalized probe intensities.  This directly examines the difference between the alleles, ignoring overall intensity effects.  This concentrates the regression on finding probe-pairs that discriminate strongly between genotypes.
+
+Once the contrast value has been obtained, it is used as the input variable in the logistic regression routine predicting genotype from contrast, using the mapping that genotypes consist of either 0 copies of the B allele, 1 copy of the B allele or 2 copies of the B allele, given observations of two alleles.  The logistic regression is attempting to fit a model Pr(allele=B|contrast=X) = 1/(1+exp(a*X+b)) to the given data that predicts genotype as well as possible given contrast.  Note that this differs from the clustering model used to actually call genotypes.  This model can certainly be improved, but is useful for detecting suboptimal probe-pairs.
+
+There are a number of important caveats to this model.  First, any regression model will fit well a SNP with only one genotype available in the input data, with no discrimination among probes.  Second, logistic regression breaks down when confronted with perfectly separated clusters.  We handle both these cases by including a Bayesian prior on the model which prevents breakdown (by assuming the potential for an error in the genotypes provided for regression).  However, of course, the monomorphic case still provides no useful data for ranking.
+
+Once the model is fit for a probe pair, we output a single line summarizing the results to a file.  This output file is tab-delimited text with the following fields and a header line containing names for each column:
+- <b>SNPID</b> - the probeset
+- <b>A</b> - always "A", can be ignored.
+- <b>ProbeNum</b> - which probe pair within probeset
+- <b>ProbeAindex</b> - location on array of A allele probe.
+- <b>ProbeBindex</b> - location on array of B allele probe.
+- <b>HomLogisticCorrect</b> - homozygous concordance estimated from logistic regression
+- <b>HetLogisticCorrect</b> - heterozygous concordance estimated from logistic regression
+- <b>LogisticCorrect</b> - total concordance estimated from logistic regression
+- <b>MeanAA</b> - Mean of all AA genotypes (or generic prior if missing)
+- <b>MeanAB</b> - Mean of all AB genotypes (or generic prior if missing)
+- <b>MeanBB</b> - Mean of all BB genotypes (or generic prior if missing)
+- <b>nAA</b> - Number of AA genotypes input (+.01 to avoid zero)
+- <b>nAB</b> - Number of AB genotypes input (+.01 to avoid zero)
+- <b>nBB</b> - Number of BB genotypes input (+.01 to avoid zero)
+- <b>Stdev</b> - Average Stdev across clusters (computed as common value for simplicity)
+- <b>FLDAH</b> - Fishers linear discriminant between AA and AB
+- <b>FLDHB</b> - FLD between AB and BB
+- <b>FLDAB</b> - FLD between AA and BB
+- <b>Entropy</b> - Entropy of input genotypes (in 'nats' n(t)*log(p(t))
+- <b>LogisticAIC</b> - Akaike's information criterion for model fit
+- <b>B0: LogisticIntercept</b> - intercept of the model
+- <b>B1: LogisticSlope</b> - slope of the model
+
+See the <a href="FAQ.html#probe_id_faq">FAQ item on probe IDs</a> for more info.
+
+The AIC, which turns out to be the most useful measure of fit, consists of the standard -2*log-likelihood+2*parameters value from the regression.  The <em>smallest</em> AIC is the 'best' probe pair.   This was the measure used for selection in the development of the Genome Wide SNP 6.0 Array - the single best probe pair was identified on a screening array and was then tiled in replicate (3 or 4 copies) on the final product.  In general, the AIC is appropriately correlated with other quality measures, and combines all the data sufficiently well.  
+
+The 'concordance' is measured between the predicted values from the logistic regression against the full-set genotype calls.  The predictions from the logistic regression are turned into discrete calls by using a t-like statistic comparing Pr(B allele) against the values, 0, 0.5, 1.0, i.e. (p-x)/sqrt(variance) smallest in absolute value.  The statistic for hets is divided by 2, because the slope is steepest near p=0.5.  The genotype (probability) with the smallest absolute value of the metric is 'called' as the genotype from the logistic regression.  These 'calls' are then compared with the full-set genotype calls, and divided into summaries for heterozygous and homozygous calls.  This predicted concordance is of limited utility (generally not many data points, not the same clustering method as used in actual analysis, miscalls more often than clustering methods) for distinguishing amongst generally well performing probes.
+
+The FLD is computed directly from the genotypes and the data, consisting of the distance between cluster centers divided by the standard deviation within clusters.  This measures the separation between clusters directly in terms of the within cluster variation.  However, nice as this metric is, it is difficult to interpret when genotypes are missing for one or more clusters (and is filled in by prior information).  There are of course 3 FLD values, one for each cluster pair.  Note that the <em>largest</em> FLD is the 'best', which differs from the AIC.  
+
+All these summary values are output to a standard file [method].select-probes.txt, similar to other analysis pathways using apt-probeset-genotype.  As mentioned above, AIC is sensitive to all deviations from ideal performance, and was found to be most useful in selecting probes.
+
+\section example Example usage
+
+This probe ranking pathway is experimental software and not heavily optimized.  Currently it cannot correctly handle chrY SNPs in a run that include female samples (see the list of <a href="#bugs">known bugs</a> below).  As a result if the user wishes to perform selection on chrY as well as other kinds of SNPs two separate runs of apt-probeset-genotype will be required.
+
+
+An example run of probe ranking (based on the Genome Wide SNP 6.0 Array) to empirically rank SNPs on an arbitrary mix of autosomal, chrX and mitochondrial SNPs:
+
+\verbatim
+apt-probeset-genotype \
+  --select-probes \
+  --cdf-file             lib/GenomeWideSNP_6.cdf \
+  --special-snps         lib/GenomeWideSNP_6.specialSNPs \
+  --read-models-brlmmp   lib/GenomeWideSNP_6.brlmm-p.models \
+  --analysis             quant-norm.sketch=50000,pm-only,brlmm-p.CM=1.bins=100.mix=1.bic=2.HARD=3.SB=0.45.KX=1.KH=1.5.KXX=0.5.KAH=-0.6.KHB=-0.6.transform=MVA.AAM=2.0.BBM=-2.0.AAV=0.06.BBV=0.06.ABV=0.06.copyqc=0.000001.wobble=0.05.MS=0.05.hints=1.CP=16 \
+  --genotypes            myKnownGenotypes.txt \
+  --set-gender-method    user-supplied \
+  --read-genders         myCels.genders.txt \
+  --cel-files            myCels.txt \
+  --probeset-ids         myAutoMitoChrX_SNPs.txt \
+  --out-dir              out.AutoMitoChrX
+\endverbatim
+
+We now present an example run of probe ranking (based on the Genome Wide SNP 6.0 Array) to empirically rank chrY SNPs.  The key differences relative to the run above are:
+- only chrY SNPs are specified for the --probeset-ids option
+- only male CEL files are specified for the --cel-files option
+- output is written to a different directory so nothing is overwritten
+
+\verbatim
+apt-probeset-genotype \
+  --select-probes \
+  --cdf-file             lib/GenomeWideSNP_6.cdf \
+  --special-snps         lib/GenomeWideSNP_6.specialSNPs \
+  --read-models-brlmmp   lib/GenomeWideSNP_6.brlmm-p.models \
+  --analysis             quant-norm.sketch=50000,pm-only,brlmm-p.CM=1.bins=100.mix=1.bic=2.HARD=3.SB=0.45.KX=1.KH=1.5.KXX=0.5.KAH=-0.6.KHB=-0.6.transform=MVA.AAM=2.0.BBM=-2.0.AAV=0.06.BBV=0.06.ABV=0.06.copyqc=0.000001.wobble=0.05.MS=0.05.hints=1.CP=16 \
+  --genotypes            myKnownGenotypes.txt \
+  --read-genders         myCels.genders.txt \
+  --cel-files            myCels.male.txt \
+  --probeset-ids         myChrY_SNPs.txt \
+  --out-dir              out.ChrY
+\endverbatim
+
+
+- <b>Options & Inputs</b> 
+  - <b>--select-probes</b> engages the empirical probe ranking functionality.
+  - <b>--cdf-file</b> specifies the CDF file which relates probe to SNPs (required)
+  - <b>--special-snps</b> specifies the file that identifies expected copy numbers of non-autosomal SNPs for each gender.  It it not required, if absent all SNPs will be treated as autosomal and gender will be irrelevant.
+  - <b>--read-models-brlmmp</b> specifies the SNP-specific models to be used for genotyping.  See <a href="VIGNETTE-WGSA-clustering-without-priors.html">clustering without priors</a> for information on how to create such a file if one does not already exist.
+  - <b>--analysis</b> specifies the analysis workflow that is applied.  The analysis workflow should be the same as the one used in creation of the models files, and should be based on brlmm-p for probe ranking to be enabled.  In the example above we use the analysis string that corresponds to the "brlmm-p-plus" alias, with the addition of ".hints=1.CP=16" for use with the <a href="VIGNETTE-WGSA-clustering-without-priors.html#supervised">hints</a> functionality.  If no hints are available then just specifying "--analysis brlmm-p-plus" would work for this example (since the BRLMM-P models file for the Genome Wide SNP 6.0 Array was created with the analysis string that is aliased to "brlmm-p-plus").  When using 'hints', the command ".override=1"  when added to the analysis string causes logistic regression to use the supplied reference genotypes (when available) rather than the full-set genotypes.
+  - <b>--genotypes</b> specifies gold-standard genotypes to which calls will be biased (strength of bias determined by the 'CP' parameter in the analysis string).  Using these supplied hints will ensure that each probe pair is regressed against the 'correct' genotype (though the supplied 'hint' can be over-ruled by the empirical data if there is overwhelming evidence to the contrary).  When using 'override', the reference genotypes will be used for regression even if the empirical data is overwhelming.  This option is particularly useful when screening out SNPs that do not function acceptably at the full-set level.  See the documentation on using <a href="VIGNETTE-WGSA-clustering-without-priors.html#supervised">hints</a> for more detail.  If no hints are available this option can be skipped, in which case the ".hints=1.CP=16" should be dropped from the analysis string.  
+  - <b>--set-gender-method user-supplied</b> informs the software that the user is supplying gender information and that automated gender-calling should be skipped.  Although the user could in principle rely on automated gender calling, empirical probe ranking is typically applied to screening arrays which may contain many poorly-performing SNPs and automated gender calling may not work optimally, it is safer to supply the genders directly.  This option and the --read-genders option are not necessary if the user is comfortable treating all SNPs as autosomal.
+  - <b>--read-genders</b> option identifies a file to supply known genders.  The file format should <a href="file-format-tsv.html">TSV</a> with two required fields:
+    - cel_files (name of CEL)
+    - gender (should be "male" or "female")
+  - <b>--cel-files</b> specifies a file listing all the CEL files to be analyzed.  The file format should <a href="file-format-tsv.html">TSV</a> with one required field named "cel_files" specifying CEL file locations.  Alternatively CEL files to analyze can be specified directly on the command line.
+  - <b>--probeset-ids</b> restricts analysis to a subset of SNPs.  Useful if multiple runs are being performed for special handling of non-autosomal SNPs as outlined <a href="#example">above</a>.
+  - <b>--out-dir</b> identifies a directory to which results will be written (optional)
+- <b>Outputs</b> are written to a tab-delimited text file with the suffix ".select-probes.txt" - see <a href="#method">above</a> for more detail on each fields. There is a header line providing column names.
+  - ProbeSet
+  - "A"
+  - ProbeNum
+  - ProbeAindex
+  - ProbeBindex
+  - HomLogisticCorrect
+  - HetLogisticCorrect 
+  - LogisticCorrect 
+  - MeanAA
+  - MeanAB
+  - MeanBB
+  - nAA
+  - nAB
+  - nBB
+  - Stdev
+  - FLDAH
+  - FLDHB
+  - FLDAB
+  - Entropy
+  - AIC
+  - B0 
+  - B1 
+
+\section summary Review of empirical probe ranking
+
+- Call genotypes using however many probes are available
+  - Where available, <a href="VIGNETTE-WGSA-clustering-without-priors.html#supervised">hints</a> should be used to ensure the calls are always correct
+- For each matched (A-allele, B-allele) probe pair
+  -  Generate contrast value for each cel file
+    -  [turn into 1-d contrast signal]
+  -  Use Logistic Regression to match contrast to Genotype
+    -  Genotype encoded as {0,1,2} according to the number of copies of B allele
+    -   Pr(B allele | Contrast = x) = 1/(1+exp( a*x+b))
+  -  Generate summary statistics
+    -  AIC = -2* log-likelihood +2 * parameters
+    -   "Calls" - Pr(B allele) closest to 0, 0.5, 1.0
+      -  Done with (p-x)/sqrt(v) "t-like statistic"
+      -  Hets get a bonus of 1/2 [because regression steep near 0.5]
+      -  "Hom concordance" 
+        -  Full call = Hom, 1pp "call" = Hom
+      -  "Het concordance"
+        -  Full call = Het, 1pp "call" = Het
+    -    FLD
+      -  Compute var = common variance (within-group SSquares/n)
+      -  Use generic prior for unobserved (as supplied in analysis string)
+      -  (A-H)/sqrt(var) 
+      -  (H-B)/sqrt(var)
+      -  (A-B)/sqrt(var)
+  -   Intercept & Slope for logistic regression
+    -  Intercept/Slope ~= Het offset
+  -  Output summaries to [method].select-probes.txt
+-  Presumably, the "best" fit is the one we want (AIC smallest)
+  -  Or best FLD (FLD largest)
+    -  How to combine all 3 clusters?
+
+Special Cases:
+- Chr X
+  - Use '--set-gender-method user-supplied' and read-genders to ensure correct gender calls
+  - Identify chrX snps as male = 1 copy, female = 2 copies in special-snps file
+  - Software will call males separately from females
+  - All calls will be evaluated using logistic regression
+    - males & females will be assessed together
+    - "Within-SNP" comparison for best probe still finds best contrast-genotype evaluation
+- ChrY
+  - Omit all female cel files (0 copies)
+  - All males have 1 copy
+    - Identify chrY snps as special-snps 1-male, 0-female
+    -  Use '--set-gender-method user-supplied' and read-genders to specify all samples as "male" (1 copy)
+  - Evaluate as usual
+- Mito
+  - Everyone has 1 copy
+    - Identify Mito snps as special-snps 1-male,1-female
+    - Use '--set-gender-method user-supplied' and read-genders to specify everyone as "male" (1 copy)
+  - Evaluate as above
+
+\section bugs Known Bugs
+
+There is one known bug
+- ranking will not work for chrY SNPs if any female samples are included in the run (the program will exit with a cryptic error message).  The workaround is outlined in the <a href="#example">example usage</a> section: to rank probes for chrY SNPs perform a separate run on chrY SNPs using only male samples.
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

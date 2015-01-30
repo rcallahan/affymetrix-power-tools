@@ -1,0 +1,423 @@
+/**
+
+\page DEVELOPER DEVELOPERS
+
+<h1>Intro</h1>
+
+This document covers software developer related issues with regard to 
+the Affymetrix Power Tools (APT) SDK. This document covers developers
+contributing to the SDK code base.
+
+<h1>Contributing to APT Code</h1>
+
+Code contributions are welcome. Contact 
+<a href="mailto:devnet@affymetrix.com">devnet@affymetrix.com</a>
+for more information on contributing code to APT.
+
+<h1>Platform Priorities</h1>
+
+See the <a href="PLATFORMS.html">PLATFORMS</a> page.
+
+<h1>Portability Issues</h1>
+
+<h2>Big vs Little Endian</h2>
+
+Different processor architectures have different ideas
+about how bytes are arranged in memory.  There are two main
+camps "Big Endian" (sparc,powerpc) and "Little Endian"
+(ia32).  Rather than recap it here, you should read "On Holy
+Wars and a Plea for Peace". [Cohen] (A very good read.)
+
+Where possible, network byte order should be used
+whenever possible.  All platforms should have methods to
+convert data to network byte order as TCP/IP requires it.
+
+Our "sdk/file/FileIO.h" contains macros which will
+covert data to little endian format. They are named in the
+same scheme as the classic "htonl".  It is called
+"htoil". (host to intel long)
+
+Byte order swapping is tiny compared to the overhead of
+reading a block of io into memory.  However, there are some
+file formats which have been released which are in
+"not-network byte order" which will need to be supported.
+
+When doing IO, I would encourage you to always use the
+byte conversion functions as it acts as documentation for
+the format of the file.
+
+
+<h2>Data Types</h2>
+
+Just like byte order, processor architectures have different ideas
+how big the native word size is.  Many machines think the
+word size is 32b, while some think it is 64b.  (Others are
+less than 32b, but affymetrix is unlikely to use them.)
+
+When writing code which does IO, you should take care to
+specify the word size.  This will both ensure that the
+quantities written are of the correct size as well as
+documenting the IO which is being done.
+
+"FileIO.h" defines a series of types which we will make
+sure are of the correct size.  These types are counted in
+bit width: "int8_t", "int16_t", "int32_t", and "int64_t",
+along with their unsigned versions.
+
+One C datatype to avoid is "long".  <b>Dont use
+'long'.</b>  The size of long will vary by archecture and
+the compiler used.  Because of this variation it will cause
+problems.
+
+<h2>Floating Point</h2>
+
+The two main types of floating point are "float" and
+"double".  float is generally an IEEE-754 32b floating point
+number and double 64b one.  However, on IA32, it is
+sometimes an extended precision 80b fp number.  While more
+accurate, it can cause differences when comparing the output
+of your program across architectures.
+
+If you can, you may want to consider using the
+flags <code>-march=i686 -msse -mfpmath=sse</code> with GCC.
+This will instruct GCC to use the SSE unit for FP math
+instead of the normal FP unit.  The SSE units are designed
+to do IEEE math.  This should generate the same answers as
+on other IEEE fp systems.
+
+Like byte order there has been much written about
+floating point.  A good read is "What Every Computer
+Scientist Should Know About Floating-Point
+Arithmetic". [Goldberg]
+
+\verbatim
+[Cohen]    http://www.rdrop.com/~cary/html/endian_faq.html
+[Goldberg] http://docs.sun.com/source/806-3568/ncg_goldberg.html
+\endverbatim
+
+
+<h1>Build Tools</h1>
+
+	<h2>gcc vs MS C++</h2>
+
+	<h2>Build Systems</h2>
+
+<h1>Platform Notes</h1>
+
+<h2>Windows Notes</h2>
+
+<h2>Linux/i386 Fedora Notes</h2>
+
+<h2>Mac OS-X/PPC Notes</h2>
+
+<h2>Solaris/Sparc Notes</h2>
+
+ Until solaris 10, there is no <code>strtof</code>
+function.  We have been using <code>strtod</code> instead.
+
+<h1>APT Code Reuse</h1>
+
+- Use TsvFile to read/write deliminated text files
+- Use Err::errAbort rather than calling exit()
+- Use Err:errAbort rather than throwing an exception
+- Use Verbose::out for log messages
+- Use Verbose::warn for warnings
+- Use Err::check rather than assert (unless you really
+  want your assert compiled out in release builds)
+- Use PgOptions to document/parse command line args
+- Take a look at util/Util.h for other goodies
+- Use Min/Max macro
+
+<h1>C++ Notes</h1>
+
+The following is a collection of hints about C++ which you
+might want to keep in mind.  They are small things you can
+do to write better code.
+
+<h2>Empty() vs Size()</h2>
+
+If you find yourself writing
+<code>(container.size()==0)</code>, you should write
+<code>(container.empty())</code>.  In the case of vectors,
+it wont make much difference as size an emptiness is computed the same way.
+However, if the container is a list, then checking the size is
+more work than just checking for an item in the list.
+
+<h2>Use ++i instead of i++</h2>
+
+The post-increment operator may require making a copy of the
+item being incremented.  The pre-increment operator does
+not.  For ints, it does not make a difference, but larger
+objects will make it noticeable.
+
+<h2>Do not "use namespace" in header files</h2>
+
+Header files should not modify the namespace with
+<code>use namespace</code>.  Code which includes a header
+file should be safe from modifications of their namespace.
+Do feel free to put <code>use namespace std;</code> in your
+<code>.cpp</code> files.
+
+<h2>Algorithms, Iterators, Containers</h2>
+
+The STL is designed with the idea that algorithms use
+iterators to get data from containers.  Try to keep that in
+mind when writing code.  At some point the container might
+be changed.  Would you have to change your code?
+
+<h1>CVS Notes</h1>
+
+<h2>Write good commit messages.</h2>
+
+Before composing your commit message, ask yourself "why
+am I committing this?"  Phrase your message as an answer to
+this question.
+
+<h2>Do not check in generated files</h2>
+
+Check in the files which are required to build the
+project.  Do not check in files which are generated, unless
+you do not think others will have the tools to create them.
+
+If the files are binary and your checking them in, make sure
+you use the -kb option. If they are text files, but you want
+to force a specific line ending, also use the -kb option.
+
+<h1>Code Coding Standards</h1>
+
+<h2>The Basics</h2>
+
+- <b>Code should compile cleanly and run correctly and robustly.</b>
+  The head of the tree should build and pass all of its tests every
+  night! Checking in code that hasn't been tested is bad
+  practice. Test your code - if you don't have a test, then write a test
+  and check that into cvs at the same time. Checking code that is known to
+  be broken into the repository will not be tolerated. Code
+  should be proactive about checking its assumptions and erroring when invalid.
+
+- <b>Performance counts.</b> Code should run as fast as reasonably possible using
+  a reasonable amount of memory and disk space. Be careful to    
+  avoid obfuscating code that is rarely called for the sake of
+  speed. As Sir Tony Hoare originally said (and was restated by Donald
+  Knuth) "We should forget about small efficiencies,
+  say about 97% of the time: premature optimization is the root of all evil."
+  A programmer's job is to find that 3% that matters, isolate it in the
+  design and make it fast. Know your libraries and use modern algorithms. The 
+  plot in Figure 1 below clearly illustrates the rapid and accelerating increase in features
+  per chip.
+
+- <b>Code isn't done until there is an automatic test to prove it
+  works.</b> The algorithms and applications of a technology company
+  are constantly changing. Automated tests are necessary to ensure
+  correctness both at the time of initial development and as the code
+  is extended and refactored for new applications and algorithms.  
+
+- <b>Code should be written clearly and be easy for others to understand.</b>
+  Clear and concise variable names are a good thing. Functions should be
+  short and have a single purpose. Prefer clear to clever and if being clever
+  document how and why. Comments are a good thing. Reuse code through 
+  libraries rather than cutting and pasting. 
+
+- <b>Code for today, but design for tomorrow.</b> Quick and dirty design hacks
+  are discouraged. Work through interfaces rather than tightly coupling code.
+  Talk to your coworkers about design, respect their input.
+
+<h2>Sense of scale</h2>
+
+@image html featPerChipHuEx.png "Figure 1: Number of features per GeneChip for past and present arrays. As can clearly be seen the increase is large and accelerating. This demands that both algorithms and their implementations be scalable in computation and memory usage."
+
+<h2>Common Rules</h2>
+
+There are a lot of style guides out there that have been developed over
+the years. The following are a set of general guidelines that hopefully 
+cut across all of the main styles and we can all agree on.
+
+- Use the prevailing style in a file or module, or ask the owner, if
+you are on someone else's turf. Module owner rules all.
+
+- There shall be <b>no sprintf()</b>. In a pinch, when you have a very good
+reason not to use std::string, snprintf() is is the choice of last
+resort. Under no circumstances shall sprintf() be allowed. It is a
+security hazard and makes for the worst sort of weird memory bugs.
+
+- In general "void *" is prohibited. There may be exceptions to this rule
+for compelling reasons.
+
+- In general "goto" statements are prohibited. 
+
+- Structs that contain functions should be classes instead.
+
+- Whitespace use is always a compromise between having enough whitespace
+to make things readable and keeping the code compact enough to fit a useful
+chunk in the editor window. Try to find a reasonable balance. Some examples
+would be
+  - Very dense...
+  \code
+  void myfunction(int count, float param) {
+    for(i=0;i<count;i++){i%2==0?doSomething(param):doOther(param);}
+  }
+  \endcode
+  - Too much whitespace?
+  \code
+  void myfunction(int count, 
+                  float param) {
+
+    for ( i = 0 ; i < count ; i++ ) {
+
+      if ( i % 2 == 0 ) {
+      
+        doSomething(param);
+
+      } 
+
+      else {
+      
+        doOther(param);
+
+      } 
+
+    }
+
+  }
+  \endcode
+  - Something reasonable?
+  \code
+  void myfunction(int count, float param) {
+    for ( i=0 ; i<count; i++) {
+      if ( i % 2 == 0 ) 
+        doSomething(param);
+      else
+        doOther(param);
+    }
+  }
+  \endcode
+
+- Whitespace before control statements like <tt>if (x)</tt> is fine,
+but whitespace before function names like <tt>myFunction (x,y,z)</tt>
+is frowned upon, use <tt>myFunction(x,y,z)</tt> instead. Putting whitespace before
+or after the <tt>-></tt> operator is not allowed, so pointers should always
+be used like <tt>p->var</tt> and never <tt>p  ->  var</tt>.
+
+- No tabs. No whitespace at the end of a line. 
+   - For Emacs put the following in your .emacs file
+     \verbatim
+     ;; Make formatting use spaces instead of tabs.
+     (setq c-mode-hook
+       (function (lambda ()
+                  (setq indent-tabs-mode nil)
+                  (setq c-indent-level 4))))
+     (setq c++-mode-hook
+        (function (lambda ()
+                   (setq indent-tabs-mode nil)
+                   (setq c-indent-level 4))))
+     \endverbatim
+   - For Vim add the following in your .vimrc file:
+   \verbatim
+       set tabstop=4
+       set shiftwidth=4
+       set expandtab
+   \endverbatim
+   - In Microsoft VC2005 this is settable via
+      Tools->Options -- Text Editor->All Languages->"Insert Spaces" under tabs. 
+
+- Lines should 80 characters or less. There may be exceptions to this rule, but
+they should be rare.
+
+- Functions should be a reasonable length. Monolithic functions 
+are deeply frowned upon.
+
+- Initialize local variables whenever possible. If nothing else this makes the bugs
+reproducible...
+
+- Don't reuse a variable for something else.
+
+- Use meaningful variable names. Don't pack a paragraph description into a variable name.
+\code
+  const char *s; // Not very helpful.
+  const char *fileName; // Helpful.
+  const char *fileNameThatImPlanningToUseForOutput; // Too much of a good thing.
+\endcode
+
+- Write timely, concise, meaningful comments aimed to help the understanding
+  of what program is doing.
+\code
+  int xCount; // Count for x (this is a useless comment);
+  int xCount; // Current number of items in the x array.
+\endcode
+<h2>Indentation</h2>
+
+How to format code is a subject of much debate which can turn
+seemingly nice coworkers into zealots that would make the Spanish
+inquisition proud. Most of the disagreements center on where to but
+the braces on blocks of code. The classic Kernighan and Ritchie's
+style (k&r) from their book "The C Programming Language" puts the
+opening bracket on the same line as the control statement. This is
+also the style used in the Linux kernel and in Stroustrup's original
+c++ books. It looks like this:
+\code
+if (x == y) {
+   something();
+}
+\endcode
+
+Another popular method is to put the first bracket on a separate line
+as seen in the BSD style (also called the Allman style):
+
+\code
+if (x == y) 
+{
+   something();
+}
+\endcode
+
+Another variation is GNU official style which looks like:
+\code
+if (x == y) 
+   {
+      something();
+   }
+\endcode
+
+All of the above are reasonable if you are creating a new module, but
+please don't get creative outside of these styles.
+
+Switch statements seem to be a particularly fertile ground for creativity.
+Stick to the basic version (using Allman style bracket on a separate line is ok too) like:
+
+\code 
+switch (num)  {      
+ case one: 
+   doOne(); 
+   break;
+ case two: 
+   doTwo(); 
+   break;
+ default: 
+   error();
+}
+\endcode
+*/
+
+Put a default case in your switch statements.  It lets
+others know what is do be done in the default case.
+(Otherwise someone else might put a "default: assert(0)" to
+cover the case.)
+
+- Dont use "#pragma once" in header files.  Many C compilers
+dont like "#pragma once". Use the standard convention of:
+
+\code
+
+#ifndef _NAMEOFDOT_H_
+#define _NAMEOFDOT_H_
+
+// contents...
+
+#endif // _NAMEOFDOT_H_
+
+\endcode
+
+LocalWords:  resusablility Hoare
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

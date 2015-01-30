@@ -1,0 +1,79 @@
+/**
+
+\page CodeReviews Proposed Code Reviews
+
+@section CodeReviewIntroduction Introduction
+
+In our ongoing effort to continually improve code quality and
+future regulatory compliance APT is moving towards having
+weekly paired peer reviews. The initial proposal is that every
+week developers will be paired up with another developer and
+they will spend an hour or so discussing each other's changes
+over the past week. Part of this process is coming to an
+agreement on the standards we expect our software to meet so
+please review the \ref CodingPhilosophy "Coding Standards" and suggest changes and
+improvements.
+
+The goals of code reviews are the following:
+
+ -# <b>Code Quality.</b> Having at least two people look at
+    each line of code helps to ensure the consistency and
+    quality of the code. Many projects and companies including
+    Mozilla, Google, Apache, etc. use code reviews to reduce
+    defects in both code and design. 
+ -# <b>Knowledge Transfer.</b> The demanding nature of the
+    computationally large and algorithmically complex code
+    at Affymetrix means that the code can be non-trivial. 
+    Explaining the code to another developer helps to ensure
+    that at least two people understand each line of code.
+ -# <b>Technical Development.</b> We are fortunate to
+    have many talented developers at Affymetrix. Sitting down
+    with fellow developers and thinking through problems one
+    never fails to learn something new. Emacs tricks, windows
+    hacks, serious math, new algorithms, Affymetrix history,
+    etc. are things that we need to share with our fellow
+    developers.
+
+The downside of code reviews is that they take time. While
+formal processes like the Fagan review have been utilized to
+great success in avionics and other critical software they can
+slow the pace of development. Paired peer reviews are a compromise
+that allow a large number of lines of code to be written with at 
+least two developers having examined every line.
+
+@section CodeReviewOutline Proposed Code Review Process
+
+The proposed process is intentionally simple and we expect to
+iteratively build on this foundation as we learn new tools and
+techniques to make the review process more productive.
+
+- Each Wednesday after progress reports are due people who
+committed code to the APT code base will be paired up with
+another developer. The code to be reviewed will at least
+include the changes over the past week. Developers are free to
+discuss any other relevant, interesting, or just fun code. 
+ 
+- By Friday end of business the developers will have completed
+their review and each sent an email to the coordinator
+(chuck_sugnet@affymetrix.com) specifying:
+  - What code was reviewed.
+  - That the code has the reviewers approval or if there is any work left to be done.
+
+- Reviewers will look over the code independently and then get
+  together at a time of their choosing to discuss the code. In
+  person is preferable, but over the phone is fine if the
+  reviewers are separated geographically. The reviewers will
+  verify that the committed code has the following attributes:
+   - Is well formatted with reasonable function sizes (i.e. less than 50 lines)
+   - Implements the required functionality correctly and is efficient in memory, cpu and other resource usage.
+   - Has an automated test case that verifies the functionality.
+   - Contains concise, clear and descriptive comments in the header files.
+   - Handles error conditions properly.
+   - Follows the rest of the coding guidelines.
+
+- In the event that reviewers are unable to come to a consensus on the
+  code they can schedule a more formal review of the code from the group.
+  Reviewers are encouraged to get informal feedback from other parties to
+  act as a tiebreaker before appealing to the more formal process.
+
+*/

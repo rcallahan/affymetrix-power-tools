@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ParameterFile company="Affymetrix, Inc." userName="Affymetrix" contentVersion="1">
+
+  <Parameter name="ArrayType" type="String8" currentValue="Hu6800"></Parameter>
+
+  <Parameter name="ProbePairThreshold" type="Int32" currentValue="10"></Parameter>
+  
+  <Parameter name="BioB spike 3 prime" displayName="BioB" type="Int32" category="3" index="3"></Parameter>
+  <Parameter name="BioB spike 5 prime" displayName="BioB" type="Int32" category="5" index="1"></Parameter>
+
+  <Parameter name="GAPDH housekeeping 3 prime" displayName="GAPDH" type="Int32" category="3" index="13"></Parameter>
+  <Parameter name="GAPDH housekeeping M" displayName="GAPDH" type="Int32" category="M" index="12"></Parameter>
+  <Parameter name="GAPDH housekeeping 5 prime" displayName="GAPDH" type="Int32" category="5" index="11"></Parameter>
+
+  <Parameter name="Lys housekeeping 5 prime" displayName="Lys" type="Int32" category="5" index="310"></Parameter>
+  <Parameter name="Lys housekeeping M" displayName="Lys" type="Int32" category="M" index="320"></Parameter>
+  <Parameter name="Lys housekeeping 3 prime" displayName="Lys" type="Int32" category="3" index="330"></Parameter>
+
+</ParameterFile> 

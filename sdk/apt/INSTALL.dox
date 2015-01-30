@@ -1,0 +1,20 @@
+/**
+
+\page INSTALL INSTALL
+
+This document covers installing APT from the binary releases. 
+Note that multiple versions of APT can be installed and used simultaneously. The
+the various manuals for more information on using APT command line programs.
+
+<h1>MS Windows Systems</h1>
+	- Download the windows installer
+	- Run the installer
+	- From the start menu, run the APT Command Prompt
+
+<h1>*NIX Systems</h1>
+	- Download the respective binary zip file
+	- Unzip the binary distribution in a convenient location
+	- Add the bin sub folder to your PATH
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

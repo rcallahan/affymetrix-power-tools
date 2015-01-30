@@ -1,0 +1,1077 @@
+/////////////////////////////////////////////////////////////////
+//
+// Copyright (C) 2007 Affymetrix, Inc.
+//
+// This library is free software; you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published
+// by the Free Software Foundation; either version 2.1 of the License,
+// or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+// for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this library; if not, write to the Free Software Foundation, Inc.,
+// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
+//
+/////////////////////////////////////////////////////////////////
+// affx_fusion_com.idl : IDL source for affx_fusion_com
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (affx_fusion_com.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+    enum
+    {
+        X_CHR = 24,
+        Y_CHR = 25,
+        MT_CHR = 26,
+        NO_CHR = 255
+    };
+
+	enum
+	{
+		CEL_ALL=1,
+		CEL_DATA=2,
+		CEL_OUTLIER=4,
+		CEL_MASK=8
+	};
+    
+	typedef [v1_enum, helpstring("MultiDataType")]
+	enum _MultiDataType
+    {
+        Expression,
+        ExpressionControl,
+        Genotype,
+        GenotypeControl,
+        CopyNumber,
+        Cyto,
+        CopyNumberVariation
+    } MultiDataType;
+
+	typedef [v1_enum, helpstring("CytoCallType")]
+	enum _CytoCallType
+	{
+        CytoNoCall  = 0,
+        CytoAbsent  = 1,
+        CytoPresent = 2
+    } CytoCallType;
+
+	typedef [v1_enum, helpstring("GeneChipProbeSetType")]
+	enum _GeneChipProbeSetType
+	{
+		UnknownProbeSetType			= 0,
+		ExpressionProbeSetType		= 1,
+		GenotypingProbeSetType		= 2,
+		ResequencingProbeSetType	= 3,
+		TagProbeSetType				= 4,
+        CopyNumberProbeSetType      = 5,
+        GenotypeControlProbeSetType = 6,
+        ExpressionControlProbeSetType = 7,
+		MarkerProbeSetType			= 8,
+		MultichannelProbeSetType	= 9
+	} GeneChipProbeSetType;
+
+	typedef [v1_enum, helpstring("DirectionType")]
+	enum _DirectionType
+	{
+		NoDirection			= 0,
+		SenseDirection		= 1,
+		AntiSenseDirection	= 2,
+        EitherDirection     = 3
+	} DirectionType;
+
+	typedef  [v1_enum, helpstring("GeneChipQCProbeSetType")]
+	enum _GeneChipQCProbeSetType
+	{
+		UnknownQCProbeSetType,
+		CheckerboardNegativeQCProbeSetType,
+		CheckerboardPositiveQCProbeSetType,
+		HybNegativeQCProbeSetType,
+		HybPositiveQCProbeSetType,
+		TextFeaturesNegativeQCProbeSetType,
+		TextFeaturesPositiveQCProbeSetType,
+		CentralNegativeQCProbeSetType,
+		CentralPositiveQCProbeSetType,
+		GeneExpNegativeQCProbeSetType,
+		GeneExpPositiveQCProbeSetType,
+		CycleFidelityNegativeQCProbeSetType,
+		CycleFidelityPositiveQCProbeSetType,
+		CentralCrossNegativeQCProbeSetType,
+		CentralCrossPositiveQCProbeSetType,
+		CrossHybNegativeQCProbeSetType,
+		CrossHybPositiveQCProbeSetType,
+		SpatialNormalizationNegativeQCProbeSetType,
+		SpatialNormalizationPositiveQCProbeSetType
+	} GeneChipQCProbeSetType;
+
+	typedef [v1_enum, helpstring("AssayType")]
+	enum _AssayType
+	{
+		FusionExpression,
+		FusionGenotyping,
+		FusionResequencing,
+		FusionUniversal,
+		FusionUnknown
+	} AssayType;
+
+	typedef [v1_enum, helpstring("ReplicationType")]
+	enum _ReplicationType
+	{
+		UnknownRepType,
+		DifferentRepType,
+		MixedRepType,
+		IdenticalRepType
+	} ReplicationType;
+
+[
+	object,
+	uuid(107E2E83-4C14-4C27-A934-C28EDEA7FE9D),
+	dual,
+	nonextensible,
+	helpstring("IFPoint Interface"),
+	pointer_default(unique)
+]
+interface IFPoint : IDispatch{
+	[propget, id(1), helpstring("property x")] HRESULT x([out, retval] float* pVal);
+	[propget, id(2), helpstring("property y")] HRESULT y([out, retval] float* pVal);
+};
+[
+	object,
+	uuid(66F292C9-6B3B-482E-A5A4-5AA5E80E789D),
+	dual,
+	nonextensible,
+	helpstring("IFGridCoords Interface"),
+	pointer_default(unique)
+]
+interface IFGridCoords : IDispatch{
+	[propget, id(1), helpstring("method upperleft")] HRESULT upperleft([out,retval] IFPoint ** pVal);
+	[propget, id(2), helpstring("method upperright")] HRESULT upperright([out,retval] IFPoint ** pVal);
+	[propget, id(3), helpstring("method lowerright")] HRESULT lowerright([out,retval] IFPoint ** pVal);
+	[propget, id(4), helpstring("method lowerleft")] HRESULT lowerleft([out,retval] IFPoint ** pVal);
+};
+[
+	object,
+	uuid(4AA4CA43-EACD-4BAD-9A69-DDCD1886ADFE),
+	dual,
+	nonextensible,
+	helpstring("IFusionCELFileEntryType Interface"),
+	pointer_default(unique)
+]
+interface IFusionCELFileEntryType : IDispatch{
+	[propget, id(1), helpstring("property Intensity")] HRESULT Intensity([out, retval] float* pVal);
+	[propget, id(2), helpstring("property Stdv")] HRESULT Stdv([out, retval] float* pVal);
+	[propget, id(3), helpstring("property Pixels")] HRESULT Pixels([out, retval] short* pVal);
+};
+[
+	object,
+	uuid(D081020B-77E1-4157-8BF6-7E26A6275EC6),
+	dual,
+	nonextensible,
+	helpstring("IFusionCELData Interface"),
+	pointer_default(unique)
+]
+interface IFusionCELData : IDispatch{
+	[propget, id(1), helpstring("property FileName")] HRESULT FileName([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("property FileName")] HRESULT FileName([in] BSTR newVal);
+	[propget, id(2), helpstring("property Error")] HRESULT Error([out, retval] BSTR* pVal);
+	[id(3), helpstring("method GetHeaderKey")] HRESULT GetHeaderKey([in] BSTR key, [out, retval] BSTR *pVal);
+	[propget, id(4), helpstring("property Version")] HRESULT Version([out, retval] int* pVal);
+	[propget, id(5), helpstring("property Cols")] HRESULT Cols([out, retval] int* pVal);
+	[propget, id(6), helpstring("property Rows")] HRESULT Rows([out, retval] int* pVal);
+	[propget, id(7), helpstring("property NumCells")] HRESULT NumCells([out, retval] int* pVal);
+	[propget, id(8), helpstring("property Header")] HRESULT Header([out, retval] BSTR* pVal);
+	[propget, id(9), helpstring("property Alg")] HRESULT Alg([out, retval] BSTR* pVal);
+	[propget, id(10), helpstring("property Params")] HRESULT Params([out, retval] BSTR* pVal);
+	[id(11), helpstring("method GetAlgorithmParameter")] HRESULT GetAlgorithmParameter([in] BSTR tag, [out,retval] BSTR * pVal);
+	[id(12), helpstring("method GetAlgorithmParameterTag")] HRESULT GetAlgorithmParameterTag([in] int index, [out,retval] BSTR *pVal);
+	[propget, id(13), helpstring("property NumberAlgorithmParameters")] HRESULT NumberAlgorithmParameters([out, retval] int* pVal);
+	[propget, id(14), helpstring("property AlgorithmParameters")] HRESULT AlgorithmParameters([out, retval] BSTR* pVal);
+	[propget, id(15), helpstring("property DatHeader")] HRESULT DatHeader([out, retval] BSTR* pVal);
+	[propget, id(16), helpstring("property ChipType")] HRESULT ChipType([out, retval] BSTR* pVal);
+	[propget, id(17), helpstring("property CellMargin")] HRESULT CellMargin([out, retval] int* pVal);
+	[propget, id(18), helpstring("property NumOutliers")] HRESULT NumOutliers([out, retval] int* pVal);
+	[propget, id(19), helpstring("property NumMasked")] HRESULT NumMasked([out, retval] int* pVal);
+	[id(20), helpstring("method IndexToX")] HRESULT IndexToX([in] int index, [out,retval] int * x);
+	[id(21), helpstring("method IndexToY")] HRESULT IndexToY([in] int index, [out,retval] int * y);
+	[id(22), helpstring("method XYToIndex")] HRESULT XYToIndex([in] int x, [in] int y, [out,retval] int * index);
+	[id(23), helpstring("method XYToIndexStatic")] HRESULT XYToIndexStatic([in] int x, [in] int y, [in] int r, [in] int c, [out,retval] int * index);
+	[id(24), helpstring("method GetEntryByIndex")] HRESULT GetEntryByIndex([in] int index, [in] IFusionCELFileEntryType * entry);
+	[id(25), helpstring("method GetEntryByCoordinate")] HRESULT GetEntryByCoordinate([in] int x, [in] int y, [in] IFusionCELFileEntryType * entry);
+	[id(26), helpstring("method GetIntensityByIndex")] HRESULT GetIntensityByIndex([in] int index, [out,retval] float * intensity);
+	[id(27), helpstring("method GetIntensityByCoordinate")] HRESULT GetIntensityByCoordinate([in] int x, [in] int y, [out,retval] float * intensity);
+	[id(28), helpstring("method GetStdvByIndex")] HRESULT GetStdvByIndex([in] int index, [out,retval] float * stdv);
+	[id(29), helpstring("method GetStdvByCoordinate")] HRESULT GetStdvByCoordinate([in] int x, [in] int y, [out,retval] float * stdv);
+	[id(30), helpstring("method GetPixelsByIndex")] HRESULT GetPixelsByIndex([in] int index, [out,retval] short * pixels);
+	[id(31), helpstring("method GetPixelsByCoordinate")] HRESULT GetPixelsByCoordinate([in] int x, [in] int y, [out,retval] short * pixels);
+	[id(32), helpstring("method IsOutlierByIndex")] HRESULT IsOutlierByIndex([in] int index, [out,retval] VARIANT_BOOL * value);
+	[id(33), helpstring("method IsOutlierByCoordinate")] HRESULT IsOutlierByCoordinate([in] int x, [in] int y, [out,retval] VARIANT_BOOL * value);
+	[id(34), helpstring("method IsMaskedByIndex")] HRESULT IsMaskedByIndex([in] int index, [out,retval] VARIANT_BOOL * value);
+	[id(35), helpstring("method IsMaskedByCoordinate")] HRESULT IsMaskedByCoordinate([in] int x, [in] int y, [out,retval] VARIANT_BOOL * value);
+	[id(36), helpstring("method Close")] HRESULT Close(void);
+	[id(37), helpstring("method GetFileSize")] HRESULT GetFileSize([out,retval] LONG* size);
+	[id(38), helpstring("method Exists")] HRESULT Exists([out,retval] VARIANT_BOOL *pVal);
+	[id(39), helpstring("method ReadHeader")] HRESULT ReadHeader([out,retval] VARIANT_BOOL* pVal);
+	[id(40), helpstring("method Read")] HRESULT Read([in] VARIANT_BOOL includeMaskAndOutliers, [out,retval] VARIANT_BOOL* pVal);
+	[id(41), helpstring("method Clear")] HRESULT Clear(void);
+	[id(42), helpstring("method GetParameters")] HRESULT GetParameters([out,retval] VARIANT* params);
+	[id(43), helpstring("method GetGridCorners")] HRESULT GetGridCorners([out,retval] IFGridCoords ** pVal);
+	[propget, id(44), helpstring("property FileId")] HRESULT FileId([out, retval] BSTR* pVal);
+	[propget, id(45), helpstring("property MasterFileName")] HRESULT MasterFileName([out, retval] BSTR* pVal);
+	[propget, id(46), helpstring("property LibraryPackageName")] HRESULT LibraryPackageName([out, retval] BSTR* pVal);
+	[id(47), helpstring("method SetActiveDataGroup")] HRESULT SetActiveDataGroup([in] BSTR channel);
+	[id(48), helpstring("method IsMultiColor")] HRESULT IsMultiColor([out,retval] VARIANT_BOOL *pVal);
+	[id(49), helpstring("method GetChannels")] HRESULT GetChannels([out,retval] VARIANT *channels);
+};
+[
+	object,
+	uuid(7460F660-E36A-46CC-9619-95C9F7B8DE3F),
+	dual,
+	nonextensible,
+	helpstring("IFusionTagValuePairType Interface"),
+	pointer_default(unique)
+]
+interface IFusionTagValuePairType : IDispatch{
+	[propget, id(1), helpstring("property Tag")] HRESULT Tag([out, retval] BSTR* pVal);
+	[propget, id(2), helpstring("property Value")] HRESULT Value([out, retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(87F85B91-7ACC-43AF-AF94-F1DD7ECDDF72),
+	dual,
+	nonextensible,
+	helpstring("IFusionPSIFile Interface"),
+	pointer_default(unique)
+]
+interface IFusionPSIFile : IDispatch{
+	[propget, id(1), helpstring("property FileName")] HRESULT FileName([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("property FileName")] HRESULT FileName([in] BSTR newVal);
+	[propget, id(2), helpstring("property ProbeSetCount")] HRESULT ProbeSetCount([out, retval] int* pVal);
+	[id(3), helpstring("method GetProbeSetName")] HRESULT GetProbeSetName([in] int index, [out,retval] BSTR* pVal);
+	[id(4), helpstring("method GetProbePairs")] HRESULT GetProbePairs([in] int index, [out,retval] int * pVal);
+	[id(5), helpstring("method Read")] HRESULT Read([out,retval] VARIANT_BOOL* pVal);
+	[id(6), helpstring("method Exists")] HRESULT Exists([out,retval] VARIANT_BOOL* pVal);
+	[id(7), helpstring("method Clear")] HRESULT Clear();
+};
+[
+	object,
+	uuid(607AE23E-FDB5-4B94-97A7-C8C4AAFB1DB4),
+	dual,
+	nonextensible,
+	helpstring("IFusionCDFFileHeader Interface"),
+	pointer_default(unique)
+]
+interface IFusionCDFFileHeader : IDispatch{
+	[propget, id(1), helpstring("property Cols")] HRESULT Cols([out, retval] int* pVal);
+	[propget, id(2), helpstring("property Rows")] HRESULT Rows([out, retval] int* pVal);
+	[propget, id(3), helpstring("property NumProbeSets")] HRESULT NumProbeSets([out, retval] int* pVal);
+	[propget, id(4), helpstring("property NumQCProbeSets")] HRESULT NumQCProbeSets([out, retval] int* pVal);
+	[propget, id(5), helpstring("property Reference")] HRESULT Reference([out, retval] BSTR* pVal);
+	[propget, id(6), helpstring("property FormatVersion")] HRESULT FormatVersion([out, retval] int* pVal);
+	[propget, id(7), helpstring("property GUID")] HRESULT GUID([out, retval] BSTR* pVal);
+	[propget, id(8), helpstring("property IntegrityMd5")] HRESULT IntegrityMd5([out, retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(A9E69892-DB69-43C4-805D-15C550BB7D73),
+	dual,
+	nonextensible,
+	helpstring("IFusionCDFProbeInformation Interface"),
+	pointer_default(unique)
+]
+interface IFusionCDFProbeInformation : IDispatch{
+	[propget, id(1), helpstring("property ListIndex")] HRESULT ListIndex([out, retval] int* pVal);
+	[propget, id(2), helpstring("property Expos")] HRESULT Expos([out, retval] int* pVal);
+	[propget, id(3), helpstring("property X")] HRESULT X([out, retval] int* pVal);
+	[propget, id(4), helpstring("property Y")] HRESULT Y([out, retval] int* pVal);
+	[propget, id(5), helpstring("property PBase")] HRESULT PBase([out, retval] CHAR* pVal);
+	[propget, id(6), helpstring("property TBase")] HRESULT TBase([out, retval] CHAR* pVal);
+	[propget, id(7), helpstring("property ProbeLength")] HRESULT ProbeLength([out, retval] USHORT* pVal);
+	[propget, id(8), helpstring("property ProbeGrouping")] HRESULT ProbeGrouping([out, retval] USHORT* pVal);
+};
+[
+	object,
+	uuid(2366695A-6CD0-45C4-A2FE-F7EB20BB2F52),
+	dual,
+	nonextensible,
+	helpstring("IFusionCDFProbeGroupInformation Interface"),
+	pointer_default(unique)
+]
+interface IFusionCDFProbeGroupInformation : IDispatch{
+	[propget, id(1), helpstring("property Direction")] HRESULT Direction([out, retval] DirectionType* pVal);
+	[propget, id(2), helpstring("property NumLists")] HRESULT NumLists([out, retval] int* pVal);
+	[propget, id(3), helpstring("property NumCells")] HRESULT NumCells([out, retval] int* pVal);
+	[propget, id(4), helpstring("property NumCellsPerList")] HRESULT NumCellsPerList([out, retval] int* pVal);
+	[propget, id(5), helpstring("property Start")] HRESULT Start([out, retval] int* pVal);
+	[propget, id(6), helpstring("property Stop")] HRESULT Stop([out, retval] int* pVal);
+	[propget, id(7), helpstring("property Name")] HRESULT Name([out, retval] BSTR* pVal);
+	[id(8), helpstring("method GetCell")] HRESULT GetCell([in] int index, [in] IFusionCDFProbeInformation * info);
+	[propget, id(9), helpstring("property WobbleSituation")] HRESULT WobbleSituation([out, retval] USHORT* pVal);
+	[propget, id(10), helpstring("property AlleleCode")] HRESULT AlleleCode([out, retval] USHORT* pVal);
+	[propget, id(11), helpstring("property Channel")] HRESULT Channel([out, retval] int* pVal);
+	[propget, id(12), helpstring("property RepType")] HRESULT RepType([out, retval] ReplicationType* pVal);
+};
+[
+	object,
+	uuid(D8A41625-8DF8-4436-848D-489A3CC0A26C),
+	dual,
+	nonextensible,
+	helpstring("IFusionCDFProbeSetInformation Interface"),
+	pointer_default(unique)
+]
+interface IFusionCDFProbeSetInformation : IDispatch{
+	[propget, id(1), helpstring("property ProbeSetType")] HRESULT ProbeSetType([out, retval] GeneChipProbeSetType* pVal);
+	[propget, id(2), helpstring("property Direction")] HRESULT Direction([out, retval] DirectionType* pVal);
+	[propget, id(3), helpstring("property NumLists")] HRESULT NumLists([out, retval] int* pVal);
+	[propget, id(4), helpstring("property NumGroups")] HRESULT NumGroups([out, retval] int* pVal);
+	[propget, id(5), helpstring("property NumCells")] HRESULT NumCells([out, retval] int* pVal);
+	[propget, id(6), helpstring("property NumCellsPerList")] HRESULT NumCellsPerList([out, retval] int* pVal);
+	[propget, id(7), helpstring("property ProbeSetNumber")] HRESULT ProbeSetNumber([out, retval] int* pVal);
+	[id(8), helpstring("method GetGroup")] HRESULT GetGroup([in] int index, [in] IFusionCDFProbeGroupInformation * group);
+};
+[
+	object,
+	uuid(B5CB5ACF-A0B3-4720-B3DE-89FAFA25C81B),
+	dual,
+	nonextensible,
+	helpstring("IFusionCDFQCProbeInformation Interface"),
+	pointer_default(unique)
+]
+interface IFusionCDFQCProbeInformation : IDispatch{
+	[propget, id(1), helpstring("property X")] HRESULT X([out, retval] int* pVal);
+	[propget, id(2), helpstring("property Y")] HRESULT Y([out, retval] int* pVal);
+	[propget, id(3), helpstring("property PLen")] HRESULT PLen([out, retval] int* pVal);
+	[id(4), helpstring("method IsPerfectMatchProbe")] HRESULT IsPerfectMatchProbe([out,retval] VARIANT_BOOL* pVal);
+	[id(5), helpstring("method IsBackgroundProbe")] HRESULT IsBackgroundProbe([out,retval] VARIANT_BOOL* pVal);
+};
+[
+	object,
+	uuid(D8DA3F6D-18D5-4DD6-8D18-7E2E5D3D38E3),
+	dual,
+	nonextensible,
+	helpstring("IFusionCDFQCProbeSetInformation Interface"),
+	pointer_default(unique)
+]
+interface IFusionCDFQCProbeSetInformation : IDispatch{
+	[propget, id(1), helpstring("property QCProbeSetType")] HRESULT QCProbeSetType([out, retval] GeneChipQCProbeSetType* pVal);
+	[propget, id(2), helpstring("property NumCells")] HRESULT NumCells([out, retval] int* pVal);
+	[id(3), helpstring("method GetProbeInformation")] HRESULT GetProbeInformation([in] int index, [in] IFusionCDFQCProbeInformation * pVal);
+};
+[
+	object,
+	uuid(D41E1413-2E4A-47EF-A3D1-DF09AF2D519C),
+	dual,
+	nonextensible,
+	helpstring("IFusionCDFData Interface"),
+	pointer_default(unique)
+]
+interface IFusionCDFData : IDispatch{
+	[propget, id(1), helpstring("property FileName")] HRESULT FileName([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("property FileName")] HRESULT FileName([in] BSTR newVal);
+	[id(2), helpstring("method GetHeader")] HRESULT GetHeader([out,retval] IFusionCDFFileHeader ** pVal);
+	[propget, id(3), helpstring("property Error")] HRESULT Error([out, retval] BSTR* pVal);
+	[id(4), helpstring("method GetProbeSetName")] HRESULT GetProbeSetName([in] int index, [out,retval] BSTR * pVal);
+	[propget, id(5), helpstring("property ChipType")] HRESULT ChipType([out, retval] BSTR* pVal);
+	[id(6), helpstring("method Read")] HRESULT Read([out,retval] VARIANT_BOOL* pVal);
+	[id(7), helpstring("method ReadHeader")] HRESULT ReadHeader([out,retval] VARIANT_BOOL* pVal);
+	[id(8), helpstring("method Exists")] HRESULT Exists([out,retval] VARIANT_BOOL* pVal);
+	[id(9), helpstring("method Close")] HRESULT Close(void);
+	[id(10), helpstring("method IsXDACompatibleFile")] HRESULT IsXDACompatibleFile([in] BSTR fileName, [out,retval] VARIANT_BOOL* pVal);
+	[id(11), helpstring("method IsCalvinCompatibleFile")] HRESULT IsCalvinCompatibleFile([in] BSTR fileName, [out,retval] VARIANT_BOOL* pVal);
+	[id(12), helpstring("method GetProbeSetType")] HRESULT GetProbeSetType([in] int index, [out,retval] GeneChipProbeSetType * pVal);
+	[id(13), helpstring("method GetProbeSetInformation")] HRESULT GetProbeSetInformation([in] int index, [in] IFusionCDFProbeSetInformation * pVal);
+	[id(14), helpstring("method GetQCProbeSetInformation")] HRESULT GetQCProbeSetInformation([in] int index, [in] IFusionCDFQCProbeSetInformation * pVal);
+	[id(15), helpstring("method GetQCProbeSetInformationByType")] HRESULT GetQCProbeSetInformationByType([in] GeneChipQCProbeSetType qcType, [in] IFusionCDFQCProbeSetInformation * pVal);
+	[propget, id(16), helpstring("property ChipTypes")] HRESULT ChipTypes([out, retval] VARIANT* pVal);
+	[propget, id(17), helpstring("property GUID")] HRESULT GUID([out, retval] BSTR* pVal);
+	[propget, id(18), helpstring("property IntegrityMd5")] HRESULT IntegrityMd5([out, retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(4896EC1C-05F8-40F3-A7F2-E53371614C3E),
+	dual,
+	nonextensible,
+	helpstring("IFusionExpressionProbeSetResults Interface"),
+	pointer_default(unique)
+]
+interface IFusionExpressionProbeSetResults : IDispatch{
+	[propget, id(1), helpstring("property DetectionPValue")] HRESULT DetectionPValue([out, retval] float* pVal);
+	[propget, id(2), helpstring("property Signal")] HRESULT Signal([out, retval] float* pVal);
+	[propget, id(3), helpstring("property NumPairs")] HRESULT NumPairs([out, retval] int* pVal);
+	[propget, id(4), helpstring("property NumUsedPairs")] HRESULT NumUsedPairs([out, retval] int* pVal);
+	[propget, id(5), helpstring("property Detection")] HRESULT Detection([out, retval] CHAR* pVal);
+	[propget, id(6), helpstring("property HasCompResults")] HRESULT HasCompResults([out, retval] VARIANT_BOOL* pVal);
+	[propget, id(7), helpstring("property ChangePValue")] HRESULT ChangePValue([out, retval] float* pVal);
+	[propget, id(8), helpstring("property SignalLogRatio")] HRESULT SignalLogRatio([out, retval] float* pVal);
+	[propget, id(9), helpstring("property SignalLogRatioLow")] HRESULT SignalLogRatioLow([out, retval] float* pVal);
+	[propget, id(10), helpstring("property SignalLogRatioHigh")] HRESULT SignalLogRatioHigh([out, retval] float* pVal);
+	[propget, id(11), helpstring("property NumCommonPairs")] HRESULT NumCommonPairs([out, retval] int* pVal);
+	[propget, id(12), helpstring("property Change")] HRESULT Change([out, retval] CHAR* pVal);
+	[id(13), helpstring("method GetDetectionString")] HRESULT GetDetectionString([out,retval] BSTR * pVal);
+	[id(14), helpstring("method GetChangeString")] HRESULT GetChangeString([out,retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(AA91C61D-D2C3-47AE-8A90-EE190B24A697),
+	dual,
+	nonextensible,
+	helpstring("IFusionGenotypeProbeSetResults Interface"),
+	pointer_default(unique)
+]
+interface IFusionGenotypeProbeSetResults : IDispatch{
+	[propget, id(1), helpstring("property AlleleCall")] HRESULT AlleleCall([out, retval] CHAR* pVal);
+	[propget, id(2), helpstring("property Confidence")] HRESULT Confidence([out, retval] float* pVal);
+	[propget, id(3), helpstring("property RAS1")] HRESULT RAS1([out, retval] float* pVal);
+	[propget, id(4), helpstring("property RAS2")] HRESULT RAS2([out, retval] float* pVal);
+	[propget, id(5), helpstring("property PValueAA")] HRESULT PValueAA([out, retval] float* pVal);
+	[propget, id(6), helpstring("property PValueAB")] HRESULT PValueAB([out, retval] float* pVal);
+	[propget, id(7), helpstring("property PValueBB")] HRESULT PValueBB([out, retval] float* pVal);
+	[propget, id(8), helpstring("property PValueNoCall")] HRESULT PValueNoCall([out, retval] float* pVal);
+	[id(9), helpstring("method GetAlleleCallString")] HRESULT GetAlleleCallString([out,retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(F61855C0-70CB-4E6E-9D03-57DC99801059),
+	dual,
+	nonextensible,
+	helpstring("IFusionUniversalProbeSetResults Interface"),
+	pointer_default(unique)
+]
+interface IFusionUniversalProbeSetResults : IDispatch{
+	[propget, id(1), helpstring("property Background")] HRESULT Background([out, retval] float* pVal);
+};
+[
+	object,
+	uuid(4D931BCD-81D1-4C4A-AAF4-282AB46F99EA),
+	dual,
+	nonextensible,
+	helpstring("IFusionBaseCallType Interface"),
+	pointer_default(unique)
+]
+interface IFusionBaseCallType : IDispatch{
+	[propget, id(1), helpstring("property Position")] HRESULT Position([out, retval] int* pVal);
+	[propget, id(2), helpstring("property Call")] HRESULT Call([out, retval] CHAR* pVal);
+};
+[
+	object,
+	uuid(FE68052F-D5D9-4229-A442-5B1A8D248F4C),
+	dual,
+	nonextensible,
+	helpstring("IFusionForceCallType Interface"),
+	pointer_default(unique)
+]
+interface IFusionForceCallType : IFusionBaseCallType{
+	[propget, id(3), helpstring("property Reason")] HRESULT Reason([out, retval] CHAR* pVal);
+};
+[
+	object,
+	uuid(89B7FD94-354D-40DE-A891-27E9CAAC9DA7),
+	dual,
+	nonextensible,
+	helpstring("IFusionResequencingResults Interface"),
+	pointer_default(unique)
+]
+interface IFusionResequencingResults : IDispatch{
+	[id(1), helpstring("method Clear")] HRESULT Clear(void);
+	[id(2), helpstring("method GetCalledBase")] HRESULT GetCalledBase([in] int index, [out,retval] CHAR* pVal);
+	[propget, id(3), helpstring("property CalledBasesSize")] HRESULT CalledBasesSize([out, retval] int* pVal);
+	[id(4), helpstring("method GetScore")] HRESULT GetScore([in] int index, [out,retval] float* pVal);
+	[propget, id(5), helpstring("property ScoresSize")] HRESULT ScoresSize([out, retval] int* pVal);
+	[id(6), helpstring("method GetForceCall")] HRESULT GetForceCall([in] int index, [out,retval] IFusionForceCallType ** pVal);
+	[propget, id(7), helpstring("property ForceCallsSize")] HRESULT ForceCallsSize([out, retval] int* pVal);
+	[id(8), helpstring("method GetOrigCall")] HRESULT GetOrigCall([in] int index, [out,retval] IFusionBaseCallType ** pVal);
+	[propget, id(9), helpstring("property OrigCallsSize")] HRESULT OrigCallsSize([out, retval] int* pVal);
+};
+[
+	object,
+	uuid(6579FF7D-D6A5-46EE-8190-EE94F0100079),
+	dual,
+	nonextensible,
+	helpstring("IFusionCHPData Interface"),
+	pointer_default(unique)
+]
+interface IFusionCHPData : IDispatch{
+	[propget, id(1), helpstring("property FileTypeIdentifiers")] HRESULT FileTypeIdentifiers([out, retval] VARIANT* pVal);
+	[propget, id(2), helpstring("property FileId")] HRESULT FileId([out, retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(0DBB8724-3A9D-4BEA-8343-362C6351EAA6),
+	dual,
+	nonextensible,
+	helpstring("IBackgroundZoneType Interface"),
+	pointer_default(unique)
+]
+interface IBackgroundZoneType : IDispatch{
+	[propget, id(1), helpstring("property centerx")] HRESULT centerx([out, retval] float* pVal);
+	[propget, id(2), helpstring("property centery")] HRESULT centery([out, retval] float* pVal);
+	[propget, id(3), helpstring("property background")] HRESULT background([out, retval] float* pVal);
+};
+[
+	object,
+	uuid(21CA9460-480D-4174-BE7F-63F49D1858F3),
+	dual,
+	nonextensible,
+	helpstring("IBackgroundZoneInfo Interface"),
+	pointer_default(unique)
+]
+interface IBackgroundZoneInfo : IDispatch{
+	[propget, id(1), helpstring("property number_zones")] HRESULT number_zones([out, retval] int* pVal);
+	[propget, id(2), helpstring("property smooth_factor")] HRESULT smooth_factor([out, retval] float* pVal);
+	[propget, id(3), helpstring("property zones")] HRESULT zones([out, retval] VARIANT* pVal);
+};
+[
+	object,
+	uuid(5C336464-EF0D-4805-965D-5D449225716E),
+	dual,
+	nonextensible,
+	helpstring("IFusionCHPHeader Interface"),
+	pointer_default(unique)
+]
+interface IFusionCHPHeader : IDispatch{
+	[propget, id(1), helpstring("property Cols")] HRESULT Cols([out, retval] int* pVal);
+	[propget, id(2), helpstring("property Rows")] HRESULT Rows([out, retval] int* pVal);
+	[propget, id(3), helpstring("property NumProbeSets")] HRESULT NumProbeSets([out, retval] int* pVal);
+	[propget, id(4), helpstring("property AssayType")] HRESULT AssayType([out, retval] AssayType* pVal);
+	[propget, id(5), helpstring("property ChipType")] HRESULT ChipType([out, retval] BSTR* pVal);
+	[propget, id(6), helpstring("property AlgName")] HRESULT AlgName([out, retval] BSTR* pVal);
+	[propget, id(7), helpstring("property AlgVersion")] HRESULT AlgVersion([out, retval] BSTR* pVal);
+	[propget, id(8), helpstring("property AlgorithmParameters")] HRESULT AlgorithmParameters([out, retval] VARIANT* pVal);
+	[propget, id(9), helpstring("property AlgorithmParameterCount")] HRESULT AlgorithmParameterCount([out, retval] int* pVal);
+	[propget, id(10), helpstring("property SummaryParameters")] HRESULT SummaryParameters([out, retval] VARIANT* pVal);
+	[propget, id(11), helpstring("property SummaryParameterCount")] HRESULT SummaryParameterCount([out, retval] int* pVal);
+	[propget, id(12), helpstring("property ParentCellFile")] HRESULT ParentCellFile([out, retval] BSTR* pVal);
+	[propget, id(13), helpstring("property ProgID")] HRESULT ProgID([out, retval] BSTR* pVal);
+	[id(14), helpstring("method GetAlgorithmParameter")] HRESULT GetAlgorithmParameter([in] BSTR tag, [out,retval] BSTR * pVal);
+	[id(15), helpstring("method GetSummaryParameter")] HRESULT GetSummaryParameter([in] BSTR tag, [out,retval] BSTR* pVal);
+	[id(16), helpstring("method GetAlgorithmParameterName")] HRESULT GetAlgorithmParameterName([in] int index, [out,retval] BSTR * pVal);
+	[id(17), helpstring("method GetSummaryParameter")] HRESULT GetSummaryParameterName([in] int index, [out,retval] BSTR* pVal);
+	[id(18), helpstring("method Clear")] HRESULT Clear(void);
+	[propget, id(19), helpstring("property BackgroundZoneInfo")] HRESULT BackgroundZoneInfo([out, retval] IBackgroundZoneInfo ** pVal);
+	[id(20), helpstring("method GetBackgroundZones")] HRESULT GetBackgroundZones([out,retval] VARIANT *zones);
+	[id(21), helpstring("method GetBackgroundZone")] HRESULT GetBackgroundZone([in] int x, [in] int y, [out,retval] IBackgroundZoneType ** pVal);
+};
+[
+	object,
+	uuid(2916B686-EC31-4C71-8B55-6EF1C66D043B),
+	dual,
+	nonextensible,
+	helpstring("IFusionCHPLegacyData Interface"),
+	pointer_default(unique)
+]
+interface IFusionCHPLegacyData : IFusionCHPData{
+	[id(3), helpstring("method FromBase")] HRESULT FromBase([in] IFusionCHPData * baseChp, [out,retval] VARIANT_BOOL* pVal);
+	[id(4), helpstring("method GetExpressionResults")] HRESULT GetExpressionResults([in] int index, [in] IFusionExpressionProbeSetResults * pVal);
+	[id(5), helpstring("method GetGenotypingResults")] HRESULT GetGenotypingResults([in] int index, [in] IFusionGenotypeProbeSetResults * pVal);
+	[id(6), helpstring("method GetUniversalResults")] HRESULT GetUniversalResults([in] int index, [in] IFusionUniversalProbeSetResults * pVal);
+	[id(7), helpstring("method GetReseqResults")] HRESULT GetReseqResults([in] IFusionResequencingResults * pVal);
+	[id(8), helpstring("method Clear")] HRESULT Clear(void);
+	[id(9), helpstring("method GetHeader")] HRESULT GetHeader([out,retval] IFusionCHPHeader ** pVal);
+	[id(10), helpstring("method GetProbeSetName")] HRESULT GetProbeSetName([in] int index, [out,retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(D4999F9B-7C01-4465-BF19-2519E09B9695),
+	dual,
+	nonextensible,
+	helpstring("IFusionCHPDataReg Interface"),
+	pointer_default(unique)
+]
+interface IFusionCHPDataReg : IDispatch{
+	[id(1), helpstring("method Read")] HRESULT Read([in] BSTR fileName, [out,retval] IFusionCHPData ** pVal);
+	[id(2), helpstring("method ReadHeader")] HRESULT ReadHeader([in] BSTR fileName, [out,retval] IFusionCHPData ** pVal);
+};
+[
+	object,
+	uuid(DB967293-E0AE-4CC2-ACB6-FE9BDD775E52),
+	dual,
+	nonextensible,
+	helpstring("IProbeSetQuantificationData Interface"),
+	pointer_default(unique)
+]
+interface IProbeSetQuantificationData : IDispatch{
+	[propget, id(1), helpstring("property name")] HRESULT name([out, retval] BSTR* pVal);
+	[propget, id(2), helpstring("property quantification")] HRESULT quantification([out, retval] float* pVal);
+    [propget, id(3), helpstring("property identifier")] HRESULT identifier([out, retval] int* pVal);
+};
+[
+	object,
+	uuid(39AA8C7B-E9A3-43AC-9CFB-4C725A240401),
+	dual,
+	nonextensible,
+	helpstring("IFusionCHPQuantificationData Interface"),
+	pointer_default(unique)
+]
+interface IFusionCHPQuantificationData : IFusionCHPData{
+	[id(3), helpstring("method FromBase")] HRESULT FromBase([in] IFusionCHPData * baseChp, [out,retval] VARIANT_BOOL* pVal);
+	[propget, id(4), helpstring("property AlgName")] HRESULT AlgName([out, retval] BSTR* pVal);
+	[propget, id(5), helpstring("property AlgVersion")] HRESULT AlgVersion([out, retval] BSTR* pVal);
+	[propget, id(6), helpstring("property ArrayType")] HRESULT ArrayType([out, retval] BSTR* pVal);
+	[propget, id(7), helpstring("property AlgorithmParameters")] HRESULT AlgorithmParameters([out, retval] VARIANT* pVal);
+	[propget, id(8), helpstring("property SummaryParameters")] HRESULT SummaryParameters([out, retval] VARIANT* pVal);
+	[propget, id(9), helpstring("property EntryCount")] HRESULT EntryCount([out, retval] int* pVal);
+	[id(10), helpstring("method GetQuantificationEntry")] HRESULT GetQuantificationEntry([in] int index, [in] IProbeSetQuantificationData * pVal);
+	[id(11), helpstring("method Close")] HRESULT Close();
+};
+[
+	object,
+	uuid(48733CDB-673E-4903-B10B-A5FE9683C7A2),
+	dual,
+	nonextensible,
+	helpstring("IProbeSetQuantificationDetectionData Interface"),
+	pointer_default(unique)
+]
+interface IProbeSetQuantificationDetectionData : IDispatch{
+ 	[propget, id(1), helpstring("property name")] HRESULT name([out, retval] BSTR* pVal);
+	[propget, id(2), helpstring("property quantification")] HRESULT quantification([out, retval] float* pVal);
+	[propget, id(3), helpstring("property pvalue")] HRESULT pvalue([out, retval] float* pVal);
+    [propget, id(4), helpstring("property identifier")] HRESULT identifier([out, retval] int* pVal);
+};
+[
+	object,
+	uuid(CA9D2A3B-13CB-4C90-97D1-DF095B6FE95E),
+	dual,
+	nonextensible,
+	helpstring("IFusionCHPQuantificationDetectionData Interface"),
+	pointer_default(unique)
+]
+interface IFusionCHPQuantificationDetectionData : IFusionCHPData{
+	[id(3), helpstring("method FromBase")] HRESULT FromBase([in] IFusionCHPData * baseChp, [out,retval] VARIANT_BOOL* pVal);
+	[propget, id(4), helpstring("property AlgName")] HRESULT AlgName([out, retval] BSTR* pVal);
+	[propget, id(5), helpstring("property AlgVersion")] HRESULT AlgVersion([out, retval] BSTR* pVal);
+	[propget, id(6), helpstring("property ArrayType")] HRESULT ArrayType([out, retval] BSTR* pVal);
+	[propget, id(7), helpstring("property AlgorithmParameters")] HRESULT AlgorithmParameters([out, retval] VARIANT* pVal);
+	[propget, id(8), helpstring("property SummaryParameters")] HRESULT SummaryParameters([out, retval] VARIANT* pVal);
+	[propget, id(9), helpstring("property EntryCount")] HRESULT EntryCount([out, retval] int* pVal);
+	[id(10), helpstring("method GetQuantificationDetectionEntry")] HRESULT GetQuantificationDetectionEntry([in] int index, [in] IProbeSetQuantificationDetectionData * pVal);
+   	[id(11), helpstring("method Close")] HRESULT Close();
+};
+[
+	object,
+	uuid(98D16483-1A75-40d3-9D68-DA2D22E7FD20),
+	dual,
+	nonextensible,
+	helpstring("IProbeSetMultiDataGenotypeData Interface"),
+	pointer_default(unique)
+]
+interface IProbeSetMultiDataGenotypeData : IDispatch{
+	[propget, id(1), helpstring("property name")] HRESULT name([out, retval] BSTR* pVal);
+	[propget, id(2), helpstring("property call")] HRESULT call([out, retval] int* pVal);
+    [propget, id(3), helpstring("property confidence")] HRESULT confidence([out, retval] float* pVal);
+    [propget, id(4), helpstring("property metricCount")] HRESULT metricCount([out, retval] int* pVal);
+    [id(5), helpstring("method metric")] HRESULT GetMetric([in] int index, [out, retval] VARIANT* pVal);
+    [id(6), helpstring("method metric name")] HRESULT GetMetricName([in] int index, [out, retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(841781CC-3DE9-4F49-90F3-49922EC85BB0),
+	dual,
+	nonextensible,
+	helpstring("IProbeSetMultiDataExpressionData Interface"),
+	pointer_default(unique)
+]
+interface IProbeSetMultiDataExpressionData : IDispatch{
+	[propget, id(1), helpstring("property name")] HRESULT name([out, retval] BSTR* pVal);
+    [propget, id(2), helpstring("property quantification")] HRESULT quantification([out, retval] float* pVal);
+    [propget, id(3), helpstring("property metricCount")] HRESULT metricCount([out, retval] int* pVal);
+    [id(4), helpstring("method metric")] HRESULT GetMetric([in] int index, [out, retval] VARIANT* pVal);
+    [id(5), helpstring("method metric name")] HRESULT GetMetricName([in] int index, [out, retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(FED91B7A-5199-43F6-B610-860AC2503530),
+	dual,
+	nonextensible,
+	helpstring("IProbeSetMultiDataCopyNumberData Interface"),
+	pointer_default(unique)
+]
+interface IProbeSetMultiDataCopyNumberData : IDispatch{
+	[propget, id(1), helpstring("property name")] HRESULT name([out, retval] BSTR* pVal);
+	[propget, id(2), helpstring("property chr")] HRESULT chr([out, retval] int* pVal);
+    [propget, id(3), helpstring("property position")] HRESULT position([out, retval] int* pVal);
+    [propget, id(4), helpstring("property metricCount")] HRESULT metricCount([out, retval] int* pVal);
+    [id(5), helpstring("method metric")] HRESULT GetMetric([in] int index, [out, retval] VARIANT* pVal);
+    [id(6), helpstring("method metric name")] HRESULT GetMetricName([in] int index, [out, retval] BSTR* pVal);
+};
+[
+	object,
+	uuid(D21A467C-FA6C-4E87-9402-7EB67F8DD78B),
+	dual,
+	nonextensible,
+	helpstring("IProbeSetMultiDataCytoRegionData Interface"),
+	pointer_default(unique)
+]
+interface IProbeSetMultiDataCytoRegionData : IDispatch{
+	[propget, id(1), helpstring("property name")] HRESULT name([out, retval] BSTR* pVal);
+	[propget, id(2), helpstring("property chr")] HRESULT chr([out, retval] int* pVal);
+    [propget, id(3), helpstring("property startPosition")] HRESULT startPosition([out, retval] int* pVal);
+    [propget, id(4), helpstring("property stopPosition")] HRESULT stopPosition([out, retval] int* pVal);
+	[propget, id(5), helpstring("property call")] HRESULT call([out, retval] CytoCallType* pVal);
+    [propget, id(6), helpstring("property confidenceScore")] HRESULT confidenceScore([out, retval] float* pVal);
+    [propget, id(7), helpstring("property metricCount")] HRESULT metricCount([out, retval] int* pVal);
+    [id(8), helpstring("method metric")] HRESULT GetMetric([in] int index, [out, retval] VARIANT* pVal);
+    [id(9), helpstring("method metric name")] HRESULT GetMetricName([in] int index, [out, retval] BSTR* pVal);
+};
+
+[
+	object,
+	uuid(5E71618F-38D5-48DB-8D67-82DD55A0DA61),
+	dual,
+	nonextensible,
+	helpstring("IProbeSetMultiDataCopyNumberVariationRegionData Interface"),
+	pointer_default(unique)
+]
+interface IProbeSetMultiDataCopyNumberVariationRegionData : IDispatch{
+    [propget, id(1), helpstring("property name")] HRESULT name([out, retval] BSTR* pVal);
+    [propget, id(2), helpstring("property signal")] HRESULT signal([out, retval] float* pVal);
+    [propget, id(3), helpstring("property call")] HRESULT call([out, retval] int* pVal);
+    [propget, id(4), helpstring("property confidenceScore")] HRESULT confidenceScore([out, retval] float* pVal);
+    [propget, id(5), helpstring("property metricCount")] HRESULT metricCount([out, retval] int* pVal);
+    [id(6), helpstring("method metric")] HRESULT GetMetric([in] int index, [out, retval] VARIANT* pVal);
+    [id(7), helpstring("method metric name")] HRESULT GetMetricName([in] int index, [out, retval] BSTR* pVal);
+   
+};
+[
+	object,
+	uuid(A35C3262-9F4D-43d3-B651-30249A927DDB),
+	dual,
+	nonextensible,
+	helpstring("FusionCHPMultiDataData Interface"),
+	pointer_default(unique)
+]
+interface IFusionCHPMultiDataData : IFusionCHPData{
+	[id(3), helpstring("method FromBase")] HRESULT FromBase([in] IFusionCHPData * baseChp, [out,retval] VARIANT_BOOL* pVal);
+	[propget, id(4), helpstring("property AlgName")] HRESULT AlgName([out, retval] BSTR* pVal);
+	[propget, id(5), helpstring("property AlgVersion")] HRESULT AlgVersion([out, retval] BSTR* pVal);
+	[propget, id(6), helpstring("property ArrayType")] HRESULT ArrayType([out, retval] BSTR* pVal);
+	[propget, id(7), helpstring("property AlgorithmParameters")] HRESULT AlgorithmParameters([out, retval] VARIANT* pVal);
+	[propget, id(8), helpstring("property SummaryParameters")] HRESULT SummaryParameters([out, retval] VARIANT* pVal);
+	[id(9), helpstring("method GetEntryCount")] HRESULT GetEntryCount([in] MultiDataType dataType, [out, retval] int* pVal);
+	[id(10), helpstring("method GetGenotypeEntry")] HRESULT GetGenotypeEntry([in] MultiDataType dataType, [in] int index, [in] IProbeSetMultiDataGenotypeData * pVal);
+	[id(11), helpstring("method GetGenoCall")] HRESULT GetGenoCall([in] MultiDataType dataType, [in] int index, [out, retval] int * pVal);
+	[id(12), helpstring("method GetGenoConfidence")] HRESULT GetGenoConfidence([in] MultiDataType dataType, [in] int index, [out, retval] float * pVal);
+	[id(13), helpstring("method GetProbeSetName")] HRESULT GetProbeSetName([in] MultiDataType dataType, [in] int index, [out, retval] BSTR * pVal);
+	[id(14), helpstring("method GetExpressionEntry")] HRESULT GetExpressionEntry([in] MultiDataType dataType, [in] int index, [in] IProbeSetMultiDataExpressionData * pVal);
+    [id(15), helpstring("method GetExpressionQuantification")] HRESULT GetExpressionQuantification([in] MultiDataType dataType, [in] int index, [out, retval] float * pVal);
+    [id(16), helpstring("method GetNumMetricColumns")] HRESULT GetNumMetricColumns([in] MultiDataType dataType, [out, retval] int * pVal);
+    [id(17), helpstring("method GetMetricColumnName")] HRESULT GetMetricColumnName([in] MultiDataType dataType, [in] int index, [out, retval] BSTR * pVal);
+    [id(18), helpstring("method GetProbesetNamesAndGenotypeCalls")] HRESULT GetProbesetNamesAndGenotypeCalls([in] MultiDataType dataType, [in,out] VARIANT* names, [in,out] VARIANT* calls, [in] int startIndex, [out, retval] int *pVal);
+    [id(19), helpstring("method GetProbesetNamesAndExpressionSignals")] HRESULT GetProbesetNamesAndExpressionSignals([in] MultiDataType dataType, [in,out] VARIANT* names, [in,out] VARIANT* signals, [in] int startIndex, [out, retval] int *pVal);
+    [id(20), helpstring("method InitializeGetGenotypeEntries")] HRESULT InitializeGetGenotypeEntries([in] MultiDataType dataType, [in,out] BSTR* forcedName, [in,out] BSTR *signalAName, [in,out] BSTR *signalBName);
+    [id(21), helpstring("method GetGenotypeEntries")] HRESULT GetGenotypeEntries([in] MultiDataType dataType, [in,out] VARIANT* names, [in,out] VARIANT* calls, [in,out] VARIANT* confidences, [in,out] VARIANT* forcedcalls, [in,out] VARIANT* signalsA, [in,out] VARIANT* signalsB, [in] int startIndex, [out, retval] int *pVal);
+    [id(22), helpstring("method GetGenotypeEntriesGivenIndicies")] HRESULT GetGenotypeEntriesGivenIndicies([in] MultiDataType dataType, [in] VARIANT* indicies, [in,out] VARIANT* names, [in,out] VARIANT* calls, [in,out] VARIANT* confidences, [in,out] VARIANT* forcedcalls, [in,out] VARIANT* signalsA, [in,out] VARIANT* signalsB);
+   	[id(23), helpstring("method Close")] HRESULT Close();
+   	[id(24), helpstring("method GetCopyNumberEntry")] HRESULT GetCopyNumberEntry([in] MultiDataType dataType, [in] int index, [in] IProbeSetMultiDataCopyNumberData * pVal);
+    [id(25), helpstring("method GetCytoRegionEntry")] HRESULT GetCytoRegionEntry([in] MultiDataType dataType, [in] int index, [in] IProbeSetMultiDataCytoRegionData * pVal);
+    [id(26), helpstring("method GetCytoRegionEntries")] HRESULT GetCytoRegionEntries([in] MultiDataType dataType, [in,out] VARIANT* names, [in,out] VARIANT* calls, [in,out] VARIANT* confidences, [in,out] VARIANT* callsLOH, [in,out] VARIANT* confidencesLOH, [in] int startIndex, [out, retval] int *pVal);
+	[id(27), helpstring("method GetDataSetHeaderParameters")] HRESULT GetDataSetHeaderParameters([in] MultiDataType dataType, [out, retval] VARIANT* pVal);
+    [id(28), helpstring("method InitializeGetCNStateEntries")] HRESULT InitializeGetCNStateEntries([in] MultiDataType dataType);
+    [id(29), helpstring("method GetCopyNumberState")] HRESULT GetCopyNumberState([in] MultiDataType dataType, [in,out] VARIANT* names, [in,out] VARIANT* chromosomes, [in,out] VARIANT* positions, [in,out] VARIANT* cnStates, [in] int startIndex, [out, retval] int *pVal);
+    [id(30), helpstring("method InitializeGetLOHStateEntries")] HRESULT InitializeGetLOHStateEntries([in] MultiDataType dataType);
+    [id(31), helpstring("method GetLOHState")] HRESULT GetLOHState([in] MultiDataType dataType, [in,out] VARIANT* names, [in,out] VARIANT* chromosomes, [in,out] VARIANT* positions, [in,out] VARIANT* lohStates, [in] int startIndex, [out, retval] int *pVal);
+    [id(32), helpstring("method InitializeGetLog2RatioEntries")] HRESULT InitializeGetLog2RatioEntries([in] MultiDataType dataType);
+	[id(33), helpstring("method GetLog2Ratio")] HRESULT GetLog2Ratio([in] MultiDataType dataType, [in] int startIndex, [in] int count, [in,out] VARIANT* names, [in,out] VARIANT* positions, [in,out] VARIANT* values);
+    [id(34), helpstring("method GetCopyNumberVariationRegionEntry")] HRESULT GetCopyNumberVariationRegionEntry([in] MultiDataType dataType, [in] int index, [in] IProbeSetMultiDataCopyNumberVariationRegionData * pVal); 
+	[id(35), helpstring("method GetLog2Ratio2")] HRESULT GetLog2Ratio2([in] MultiDataType dataType, [in] int startIndex, [in] int count, [in,out] VARIANT* values);
+    [id(36), helpstring("method GetCopyNumberVariationRegionNamesAndResults")] HRESULT GetCopyNumberVariationRegionNamesAndResults([in] MultiDataType dataType, [in,out] VARIANT* names, [in,out] VARIANT* calls, [in,out] VARIANT* signals, [in,out] VARIANT* confidenceScores, [out, retval] int *pVal);
+    [id(37), helpstring("method InitializeGetCopyNumberVariationEntries")] HRESULT InitializeGetCopyNumberVariationEntries([in] MultiDataType dataType);
+    [id(38), helpstring("method GetCopyNumberVariationResults")] HRESULT GetCopyNumberVariationResults([in] MultiDataType dataType, [in,out] VARIANT* calls, [in,out] VARIANT* signals, [in,out] VARIANT* confidenceScores, [out, retval] int *pVal);
+	[id(39), helpstring("method GetCopyNumberEntryLog2Ratio")] HRESULT GetCopyNumberEntryLog2Ratio([in] MultiDataType dataType, [in] int index, [in,out] float * pVal);
+
+   
+};
+
+[
+	uuid(05760AA6-8312-4AC3-A990-3581F2994BED),
+	version(1.0),
+	helpstring("affx_fusion_com 1.0 Type Library")
+]
+library affx_fusion_comLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(CC256DF1-4BD7-4C2D-9111-7DEC0195BD36),
+		helpstring("FusionCELData Class")
+	]
+	coclass FusionCELData
+	{
+		[default] interface IFusionCELData;
+	};
+	[
+		uuid(404F7728-11CB-4E1E-9343-C570DA8B4F3C),
+		helpstring("FusionCELFileEntryType Class")
+	]
+	coclass FusionCELFileEntryType
+	{
+		[default] interface IFusionCELFileEntryType;
+	};
+	[
+		uuid(8D649E0E-13B6-4F89-953D-CABFF16EFA72),
+		helpstring("FusionTagValuePairType Class")
+	]
+	coclass FusionTagValuePairType
+	{
+		[default] interface IFusionTagValuePairType;
+	};
+	[
+		uuid(84371ACD-6AF1-4C6A-B263-962C243F6C51),
+		helpstring("FusionPSIFile Class")
+	]
+	coclass FusionPSIFile
+	{
+		[default] interface IFusionPSIFile;
+	};
+	[
+		uuid(D23C6C39-4E7E-4DAC-8DD2-5CE2DFCD0BBC),
+		helpstring("FPoint Class")
+	]
+	coclass FPoint
+	{
+		[default] interface IFPoint;
+	};
+	[
+		uuid(F1A2DC17-3871-4189-9E3F-D3852387F0FF),
+		helpstring("FGridCoords Class")
+	]
+	coclass FGridCoords
+	{
+		[default] interface IFGridCoords;
+	};
+	[
+		uuid(28093011-D55B-4CD4-AA79-2B00E81F0824),
+		helpstring("FusionCDFFileHeader Class")
+	]
+	coclass FusionCDFFileHeader
+	{
+		[default] interface IFusionCDFFileHeader;
+	};
+	[
+		uuid(BA270FF2-23B4-4BE7-AE14-E0E91BFCD979),
+		helpstring("FusionCDFProbeInformation Class")
+	]
+	coclass FusionCDFProbeInformation
+	{
+		[default] interface IFusionCDFProbeInformation;
+	};
+	[
+		uuid(B5140874-D129-489E-A3D4-97CFD9AB2279),
+		helpstring("FusionCDFProbeGroupInformation Class")
+	]
+	coclass FusionCDFProbeGroupInformation
+	{
+		[default] interface IFusionCDFProbeGroupInformation;
+	};
+	[
+		uuid(15C4A27A-2392-4111-9241-A0DC10FE1C56),
+		helpstring("FusionCDFProbeSetInformation Class")
+	]
+	coclass FusionCDFProbeSetInformation
+	{
+		[default] interface IFusionCDFProbeSetInformation;
+	};
+	[
+		uuid(E75F9040-C733-4429-8F59-CB6CF36BAAB0),
+		helpstring("FusionCDFQCProbeInformation Class")
+	]
+	coclass FusionCDFQCProbeInformation
+	{
+		[default] interface IFusionCDFQCProbeInformation;
+	};
+	[
+		uuid(B75F5A82-11F1-4E46-8C2B-BF541D67F911),
+		helpstring("FusionCDFQCProbeSetInformation Class")
+	]
+	coclass FusionCDFQCProbeSetInformation
+	{
+		[default] interface IFusionCDFQCProbeSetInformation;
+	};
+	[
+		uuid(C7E9A6DC-F46E-43FC-8E52-C7E3A60FEC3C),
+		helpstring("FusionCDFData Class")
+	]
+	coclass FusionCDFData
+	{
+		[default] interface IFusionCDFData;
+	};
+	[
+		uuid(943A92AD-6924-4557-99D0-FAE9B541AD95),
+		helpstring("FusionCHPHeader Class")
+	]
+	coclass FusionCHPHeader
+	{
+		[default] interface IFusionCHPHeader;
+	};
+	[
+		uuid(4D217947-8E07-44E5-AB2D-A020D9F66538),
+		helpstring("FusionCHPLegacyData Class")
+	]
+	coclass FusionCHPLegacyData
+	{
+		[default] interface IFusionCHPLegacyData;
+	};
+	[
+		uuid(E6C8C9B8-0E6D-420F-A97E-93519CDCBFD0),
+		helpstring("FusionCHPDataReg Class")
+	]
+	coclass FusionCHPDataReg
+	{
+		[default] interface IFusionCHPDataReg;
+	};
+	[
+		uuid(54A30533-F7CE-431E-81DC-9446C638661B),
+		helpstring("FusionCHPData Class")
+	]
+	coclass FusionCHPData
+	{
+		[default] interface IFusionCHPData;
+	};
+	[
+		uuid(5FFAEAB6-25D5-4216-878B-65F09DBAD589),
+		helpstring("FusionExpressionProbeSetResults Class")
+	]
+	coclass FusionExpressionProbeSetResults
+	{
+		[default] interface IFusionExpressionProbeSetResults;
+	};
+	[
+		uuid(5DCBDFFB-92DD-4D3E-AF04-C74B05845535),
+		helpstring("FusionGenotypeProbeSetResults Class")
+	]
+	coclass FusionGenotypeProbeSetResults
+	{
+		[default] interface IFusionGenotypeProbeSetResults;
+	};
+	[
+		uuid(3F997A3E-37A8-4C60-80FA-0E31BEC91B43),
+		helpstring("FusionUniversalProbeSetResults Class")
+	]
+	coclass FusionUniversalProbeSetResults
+	{
+		[default] interface IFusionUniversalProbeSetResults;
+	};
+	[
+		uuid(59DDE73B-DE72-429E-90EA-5A964BD49025),
+		helpstring("FusionResequencingResults Class")
+	]
+	coclass FusionResequencingResults
+	{
+		[default] interface IFusionResequencingResults;
+	};
+	[
+		uuid(9C4E10D8-484E-4CB1-9702-32E9F48AA02C),
+		helpstring("BackgroundZoneType Class")
+	]
+	coclass BackgroundZoneType
+	{
+		[default] interface IBackgroundZoneType;
+	};
+	[
+		uuid(0E4972A9-3A60-486A-B2B5-8ADBD302F9FE),
+		helpstring("BackgroundZoneInfo Class")
+	]
+	coclass BackgroundZoneInfo
+	{
+		[default] interface IBackgroundZoneInfo;
+	};
+	[
+		uuid(3E564C76-52E8-472B-81CA-B110B53A6B31),
+		helpstring("FusionBaseCallType Class")
+	]
+	coclass FusionBaseCallType
+	{
+		[default] interface IFusionBaseCallType;
+	};
+	[
+		uuid(915122D4-A194-4BBE-B34B-1AFF2A221C08),
+		helpstring("FusionForceCallType Class")
+	]
+	coclass FusionForceCallType
+	{
+		[default] interface IFusionForceCallType;
+	};
+	[
+		uuid(144AABD7-0EF4-49CB-85C7-5E942D88143B),
+		helpstring("ProbeSetQuantificationData Class")
+	]
+	coclass ProbeSetQuantificationData
+	{
+		[default] interface IProbeSetQuantificationData;
+	};
+	[
+		uuid(65138D84-E03E-4CA4-B5FF-310ECEE54351),
+		helpstring("FusionCHPQuantificationData Class")
+	]
+	coclass FusionCHPQuantificationData
+	{
+		[default] interface IFusionCHPQuantificationData;
+	};
+	[
+		uuid(3C0AD338-E088-4849-9BA7-B8BFB527BC2E),
+		helpstring("ProbeSetQuantificationDetectionData Class")
+	]
+	coclass ProbeSetQuantificationDetectionData
+	{
+		[default] interface IProbeSetQuantificationDetectionData;
+	};
+	[
+		uuid(6F879EBD-6F16-4C85-A2BF-40BF71B70489),
+		helpstring("FusionCHPQuantificationDetectionData Class")
+	]
+	coclass FusionCHPQuantificationDetectionData
+	{
+		[default] interface IFusionCHPQuantificationDetectionData;
+	};
+	[
+		uuid(BDE076B0-101E-4684-8500-E78FEC2765AD),
+		helpstring("ProbeSetMultiDataGenotypeData Class")
+	]
+	coclass ProbeSetMultiDataGenotypeData
+	{
+		[default] interface IProbeSetMultiDataGenotypeData;
+	};
+    [
+		uuid(59BFE16B-5895-4725-AD56-B24F51EF85D9),
+		helpstring("FusionCHPMultiDataData Class")
+	]
+	coclass FusionCHPMultiDataData
+	{
+		[default] interface IFusionCHPMultiDataData;
+	};
+	[
+		uuid(D6450C22-3419-477B-83DA-C625B5CF6DB7),
+		helpstring("ProbeSetMultiDataExpressionData Class")
+	]
+	coclass ProbeSetMultiDataExpressionData
+	{
+		[default] interface IProbeSetMultiDataExpressionData;
+	};
+	[
+		uuid(FABD39D4-80C4-4E2D-9CFF-50C422F03726),
+		helpstring("ProbeSetMultiDataCopyNumberData Class")
+	]
+	coclass ProbeSetMultiDataCopyNumberData
+	{
+		[default] interface IProbeSetMultiDataCopyNumberData;
+	};
+	[
+		uuid(1A08EC80-5DA4-4851-9E32-113CD195C106),
+		helpstring("ProbeSetMultiDataCytoRegionData Class")
+	]
+	coclass ProbeSetMultiDataCytoRegionData
+	{
+		[default] interface IProbeSetMultiDataCytoRegionData;
+	};
+	[
+		uuid(937A202B-A171-429F-950D-2EF2E0E0F112),
+		helpstring("ProbeSetMultiDataCopyNumberVariationRegionData Class")
+	]
+	coclass ProbeSetMultiDataCopyNumberVariationRegionData
+	{
+		[default] interface IProbeSetMultiDataCopyNumberVariationRegionData;
+	};
+};

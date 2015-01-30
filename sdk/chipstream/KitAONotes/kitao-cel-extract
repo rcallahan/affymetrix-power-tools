@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# /nfs/ss11/harley/Apt/work/apt-onzo-1/affy/sdk/chipstream/KitAONotes/kitao-cel-extract ---
+#
+# $Id$
+#
+
+apt_cel_extract=/nfs/ss11/harley/Apt/work/apt-onzo-1/affy/sdk/output/amd64-pc-linux/bin/apt-cel-extract
+lib_dir=/nfs/falcon/lib/release/internal/Genome_Scan.v1
+kitao_cel_extract=/nfs/ss11/harley/Apt/work/apt-onzo-1/affy/sdk/chipstream/KitAONotes/kitao-cel-extract
+
+if [ "$1" = "-gencel" ]
+then
+  cat /nfs/falcon/AssayDev_Axiom/2010-06-07/AmpOptimizationBakeOff_20100607_GenomeScan/analysis_normal/cel_list_KitA_Cond1.txt \
+      /nfs/falcon/AssayDev_Axiom/2010-06-07/AmpOptimizationBakeOff_20100607_GenomeScan/analysis_normal/cel_list_KitO_Cond1.txt \
+      /nfs/falcon/AssayDev_Axiom/2010-06-07/AmpOptimizationBakeOff_20100607_GenomeScan/analysis_normal/cel_list_KitO_Cond2.txt \
+      /nfs/falcon/AssayDev_Axiom/2010-07-19/20100722_GenomeScan_KitO_pH/analysis/cond1_cel_files.txt \
+      /nfs/falcon/AssayDev_Axiom/2010-07-19/20100722_GenomeScan_KitO_pH/analysis/cond2_cel_files.txt \
+      /nfs/falcon/AssayDev_Axiom/2010-07-19/20100722_GenomeScan_KitO_pH/analysis/cond3_cel_files.txt \
+      /nfs/falcon/AssayDev_Axiom/2010-07-19/20100722_GenomeScan_KitO_pH/analysis/cond4_cel_files.txt \
+    | grep -v cel_files | sort > jhg-celfiles
+  #
+  cat jhg-celfiles | xargs -P 4 -n 1 ${kitao_cel_extract}
+  #
+  exit
+fi
+
+if [ "$1" = "-all" ]
+then
+  shift
+  mkdir 20100722_GenomeScan_KitO_pH
+  cd 20100722_GenomeScan_KitO_pH
+  ${kitao_cel_extract} /nfs/falcon/AssayDev_Axiom/2010-07-19/20100722_GenomeScan_KitO_pH/cel/*.CEL
+  exit 0
+fi
+
+# --probeset-ids /nfs/ss11/harley/Apt/work/apt-onzo-1/affy/sdk/chipstream/KitAONotes/kitao-extract.probesets \
+
+#
+for cel_file in ${@}
+do
+  out_base=$(basename ${cel_file} .CEL)
+  out_tmp=${out_base}.tmp
+  #
+  rm -f ${out_base}.{channel0,channel1,out}
+  rm -f ${out_tmp}.{channel0,channel1,out}
+  #
+  if ${apt_cel_extract} \
+    --spf-file ${lib_dir}/Genome_Scan.v1.spf \
+    --analysis "quant-norm.sketch=50000,pm-only" \
+    --target-sketch-file ${lib_dir}/Genome_Scan.v1.AxiomGT1.sketch \
+    --out-file ${out_tmp} \
+    ${cel_file} \
+    2>&1 | tee ${out_tmp}.out
+    then
+      mv ${out_tmp}.channel0 ${out_base}.channel0
+      mv ${out_tmp}.channel1 ${out_base}.channel1
+      mv ${out_tmp}.out      ${out_base}.out
+    fi
+done
+
+# Local Variables:
+# mode: ksh
+# End:

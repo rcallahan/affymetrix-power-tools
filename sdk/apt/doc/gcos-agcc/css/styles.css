@@ -1,0 +1,212 @@
+/*
+
+2010 
+
+Title : styles.css
+
+Description : Fusion Stylesheet
+*/
+
+/*---------------------------------------------- GLOBAL SETTINGS */
+body, html {
+	background-color:#fff;
+	color:#4D4F53;
+	font-family:Verdana;
+	font-size:0.9em;
+	border:0;
+	margin:0;
+	padding:0;
+}
+/*---------------------------------------------------- HEADINGS */
+h1 {
+	margin:0;
+	padding:0;
+	font-weight:normal;
+	color:#B71234;
+	font-size:1.8em;
+}
+h2 {
+	margin:0;
+	padding:0;
+	font-weight:normal;
+	color:#b71234;
+	font-size:1.2em;
+	text-align:left;
+}
+h3 {
+	margin:0;
+	padding:0 0 15px 0;
+	font-weight:normal;
+	color:#333;
+	font-size:1.3em;
+	text-align:left;
+}
+/*-------------------------------------------- COMMON FORMATING */
+p {
+	margin:0;
+	padding:0;
+	font-size:0.9em;
+	text-align:left;
+}
+ul {
+	margin:0;
+	padding:0;
+}
+li {
+	margin:0;
+	padding:5px;
+	font-size:13px;
+}
+ol {
+	margin:0;
+	padding:0;
+}
+em {
+	color:#333;
+}
+blockquote {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+code, pre {
+	background-image:none;
+	background-repeat:repeat-x;
+	background-color:#E8EBEC;
+	border:1px dotted #BBBBBB;
+	color:#333333;
+	font-family:Consolas,"Lucida Console","Courier New",Courier,mono-space;
+	font-size:13px;
+	padding:1px 3px;
+}
+.clr {
+	clear:both;
+}
+/*-------------------------------------------------------- LINK */
+a, a:link, a:visited, a:active {
+	color:#333;
+	text-decoration:underline;
+	outline:none;
+}
+a:hover {
+	color:#b71234;
+	text-decoration:none;
+}
+
+/*------------------------------------------------------- FORMS */
+form {
+	margin:0;
+	padding:0;
+	display:inline;
+}
+#wrapper {
+	width:100%;
+}
+#page {
+	margin:0 auto;
+	width:900px;
+}
+#header {	
+	height:163px;
+}
+#header #logo {
+	float:left;	
+	width:200px;
+	margin:0; 
+	padding:0;
+}
+#header #tagline {
+	float:left;
+	color:#b71234;
+	font-size:2.0em;
+	margin:0; 
+	padding:0;
+}
+#content {
+	float:left;
+	background-image:url("http://www.affymetrix.com/images/site/mainContent_bg.giff");
+	background-color:#efefef;
+	background-repeat:repeat-y;
+	margin:0;
+	padding:10px 20px;
+}
+#content h1 {
+	margin:10px 0 10px 0
+}
+#content h2 {
+	margin:6px 0 6px 0
+}
+#content p {
+	line-height:22px;
+	margin:0;
+	padding:0 0 15px 0;
+}
+#content p b {
+	margin:0;
+	padding:0;
+	font-weight:bold;
+}
+#content ul {
+	list-style-type:none;
+	padding:0;
+	margin:0 0 10px 0;
+}
+#content li {
+	list-style-type:disc;
+	padding:0;
+	margin:0 0 0 15px;
+}
+#content .indent {
+	margin:0 0 0 20px;
+	padding:0;
+}
+#content .indent_2 {
+	margin:0 0 0 40px;
+	padding:0;
+}
+#content .indent_3 {
+	margin:0 0 0 60px;
+	padding:0;
+}
+#content table {
+	margin:10px 0;
+	padding:0;
+}
+#content table th {
+	background-color:#B71234;
+	border:1px solid #ADAFAF;
+	color:#FFFFFF;
+	font-size:12px;
+	font-weight:bold;
+	padding:5px 10px;
+	text-align:left;
+}
+#content table td {
+	background-color:#fff;
+	border-bottom:1px solid #ADAFAF;
+	border-left:1px solid #ADAFAF;
+	border-right:1px solid #ADAFAF;
+	color:#4D4F53;
+	font-size:11px;
+	padding:5px 10px;
+	text-align:left;
+}
+#content #sidebar {
+	float:left;
+	width:200px;
+	height:700px;
+	overflow:hidden;
+}
+#content #sidebar ul {
+	list-style-type:none;
+}
+#footer {
+	background-color:#e8e9e9;
+	padding:10px 20px;
+}

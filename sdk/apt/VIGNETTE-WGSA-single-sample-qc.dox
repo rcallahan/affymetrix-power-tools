@@ -1,0 +1,155 @@
+/**
+
+\page VIGNETTE-WGSA-single-sample-qc VIGNETTES: Single-Sample QC Analysis for the Whole Genome Sampling Assay
+
+\date 2007-11-20
+
+\section content Contents
+
+- <a href="#intro">Introduction</a>
+- <a href="#run">Running a single-chip QC analysis</a>
+- <a href="#fileQcc">The QCC file: defining sets of SNPs on which to perform single-chip analysis</a>
+- <a href="#fileQca">The QCA file: specifying how each set of SNPs should be analyzed</a>
+- <a href="#fileCelList">The list of CEL files to analyze</a>
+- <a href="#fileReport">The output report</a>
+- <a href="#usage">Guidelines on derivation of sets of SNPs and thresholds for use as a QC metric</a>
+
+\section intro Introduction
+
+Sample QC is an important part of genotyping analysis.  Inclusion of a substantial proportion of low-quality samples in a genotype clustering run can end up impacting the quality of results for the other high-quality samples.  So it is particularly useful to be able to perform single-sample QC analysis prior to clustering.  Doing QC analysis on a single-sample basis also fits in well with most laboratory workflows - low-quality experiments can be identified at the time of processing, making rehybridization or reprocessing most practical.  In this vignette guidelines are provided for using the application apt-geno-qc to develop a single-sample QC procedure for custom WGSA arrays.
+
+Before going into the details, it should be noted that while single-sample QC is an essential component of any genotyping analysis, it is not the only type of sample QC that should be applied.  At best the single-sample QC metric will be well-correlated with final genotyping performance, but the correlation will never be perfect and there will always be some poor samples accepted and some good samples rejected.  Often the former scenario is of greater concern to the user, and to increase the opportunity to identify poor quality samples the user should also look carefully at sample attributed after performing genotype clustering.  In particular, samples that display outlier values for the clustering call rate and/or heterozygosity may be poor performers that slipped by the single-sample QC metric and may need to be excluded.  There are additional checks that may apply onto to certain kinds of arrays - for example, if a mix of restriction enzymes is being used in the target prep (such has Nsp & Sty) it would be prudent to look at the relative performance on the Nsp-only and Sty-only SNPs to look for any samples with unusual ratios of performance (which might indicate a failure in one enzyme prep and not the other).
+
+The current supported method for doing single-chip QC analysis is to run the Dynamic Model (DM) algorithm (<a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/bti275v1">Di et al, 2005</a>).  The DM method requires both perfect-match (PM) and mis-match (MM) probes, so on some PM-only chip designs a special subset of SNPs are tiled with both PM and MM probes specifically for the purpose of single-chip QC with the DM algorithm.
+
+\section run Running a single-chip QC analysis
+
+We start with an example of how to run a QC analysis on the catalog Genome Wide SNP 6.0 Array:
+
+\verbatim
+  apt-geno-qc \
+    --cdf-file  GenomeWideSNP_6.cdf \
+    --qcc-file  GenomeWideSNP_6.qcc \
+    --qca-file  GenomeWideSNP_6.qca \
+    --cel-files cel.txt \
+    --out-file  qc.txt
+\endverbatim
+
+The CDF file identifies which probes belong to which SNPs and is supplied by Affymetrix for all catalog and custom WGSA chip designs.  The other input & output files are explained below.
+
+\section fileQcc The QCC file: defining sets of SNPs on which to perform single-chip analysis
+
+The QCC (Quality Control Classes) file specifies classes of SNPs to be analyzed for QC purposes.  The file format is a specialization of <a href="file-format-tsv.html">TSV</a>.  There are two required columns, described below.  As with the TSV format in general, the order of the columns and the possible presence of additional columns do not matter.
+
+- probeset_name - this column is the primary key (i.e. there should be only one entry in the file for each probeset_name).
+
+- group_name - this column is a space separated list of names of groups to which the probeset belongs.  A probeset can belong to more than one group.
+
+As an example, here are the first ten lines from the QCC file released with the Genome Wide SNP Array 6.0:
+
+\verbatim
+#%format_version=1.0
+#%content_version=1.0
+#%primary_key=probeset_name
+group_name      probeset_name
+all_qc nsp_qc   AFFX-SNP_10000979
+all_qc nsp_qc   AFFX-SNP_10009702
+all_qc sty_qc   AFFX-SNP_10015773
+all_qc sty_qc   AFFX-SNP_10021569
+all_qc nsp_sty_qc       AFFX-SNP_10026879
+all_qc sty_qc   AFFX-SNP_10029725
+\endverbatim
+
+So for example the first line implies that the SNP named AFFX-SNP_10000979 is a member of two groups, one named all_qc and one named nsp_qc.  The QCA file (see next section) describes how each group of SNPs should be analyzed.
+
+\section fileQca The QCA file: specifying how each set of SNPs should be analyzed
+
+The QCA (Quality Control Analysis) file is a companion to the QCC file - the QCC file specifies groups of SNPs, the QCA file specifies how they should be analyzed.  The file format is a specialization of <a href="file-format-tsv.html">TSV</a>.  There are four required columns, described below.  As with the TSV format in general, the order of the columns and the possible presence of additional columns do not matter.
+
+- <b>analysis_name</b> - this field is a name for the analysis.  This name will be the column title for the results in the output file.
+
+- <b>group_name</b> - this field specifies the group of probesets to which the analysis should be applied.  It must be a group name specified in the QCC file.
+
+- <b>analysis</b> - this field specifies the analysis method to be applied to the group.  There are two valid options
+  - <b>dm</b> specifies the Dynamic Model algorithm.  This method can only be applied to probesets that are tiled on the array with both PM and MM probes.
+  - <b>gender</b> specifies the em-cluster-chrX-het-contrast.  The group of SNPs to which this method is applied should all be part of the non-pseudo-autosomal region of chromosome X (at least in humans).  No MM probes are requried.  The method computes the contrast ((A-B)/(A+B)) for all the specified SNPs and estimates the heterozygosity of this class of SNPs by looking at the proportion of SNPs with near-zero contrast values, if estimated heterozygosity is high the sample will be called as female.  Note that low quality samples also tend to have an enrichment of near-zero contrast values and will tend to be called female by this method, regardless of actual gender.  Users interested in a more accurate gender calling method should look at the cn-probe-chrXY-ratio method available in <a href="apt-probeset-genotype.html">apt-probeset-genotype</a> (which uses copy number probes designed against chrX and chrY to estimate gender).
+
+- <b>options</b> specifies the options that go along with the method specified in the analysis field.  Different options are available for the different analysis methods.  The options string is a comma-separated list of key=value pairs (for example the string <em>a=1,b=2</em> would specify that option a is set to 1 and option b is set to 2).
+  - <b>dm</b> has the following available options:
+    - <b>dm.cutoff</b> The DM algorithm produces confidence values that go along with each genotype call.  Values are in the range [0,1] and lower values are associated with greater confidence.  The <b>dm.cutoff</b> parameter specifies the confidence cutoff to apply to the calls, calls with confidence value above this value are classified as no-calls.
+    - <b>dm.hetMult</b> This parameter is used to tune the tendency to make heterozygous or homozygous calls.  It specifies a value to be added to the log likelihood computed for heterozygous calls.  Specification of positive values makes calling hets more likely.  It can be tuned to achieve an even balance in performance on homozygotes and heterozygotes.
+    - <b>as.percentage</b> A Boolean parameter.  If set to 1 then call rates will be reported as a percentage (as opposed to as a fraction).
+    - <b>precision</b> Specifies the number of significant digits to report in the results file.
+  - <b>gender</b> has the following options:
+    - <b>em.thresh</b> Threshold applied to EM genotype calling method, smaller is more stringent. 
+    - <b>em.cutoff</b> Threshold applied to the call rate at the given stringency (as specified by <b>em.thresh</b>.  If the proportion of SNPs called is less than <b>em.cutoff</b> the gender will be reported as unknown.
+    - <b>gender.cutoff</b> Threshold to apply to estimated heterozygosity for calling gender.  Samples with estimated heterozygosity above this value will be called female, those with estimated heterozygosity below will be called male.
+    - <b>as.text</b> If set to 1 results will be reported as text (unknown/male/female).  If set to 0 gender will be encoded numerically (-1,0,1).
+
+As an example, here are the contents of the QCA file for the Genome Wide SNP Array 6.0 (with some minor edits for clarity).
+
+\verbatim
+#%format_version=1.0
+#%content_version=1.0
+analysis_name   group_name      analysis        options
+# Standard analyses
+QC_call_rate_all      all_qc  dm      dm.cutoff=0.33,dm.hetMult=1.25,as.percentage=1,precision=4
+QC_call_rate_Nsp      nsp_qc  dm      dm.cutoff=0.33,dm.hetMult=1.25,as.percentage=1,precision=4
+QC_call_rate_Sty      sty_qc  dm      dm.cutoff=0.33,dm.hetMult=1.25,as.percentage=1,precision=4
+QC_call_rate_Nsp_Sty_overlap  nsp_sty_qc      dm      dm.cutoff=0.33,dm.hetMult=1.25,as.percentage=1,precision=4
+Gender  chrX    gender  em.cutoff=0.5,em.thresh=0.05,gender.cutoff=0.1,as.text=1
+\endverbatim
+
+\section fileCelList The list of CEL files to analyze
+
+The file specified with the <em>--cel-files</em> option identifies the CEL files to be analyzed.  The file format is <a href="file-format-tsv.html">TSV</a>.  There is only one field required, cel_files.  An example is provided below.
+
+\verbatim
+cel_files
+cel/GenomeWideSNP_6/hapmap/NA06985_GW6_C.CEL
+cel/GenomeWideSNP_6/hapmap/NA06991_GW6_C.CEL
+cel/GenomeWideSNP_6/hapmap/NA06993_GW6_C.CEL
+cel/GenomeWideSNP_6/hapmap/NA06994_GW6_C.CEL
+\endverbatim
+
+\section fileReport The output report
+
+The file specified by <em>--out-file</em> is where the results will be written.  The file format is <a href="file-format-tsv.html">TSV</a> with a row for each CEL file analyzed.  There will be a field called Chip with the CEL file name, followed by a field for each of the analyses specified in the QCA file.
+
+An example from the Genome Wide SNP Array 6.0 is provided below.
+
+\verbatim
+#%format_version=1
+#%content_version=1
+#%default_analysis_name=QC call rate (all)
+#%library file=lib/GenomeWideSNP_6/GenomeWideSNP_6.cdf
+#gender information: male=0,female=1,unknown=-1
+#method1:analysis_name=QC call rate (all);analysis=dm;group_name=all_qc;as.percentage=1;dm.cutoff=0.33;dm.hetMult=1.25;precision=4
+#method2:analysis_name=QC call rate (Nsp);analysis=dm;group_name=nsp_qc;as.percentage=1;dm.cutoff=0.33;dm.hetMult=1.25;precision=4
+#method3:analysis_name=QC call rate (Sty);analysis=dm;group_name=sty_qc;as.percentage=1;dm.cutoff=0.33;dm.hetMult=1.25;precision=4
+#method4:analysis_name=QC call rate (Nsp/Sty overlap);analysis=dm;group_name=nsp_sty_qc;as.percentage=1;dm.cutoff=0.33;dm.hetMult=1.25;precision=4
+#method5:analysis_name=Gender;analysis=gender;group_name=chrX;as.text=1;em.cutoff=0.5;em.thresh=0.05;gender.cutoff=0.1
+Chip    Gender  QC call rate (Nsp)      QC call rate (Nsp/Sty overlap)  QC call rate (Sty)      QC call rate (all)
+NA06985_GW6_C.CEL       female  98.07   98.46   96.14   97.88
+NA06991_GW6_C.CEL       female  98.2    98.77   96.78   98.21
+NA06993_GW6_C.CEL       male    94.6    95.75   88.57   93.98
+NA06994_GW6_C.CEL       male    99.1    98.52   96.62   98.28
+NA07000_GW6_C.CEL       female  97.69   98.52   95.81   97.75
+NA07019_GW6_C.CEL       female  97.3    98.58   94.36   97.39
+NA07022_GW6_C.CEL       male    97.04   96.61   92.59   95.9
+NA07029_GW6_C.CEL       male    96.02   96.98   93.4    96
+NA07034_GW6_C.CEL       male    96.4    97.54   93.56   96.43
+\endverbatim
+
+\section usage Guidelines on derivation of sets of SNPs and thresholds for use as a QC metric
+
+When working for the first time with a new WGSA chip design it will often not be known in advance which SNPs will work well.  In the first pass a reasonable approach would be to use the full set of SNPs tiled with MMs, analyzing them with the same parameter settings as used for the Genome Wide SNP Array 6.0 (in the example above).  Call rates will probably be low (due to the inclusion of SNPs that aren't working well) but should still be correlated with genotyping performance.
+
+After running a few dozen or more distinct samples it should be possible to assess which of the SNPs tiled with MM probes appear to be working well with the assay, at which point the set of SNPs used for deriving the DM call rate should trimmed back to just those that appear to be working well.  This will generally improve the correlation between the DM call rate and the genotyping performance, and (less importantly) will result in higher DM call rates.
+
+In the case of multiple-enzyme applications of WGSA (for example, the simultaneous hybridization of Nsp- and Sty-generated target) it may be useful to also define enzyme-subsets to monitor performance in different subsets separately in addition to monitoring overall performance.
+
+Once the set of SNPs to be used for computing QC has been finalized the user may wish to come up with a threshold or a range of QC values for ruling experiments in or out of subsequent clustering analysis.  Determination of such a threshold or range is somewhat subjective.  Studying the relationship between QC call rate and clustering call rate for a large batch of samples can be helpful in this regard.  Additionally, where possible the relationship between QC call rate and accuracy should be studied.  Useful proxies for accuracy include evaluation of reproducibility, Mendelian consistency for related samples, and concordance to some other gold standard where available.
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

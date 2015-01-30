@@ -1,0 +1,190 @@
+/**
+\page APTLibraries APT Libraries
+
+
+There are numerous libraries in use at Affymetrix to help
+write maintainable and reusable code. It is critical to use these
+existing libraries whenever possible rather than reinventing
+the wheel at every opportunity. Below is a brief description
+of some of the key libraries. Please refer to the libraries
+themselves for further documentation.
+
+@section LibraryErrAbort Err::errAbort()
+
+<tt>Err::errAbort()</tt> is a centralized place to handle all
+fatal errors. What happens when a fatal error is encountered
+can be customized by using the <tt>Err::popHandler()</tt> and
+<tt>Err::pushHandler(ErrHandler *)</tt> functions. This allows
+the command line programs to do simple things like call
+<tt>exit(1)</tt> and the GUI programs to enable other
+behaviors like throwing exceptions or setting global flags and
+clean up. It is extremely bad when the APT libraries bring
+down a GUI program that is using them use
+<tt>Err::errAbort()</tt> rather than <tt>exit(1)</tt> or some
+other mechanism of stopping the entire program. Use
+<tt>APT_ERR_ASSERT()</tt> rather than <tt>assert</tt> which
+will stop execution immediately.
+
+@section LibraryVerbose Verbose::out()
+
+<tt>Verbose::out(int level, const string &s)</tt> is a
+centralized place for communication from the APT libraries and
+engines to the users and logs. Think of
+<tt>Verbose::out()</tt> as printing to the usual stdout for
+programs, but with the added structure of specifying a level
+of detail. The level parameter specifies the detail level of
+the message and thus when the message should be
+output. Different message handlers can be registered with the
+<tt>Verbose</tt> class and they can each choose to ignore
+messages above a certain level. By convention the levels
+correspond to the following levels of detail.
+
+- 1 = Messages for the end user, should be pretty sparse. (Console, GUI, log file)
+- 2 = More detailed information for the Console and log file.
+- 3 = Very detailed level of information, usually just displayed in log file.
+- 4 = sparse debug messages, 
+- 5 = probeset level debug messages, 
+- 6 = probe level debug messages
+
+<tt>Verbose::warn()</tt> is a similar but should be thought of as
+the stderr equivalent of <tt>Verbose::out()</tt>. And should be used for
+errors rather than informative messages.
+
+<tt>progressBegin(),progressStep()</tt> and
+<tt>progressEnd()</tt> in the <tt>Verbose</tt> class allow
+communication of the progress of a longer job to the user. For
+the command line programs this often means simply printing a
+dot to let the user know the program is progressing. GUI
+programs can register a <tt>ProgressHandler</tt> drives the
+use of a dialog progress meter to let the user know how the
+computation is progressing.
+
+@section LibraryPgOptions PgOptions
+
+<tt>PgOptions</tt> is the APT library for working with command line
+options.  With this library, a program can declare the list
+of options it supports along with their kind and defaults.
+<tt>PgOptions</tt> will process the command line and then the program
+can query what was set.
+                                             
+Like standard unix programs, an option of <tt>"--"</tt> ends option
+parsing.  All the remaining arguments are args to the
+program.
+
+There are three kinds of options: <tt>BOOL</tt>,
+<tt>DOUBLE</tt> and <tt>STRING</tt>.  All three kinds may have
+a value appended to the option name with "=".  (Like:
+<tt>"--double-example=10.5"</tt>,
+<tt>"--output-dir=foo"</tt>.)
+
+BOOL values may have a prefix of "-no-" or "--no-" to set
+the value to "false".  If the arg after a bool option is
+"true/1" or "false/0" it is used as the value.  Otherwise
+the option is set to true.  (Note that this might make
+working with a file called "true" ambiguous.  In that case
+use "--" to separate the args from the option.)  Non-option
+args to the program are put into the "args" list which the
+program can retrieve with <tt>"getArg(idx)"</tt>.
+
+Normal usage looks like:
+
+@verbatim
+int main (int argc,char* argv[]) {
+  PgOptions opts;
+  opts->setUsage("A nice paragraph about what this program does.");
+  opts->defineOption("p","print",PgOpt::BOOL_OPT,
+                     "Do you want to print the output?",
+                     "true");
+
+  opts->parseArgv(argv);
+  if (opts->getBool("print")) {
+    doPrint();
+  }
+}
+@endverbatim
+
+Please try and write the options in the "positive sense".
+If the default is to print, then define the option "print"
+to be true.  The user can use <tt>"--no-print"</tt> when they don't
+want to.  (Don't define <tt>"--no-print"</tt>.)  
+
+@section LibraryTsvFile TsvFile
+
+<tt>TsvFile</tt> is a library to read tab separated files, or
+any other delimited file. The caller defines the columns in
+the file and then functions to get and or set the values at a
+particular row. The <tt>TsvFile</tt> library allows for:
+- Reading headers
+- Reading data by lines or levels
+- Writing headers and data
+- Indexing the contents of the file by a column and searching the index
+
+Whenever possible input and output files should use the
+<tt>TsvFile</tt> libraries. See the \link file-format-tsv
+documentation \endlink and \link tsv-example.cpp
+tsv-example.cpp \endlink for some example usages.
+
+@section LibraryFile5 File5
+
+<tt>File5</tt> is a library which provides a simplified C++
+interface to the HDF5 library. It is similar in spirit to a
+binary form of the <tt>TsvFile</tt> library. It allows the
+user to focus on the specification of "what" is stored while
+HDF5 takes care of the "how" it is represented on disk. Note
+that as every <tt>File5</tt> file is an HDF5 file the normal
+<tt>h5dump</tt> and other utilities like HDF5 viewer will work
+with them.
+
+HDF5 (Hierarchical Data Format 5) is a data model, file format
+and library for file IO. It is mature and permits the storage
+of multiple named binary data sets in one file along with user
+transparent byte-ordering, resizing, compression, and
+checksuming of the stored data. With HDF5, we can concentrate
+on what is to be stored rather than the how. By using this
+library we hope to have a richer data format than the file
+formats which are currently in use at Affymetrix. (It does not
+have a 2 or 4 GB limit.)
+
+With all of the features HDF5 offers, the interface is rather
+large. Additionally, there is a bit of book-keeping of the
+objects which HDF5 uses. (data-types, data-sets, data-files,
+etc.) The aim of File5 is to offer a set of C++ objects which
+simplify working with the datasets by taking care of the
+resource tracking.
+
+See the \link file-format-file5 <tt>File5</tt> documentation
+\endlink for further details and usage.
+
+@section LibraryRegression Regression Testing
+
+When writing regression or integration tests use the
+<tt>RegressionTest</tt> framework.  <tt>RegressionTest</tt>
+takes a command to run and a series of checks that implement
+<tt>RegressionCheck</tt> interface to be run after the
+command. 
+
+@section LibraryCPPUnit CPPUnit
+
+Use <tt>CPPUnit</tt> for unit testing. There is a lot of
+documentation at the Sourceforge page for <tt>CPPUnit</tt>
+http://sourceforge.net/apps/mediawiki/cppunit/
+. By convention the <tt>CPPUnit</tt> tests reside in a
+<tt>CPPTest</tt> subdirectory of the location of the classes
+to be tested. Unit tests should run very quickly and only
+reference data either in the file itself or checked into
+cvs. If your unit tests runtime is measured in minutes or you
+data in megabytes then please use the regression framework
+instead. An example of <tt>CPPUnit</tt> usage for testing is in 
+the RMA framework under <tt>affy/sdk/rma/CPPTest</tt>
+
+@section LibraryUtil Util
+
+In <tt>util/Util.h</tt> there are a number of useful functions that
+developers are encouraged to use. Examples include:
+
+- String utilities for pattern matching, comparing, case changing etc.
+- File opening, closing, removing, renaming, etc. on different platforms.
+- <tt>convertPathName()</tt> is particularly important as it allows longer paths
+  on Windows platform.
+
+*/

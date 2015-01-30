@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+					
+
+			<h1>Affymetrix® EXP Data File Format</h1>
+
+			<h2>EXP FILE</h2>
+	
+
+ 
+	
+
+			<p><b>Description</b></p>
+			<p>The EXP file contains information captured in the Experiment window of the MAS 5 software. Experiment files are not available in GCOS or LIMS. Experiment information in those applications are stored in a database and are available via the Affymetrix GCOS SDK.</p>
+
+			<p><b>Format</b></p>
+<p>The format of the EXP file is an ASCII text file similar to the Windows INI format.</p>
+
+<p>The first line defines the file type. The value is always: "Affymetrix GeneChip Experiment Information".</p>
+
+<p>The second line contains the version number of the file. The value is always: "Version 1".</p>
+
+<p>The remainder of the file is divided up into sections. The start of each section is defined by a line containing a section name enclosed in square braces. The section names are: "Sample Info", "Fluidics" and "Scanner". The data in each section is of the format TAG&lt;tab&gt;VALUE, where the TAG and VALUE are separated by a tab.</p>
+
+<p>The "Sample Info" section contains information about the experiment. The TAGS are:</p>
+
+
+<table> 
+<tbody><tr> <th><b>TAG</b></th><th><b>Description</b></th><th><b>MAS 
+Term (as displayed in the Experiment window)</b></th></tr> <tr> <td height="14" width="110">Chip Type</td><td height="14" width="70%">The 
+type of probe array. This is the only required field.</td><td height="14" width="214">Probe 
+Array Type</td></tr> <tr> <td height="14" width="110">Chip Lot</td><td height="14" width="70%">The 
+lot number of the array.</td><td height="14" width="214">Probe Array Lot</td></tr> 
+<tr> <td height="14" width="110">Operator</td><td height="14" width="70%">The 
+name of the user.</td><td height="14" width="214">Operator Name</td></tr> <tr> 
+<td height="13" width="110">Sample Type</td><td height="13" width="70%">The type 
+of sample.</td><td height="13" width="214">Sample Type</td></tr> <tr> <td height="14" width="110">Description</td><td height="14" width="70%">A 
+description of the sample.</td><td height="14" width="214">Sample Description</td></tr> 
+<tr> <td height="14" width="110">Project</td><td height="14" width="70%">The project 
+name.</td><td height="14" width="214">Sample Project</td></tr> <tr> <td height="14" width="110">Comments</td><td height="14" width="70%">Comments 
+about the experiment.</td><td height="14" width="214">Comments</td></tr> <tr> 
+<td height="14" width="110">Solution Type</td><td height="14" width="70%">The 
+reagents used in the experiment.</td><td height="14" width="214">Reagents</td></tr> 
+<tr> <td height="14" width="110">Solution Lot</td><td height="14" width="70%">The 
+lot number of the reagents.</td><td height="14" width="214">Reagent Lot</td></tr> 
+</tbody></table>
+			
+			<p>The "Fluidics" section contains information about the last fluidics run. The TAGS are:</p>
+			
+			<table> 
+<tbody><tr> <th><b>TAG</b></th><th><b>Description</b></th><th><b>MAS 
+Term (as displayed in the Experiment window)</b></th></tr> <tr> <td height="14" width="110">Protocol</td><td height="14" width="70%">The 
+name of the fluidics protocol run on the fluidics station.</td><td height="14" width="214">Protocol</td></tr> 
+<tr> <td height="14" width="110">Station</td><td height="14" width="70%">The station 
+number.</td><td height="14" width="214">Fluidics Station</td></tr> <tr> <td height="14" width="110">Module</td><td height="14" width="70%">The 
+module number.</td><td height="14" width="214">Module</td></tr> <tr> <td height="14" width="110">Hybridize 
+Date</td><td height="14" width="70%">The date and time of the hybridization.</td><td height="14" width="214">Date</td></tr> 
+</tbody></table>
+
+		<p>Other tags may be in this section. The names of the tags are the steps in the fluidics script executed on the experiment. Other lines in this section may be defined but do not follow the TAG&lt;tab&gt;VALUE format. These lines may include status messages provided by the fluidics station.</p>
+
+<p>The "Scanner" section contains information about the last scan. The TAGS are:</p>
+		
+		<table> 
+<tbody><tr> <th><b>TAG</b></th><th><b>Description</b></th><th><b>MAS 
+Term (as displayed in the Experiment window)</b></th></tr> <tr> <td height="14" width="110">Pixel Size</td><td height="14" width="70%">The 
+pixel size used.</td><td height="14" width="214">Pixel Size</td></tr> <tr> <td height="14" width="110">Filter</td><td height="14" width="70%">The 
+filter used.</td><td height="14" width="214">Filter</td></tr> <tr> 
+  <td height="13" width="110">Scan Temperature</td><td height="13" width="70%">
+  This item is not used by the current GeneChip scanners.</td>
+  <td height="13" width="214">Temperature</td></tr> <tr> <td height="14" width="110">
+  Scan Date</td><td height="14" width="70%">The 
+date and time of the scan.</td><td height="14" width="214">Date</td></tr> <tr> 
+<td height="14" width="110">Scanner ID</td><td height="14" width="70%">The ID 
+of the scanner.</td><td height="14" width="214">Scanner ID</td></tr> <tr> <td height="14" width="110">Number 
+of Scans</td><td height="14" width="70%">The number of multi-image scans.</td><td height="14" width="214"># 
+of scans</td></tr> <tr> <td height="14" width="110">Scanner Type</td><td height="14" width="70%">The 
+type of scanner.</td><td height="14" width="214">NA</td></tr> </tbody></table>
+			
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+#
+# affy/sdk/regression-data/LOCATION.txt ---
+#
+
+# this line is special and is parsed out by "./configure"
+# it might need to be modfied for a branch.
+LOCATION:/nfs/bioinformatics/apt/apt-regression-data/trunk
+# Now the rest of the readme...
+
+   When on an affy unix host, the makefile will do the right
+thing and make the symlink for you:
+
+  ln -s /nfs/bioinformatics/apt/apt-regression-data/trunk data
+
+   On a windows host you will need to have followed the
+"Building on Windows" instructions [1] to have cygwin and
+junction.exe installed.  For your cut-n-paste convenience
+here are the commands you need to run (in a cywin bash
+shell):
+
+NOTE: On the bamboo build hosts, we use drive "D:" for all the
+      regression data.  Change the path on these hosts.
+
+rsync -Pa --delete ora:/nfs/bioinformatics/apt/apt-regression-data/trunk /cygdrive/c/apt/apt-regression-data/trunk
+
+c:\APT\BIN\junction.exe data C:\APT\regression-data
+
+   Or with the bash shell on a bamboo build host:
+/cygwin/d/apt/bin/junction.exe data d:\\apt\\apt-regression-data\\trunk
+
+   You can also check out a versioned copy of the APT regression data.
+To get it from svn, run the following command:
+
+svn co svn://svn.ev.affymetrix.com/apt-regression-data/trunk data
+
+[1] http://infowiki.ev.affymetrix.com/index.php/APT:_Building_on_Windows

@@ -1,0 +1,123 @@
+/**
+
+\page VIGNETTE-expression-mask-probes VIGNETTES: Masking Out Probes in apt-probeset-summarize
+
+\date 2008-02-11
+
+\section content Contents
+
+- <a href="#workflow">Experimental Probe Masking Workflow</a>
+- <a href="#faq">FAQ - Frequently Asked Questions.</a>
+
+<a name="workflow">
+\section workflow Experimental Probe Masking Workflow
+
+This is a highly experimental workflow. The code in APT to enable this is experimental and may contain
+bugs. In addition, the utility of applying such an approach in a broad range of applications is not
+yet demonstrated.  With this in mind, under particular experimental designs it may be desirable to 
+mask out particular probes. Examples include:
+
+- Experimental design focused on samples stratified by genotype where SNPs and/or other genetic polymorphisms
+  which overlap probes may distort the expression summaries. At the gene level this is usually a non-issue due to 
+  the large number of probes used for each gene. For an exon level analysis (ie where the probes may heavily and
+  are thus less independent with regard to genome location) expression differences may be primarily due to such
+  interactions.
+- The use of target from one organism on an array designed for a different organism. Under such cases it may
+  be desirable to mask out probes known to not match the target.
+
+In addition to <i>a priori</i> masking out of probes, feature selection methods such as the PCA Feature Selection
+method may prove useful as a non- <i>a priori</i> method. 
+
+In the current version of APT (as of 1.8.1) the --kill-list option will remove any MM probes associated with
+a PM probe which has been removed.
+
+The first step is to create the probe mask file. The probe mask file is a tab separated text file which must
+contain two columns: probeset_id, and probe_id. The following is an example of a valid probe mask file:
+\verbatim
+probe_id	probeset_id
+14	2561152
+17	2400195
+87	2448973
+92	2985267
+102	3011834
+106	2822668
+107	2798328
+111	2604445
+156	3077098
+...
+\endverbatim
+Note that key/value header lines can be supplied (for use in other software) using the '#%key=value' syntax
+and that comments lines starting with '#' are allowed per the <a href="file-format-tsv.html">TSV File Format</a>.
+
+The probeset_id column is either the numeric probeset_id (if using PGF/CLF file) or the alphanumeric probeset name (if using a CDF file). In either case the column name is probeset_id.
+
+Alternatively, the probe mask file can contain an "x" and a "y" column (0-base). If both an x/y columns and
+a probe_id column is present, the consistency of the two will be checked. 
+
+See the <a href="FAQ.html#probe_id_faq">FAQ item on probe IDs</a> for more info.
+
+<b>WARNING</b>: In earlier APT versions (<=1.8.0) the masking functionality only works correctly
+for probes present in a single probeset. If a probe appears in more than one probeset, you will most likely
+get an error if the probe is specified multiple times in the mask file for each probeset. If you only list it
+once in the mask file you will get an error during the library file read when the probe is observed in the other
+probesets.
+
+<b>WARNING</b>: Also note that in earlier APT versions (<=1.8.0) probesets and meta probesets which were completely
+masked out would result in a runtime error. With version 1.8.1+, a warning is reported rather than an error.
+
+Finally we can run apt-probeset-summarize with our new files:
+
+\verbatim
+    apt-probeset-summarize \
+        -a rma-sketch \
+        -p HuEx-1_0-st-v2.r2.pgf \
+        -c HuEx-1_0-st-v2.r2.clf \
+        -b HuEx-1_0-st-v2.r2.antigenomic.bgp \
+        -o results \
+        --kill-list my-mask.probe_mask \
+        *.CEL
+\endverbatim
+
+So in short:
+
+    - Create file of probes to mask
+    - Run apt-probeset-summarize with the mask file
+    - Check your results, as this is an experimental workflow using experimental features in the code
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. I get the following error when using a probe mask file:
+\verbatim
+    Can't find probe set with name: [probeset id]
+\endverbatim
+
+A. You are probably using an older version of APT.
+   There are probesets (as listed in the PGF file) which are completely masked out in the
+   probe mask file. With older versions of APT (<=1.8.0) you have to manually
+   remove these probesets from the probeset list or meta probeset file to prevent this
+   failure.
+
+Q. I get the following error when using a probe mask file:
+\verbatim
+    Probe id: [probe id] specified twice in file: [my mask file]
+\endverbatim
+
+A. You are probably using an older version of APT.
+   In older versions of APT (<=1.8.0) a probe ID can only be listed once in the mask file. 
+   There is no way to mask out a probe which is present in more than one probeset using the
+   mask file. Newer version of APT take into account botht he probe ID and the probeset ID 
+   when masking out probes.
+
+Q. I get the following error when using a probe mask file:
+\verbatim
+    ChipLayout::readPgfFileKillList() - Expecting probe with id: [probe id] to be in probeset '[probeset id]' not probeset '[different probeset id]'
+\endverbatim
+
+A. Your probe mask file contains a probe which is present in more than one probeset. 
+   In older versions of APT (<=1.8.0) a probe ID can only be listed once in the mask file. 
+   There is no way to mask out a probe which is present in more than one probeset using the
+   mask file.
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

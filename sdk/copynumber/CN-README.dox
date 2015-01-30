@@ -1,0 +1,97 @@
+//
+// cvs:affy/sdk/copynumber/CN-README.dox ---
+//
+// $Id: CN-README.dox,v 1.2 2008-06-20 20:15:21 awilli Exp $
+//
+
+/*
+ * @file  file5/CN-README.dox
+ * @brief The doxygen docs for Copynumber.
+ */
+
+/**
+@page file-format-CN-ref File Format: CN Reference (.ref)
+
+<center><b>DRAFT</b></center>
+
+This is a description of the contents of the copynumber
+reference file.  The low-level formatting of the file is as
+a File5 file. (See the File5 docs for how these map into
+HDF5 objects.)
+
+Unless otherwise noted, the columns are listed in the order
+they appear (0-based) and are double (H5T_STD_F64LE) values.
+
+@section CN5 group: CN5
+
+This group serves to group all the copynumber reference objects.
+
+
+@subsection CN5_CN5_plier_feature_response CN5/CN5.plier.feature-response
+
+A File5_Tsv which list the plier feature responses by
+
+@li probeset_id (colidx: 0) (datatype: int H5T_STD_I32LE)
+
+@li one-column-per-CEL-file (colidx: 1 to N) (datatype: double / H5T_STD_F64LE)
+
+
+@subsection CN5_CN5_plier_snp_posteriors CN5/CN5.plier.snp-posteriors
+
+These columns are listed in order they should appear. Except
+for the "probeset_id" column these are doubles.
+
+@li id (colidx: 0) (datatype: 30-char string)
+
+@li Cluster_AA_MeanStrength
+@li Cluster_AA_Mean
+@li Cluster_AA_Variance
+@li Cluster_AA_VarianceStrength
+
+@li Cluster_AB_MeanStrength
+@li Cluster_AB_Mean
+@li Cluster_AB_Variance
+@li Cluster_AB_VarianceStrength
+
+@li Cluster_BB_MeanStrength
+@li Cluster_BB_Mean
+@li Cluster_BB_Variance
+@li Cluster_BB_VarianceStrength
+
+@li Cross-Term_PAH
+@li Cross-Term_PAB
+@li Cross-Term_PHB
+
+
+@subsection target-sketch  CN5/target-sketch
+
+@li intensities (colidx: 0) (datatype: double)
+
+@section CopyNumber CopyNumber
+
+This groups the copynumber parameters.
+
+@subsection CopyNumber_Parameters CopyNumber/Parameters
+
+A File5_Tsv with a single column used to store the
+parameters for the run.
+
+@li Parameter (colidx: 0) (datatype: 1024-char string) This
+string is formatted like the TsvFile headers are. ("#%" KEY
+"=" VAL)
+
+@subsection CopyNumber_Reference  CopyNumber/Reference
+
+@li probeset_id     (colidx: 0) (datatype: 20-char string)
+@li MedianSignal
+@li XXMedianSignal
+@li YMedianSignal
+@li AAMedianSignal
+@li ABMedianSignal
+@li ABMedianSignal
+
+*/
+
+// Local Variables:
+// mode: c++
+// End:

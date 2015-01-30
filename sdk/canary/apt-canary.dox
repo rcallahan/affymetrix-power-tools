@@ -1,0 +1,80 @@
+/**
+\page apt-canary MANUAL: apt-canary (\aptversion)
+
+\section canaryIntro Introduction
+
+apt-canary is the Affymetrix Power Tools (APT) implementation of the Canary
+clustering algorithm for calling genotypes of predefined copy number
+variable (CNV) regions.  The Canary algorithm was developed by David
+Altshuler's group at The Broad Institute as part of a larger package 
+called Birdsuite.  At the time of this non-official release the site
+<a href="http://www.broad.mit.edu/mpg/birdsuite/">www.broad.mit.edu/mpg/birdsuite/</a>.
+
+The APT implementation requires files with prior information on how
+probe intensity summaries of individual CNV regions will cluster.
+For a non-prior implementation see the release at the Broad Institute
+<a href="http://www.broad.mit.edu/mpg/birdsuite/">www.broad.mit.edu/mpg/birdsuite/</a>.
+
+\section inputFiles Input Files
+Several input files are required by apt-canary.  These input files are
+provided by affymetrix at the GenomeWideSNP_6 array support page
+(<a href="http://www.affymetrix.com/support/technical/byproduct.affx?product=genomewidesnp_6">www.affymetrix.com</a>). 
+
+<ol>
+<li> The region file, <b>GenomeWideSNP_6.canary-v1.region</b>, contains
+     the names of CNV regions and lists of both copy number and SNP probes,
+     designated as Smart Probes by the Broad Institue, matching the regions.
+
+<li> The prior file, <b>GenomeWideSNP_6.canary-v1.prior</b>, the names of
+     CNV regions as well as empirically derived prior information about
+     cluster location, dispersion(variance) and relative frequency of
+     membership for each cluster for each CNV region.
+
+<li> The normalization file, <b>GenomeWideSNP_6.canary-v1.normalization</b>,
+     contains a list of probes used for chip-by-chip scale normalization of
+     probe intensities.
+
+<li> The bed (a.k.a. map) file, <b>GenomeWideSNP_6.canary-v1.bed</b>,
+     contains the names of CNV regions as well as chromosomal locations
+     spanned by the CNV regions for NCBI build 36.1 of the human genome.
+     The bed file is not required to run Canary. It is useful for
+     identifying CNV regions with the genome.
+</ol>
+
+To run canary with the above input files the correct CDF file to use
+is <b>GenomeWideSNP_6.cdf</b>.  CEL files should be compatible with this CDF.
+
+
+\section customMaps Custom CNV Maps
+CNV maps alternative to those derived from the Broad Institute's set of
+CNV regions can be implemented by supplying the appropriate region and prior
+files.  Clustering patterns of CNV regions and consequently the information
+in prior files are sensitive to the set of probes selected for a CNV region.
+For this reason, the user should be wary of any results got by improvement
+of probe selection applied to the region file without recomputing priors.
+
+
+\section canaryQuickStart Quick Start
+To run canary on a set of cel files using the default algorithm parameters use:
+
+\verbatim
+apt-canary \
+  --out-dir canary-results \
+  --cdf-file ../regression-data/data/lib/GenomeWideSNP_6/GenomeWideSNP_6.cdf \
+  --cnv-region-file inputs/GenomeWideSNP_6.canary-v1.region \
+  --cnv-normalization-file inputs/GenomeWideSNP_6.canary-v1.normalization \
+  --cnp-prior-file inputs/GenomeWideSNP_6.canary-v1.prior \
+  --cnv-map-file inputs/GenomeWideSNP_6.canary-v1.bed \
+  --cel-files inputs/celfiles.txt
+\endverbatim
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-canary.help.txt
+
+*/

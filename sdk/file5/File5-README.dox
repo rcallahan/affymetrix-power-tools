@@ -1,0 +1,161 @@
+//
+// cvs:affy/sdk/file5/File5-README.dox ---
+//
+// $Id: File5-README.dox,v 1.2 2009-08-23 01:20:18 harley Exp $
+//
+
+/*
+ * @file  file5/File5-README.dox
+ * @brief The doxygen docs for file5.
+ */
+
+// @todo
+// * more verbose error messages?
+// * restrict the amount of memory used?
+// * Somehow free memory when needed?
+// * tests for apt-file5-util
+
+/**
+@page file-format-file5 File Format: File5 (\aptversion)
+
+<center><b>DRAFT</b></center>
+
+File5 is a library which provides a simplified C++ interface
+to the HDF5 library.  It is also a specification of "what"
+is stored.  The "how" is taken care of by the HDF5 library
+it is built on.
+
+
+@section file5_why_hdf5 Why HDF5?
+
+HDF5 (Hierarchical Data Format 5) is a data model, file
+format and library for file IO.  It is mature and permits
+the storage of multiple named binary data sets in one file
+along with user transparent byte-ordering, resizing,
+compression, and checksuming of the stored data.  With HDF5,
+we can concentrate on what is to be stored rather than the
+how.  By using this library we hope to have a richer data
+format than the file formats which are currently in use at
+Affymetrix.  (Eg: HDF5 does not have a 2 or 4 GB limit.)
+
+
+@section file5_why_file5 Why File5 (aka A5)
+
+With all of the features HDF5 offers, the interface is
+rather large.  Additionaly, there is a bit of book-keeping
+of the objects which HDF5 uses. (data-types, data-sets,
+data-files, etc.)  The aim of File5 is to offer a set of C++
+objects which simplify working with the datasets with a
+simpler API and by taking care of this resource tracking.
+
+
+@section File5_classes File5 Classes
+
+Here is a short list of the classes a File5 programmer can
+use, along with short descriptions.  See "test-file5.cpp"
+for more examples.
+
+
+@subsection File5_Metadata File5 Metadata
+
+HDF5 allows metadata to be attached to HDF5 objects.  This
+metadata maps a string to a simple HDF5 dataset.  In File5
+usage, we reserve HDF5 metadata for File5 use.  User
+metadata is kept in the File5_Group metadata.  This
+representation is restricted to "string keys" and "string
+values".  This loses some of the data richness, but has two
+benefits: user metadata wont conflict with file5 metadata
+and the user metadata can be chunked, compressed and
+checksumed.  (Which doesnt happen with File5 attributes.)
+
+
+@subsection File5_File File5_File
+
+"File5_File" represents a File5 file in the filesystem.  It
+is a subclass of File5_Group.  (It provides an interface to
+the "H5F_*" functions.)
+
+
+@subsection File5_Group File5_Group
+
+"File5_Group" is similar to a filesytesm directory.  It maps
+names to the actual HDF5 objects.  Vectors, Matrixes, Tsv
+and other Group objects are contained within it. (It
+provides an interface to the "H5G_*" functions.)
+
+
+@subsection File5_Matrix File5_Matrix
+
+"File5_Matrix" is a simplified multi-dimensional matrix
+class.  The user can resize the dimensions, but new
+dimensions cant be added.  (A 2x2 dataset can become a 10x10
+dataset, but it cant become a 2x2x2 dataset; That increases
+the number of dimensions from 2 to 3.)
+
+
+@subsection file5_Object File5_Object
+
+"File5_Object" is the base class of the File5 objects.  (It
+provides the interface to getting and setting attributes.)
+
+
+@subsection File5_UserMeta File5_UserMeta
+
+"File5_UserMeta" should be split out of "File5_Group".
+
+@subsection File5_Vector File5_Vector
+
+File5_Vector is the workhorse of File5 and most likely what
+you will use the most.  It is modeled after std::vector: it
+is 0-based, can be resized, has integer indexing and
+push_back.  It also holds a number of basic types: strings,
+chars, ints, floats.
+
+Unlike std::vector, it is not a template.  The allowed types
+are defined in the File5 library.
+
+Index: | 0 | 1 | 3 | 4 | 5 | 
+Data:  | a | b | c | d | e | 
+                 ^           ^
+                 |           +- file-end
+                 +- fill-end
+
+
+@subsection File5_Tsv File5_Tsv
+
+File5_Tsv is a porting of the TsvFile format to file5.  It
+has most of the features and interface of TsvFile but is
+better in many ways. Principally:
+
+* updateable
+* compresed
+* binary
+* checksumed
+* column based storage
+
+File5_Tsv is built out of File5_Vectors, but as an end user,
+you dont need to know that.  The File5 library does the
+bookkeeping.
+
+
+@section file5_notes Notes
+
+@li The suggested suffix for File5 formatted files is the
+suffix of the base file plus "5".  (Eg: ".cel" -> ".cel5",
+".foo" -> ".foo5")
+
+@li There are several tools which can be used to examine the
+contents of an HDF5 file.  "h5dump" and the hdf5 viewer are
+two useful ones which are part of HDF5.
+
+@li File5 also has a utility program "apt-file5-util" which
+allows you to export and import File5 formatted data to and
+from TsvFile formatted files.
+
+*/
+
+
+
+// Local Variables:
+// mode: c++
+// End:

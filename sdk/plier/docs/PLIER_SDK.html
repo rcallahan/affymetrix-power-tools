@@ -1,0 +1,2367 @@
+<html>
+	<head>
+		<title>PLIER Interface SDK</title>
+		<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<LINK href="style.css" type="text/css" rel="stylesheet"></head>
+	<BODY text="#000000" vLink="#808080" aLink="#808080" link="#ee0000" bgColor="#ffffff">
+		<a name="plier_sdk"></a>
+		<table class="content" cellSpacing="10" border="0">
+			<tr>
+				<th class="header2" align="left" border="0" span>
+					<span class="header2">PLIER SDK</span></th></tr>
+			<tr>
+				<td vAlign="top">This document will outline the requirements and functional 
+					characteristics of the Probe Logarithmic Intensity Error Algorithm (PLIER) 
+					application programming interface (API). The PLIER algorithm is an expression 
+					analysis algorithm that is accessible from the SDK. This document describes the 
+					interfaces that are required to execute the algorithm.</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<th class="header2" align="left" span>
+					<a name="overview"></a>
+					<span class="header2">GENERAL 
+      OVERVIEW</span></th></tr>
+			<tr>
+				<td vAlign="top">The PLIER SDK code shall allow users to execute the PLIER 
+					algorithm on any workstation that has an ANSI C/C++ compiler. The PLIER SDK 
+					executes the PLIER algorithm and provides results from the PLIER execution. It 
+					allows a user to set and or get the various parameters that are required for 
+					the execution of PLIER. The user is assumed to have a basic knowledge of C/C++ 
+					and object oriented programming. The SDK does not allocate any memory for the 
+					data inputs or outputs. It is the user's responsible to manage the memory 
+					allocation. A reference count shall be maintained in the PLIER interface object 
+					and the object shall delete itself when the reference count goes down to zero.
+				</td>
+			</tr>
+			<TR>
+				<TD height="10"></TD>
+			</TR>
+			<tr>
+				<td vAlign="top">The PLIER SDK works as follows:<br>
+					a) An initial estimate is made by the Simplified Expression Analysis (SEA) 
+					method. The various parameters labeled SEA control initialize this estimation 
+					procedure.<br>
+					b) This estimate is refined by a descent method using the PLIER "goodness of 
+					fit" as the optimization criterion. This portion of the code performs the 
+					actual "PLIER" estimation of values for affinity and concentration.<br>
+					c) Whenever part (b) converges, a grid search is performed to find if the 
+					values are merely a local minimum of the "goodness of fit". If a better fit is 
+					found, we return to part (b), otherwise, we exit with the current values.<br>
+					<br>
+					The flag labeled "optimization" is not a TRUE/FALSE flag. It indicates 
+				full optimization of the Maximum Likelihood Estimator (FULL_MLE) for the value 0 (i.e. do parts (b) and (c)), and SEA for the value 
+					1 (do not do parts b and c, i.e. do not execute PLIER!). Thus, setting the 
+					optimization flag to 0 runs quickly, but the outputs are simply the initial 
+					estimates and not the PLIER estimates.
+				</td>
+			</tr>
+			<tr>
+				<th align="left">
+					<a name="terms"></a>
+					<span class="header2">TERMS/DEFINITIONS</span></th></tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" id="table1" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td><B>Term</B></td>
+							<td><B>Definition</B></td>
+						</tr>
+						<tr>
+							<td vAlign="top">PLIER Algorithm<br>
+								&nbsp;</td>
+							<td vAlign="top">Probe Logarithmic Intensity Error Algorithm<br>
+								&nbsp;</td>
+						</tr>
+						<tr>
+							<td vAlign="top">SEA<br>
+								&nbsp;</td>
+							<td vAlign="top">Simplified Expression Analysis</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><a name="interfaces"></a><span class="header2">PLIER 
+      PARAMETRS INTERFACES</span></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_init_augmentation</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The
+								AUGMENTATION parameter handles the case in which input data is exactly 0 for an 
+								intensity.
+								It simply adds 0.1 to all values given to the PLIER routine, so that division by 
+								zero does not occur.<br>
+							<STRONG>Default value</STRONG>: 0.1<br>
+								<STRONG>Valid Range</STRONG>: 0&lt;x&lt;infinity<br>
+								<STRONG>Useful Range</STRONG>: 10^-6 to 1
+							</td>
+							<td vAlign="top">Initialization<br>
+							</td>
+							<td vAlign="top">double<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_init_augmentation</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the augmentation parameter that are currently set<br>
+							</td>
+							<td vAlign="top">Initialization<br>
+							</td>
+							<td vAlign="top">A pointer to a double variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_init_defaultaffinity</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The AFFINITY parameter is the 
+							default affinity value to be used when a probe model 
+							file is not used. All probes are given the same 
+							affinity, 1.0. This value should never be adjusted 
+							in normal operation.<br>
+							<b>Default value</b>: 1.0<br>
+							<b>Valid Range</b>: 0&lt;x&lt;infinity<br>
+							<b>Useful Range</b>: 1.0<br>
+							</td>
+							<td vAlign="top">Initialization<br>
+							</td>
+							<td vAlign="top">double<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_init_defaultaffinity</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the default affinity parameter that are currently set<br>
+							</td>
+							<td vAlign="top">Initialization<br>
+							</td>
+							<td vAlign="top">A pointer to a double variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_init_defaultconcentration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The CONCENTRATION parameter is the 
+							default concentration value to be used to initialize 
+							estimation. All experiments are given the same 
+							concentration, 1.0. This value should never be 
+							adjusted in normal operation.<br>
+							<b>Default value</b>: 1.0<br>
+							<b>Valid Range</b>: 0&lt;x&lt;infinity<br>
+							<b>Useful Range</b>: 1.0<br>
+							</td>
+							<td vAlign="top">Initialization<br>
+							</td>
+							<td vAlign="top">double<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_init_defaultconcentration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the default concentration parameter that are currently set<br>
+							</td>
+							<td vAlign="top">Initialization<br>
+							</td>
+							<td vAlign="top">A pointer to a double variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_sea_attenuation</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The ATTENUATION parameter controls 
+							the use of background values in SEA. ATTENUATION = 1 
+							means that background is ignored, and PM only values 
+							are used for the initial approximation. ATTENUATION 
+							= 0 means that the value is max(0, PM-MM). Values in 
+							between &quot;attenuate&quot; the background smoothly between 
+							those two extremes. This is a first-order 
+							approximation to the RMA technique of taking 
+							&quot;expected background&quot;. A value of 0.005 is a good 
+							default, leaving about 5% of the PM intensity when 
+							MM is larger than PM.<br>
+							<b>Default value</b>: 0.005<br>
+							<b>Valid Range</b>: 0&lt;x&lt;1.0<br>
+							<b>Useful Range</b>: 10^-6&lt;x&lt;1.0<br>
+							</td>
+							<td vAlign="top">SEA<br>
+							</td>
+							<td vAlign="top">float<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_sea_attenuation</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the SEA attenuation parameter that are currently set<br>
+							</td>
+							<td vAlign="top">SEA<br>
+							</td>
+							<td vAlign="top">A pointer to a float variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_sea_opt_convergence</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The SEACONVERGENCE parameter is the 
+							termination criterion for the initial estimate. When 
+							log(conc) and log affinity) change by less than this 
+							value, stop.<br>
+							<b>Default Value</b>: 0.000001<br>
+							<b>Valid Range</b>: 0&lt;x&lt;infinity<br>
+							<b>Useful Range</b>: 10^-6&lt;x&lt;10^-3<br>
+							</td>
+							<td vAlign="top">SEA optimization<br>
+							</td>
+							<td vAlign="top">double<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_sea_opt_convergence</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the SEA convergence value that are currently set<br>
+							</td>
+							<td vAlign="top">SEA optimization<br>
+							</td>
+							<td vAlign="top">A pointer to a double variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_sea_opt_iteration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The SEAITERATION parameter is the 
+							maximum number of median polish steps to be 
+							executed. The typical number of steps taken is 
+							approximately 10.<br>
+							<b>Default Value</b>: 3000<br>
+							<b>Valid Range</b>: 0&lt;=x&lt;infinity<br>
+							<b>Useful Range</b>: 30&lt;x&lt;100000<br>
+							</td>
+							<td vAlign="top">SEA optimization<br>
+							</td>
+							<td vAlign="top">long<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_sea_opt_iteration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the maximum number of SEA iteration that are currently set<br>
+							</td>
+							<td vAlign="top">SEA optimization<br>
+							</td>
+							<td vAlign="top">A pointer to a long variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_gmcutoff</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The GMCUTOFF parameter controls the 
+							discounting of outliers. Small GMCUTOFF values 
+							indicate that even small differences are seen as 
+							outliers, large values that few outliers are 
+							expected.<br>
+							<b>Default Value</b>: 0.15<br>
+							<b>Valid Range</b>: 0&lt;x&lt;infinity<br>
+							<b>Useful Range</b>: 0.05&lt;x&lt;100<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">float<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_gmcutoff</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the GMCutoff that are currently set<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to a float variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_probepenalty</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The PROBEPENALTY parameter is a &quot;Bayes 
+							penalty&quot; on affinity values being very different 
+							across probes. Larger PROBEPENALTY values indicate 
+							that probes are expected to have very similar 
+							affinities within a probeset (all near 1.0). Small 
+							values indicate that affinities should follow the 
+							observed data.<br>
+							<b>Default Value</b>: 0.001<br>
+							<b>Valid Range</b>: 0&lt;x&lt;infinity<br>
+							<b>Useful Range</b>: 10^-6 &lt;x &lt; 1.0<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">float<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_probepenalty</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the probe penalty for PLIER that are currently set<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to a float variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_concpenalty</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The CONCPENALTY parameter is a &quot;Bayes 
+							penalty&quot; on concentration values being very 
+							different across experiments. Typically, most genes 
+							are expected not to change. Large values of 
+							CONCPENALTY (not recommended) indicate that the 
+							concentrations are expected to be similar for most 
+							genes across all experiments. Small values indicate 
+							that signal values should follow the observed data 
+							closely.<br>
+							<b>Default Value</b>: 0.000001<br>
+							<b>Valid Range</b>: 0&lt;x&lt;infinity<br>
+							<b>Useful Range</b>: 10^-6 &lt;=x &lt; 0.001<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">float<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_concpenalty</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the concentration penalty for PLIER that are currently set<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to a float variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_use_mm</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The USEMM parameter uses the 
+							mismatch &quot;MM&quot; goodness of fit, as opposed to 
+							&quot;background based likelihood estimate&quot; goodness of 
+							fit.<br>
+							<b>Default Value</b>: MM (1)<br>
+							<b>Valid Values</b>: MM/BACKGROUND (1/0)<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">bool<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_use_mm</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current flag of using mismatch or background based 
+								likelihood<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to a bool variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_use_model</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the flag whether input model is used, 
+							without fitting the affinities.<br>
+							The USEMODEL parameter uses the affinities supplied 
+							to the SDK rather than the default initial value 
+							(1.0)<br>
+							<b>Default Value</b>: DEFAULT (0)<br>
+							<b>Valid Values</b>: MODEL/DEFAULT (1/0<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">bool<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_use_model</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current flag of using input model<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to a bool variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_fit_affinity</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The FITAFFINITY parameter fits 
+							probe affinities. This should be TRUE, unless you 
+							are using a model. Otherwise, you are not exploiting 
+							the multiple chip information.<br>
+							<b>Default Value</b>: TRUE (1)<br>
+							<b>Valid Values</b>: TRUE/FALSE (1/0)<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">bool<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_fit_affinity</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current flag of fitting the affinity values<br>
+							</td>
+							<td vAlign="top">PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to a bool variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_opt_convergence</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the convergence threshold value for PLIER (change in 
+								likelihood).<br>
+							The PLIERCONVERGENCE parameter is used when the 
+							goodness of fit changes by less than this value, 
+							stop the descent procedure in (b) above and go to 
+							(c) Grid Search.<br>
+							<b>Default Value</b>: 0.000001<br>
+							<b>Valid Values</b>: 0&lt;x&lt;infinity<br>
+							<b>Useful Values</b>: 10^-6&lt;x&lt;10^-3<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">double<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_opt_convergence</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the convergence threshold value for PLIER that are 
+								currently set<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">A pointer to a double variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_opt_iteration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The PLIERITERATION parameter is 
+							used to avoid infinite loops by having a maximum 
+							number of iterations for (b) and (c) above. Typical 
+							iterations range from 150-300, depending on chips. 
+							Bad probe sets can take longer to converge.<br>
+							<b>Default Value</b>: 3000<br>
+							<b>Valid Values</b>: 0&lt;=x&lt;infinity<br>
+							<b>Useful Values</b>: 500&lt;x&lt;100000<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">long<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_opt_iteration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the maximum number of iteration in PLIER that are currently 
+								set<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">A pointer to a long variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_opt_dropmax</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">The DROPMAX parameter is used to 
+							avoid negative or zero values by controlling the 
+							descent procedure near zero. It should be greater 
+							than 1, or the value will never decrease.<br>
+							<b>Default Value</b>: 3<br>
+							<b>Valid Values</b>: 1&lt;x&lt;infinity<br>
+							<b>Useful Values</b>: 2-10<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">double<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_opt_dropmax</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the logarithmic barrier near zero for PLIER that are 
+								currently set.<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">A pointer to a double variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_opt_lambdalimit</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the minimum step multiplier in method.<br>
+							The LAMBDALIMIT parameter is used to avoid steps 
+							that are too small in the descent procedure.<br>
+							<b>Default Value</b>: 0.01<br>
+							<b>Valid Values</b>: 0&lt;x&lt;1<br>
+							<b>Useful Values</b>: 10^-6&lt;x&lt;0.1<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">double<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_opt_lambdalimit</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the minimum step multiplier in method that are currently 
+								set<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">A pointer to a double variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_plier_opt_optimization</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the PLIER optimization method (possible values: Full 
+								optimization (0) or SEA estimation (1)). The 
+							OPTIMIZATION parameter should always be &quot;FULL_MLE&quot; 
+							or 0 when getting PLIER estimates.<br>
+							<b>Default Value</b>: FULL_MLE (0)<br>
+							<b>Valid Values</b>: FULL_MLE/SEA_ONLY (0/1)<br>
+							<b>Useful Values</b>: FULL_MLE/SEA_ONLY (0/1)<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">long<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_opt_optimization</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the PLIER optimization method that are currently set<br>
+							</td>
+							<td vAlign="top">PLIER optimization<br>
+							</td>
+							<td vAlign="top">A pointer to a long variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_concentration 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the flag whether to use initial concentration values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">bool<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_concentration 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current flag of whether to use initial concentration 
+								values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">A pointer to a bool variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_bg (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the flag whether to use background values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">bool<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_bg (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current flag of whether to use background values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">A pointer to a bool variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_conc_sd 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the flag whether to use concentration standard deviation 
+								values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">bool<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_conc_sd 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current flag of whether to use concentration standard 
+								deviation values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">A pointer to a bool variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_affinity_sd 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the flag whether to use affinity standard deviation values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">bool<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_use_affinity_sd 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="25%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Parameter Type</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="25%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current flag of whether to use affinity standard 
+								deviation values<br>
+							</td>
+							<td vAlign="top">Reserved for future use<br>
+							</td>
+							<td vAlign="top">A pointer to a bool variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><a name="inputs"></a><span class="header2">PLIER 
+      INPUTS</span><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_num_exp</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the number of input experiments<br>
+							</td>
+							<td vAlign="top">long<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_num_exp</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the number of input experiments that are currently set<br>
+							</td>
+							<td vAlign="top">A pointer to a long variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_num_probe</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the number of input probe in each experiment<br>
+							</td>
+							<td vAlign="top">long<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_num_probe</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the number of input probe in each experiment that are 
+								currently set<br>
+							</td>
+							<td vAlign="top">A pointer to a long variable which store the required value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_replicate</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the replicate grouping<br>
+							</td>
+							<td vAlign="top">array of long variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_replicate</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the replicate grouping that are currently set<br>
+							</td>
+							<td vAlign="top">A pointer to an array of long variables which store the required 
+								value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_pm</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the input perfect match probe intensities<br>
+							</td>
+							<td vAlign="top">double variable matrix of num_exp by num_probe stored by 
+								experiments<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_pm</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the input perfect match probe that are currently set<br>
+							</td>
+							<td vAlign="top">A pointer to a matrix of double variables which store the required 
+								value.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_mm</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the input mismatch probe intensities<br>
+							</td>
+							<td vAlign="top">double variable matrix of num_exp by num_probe stored by 
+								experiments<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_mm</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the input mismatch probe that are currently set<br>
+							</td>
+							<td vAlign="top">A pointer to a matrix of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_bg (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to set the input background values<br>
+							</td>
+							<td vAlign="top">double variable matrix of num_exp by num_probe stored by 
+								experiments<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_bg (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to get the input background values that are 
+								currently set<br>
+							</td>
+							<td vAlign="top">A pointer to a matrix of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><a name="inputs_outputs"></a><span class="header2">PLIER 
+      INPUTS/OUTPUTS</span></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_concentration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the number of initial concentration values<br>
+							</td>
+							<td vAlign="top">array of double variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_concentration</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the computed concentration values in PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to an array of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_affinity</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the number of initial affinity values<br>
+							</td>
+							<td vAlign="top">array of double variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_affinity</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the computed probe affinity values in PLIER<br>
+							</td>
+							<td vAlign="top">A pointer to an array of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_conc_sd (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to set the input concentration standard deviation 
+								values<br>
+							</td>
+							<td vAlign="top">array of double variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_conc_sd (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to get the output concentration standard deviation 
+								values<br>
+							</td>
+							<td vAlign="top">A pointer to an array of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_affinity_sd 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to set the input affinity standard deviation 
+								values<br>
+							</td>
+							<td vAlign="top">array of double variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_affinity_sd 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to get the output affinity standard deviation 
+								values<br>
+							</td>
+							<td vAlign="top">A pointer to an array of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><a name="inputs_res"></a><span class="header2">PLIER 
+      INPUTS (RESERVED)</span></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_residuals (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to set the return residuals, structure corresponds 
+								to pm<br>
+							</td>
+							<td vAlign="top">matrix of double variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_residuals (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to get the return residuals<br>
+							</td>
+							<td vAlign="top">A pointer to a matrix of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_call_pvalue 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to set the return expression call p-value<br>
+							</td>
+							<td vAlign="top">matrix of double variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_call_pvalue 
+      (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to get the return expression call p-value<br>
+							</td>
+							<td vAlign="top">A pointer to a matrix of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_likelihood (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to set the return likelihood<br>
+							</td>
+							<td vAlign="top">array of double variables<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_likelihood (reserved)</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Reserved method to get the return likelihood<br>
+							</td>
+							<td vAlign="top">A pointer to an array of double variables which store the required 
+								values.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><a name="methods"></a><span class="header2">PLIER 
+      ALGORITHM METHODS</span></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">set_default</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To set the PLIER parameters to HG-U133A default values<br>
+							</td>
+							<td vAlign="top">a void pointer (reserved)<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">run</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Run the PLIER algorithm based on the inputs and parameters<br>
+							</td>
+							<td vAlign="top">A pointer to error code<br>
+							</td>
+							<td vAlign="top" width="115">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_impl_info</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">To get the current PLIER implementation name and version<br>
+							</td>
+							<td vAlign="top">Two character pointers to the returned PLIER implementation name 
+								and version respectively.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><a name="functions"></a><span class="header2">GLOBAL 
+      FUNCTIONS</span></td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">create_plier_object</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">Create a PLIER algorithm interface based on the input 
+								implementation name<br>
+							</td>
+							<td vAlign="top">1.&nbsp;&nbsp;&nbsp; A pointer to a buffer that stores the PLIER 
+								implementation name.<br>
+								2.&nbsp;&nbsp;&nbsp; A pointer to a pointer of PLIER interface object to be 
+								returned.<br>
+							</td>
+							<td vAlign="top">none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top"><b><span class="header3">get_plier_error</span></b><br>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<table class="content" cellSpacing="0" cellPadding="0" width="100%" border="1">
+						<tr>
+							<td vAlign="top" width="33%"><b>Description</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Input Parameters</b><br>
+							</td>
+							<td vAlign="top" width="33%"><b>Return Value</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td vAlign="top">
+								Get the PLIER error string for the input error code<br>
+							</td>
+							<td valign="top">
+								1.&nbsp;&nbsp;&nbsp; Error code<br>
+								2.&nbsp;&nbsp;&nbsp; Error string buffer<br>
+							</td>
+							<td valign="top">
+								none<br>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</BODY>
+</html>

@@ -1,0 +1,19 @@
+#%Note='ignoreParamFile.tsv' 17 rows, 1 cols
+#%header0=IgnoreParameters
+FileCreationTime
+FileIdentifier
+program-version
+create_date
+create-date
+affymetrix-algorithm-param-option-verbose
+affymetrix-algorithm-param-option-exec-guid
+affymetrix-algorithm-param-option-program-cvs-id
+affymetrix-algorithm-param-option-version-to-report
+affymetrix-algorithm-param-option-command-line
+affymetrix-algorithm-param-option-mem-usage
+affymetrix-algorithm-param-option-run-probeset-genotype
+affymetrix-algorithm-param-option-cels
+affymetrix-algorithm-param-option-out-dir
+affymetrix-algorithm-param-state-time-start
+affymetrix-algorithm-param-state-free-mem-at-start
+affymetrix-algorithm-param-option-temp-dir

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+			<h1>Affymetrix® MSK Data File Format</h1>
+
+			<h2>MSK FILE</h2>
+	
+
+ 
+	<p><b>Description</b></p>
+<p>The MSK, "mask", file contains a list of probe sets to use in the MAS5 statistical expression algorithm normalization or scaling function or the list of probe pairs to exclude from the MAS5 statistical expression algorithm analysis.</p>
+
+<p><b>Format</b></p>
+<p>The format of the MSK file is ASCII text.</p>
+
+<p>The first line of the file defines the probe array type associated with the probe sets and probe pairs. The probe sets and probe pairs are defined in sections where the section starts with a "[Comp]" or "[Call]" line. The MSK file may contain either the [Comp] or [Call] sections or both.</p>
+
+<p>The list of probe sets to use in the normalization or scaling function are defined in the [Comp] section. Each line in this section defines a single probe set. The section ends with the end of the file or the start of the [Call] section.</p>
+
+<p>The list of probe pairs to ignore are defined in the [Call] section. Each line in this section defines a probe set and its probe pairs (one based index) to exclude. A tag separates the probe set name from the probe pairs. The probe pair numbers are separated by a comma and a range may be defined using a dash. The section ends with the end of the file or the start of the [Comp] section.</p>
+
+<p>The following example defines two probe sets in the [Comp] section and 2 probe sets in the [Call] section. The array type is "Hu6800".</p>
+
+    <code>Hu6800<br /><br />
+
+    [Comp]<br />
+    A28102_at<br />
+    AB000381_s_at<br /><br />
+
+    [Call]<br />
+    A28102_at 17,18,19,20<br />
+    AB000381_s_at 7<br />
+    AC000064_cds2_at 18,19,20<br />
+    AC002086_at 1-10,15-20<br />
+    AC00001_at 1-20
+	</code>
+
+			</div>
+			<div class="clr"></div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

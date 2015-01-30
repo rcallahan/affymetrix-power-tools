@@ -1,0 +1,8 @@
+# input-01.tsv
+#%tsv-type=paste-input
+probeset_id	val-01-01	val-01-02
+ps-00001	val-01-01-01	val-01-02-01
+ps-00001	val-01-01-01	val-01-02-01
+ps-00002	val-01-01-02	val-01-02-02
+ps-00003	val-01-01-03	val-01-02-03
+ps-00004	val-01-01-04	val-01-02-04

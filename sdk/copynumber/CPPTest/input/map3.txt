@@ -1,0 +1,4 @@
+probeset_id	chromosome	position
+test3	x	123
+test2	y	234
+test1	m	456

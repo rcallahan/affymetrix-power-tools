@@ -1,0 +1,5 @@
+GroupName	TsvName
+Cyto2	ProbeEffects
+Cyto2	SNPPosteriors
+Cyto2	SketchSNP
+Cyto2	WaveCorrection

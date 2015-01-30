@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'affx_fusion_com'
+		'affx_fusion_com.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

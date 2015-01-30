@@ -1,0 +1,26 @@
+/**
+\page apt-chp-to-txt MANUAL: apt-chp-to-txt (\aptversion)
+
+\p apt-chp-to-txt writes expression and genotyping CHP files in tab-delimited text format.
+
+This tool converts text/binary CHP files to tab-delimited text output.
+One output file is generated per CHP file, with the same base name and the extension
+.txt, and any previously-generated file of the same name is silently overwritten.
+
+\section QuickStart Quick Start
+To convert text/binary CHP files to tab-delimited text output, use:
+
+\verbatim
+apt-chp-to-txt [options] file1.chp ... fileN.chp
+\endverbatim
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-chp-to-txt.help.txt
+
+*/

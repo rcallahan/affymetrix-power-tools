@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ParameterFile company="Affymetrix" userName="Srinivas" contentVersion="1">
+  <Implementation name="Percentile Cell Average" version="0.1" executableFileName="percentile.exe" description="Percentile Average feature extraction algorithm for generating CEL files" />
+  <Parameter name="Percentile" displayName="Percentile" category="Percentile Parameters" isEditable="false" type="Int32" currentValue="75" minValue="0" maxValue="100" defaultValue="75" precision="0" maxLength="0" description="Percentile to use for cell intensity" index="-1" />
+  <Parameter name="CellMargin" displayName="CellMargin" category="Percentile Parameters" isEditable="false" type="Int32" currentValue="2" minValue="0" maxValue="10" defaultValue="2" precision="0" maxLength="0" description="Cell Margin to use for cell intensity" index="-1" />
+  <Parameter name="CellFileVersion" displayName="CellFileVersion" category="Percentile Parameters" isEditable="false" type="Int32" currentValue="3" minValue="3" maxValue="3" defaultValue="3" precision="0" maxLength="0" description="Version of Cell file to write" index="-1" />
+  <Parameter name="OutlierLow" displayName="OutlierLow" category="Outlier Parameters" isEditable="false" type="Float" currentValue="1.004" minValue="1.004" maxValue="1.004" defaultValue="1.004" precision="3" maxLength="0" description="Outlier threshold low" index="-1" />
+  <Parameter name="OutlierHigh" displayName="OutlierHigh" category="Outlier Parameters" isEditable="false" type="Float" currentValue="1.5" minValue="1.5" maxValue="1.5" defaultValue="1.5" precision="1" maxLength="0" description="Outlier threshold high" index="-1" />
+</ParameterFile>

@@ -1,0 +1,45 @@
+/**
+\page apt-engine-wrapper MANUAL: apt-engine-wrapper (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+This program allows you to directly call an analysis engine. You essentially specify the
+engine and then all the engine parameters. You can get help on using the wrapper like this:
+
+\verbatim
+   apt-engine-wrapper --help
+\endverbatim
+
+This will also provide a listing of known analysis engines. You can get help on what options 
+are available to each engine like so:
+
+\verbatim
+   apt-engine-wrapper --engine ProbesetSummarizeEngine --help
+\endverbatim
+
+And you can actually run the engine like this:
+
+\verbatim
+   apt-engine-wrapper --engine ProbesetSummarizeEngine -- [engine options]
+\endverbatim
+
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-engine-wrapper.help.txt
+
+*/

@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.FusionCHPHeader.1 = s 'FusionCHPHeader Class'
+	{
+		CLSID = s '{943A92AD-6924-4557-99D0-FAE9B541AD95}'
+	}
+	affx_fusion_com.FusionCHPHeader = s 'FusionCHPHeader Class'
+	{
+		CLSID = s '{943A92AD-6924-4557-99D0-FAE9B541AD95}'
+		CurVer = s 'affx_fusion_com.FusionCHPHeader.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {943A92AD-6924-4557-99D0-FAE9B541AD95} = s 'FusionCHPHeader Class'
+		{
+			ProgID = s 'affx_fusion_com.FusionCHPHeader.1'
+			VersionIndependentProgID = s 'affx_fusion_com.FusionCHPHeader'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

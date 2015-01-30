@@ -1,0 +1,330 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE MAGE-ML SYSTEM "MAGE-ML.dtd">
+<MAGE-ML identifier="Affymetrix.com">
+	<PropertySets_assnlist>
+		<NameValueType name="FileVersion" value="1.0" type="string"/>
+		<NameValueType name="CreatingUser" value="skaush" type="string"/>
+		<NameValueType name="CreationDate" value="2005-06-01T07:47:54Z" type="date"/>
+		<NameValueType name="SoftwareVersion" value="GCOS 1.4.0" type="string"/>
+		<NameValueType name="MachineName" value="DJCV4V01" type="string"/>
+		<NameValueType name="Comment" value="" type="string"/>
+	</PropertySets_assnlist>
+	<Protocol_package>
+		<Software_assnlist>
+			<Software identifier="Affymetrix.com:Software:GeneChip">
+				<Type_assn>
+					<OntologyEntry category="SoftwareType" value="Acquisition and analysis software"/>
+				</Type_assn>
+			</Software>
+		</Software_assnlist>
+	</Protocol_package>
+<BioMaterial_package>
+	<BioMaterial_assnlist>
+		<BioSource identifier="DJCV4V01:BioSource:Sample_with_Sample_Template" name="Sample_with_Sample_Template">
+			<PropertySets_assnlist>
+				<NameValueType name="Sample Template Name" value="MIAME Sample Information" type="string">
+					<PropertySets_assnlist>
+						<NameValueType name="Active" value="1" type="integer"/>
+						<NameValueType name="Attributes">
+							<PropertySets_assnlist>
+								<NameValueType name="Genus">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="species">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Strain/Line">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Individual">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Sample Provider">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Sex">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Age">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Developmental State">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Tissue">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Cell Type">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Genetic Modifications">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Genetic Characteristics">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Disease State">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Reference to Clinical Data">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Growth Conditions">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="in vivo Treatments">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Tissue Harvesting Method">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Extract Method">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Molecule Type">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Amplification">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Amount">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Label">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Label Incorporation">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+							</PropertySets_assnlist>
+						</NameValueType>
+					</PropertySets_assnlist>
+				</NameValueType>
+				<NameValueType name="Genus" value="" type="string"/>
+				<NameValueType name="species" value="Human" type="string"/>
+				<NameValueType name="Strain/Line" value="" type="string"/>
+				<NameValueType name="Individual" value="" type="string"/>
+				<NameValueType name="Sample Provider" value="" type="string"/>
+				<NameValueType name="Sex" value="Male" type="string"/>
+				<NameValueType name="Age" value="25" type="string"/>
+				<NameValueType name="Developmental State" value="Normal" type="string"/>
+				<NameValueType name="Tissue" value="Brain" type="string"/>
+				<NameValueType name="Cell Type" value="" type="string"/>
+				<NameValueType name="Genetic Modifications" value="" type="string"/>
+				<NameValueType name="Genetic Characteristics" value="" type="string"/>
+				<NameValueType name="Disease State" value="" type="string"/>
+				<NameValueType name="Reference to Clinical Data" value="" type="string"/>
+				<NameValueType name="Growth Conditions" value="" type="string"/>
+				<NameValueType name="in vivo Treatments" value="" type="string"/>
+				<NameValueType name="Tissue Harvesting Method" value="" type="string"/>
+				<NameValueType name="Extract Method" value="" type="string"/>
+				<NameValueType name="Molecule Type" value="" type="string"/>
+				<NameValueType name="Amplification" value="" type="string"/>
+				<NameValueType name="Amount" value="" type="string"/>
+				<NameValueType name="Label" value="" type="string"/>
+				<NameValueType name="Label Incorporation" value="" type="string"/>
+			</PropertySets_assnlist>
+			<AuditTrail_assnlist>
+				<Audit date="2005-06-01T07:47:00Z" action="creation"/>
+			</AuditTrail_assnlist>
+			<Characteristics_assnlist>
+				<OntologyEntry category="Affymetrix:Sample Project" value="DTT1.1"/>
+			</Characteristics_assnlist>
+			<MaterialType_assn>
+				<OntologyEntry category="MaterialType" value="Unknown"/>
+			</MaterialType_assn>
+			<SourceContact_assnreflist>
+				<Person_ref identifier="DJCV4V01:Person:skaush"/>
+			</SourceContact_assnreflist>
+		</BioSource>
+	</BioMaterial_assnlist>
+</BioMaterial_package>
+<ArrayDesign_package>
+	<ArrayDesign_assnlist>
+		<PhysicalArrayDesign identifier="Affymetrix.com:PhysicalArrayDesign:Test3" name="Test3"/>
+	</ArrayDesign_assnlist>
+</ArrayDesign_package>
+<Array_package>
+	<Array_assnlist>
+		<Array identifier="Affymetrix.com:Array:Example2_No_Wash_Stain_Uses_Sample_And_Exp_Template">
+			<ArrayDesign_assnref>
+				<PhysicalArrayDesign_ref identifier="Affymetrix.com:PhysicalArrayDesign:Test3"/>
+			</ArrayDesign_assnref>
+			<Information_assnref>
+				<ArrayManufacture_ref identifier=""/>
+			</Information_assnref>
+		</Array>
+	</Array_assnlist>
+</Array_package>
+<Experiment_package>
+	<Experiment_assnlist>
+		<Experiment identifier="DJCV4V01:Experiment:Example2_No_Wash_Stain_Uses_Sample_And_Exp_Template" name="Example2_No_Wash_Stain_Uses_Sample_And_Exp_Template">
+			<PropertySets_assnlist>
+				<NameValueType name="Assay Type" value="Expression" type="string"/>
+				<NameValueType name="Probe Array Type" value="Test3" type="string"/>
+				<NameValueType name="Barcode" value="Example2_Barcode" type="string"/>
+				<NameValueType name="Experiment Template Name" value="Example Exp Template" type="string">
+					<PropertySets_assnlist>
+						<NameValueType name="Active" value="1" type="integer"/>
+						<NameValueType name="Attributes">
+							<PropertySets_assnlist>
+								<NameValueType name="Assay Type">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="string" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Hyb Oven Temp">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="" type="string"/>
+										<NameValueType name="Type" value="float" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+								<NameValueType name="Grid Alignment Passed">
+									<PropertySets_assnlist>
+										<NameValueType name="Required" value="0" type="integer"/>
+										<NameValueType name="Active" value="1" type="integer"/>
+										<NameValueType name="Value" value="PASS\nFAIL" type="string"/>
+										<NameValueType name="Type" value="controlled" type="string"/>
+									</PropertySets_assnlist>
+								</NameValueType>
+							</PropertySets_assnlist>
+						</NameValueType>
+					</PropertySets_assnlist>
+				</NameValueType>
+				<NameValueType name="Assay Type" value="Expression" type="string"/>
+				<NameValueType name="Hyb Oven Temp" value="" type="float"/>
+				<NameValueType name="Grid Alignment Passed" value="" type="controlled"/>
+			</PropertySets_assnlist>
+			<AuditTrail_assnlist>
+				<Audit date="2005-06-01T07:47:00Z" action="creation"/>
+			</AuditTrail_assnlist>
+			<Providers_assnreflist>
+				<Person_ref identifier="DJCV4V01:Person:skaush"/>
+			</Providers_assnreflist>
+			<ExperimentDesigns_assnlist>
+				<ExperimentDesign/>
+			</ExperimentDesigns_assnlist>
+		</Experiment>
+	</Experiment_assnlist>
+</Experiment_package>
+</MAGE-ML>

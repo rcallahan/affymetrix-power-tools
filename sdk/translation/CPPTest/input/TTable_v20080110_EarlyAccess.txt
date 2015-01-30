@@ -1,0 +1,524 @@
+Gene	Reference Link	AssayID	dbSNP	Defining	cDNA	Genomic	Change	External ID	Validated	Haplotype	Reference	Variant	A1	A2	A3	A4	A5	A6	A7	A8	A9	A10	A11	A12	A13	A14	A15	A16	A17	A18	A19	A20	A21	A22	A23	A24	A25	A26	A27	A28	A29
+ABCB1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	*14	A893S	A893T 	N44S	I829V	S400N	A599T	V801M																				
+ABCB1	NCBI dbSNP 	366793	rs2214102	N	5'UTR	113063G>A	5'UTR	MDR1_A-1G	N	N	G	A																													
+ABCB1	NCBI dbSNP 	367673	rs9282564	*14	61A>G	113124A>G	N21D	MDR1star14_A61G	Y	N	A	G		G																											
+ABCB1	NCBI dbSNP 	368263	rs2032582	N	2677G>T	181946G>T	A893S	rs2032582	Y	N	G	T			T																										
+ABCB1	NCBI dbSNP 	368263	rs2032582	N	2677G>A	181946G>A	A893T 	rs2032582	Y	N	G	A				A																									
+ABCB1	NCBI dbSNP 	367497	rs1202183	N	549A>G	127581A>G	N44S	rs1202183	N	N	A	G					G																								
+ABCB1	NCBI dbSNP 	366580	rs2032581	N	2903A>G	181754A>G	I829V	rs2032581	N	N	A	G						G																							
+ABCB1	NCBI dbSNP 	367495	rs2229109	N	1617G>A	162755G>A	S400N	rs2229109	N	N	G	A							A																						
+ABCB1	NCBI dbSNP 	366795	rs2235036	N	2213G>A	167293G>A	A599T	rs2235036	N	N	G	A								A																					
+ABCB1	NCBI dbSNP 	367092	rs2235039	N	2819G>A	176710G>A	V801M	rs2235039	N	N	G	A									A																				
+ABCB1	NCBI dbSNP 	367417	rs10276036	N	Not in mRNA	162366A>G	Intron	MDR1_A-44G	Y	N	A	G																													
+ABCB1	NCBI dbSNP 	366581	rs1128503	N		162963C>T	G412G	rs1128503	Y	N	C	T																													
+ABCB1	NCBI dbSNP 	366577	rs1045642	N		203919C>T	I1145I	rs1045642	Y	N	C	T																													
+ABCB1	NCBI dbSNP 	367088	rs2235033	N	Not in mRNA	163421T>C	Intron	rs2235033	Y	N	T	C																													
+ABCB1	NCBI dbSNP 	367607	rs1128501	N	Not in mRNA	147030G>T	Intron	rs1128501	N	N	G	T																													
+ABCB1	NCBI dbSNP 	367564	rs1128502	N		147031A>T	G185G	rs1128502	N	N	A	T																													
+ABCB1	NCBI dbSNP 	367606	rs17064	N			UTR	rs17064	N	N	A	T																													
+ABCB1	NCBI dbSNP 	366792	rs2032588	N	Not in mRNA	163121A>T	Intron	rs2032588	N	N	C	T																													
+ABCB1	NCBI dbSNP 	365848	rs2235012	N		163837G>C	L554L	rs2235012	N	N	G	C																													
+ABCB1	NCBI dbSNP 	367696	rs2235013	N	Not in mRNA	163938G>A	Intron	rs2235013	N	N	G	A																													
+ABCB1	NCBI dbSNP 	367563	rs2235015	N	Not in mRNA	143000G>T	Intron	rs2235015	N	N	G	T																													
+ABCB1	NCBI dbSNP 	366971	rs2235044	N		196739G>A	P1028P	rs2235044	N	N	G	A																													
+ABCB1	NCBI dbSNP 	366167	rs2707943	N		197924C>G	G1063G	rs2707943	N	N	C	G																													
+ABCB1	NCBI dbSNP 	367713	rs3842	N		209198A>G	UTR	rs3842	N	N	A	G																													
+ABCB1	NCBI dbSNP 	#	rs2707944	N			G1063A	rs2707944	N	N	G	C																													
+ABCB1	NCBI dbSNP 	#	rs2235022	N			E243E	rs2235022	N	N	A	G																													
+ABCB1	NCBI dbSNP 	#	rs2235040	N	Not in mRNA		Intron	rs2235040	N	N	G	A																													
+ABCC2	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	Y39F	R353H	V417I	N718S	R768W	S789F	E893Q	R1181L	T1273A	K1299Q	A1450T	C1515Y																
+ABCC2	NCBI dbSNP 	366160	rs927344	N	147T>A	1874T>A	Y39F	rs927344	N	N	T	A		A																											
+ABCC2	NCBI dbSNP 	367198	rs7080681	N	1089G>A	17596G>A	R353H	rs7080681	N	N	G	A			A																										
+ABCC2	NCBI dbSNP 	366783	rs2273697	N	1280G>A	21242G>A	V417I	rs2273697	Y	N	G	A				A																									
+ABCC2	NCBI dbSNP 	367317	rs3740072	N	2184A>G	34550A>G	N718S	rs3740072	N	N	A	G					G																					
+ABCC2	Wada et al. 2006	365831	NA	N	2302C>T	36004C>T	R768W	MRP2_C2302T	Y	N	C	T						T																				
+ABCC2	Wada et al. 2006	366562	NA	N	2366C>T	36068C>T	S789F	MRP2_C2366T	Y	N	C	T							T																			
+ABCC2	NCBI dbSNP 	366779	rs3740071	N	2708C>G	47547C>G	E893Q	rs3740071	N	N	G	C								C																		
+ABCC2	NCBI dbSNP 	368043	rs8187692	N	3573G>T	53402G>T	R1181L	rs8187692	N	N	G	T									T																	
+ABCC2	NCBI dbSNP 	367074	rs8187699	N	3848A>G	61058A>G	T1273A	rs8187699	N	N	A	G										G																
+ABCC2	NCBI dbSNP 	366964	rs4148400	N	3926A>C	61557A>C	K1299Q	rs4148400	N	N	A	C											C															
+ABCC2	"Conseil et al, 2005"	366157	NA	N	4348G>A	67820G>A	A1450T	MRP2_G4348A	Y	N	G	A												A														
+ABCC2	"Conseil et al, 2005"	366157	NA	N	4348G>T	67820G>T	A1450A	MRP2_G4348A	Y	N	G	T																										
+ABCC2	NCBI dbSNP 	366776	rs8187710	N	4575G>A	68721G>A	C1515Y	rs8187710	N	N	G	A													T													
+ABCC2	NCBI dbSNP 	367275	rs717620	N	24C>T	24C>T	5'UTR	rs717620	Y	N	C	T																										
+ABCC2	NCBI dbSNP 	367472	rs4267009	N	1465G>T	21427G>T	A478A	rs4267009	N	N	G	T																										
+ABCC2	NCBI dbSNP 	367488	rs3740070	N	2965G>A	48845G>A	S978S	rs3740070	N	N	G	A																										
+ABCC2	NCBI dbSNP 	366360	rs4148401	N		61589C>T	Y1309Y	rs4148401	N	N	C	T																										
+ABCC2	NCBI dbSNP 	366963	rs3740066	N		61634C>T	I1324I	rs3740066	Y	N	C	T																										
+ABCC2	NCBI dbSNP 	366359	rs7899457	N		62930C>T	L1370L	rs7899457	N	N	C	T																										
+ABCC2	NCBI dbSNP 	366357	rs1137968	N		64288G>T	V1430V	rs1137968	N	N	G	T																													
+ABCC2	NCBI dbSNP 	366777	rs8187706	N		67882G>A	E1470E	rs8187706	N	N	G	A																													
+ABCC2	NCBI dbSNP 	366559	rs8187707	N		67960C>T	H1496H	rs8187707	N	N	C	T																													
+ABCC2	NCBI dbSNP 	367043	rs8187709	N		68704C>T	N1509N	rs8187709	N	N	C	T																													
+CDA	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	K27Q	A70T	T145T																									
+CDA	NCBI dbSNP	366029	rs2072671	N	79A>C	399A>C	K27Q	rs2072671	Y	N	A	C		C																											
+CDA	2003.Pubmed_12544510	366271	N/A	N	208G>A	16172G>A	A70T	CDA_A70T	Y	N	G	A			A																										
+CDA	NCBI dbSNP	366697	rs1048977	N	435T>C	29753T>C	T145T	rs1048977	N	N	C	T				T																									
+CYP1A1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*3	*10	*5	*2C	*4	*8	#*6																					
+CYP1A1	"Crofts et al., 1993 "	366522	N/A	*3		3205T>C		CYP1A1star3	N	Y	T	C		C																											
+CYP1A1	"Saito et al., 2003"	366216	N/A	*10		2500C>T	R477W	CYP1A1star10	N	Y	C	T			T																										
+CYP1A1	"Chevalier et al., 2001"	367853	N/A	*5		2461C>A	R464S	CYP1A1star5	N	Y	C	A				A																									
+CYP1A1	"Persson et al., 1997"	367942	N/A	*2C		2455A>G	I462V	CYP1A1star2C	N	Y	A	G					G																								
+CYP1A1	"Cascorbi et al., 1996"	367889	N/A	*4		2453C>A 	T461N 	CYP1A1star4	N	Y	C	A						A																							
+CYP1A1	"Saito et al., 2003"	367111	N/A	*8		2414T>A	I448N	CYP1A1star8	N	Y	T	A							A																						
+CYP1A1	"Chevalier et al., 2001"	#367112	N/A	*6		1636G>T	M331I	CYP1A1star6	N	Y	G	T								T																					
+CYP1A2	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*1C	*1D	*1E	*1K	*1L 	*2	*4	*5	*6	*7	*3																	
+CYP1A2	"Nakajima et al, 1999"	368215	rs2069514	N	Not in mRNA	-3860G>A	promotor	CYP1A2star1C	Y	Y	G	A		A	 	 	 	A	 	 	 	 	 																		
+CYP1A2	"Chida et al, 1999"	368392	N/A	N	Not in mRNA	-2467del T	promotor	CYP1A2star1D	Y	Y	INS	DEL			DEL	 	 	DEL	 	 	 	 	 																		
+CYP1A2	"Aklillu et al, 2003"	365811	rs17861148	N	Not in mRNA	-739T>G	promotor	CYP1A2star1K_-739TG	Y	Y	T	G		 	 	G	G	 	 	 	 	 	 																		
+CYP1A2	"Aklillu et al, 2004"	366505	rs12720461	N	Not in mRNA	-729C>T	promotor	CYP1A2star1K_-729CT	Y	Y	C	T		 	 		T	 	 	 	 	 	 																		
+CYP1A2	"Huang et al, 1999"	366140	N/A	N		63C>G	F21L	CYP1A2star2	Y	Y	C	G		 	 	 	 	 	G	 	 	 	 										 								
+CYP1A2	"Zhou et al., 2004"	366134	N/A	N		2499A>T	I386F	CYP1A2star4	Y	Y	A	T		 	 	 	 	 	 	T	 	 	 																		
+CYP1A2	"Chevalier et al, 2001"	366945	N/A	N		3497G>A	C406Y	CYP1A2star5	Y	Y	G	A		 	 	 	 	 	 	 	A	 	 																		
+CYP1A2	"Allorge et al, 2003"	366714	N/A	N	Not in mRNA	3534G>A	splicing defect	CYP1A2star7	Y	Y	G	A		 	 	 	 	 	 	 	 	 	A																		
+CYP1A2	"Zhou et al., 2004"	365802	N/A	N		5090C>T	R431W	CYP1A2star6	Y	Y	C	T		 	 	 	 	 	 	 	 	T	 																		
+CYP1A2	"Aklillu et al, 2003"	366300	N/A	N	Not in mRNA	-163C>A	promotor	CYP1A2star1K_-163CA	Y	Y	C	A					A																								
+CYP1A2	"Chevalier et al, 2001"	366339	N/A	N		2385G>A	D348N	CYP1A2star3_1042GA	N	Y	G	A												A																	
+CYP1A2	"Zhou et al., 2004"	366762	N/A	N		5347T>C		CYP1A2star3_1545TC	N	Y	T	C												C																	
+CYP1B1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*17	*22	*26	*25	*23	*3	*21	*20	*19	*18																		
+CYP1B1	"Stoilov et al, 1997"	368151	N/A	*17		4096_4108del	frameshift	CYP1B1star17	N	Y	INS	DEL		DEL																											
+CYP1B1	"Stoilov et al, 1998"	368191	N/A	*22		4232_4231dup	frameshift	CYP1B1star22	N	Y	INS	DEL			DEL																										
+CYP1B1	"Stoilov et al, 1998"	368193	N/A	*26		4435_4461dup	frameshift	CYP1B1star26	N	Y	INS	DEL				DEL																									
+CYP1B1	"Stoilov et al, 1998"	366628	rs28936701	*25		4437C>T	R469W	CYP1B1star25	N	Y	C	T					T																								
+CYP1B1	"Stoilov et al, 1998"	367981	N/A	*23		4342C>T	P437L	CYP1B1star23	N	Y	C	T						T																							
+CYP1B1	"Bailey et al, 1998"	366630	rs1056836	*3		4326C>G	L432V	CYP1B1star3	N	Y	C	G							G																						
+CYP1B1	"Stoilov et al, 1998"	366856	N/A	*21		4201G>A	R390H	CYP1B1star21	N	Y	G	A								A																					
+CYP1B1	"Stoilov et al, 1998"	366420	N/A	*20		4191G>A	E387K	CYP1B1star20	N	Y	G	A									A																				
+CYP1B1	"Stoilov et al, 1998"	366214	N/A	*19		4168C>T	P379L	CYP1B1star19	N	Y	C	T										T																			
+CYP1B1	"Stoilov et al, 1998"	366421	N/A	*18		4125G>T	G365W	CYP1B1star18	N	Y	G	T											T																		
+CYP2A13	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*1H	*1F	*4																									
+CYP2A13	"Fujieda et al., 2003"	365938	N/A	*4		579G>A	R101Q	CYP2A13star4	N	Y	C	T				T																									
+CYP2A13	"Fujieda et al., 2003"	366627	N/A	N		2366C>T		CYP2A13star1H_2366CT	N	Y	C	T		T																											
+CYP2A13	"Fujieda et al., 2003"	366520	N/A	N		 6432C>T		CYP2A13star1H_6432CT	N	Y	C	T		T																											
+CYP2A13	"Fujieda et al., 2003"	366418	N/A	*1F		6461T>A		CYP2A13star1F	N	Y	T	A			A																										
+CYP2A6	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*1B12 	*2	*5	*6	*7	*8	*10	*11	*13	*16	*15	*9A	#*12	#*17	#*20	#*4 (gene deletion)	#*1X2a	#*1X2b										
+CYP2A6	"Kiyotani et al., 2002"	365800	rs28399433	N	13G>A	13G>A	G5R	CYP2A6star13_13GA	Y	Y	G	A		 	 	 	 	 	 	 	 	A	 																		
+CYP2A6	"Kiyotani et al., 2002"	366759	rs1137115	N	51G>A	51G>A	V17V	CYP2A6star13_51AG	Y	Y	G	A		A	A	 	 	 	 	 	 	 	 																		
+CYP2A6	"Kitagawa et al., 2001"	365979	rs4986891	*6	383G>A	1703G>A	R128Q	CYP2A6star6	Y	Y	G	A		 	 	 	A	 	 	 	 	 	 															
+CYP2A6	"Oscarson et al., 1998"	366024	rs17791931	*2	479T>A	1799T>A	L160H	CYP2A6star2	Y	Y	T	A		 	A	 	 	 	 	 	 	 	 															
+CYP2A6	"Kiyotani et al., 2002"	367171	N/A	N	607C>T	2161C>T	R203S	CYP2A6star16_2161CA	Y	Y	C	T		 	 	 	 	 	 	 	 	 	T															
+CYP2A6	"Daigo et al., 2002"	368364	N/A	N	670T>C	3391T>C	S224P	CYP2A6star11	Y	Y	T	C		 	 	 	 	 	 	 	C	 	 															
+CYP2A6	"Oscarson et al., 1999"	368356	rs5031017	*5	1436G>T	6582G>T	G479V	CYP2A6star5	Y	Y	G	T		 	 	T	 	 	 	 	 	 	 															
+CYP2A6	"Ariyoshi et al., 2001 "	368360	rs5031016	*7	1412T>C	6558T>C	I471T	CYP2A6star7_6558TC	Y	Y	T	C		 	 	 	 	C	 	C	 	 	 															
+CYP2A6	"Xu et al., 2002"	366864	rs28399468	*8	1454G>T	6600G>T	R485L	CYP2A6star8_6600GT	Y	Y	G	T		 	 	 	 	 	T	T	 	 	 															
+CYP2A6	"Kiyotani et al., 2002"	366110	N/A	N	22C>T	22C>T		CYP2A6star15_22CT	N	Y	C	T												T														
+CYP2A6	"von Richter et al., 2004"	366634	N/A	N	Not in mRNA	-48T>G	TATA-box	CYP2A6star9	Y	Y	T	G												G	G													
+CYP2A6	"Haberl et al., 2005"	#*12		N		exons 1-2 of CYP2A7 origin; exons 3-9 of CYP2A6 origin; 1620T>C; 1630G>C; 3396G>A; 4489C>T; 5163G>A; 5545G>C; 5717C>G; 6692C>G	10 aa		N	N																												
+CYP2A6	"Fukami et al., 2004"	#*17	rs28399454	*17	1093G>A	5065G>A	V365M		N	N																												
+CYP2A6		#*20		*20	587_588delAA	2141_2142delAA	Frame shift		N	N	INS	DEL																										
+CYP2B6	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*1C	*2B	*3	*6	*8	*9	*11A	*12 	*13	*14	*15	*11B	#*16	#*2	#*28	#*17 (3SNPs)									
+CYP2B6	"Lang et al., 2004"	368395	N/A	N	 	136A>G	M46V	CYP2B6_136AG	Y	Y	A	G		 	 	 	 	 	 	G	 	 	 	 	G													
+CYP2B6	"Lang et al., 2005"	366257	rs2279341	*2B	 	12740G>C	P72P	CYP2B6star2B_12740GC	Y	Y	G	C		 	C	 	 	 	 	 	 	 	 	 														
+CYP2B6	"Lang et al., 2004"	368397	rs36060847	N	 	12820G>A	G99E	CYP2B6_12820GA	Y	Y	G	A		 	 	 	 	 	 	 	A	 	 	 														
+CYP2B6	"Lang et al., 2004"	365985	rs12721655	N	 	13072A>G	K139E	CYP2B6star8	Y	Y	A	G		 	 	 	 	G	 	 	 	G	 	 																	
+CYP2B6	"Lang et al., 2004"	368401	rs35773040	N	 	13076G>A	R140Q	CYP2B6_13076GA	Y	Y	G	A		 	 	 	 	 	 	 	 	 	A	 																	
+CYP2B6	"Zukunft et al., 2005"	367222	rs4803418	N	 	14593C>G	 	CYP2B6star1C_14593CG	Y	Y	C	G		G	 	 	 	 	 	 	 	 	 	 																	
+CYP2B6	"Zukunft et al., 2005"	366685	rs3745274	N	 	15631G>T	Q172H	CYP2B6star6_15631GT	Y	Y	G	T		 	 	 	T	 	T	 	 	T	 	 																	
+CYP2B6	"Lang et al., 2004"	366122	N/A	*3	 	18045C>A	S259R	CYP2B6star3	Y	Y	C	A		 	 	A	 	 	 	 	 	 	 	 																	
+CYP2B6	"Wang et al., 2006"	368407	N/A	*15	 	21388T>A	I391N	CYP2B6_21388TA	Y	Y	T	A		 	 	 	 	 	 	 	 	 	 	A																	
+CYP2B6	"Lang et al., 2004"	367147	rs8192719	N	 	21563C>T	 	CYP2B6star9_21563CT	Y	Y	C	T		 	 	 	 	 	T	 	 	T	 	 																	
+CYP2B6	"Lang et al., 2004"	366857	N/A	*1C		15582C>T		CYP2B6star1C_15582CT	Y	Y	C	T		T																											
+CYP2B6	"Lang et al., 2004"	368404	N/A	N		18273G>A		CYP2B6_18273GA	Y	Y	G	A													A																
+CYP2B6	NCBI dbSNP	#	rs2054675	N	-1456T>C		 	CYP2B6star9_-1456TC	Y	Y	T	C		in *N1 *6B *9																											
+CYP2B6	NCBI dbSNP	#	rs8192709	N	64C>T		R22C	CYP2B6star2B_64CT	Y	Y	C	T		in *2A *2B																											
+CYP2C19	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*2A	*3	*4	*5A	*6	*7	*8	*9	*10	*12	*13	*14																
+CYP2C19	"Ferguson et al, 1998"	366830	N/A	*4	1A>G	1A>G	GTG initiation codon	CYP2C19star4_1AG	Y	Y	A	G		 	 	G	 	 	 	 	 	 	 	 	 																
+CYP2C19	"Blaisdell et al, 2002"	366975	N/A	*14	50T>C	49T>C	L17P	CYP2C19star14_50TC	Y	Y	T	C		 	 	 	 	 	 	 	 	 	 	 	C																
+CYP2C19	"Ibeanu et al, 1999"	366820	rs41291556	*8	358T>C	12710T>C	W120R	CYP2C19star8	Y	Y	T	C		 	 	 	 	 	 	C	 	 	 	 	 																
+CYP2C19	"Ibeanu et al, 1998"	366825	N/A	*6	395G>A	12747G>A	R132Q	CYP2C19star6_395GA	Y	Y	G	A		 	 	 	 	A	 	 	 	 	 	 	 																
+CYP2C19	"Blaisdell et al, 2002"	367878	rs17884712	N	431G>A	12783G>A	R144H	CYP2C19star9_431GA	Y	Y	G	A		 	 	 	 	 	 	 	A	 	 	 	 													
+CYP2C19	"de Morais et al, 1994"	366832	rs4986893	*3	636G>A	17947G>A	W212X	CYP2C19star3_636GA	Y	Y	G	A		 	A	 	 	 	 	 	 	 	 	 	 													
+CYP2C19	"Blaisdell et al, 2002"	367592	rs6413438	N	680C>T	19152C>T	P227L	CYP2C19star10_680CT	Y	Y	C	T		 	 	 	 	 	 	 	 	T	 	 	 													
+CYP2C19	"de Morais et al, 1994"	367666	rs17879456	N	681G>A	19153G>A	splicing defect	CYP2C19star2_681GA	Y	Y	G	A		A	 	 	 	 	 	 	 	 	 	 	 													
+CYP2C19	"Ibeanu et al, 1999"	367614	N/A	N	IVS5+2T>A	19293T>A	splicing defect	CYP2C19star7	Y	Y	T	A		 	 	 	 	 	A	 	 	 	 	 	 													
+CYP2C19	"Blaisdell et al, 2002"	367097	rs17879685	*13	1228C>T	1228C>T	R410C	CYP2C19star13_1228CT	Y	Y	C	T		 	 	 	 	 	 	 	 	 	 	T	 													
+CYP2C19	"Xiao et al, 1997"	368115	N/A	*5A	1297C>T	1297C>T	R433W	CYP2C19star5_1297CT	Y	Y	C	T		 	 	 	T	 	 	 	 	 	 	 	 													
+CYP2C19	"Blaisdell et al, 2002"	366812	N/A	*12	1473A>C	1473A>C	X491C +26aa	CYP2C19star12_1473AC	Y	Y	A	C		 	 	 	 	 	 	 	 	 	C	 	 													
+CYP2C8	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*2	*3	*5	#*4(I264M)	#*7	#*8																			
+CYP2C8	"Dai et al., 2001"	367429	rs11572080	*3	416G>A	1196A>G	R139K	CYP2C8star3_1196AG	Y	Y	A	G		 	G	 																						
+CYP2C8	"Soyama et al., 2002"	368178	N/A	*5	475delA	2189delA	Frame shift	CYP2C8star5	Y	Y	INS	DEL		 	 	DEL																						
+CYP2C8	"Dai et al., 2001"	367109	rs11572103	*2	805A>T	11054A>T	I269F	CYP2C8star2_805AT	Y	Y	A	T		T	 	 																						
+CYP2C8	"Bahadur et al., 2002"	#*4(I264M)	rs1058930	*4	792C>G 	11041C>G 	I264M 	Listed as M264I G>I	N	Y	C	G					G																					
+CYP2C8	"Hichiya et al., 2005"	#*7		*7	556C>T	4517C>T	R186X		N	Y	C	T						T																				
+CYP2C8	"Hichiya et al., 2005"	#*8		*8	556C>G	4517C>G	R186G		N	Y	C	G							G																			
+CYP2C9	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*2A 	*3A 	*4	*5	*6	*8	*9	*10	*11A 	*12	Y358C	#*13	#*25	#*15											
+CYP2C9	"Allabi et al., 2005"	1684193	rs7900194	*8	449G>A	3627G>A	R150H	CYP2C9star8	Y	Y	G	A							A																						
+CYP2C9	"Kidd et al., 2001"	368346	N/A	*6	818delA	10601deA	Frame shift	CYP2C9star6	Y	Y	INS	DEL						DEL																							
+CYP2C9	"Blaisdell et al., 2004"	367700	rs2256871	*9	752A>G	10535A>G	H251R	CYP2C9star9	Y	Y	A	G								G																					
+CYP2C9	"Blaisdell et al., 2004"	367503	rs9332130	*10	815A>G	10598A>G	E272G	CYP2C9star10	Y	Y	A	G									G																				
+CYP2C9	"Sandberg et al., 2004  "	1684203	rs1799853	*2A	430C>T	3608C>T	R144C	CYP2C9star2	Y	Y	C	T		T																											
+CYP2C9	"King et al., 2004"	366621	rs17847042	*3A	1075A>C	42614A>C	I359L	CYP2C9star3	Y	Y	A	C			C																										
+CYP2C9	"Imai et al., 2000"	367975	N/A	*4	1076T>C	42615T>C	I359T	CYP2C9star4	Y	Y	T	C				C																									
+CYP2C9	"Allabi et al., 2005"	367972	rs28371686	*5	1080C>G	42619C>G	D360E	CYP2C9star5	Y	Y	C	G					G																								
+CYP2C9	"Allabi et al., 2005  "	366399	rs28371685	*11	1003C>T	42542C>T	R335W	CYP2C9star11	Y	Y	C	T										T																			
+CYP2C9	"Blaisdell et al., 2004"	366835	rs9332239	*12	1465C>T	50338C>T	P489S	CYP2C9star12	Y	Y	C	T											T																		
+CYP2C9	NCBI dbSNP   	366454	rs1057909	N	1073A>G	42612A>G	Y358C	rs1057909	N	N	A	G												G																	
+CYP2C9	NCBI dbSNP   	#	rs1057911	N	1425A>T		G475G	rs1057911	N	N	A	T																													
+CYP2C9	NCBI dbSNP   	#	rs2017319	N	1323C>T		A441A	rs2017319	N	N	C	T																													
+CYP2C9	"Guo et al., 2005b"	#*13		N	269T>C	3276T>C	L90P		N	N																															
+CYP2C9	"Maekawa et al., 2006"	#*25		N	353_362delAGAAATGGAA 		Frame shift		N	N																															
+CYP2C9	"Delozier et al., 2005 "	#*15		N	485C>A 	9100C>A	S162X		N	N																															
+CYP2D6	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*2	*3A	*4A	*4J	*4K	*6A	*6C	*7	*9	*10A	*11	*12	*14A	*14B	*8	*15	*17	*19	*21A	*34	*39	*41A	*44	*18	*35	*35x2	*42	*38
+CYP2D6	"Yokota et al., 1993"	368275	rs1065852	*10		100C>T	P34S	CYP2D6star10_100CT	Y	Y	C	T		 	 	T	T	T	 	 	 	 	T	 	 	T	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Marez et al., 1996"	368289	rs5030862	*12		124G>A	G42R	CYP2D6star12_124GA	Y	Y	G	A		 	 	 	 	 	 	 	 	 	 	 	A	 	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Sachse et al., 1996"	368317	N/A	*15		138insT	Frameshift	CYP2D6star15	Y	Y	DEL	INS		 	 	 	 	 	 	 	 	 	 	 	 	 	 		INS	 	 	 	 	 	 	 					
+CYP2D6	"Marez et al., 1995"	368279	rs5030863	*11	Not in mRNA	883G>C	Splicing defect	CYP2D6star11_883GC	Y	Y	G	C		 	 	 	 	 	 	 	 	 	 	C	 	 	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Oscarson et al., 1997 "	368296	rs28371706	*17		1023C>T	T107I	CYP2D6star17_1023CT	Y	Y	C	T		 	 	 	 	 	 	 	 	 	 	 	 	 	 		 	T	 	 	 	 	 	 					
+CYP2D6	"Marez et al., 1997"	368309	rs5030655	*6		1707T>del	Frameshift 	CYP2D6star6_1707Tdel	Y	Y	INS	DEL		 	 	 	 	 	DEL	DEL	 	 	 	 	 	 	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Wang et al., 1999 "	368291	rs5030865	*14		1758G>A	G169R	CYP2D6star14_1758GA	Y	Y	G	A		 	 	 	 	 	 	 	 	 	 	 	 	A	A		 	 	 	 	 	 	 	 					
+CYP2D6	"Wang et al., 1999 "	368291	rs5030865	*8	wasCYP2D6star8_1758GT	1758G>T	G169X	CYP2D6star14_1758GA	Y	Y	G	T		 	 	 	 	 	 	 	 	 	 	 	 			T	 	 	 	 	 	 	 	 					
+CYP2D6	"Marez et al., 1997"	368389	rs3892097	*4	Not in mRNA	1846G>A	Splicing defect	CYP2D6star4_1846GA	Y	Y	G	A		 	 	A	A	A	 	 	 	 	 	 	 	 	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Marez et al., 1997"	368325	N/A	*19		2539-2542delAACT	Frameshift	CYP2D6star19_2539delAACT	Y	Y	INS	DEL		 	 	 	 	 	 	 	 	 	 	 	 	 	 		 	 	DEL	 	 	 	 	 					
+CYP2D6	"Kagimoto et al., 1990"	368306	rs4986774	*3		2549A>del	Frameshift	CYP2D6star3A	Y	Y	INS	DEL		 	DEL	 	 	 	 	 	 	 	 	 	 	 	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Chida et al., 1999 "	368334	N/A	*21		2573insC	Frameshift	CYP2D6star21_2573insC	Y	Y	DEL	INS		 	 	 	 	 	 	 	 	 	 	 	 	 	 		 	 	 	INS	 	 	 	 					
+CYP2D6	"Broly & Meyer, 1993 "	368313	rs5030656	*9		2613-2615delAGA	K281del	CYP2D6star9	Y	Y	INS	DEL		 	 	 	 	 	 	 	 	DEL	 	 	 	 	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Oscarson et al., 1997 "	368284	rs16947	*17		2850C>T	R296C	CYP2D6star17_2850CT	Y	Y	C	T		T	 	 	 	T	 	 	 	 	 	T	T	T	T	T	 	T	T	T	T	 	T	 		T	T	T	
+CYP2D6	"Evert et al., 1994"	368270	rs5030867	*7		2935A>C	H324P	CYP2D6star7	Y	Y	A	C		 	 	 	 	 	 	 	C	 	 	 	 	 	 		 	 	 	 	 	 	 	 					
+CYP2D6	"Yamazaki et al., 2003"	368278	N/A	*44	Not in mRNA	2950G>C	Splicing defect 	CYP2D6star44_2950GC	Y	Y	G	C		 	 	 	 	 	 	 	 	 	 	 	 	 	 		 	 	 	 	 	 	 	C					
+CYP2D6	"Rau et al., 2006"	368417	N/A	*41	Not in mRNA	2988G>A 	Splicing defect 	CYP2D6star41_2988GA	Y	Y	G	A		 	 	 	 	 	 	 	 	 	 	 	 	 	 		 	 	 	 	 	 	A	 					
+CYP2D6	"Marez et al., 1997"	368297	rs1135840	N		4180G>C	S486T	CYP2D6star19_4180GC	Y	Y	G	C		C	 	C	 	C	 	C	 	 	C	C	C	C	C	C	 	C	C	C	 	C	C	 		C	C	C	
+CYP2D6	"Gaedigk et al., 2003"	1684137	N/A	*42		3259_3260insGT	Frameshift	CYP2D6star42	Y	Y	DEL	INS																												INS	
+CYP2D6	"Leathart et al., 1998"	368337	N/A	*38		2587_2590delGACT	Frameshift	CYP2D6star38	Y	Y	INS	DEL																													DEL
+CYP2D6	"Yokoi et al., 1996"	1684118	N/A	*18		4125_4133dupGTGCCCACT	468_470dupVPT	CYP2D6star18	Y	Y	DEL	INS																									INS				
+CYP2D6	"Gaedigk et al., 2003"	1684243	rs769258	N		31G>A	V11M	CYP2D6star35_31GA	Y	Y	G	A																										A	A		
+CYP2D6	"Griese et al., 1998"	1684316	N/A	N		-1584C>G		CYP2D6star35_-1584CG	Y	Y	C	G																										G			
+CYP2D6	"Yokoi et al., 1996"	#*18		*18		4125_4133dupGTGCCCACT	Frameshift				DEL	INS																													
+CYP2D6	"Marez-Allorge et al., 1999"	#*20		*20		1973_1974insG;	Frameshift				DEL	INS																													
+CYP2D6	"Gaedigk et al., 2002"	#*40		*40		1863_1864ins(TTTCGCCCCTTTCGCCCC)	+174(FRP)2				DEL	INS																													
+CYP2D6	"Li et al., 2006"	#*56		*56		3201C>T	R344X				C	T																													
+CYP2E1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	#*2	*3	*4	*5	*7A	*7B	*7C																					
+CYP2E1	"Hayashi et al, 1991"	366653	rs3813867	N	Not in mRNA	 -1293G>C	promotor	CYP2E1star5B_-1293GC	Y	Y	G	C		 	 	 	C																								
+CYP2E1	"Watanabe et al, 1990"	367732	rs2031920	N	Not in mRNA	 -1053C>T	promotor	CYP2E1star5B_-1053CT	Y	Y	C	T		 	 	 	T																								
+CYP2E1	"Fairbrother et al, 1998"	366228	rs6413419	*4	 	4768G>A	V179I	CYP2E1star4	Y	Y	G	A		 	 	A	 																								
+CYP2E1	"Hu et al, 1997"	366659	N/A	*3	 	10023G>A	V389I	CYP2E1star3	Y	Y	G	A		 	A	 	 																								
+CYP2E1	"Fairbrother et al, 1998"	366439	N/A	N	Not in mRNA	-352A>G	promotor	CYP2E1star7_-352AG	Y	Y	A	G								G																					
+CYP2E1	"Fairbrother et al, 1998"	365972	N/A	N	Not in mRNA	-333T>A	promotor	CYP2E1star7_-333TA	Y	Y	T	A						A	A	A																					
+CYP2E1	"Fairbrother et al, 1998"	367236	N/A	N	Not in mRNA	-71G>T	promotor	CYP2E1star7_-71GT	Y	Y	G	T							T	T																					
+CYP2E1	"Hu et al, 1997"	#366112	N/A	*2	 	1132G>A	R76H	CYP2E1star2	N	Y	G	A		A	 	 	 																								
+CYP2E1	NCBI dbSNP	367121	rs915909	N		996C>T	I321I	rs915909	N	N	C	T																													
+CYP2E1	NCBI dbSNP	367567	rs2515641	N		1296C>T	F421F	rs2515641	N	N	C	T																													
+CYP2J2	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*2	*3	*4	*5	*6	*7																						
+CYP2J2	"Spiecker et al., 2004"	365851	rs890293	*7	Not in mRNA	 -76G>T	promotor	CYP2J2star7	Y	Y	G	T		 	 	 	 	 	T																						
+CYP2J2	"King et al., 2002"	366990	N/A	*2	 427A>G	"14,488A>G"	T143A	CYP2J2star2	Y	Y	A	G		G	 	 	 	 	 																						
+CYP2J2	"King et al., 2002"	366841	N/A	*3	472C>T 	"14,533C>T"	R158C	CYP2J2star3	Y	Y	C	T		 	T	 	 	 	 																						
+CYP2J2	"King et al., 2002"	367103	N/A	*4	575T>A 	"15,029T>A"	I192N	CYP2J2star4	Y	Y	T	A		 	 	A	 	 	 																						
+CYP2J2	"King et al., 2002"	367120	N/A	*5	1024G>A 	"21,709G>A"	D342N	CYP2J2star5	Y	Y	G	A		 	 	 	A	 	 																						
+CYP2J2	"King et al., 2002"	366378	N/A	*6	1210A>T	"25,662A>T"	N404Y	CYP2J2star6	Y	Y	A	T		 	 	 	 	T	 																						
+CYP3A4	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*2	*3	*4	*5	*7	*8	*12	*13	*14	*15A	*16	*17	*18	*19	*1E	*1C	*1C_-291GT	*19A	#*20	#*6								
+CYP3A4	"Lamba et al, 2002"	366219	rs12721634	*14	44T>C	44T>C	L15P	CYP3A4star14	Y	Y	T	C		 	 	 	 	 	 	 	 	C	 	 	 	 	 	 	 	 											
+CYP3A4	"Eiselt et al, 2001"	367510	N/A	*7	167G>A	6004G>A	G56D	CYP3A4star7	Y	Y	G	A		 	 	 	 	A	 	 	 	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Hsieh et al, 2001"	367226	N/A	*4	352A>G	13221A>G	I118V	CYP3A4star4	Y	Y	A	G		 	 	G	 	 	 	 	 	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Eiselt et al, 2001"	367434	N/A	*8	389G>A	13908G>A	R130Q	CYP3A4star8	Y	Y	G	A		 	 	 	 	 	A	 	 	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Lamba et al, 2002"	366423	rs4986907	*15A	485G>A	14269G>A	R162Q	CYP3A4star15A	Y	Y	G	A		 	 	 	 	 	 	 	 	 	A	 	 	 	 	 	 	 											
+CYP3A4	"Murayama et al., 2002"	368068	rs12721627	*16	554C>G	15603C>G	T185S	CYP3A4star16	Y	Y	C	G		 	 	 	 	 	 	 	 	 	 	G	 	 	 	 	 	 											
+CYP3A4	"Hsieh et al, 2001"	367717	N/A	N	653C>G	11390C>G	P218R	CYP3A4star5	Y	Y	C	G		 	 	 	G	 	 	 	 	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Sata et al, 2000"	366862	rs4986910	N	1334T>C	3920T>C	M445T	CYP3A4star3	Y	Y	T	C		 	C	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Dai et al, 2001"	368372	rs4987161	*17	566T>C	15615T>C	F189S	CYP3A4star17	Y	Y	T	C		 	 	 	 	 	 	 	 	 	 	 	C	 	 	 	 	 											
+CYP3A4	"Sata et al, 2000"	367704	N/A	N	664T>C 	15713T>C	S222P	CYP3A4star2	Y	Y	T	C		C	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Dai et al, 2001"	366151	rs28371759	*18	878T>C	20070T>C	L293P	CYP3A4star18_878TC	Y	Y	T	C		 	 	 	 	 	 	 	 	 	 	 	 	C	 	 	 	 											
+CYP3A4	"Eiselt et al, 2001"	367337	rs12721629	N	1117C>T	21896C>T	L373F	CYP3A4star12	Y	Y	C	T		 	 	 	 	 	 	T	 	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Eiselt et al, 2001"	366424	rs4986909	N	1247C>T	22026C>T	P416L	CYP3A4star13	Y	Y	C	T		 	 	 	 	 	 	 	T	 	 	 	 	 	 	 	 	 											
+CYP3A4	"Dai et al, 2001"	367433	rs4986913	N	1399C>T	23237C>T	P467S	CYP3A4star19_1399C	Y	Y	C	T		 	 	 	 	 	 	 	 	 	 	 	 	 	T	 	 	 											
+CYP3A4	"Hamzeiy et al, 2002"	367506	rs11568826	*1E	Not in mRNA	-262T>A	promotor	CYP3A7star1C_-262TA	Y	Y	T	A		 	 	 	 	 	 	 	 	 	 	 	 	 	 	A	 	 											
+CYP3A4	"Kuehl el al, 2001"	367615	rs11568825	*1C	Not in mRNA	-270T>G	promotor	CYP3A7star1C_-270TG	Y	Y	T	G		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	G	 											
+CYP3A4	NCBI dbSNP	367702	rs11568824	N	Not in mRNA	-291G>T	promotor	CYP3A7star1C_-291GT	Y	Y	G	T		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	T											
+CYP3A4	"Dai et al, 2001"	366993	rs4986913	N	IVS10+12GA	6862G>A	splicing defect	CYP3A4star19_IVS10+12GA	N	Y	G	A															A				A										
+CYP3A4	"Westlind-Johnsson et al., 2006"	#*20		*20	1461_1462insA	25889_25890insA	Frameshift				DEL	INS																													
+CYP3A4	"Hsieh et al, 2001"	#*6		N	830_831insA	17661_176622insA	Frameshift				DEL	INS																													
+CYP3A43	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*1B	*3	P340A																									
+CYP3A43	"Cauffiez et al, 2004"	367221	rs680055	*3		31969C>G		CYP3A43star3	N	Y	C	G			G																										
+CYP3A43	"Cauffiez et al., 2004"	366845	N/A	*1B	33518C>T	33620C>T		CYP3A43star1B	N	Y	C	T		T																											
+CYP3A43	NCBI dbSNP	367421	rs4646474	N	443C>T	19496G>A	L114L	rs4646474	N	N	G	A																													
+CYP3A43	NCBI dbSNP	367210	rs680055	N	1121C>G	31969C>G	P340A	rs680055	N	N	C	G				G																									
+CYP3A43	NCBI dbSNP	367329	rs800667	N	697A>G	21605A>G	N198N	rs800667	N	N	A	G																													
+CYP3A43	NCBI dbSNP	367329	rs800667	N	697A>C	21605A>C	N198N	rs800667	N	N	A	C																													
+CYP3A5	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*2	*3A	*3B	*3D	*3F	*3G	*4	*5	*6	*8	*9	*10	S100Y	#*7														
+CYP3A5	"Lee et al, 2003"	367478	N/A	*8		3699C>T	R28C	CYP3A5star8	Y	Y	C	T											T																		
+CYP3A5	"Hustert et al, 2001"	367302	rs28383468	*3B		3705C>T	H30Y	CYP3A5star3B_H30Y	Y	Y	C	T				T																									
+CYP3A5	"Hustert et al, 2001"	367309	rs776746	N	Not in mRNA	6986G>A	splicing defect	CYP3A5star3_6986AG	Y	Y	G	A			A	A	A	A	A						A																
+CYP3A5	"Lee et al, 2003"	366148	N/A	*3D		7249T>G	L82R	CYP3A5star3D_L82R	Y	Y	T	G					G																								
+CYP3A5	"Chou et al, 2001"	367508	N/A	N	Not in mRNA	12952T>C	splicing defect	CYP3A5star5	Y	Y	T	C							C		C																				
+CYP3A5	"Chou et al, 2001"	366860	N/A	*4		14665A>G	Q200R	CYP3A5star4	Y	Y	A	G								G																					
+CYP3A5	"Kuehl et al, 2001"	367480	rs10264272	*6	Not in mRNA	14690G>A	splicing defect	CYP3A5star6	Y	Y	G	A										A																			
+CYP3A5	"Lee et al, 2003"	367182	rs28383479	*9		19386G>A	A337T	CYP3A5star9	Y	Y	G	A												A																	
+CYP3A5	"Jounaidi et al, 1996"	367225	rs28365083	*2		27289C>A	T398N	CYP3A5star2	Y	Y	C	A		A																											
+CYP3A5	"Lee et al, 2003"	366951	rs41279854	*10		29753T>C	F446S	CYP3A5star10_F446S	Y	Y	T	C													C																
+CYP3A5	"Saeki et al, 2003"	367398	N/A	*3F		31551T>C	I488T	CYP3A5star3F_I488T	Y	Y	T	C						C																							
+CYP3A5	"Hustert et al, 2001"	367431	N/A	N		7303C>A	S100Y	CYP3A5_S100Y	N	N	C	A														A															
+CYP3A5	"Hustert et al, 2001"	#*7		N	27131_27132insT		Frameshift																																		
+CYP3A7	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*1B	*1C	*1D																									
+CYP3A7	"Kuehl et al, 2001"	366413	N/A	*1D	Not in mRNA	-91G>A	promotor	CYP3A7star1D	N	Y	G	A				A																									
+CYP3A7	"Sim et al., 2005"	366625	N/A	N	Not in mRNA	-232A>C	promotor	CYP3A7star1C_-232AC	N	Y	A	C			C																										
+CYP3A7	"Sim et al., 2005"	367649	N/A	N	Not in mRNA	-281A>T	promotor	CYP3A7star1C_-281AT	N	Y	A	T			T																										
+CYP3A7	"Sim et al., 2005"	367676	N/A	N	Not in mRNA	-282T>C	promotor	CYP3A7star1C_-282TC	N	Y	T	C			C																										
+CYP3A7	"Sim et al., 2005"	367677	N/A	N	Not in mRNA	-284T>A	promotor	CYP3A7star1C_-284TA	N	Y	T	A			A																										
+CYP3A7	"Kuehl et al, 2001"	367108	N/A	N	Not in mRNA	-314C>T	promotor	CYP3A7star1B	N	Y	C	T		T																											
+CYP4B1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*3	*2	*4																									
+CYP4B1	"Lo-Guidice et al, 2002"	366844	rs4646487	*3	517C>T	14457C>T	R173W	CYP4B1star3	N	Y	C	T		T																											
+CYP4B1	"Lo-Guidice et al, 2002"	368196	N/A	N	882delAT	del16029	frameshift	CYP4B1star2_881delAT	N	Y	INS	DEL			DEL																										
+CYP4B1	"Lo-Guidice et al, 2002"	366412	N/A	N	1018C>T	16166C>T	R340C	CYP4B1star2_R340	N	Y	C	T			T																										
+CYP4B1	"Lo-Guidice et al, 2002"	366213	N/A	N		18054C>T	R375C	CYP4B1star2_R375	N	Y	C	T			T																										
+CYP4B1	"Lo-Guidice et al, 2002"	366987	N/A	*4	964A>G	16112A>G	S322G	CYP4B1star4	N	Y	A	G				G																									
+DPYD	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*2	*7	*8	*9A	*9B	*10	*13	*3	M166V																			
+DPYD	NCBI dbSNP   	367528	rs3918290	N	IVS14 G>A	470965G>A	intron	DPYDstar2A	Y	Y	G	A		A																											
+DPYD	NCBI dbSNP   	366896	rs1801265	N	85T>C	37694T>C	R29C	rs1801265	Y	Y	T	C					C	C																							
+DPYD	Pubmed_9918128	368441	N/A	*7	DelTCAT295	del180609	frameshift	DPYDstar7	Y	Y	INS	DEL			DEL																										
+DPYD	NCBI dbSNP	367155	rs1801266	*8	703C>T	229247C>T	R235W	DPYDstar8	Y	Y	C	T				T																									
+DPYD	Johnson et al. 2003	366684	N/A	*13	1679T>G	405236T>G	I560S	DPYDstar13	Y	Y	T	G								G																					
+DPYD	NCBI dbSNP	367369	rs1801267	*9B	2657G>A	822425G>A	R886H	DPYDstar9B	Y	Y	G	A						A																							
+DPYD	NCBI dbSNP	367009	rs1801268	*10	2983G>T	841952G>T	V995F	DPYDstar10	Y	Y	G	T							T																						
+DPYD	Pubmed_9918128	1684178	N/A	N		Del410390	frameshift	DPYDstar3	Y	Y	INS	DEL									DEL																				
+DPYD	NCBI dbSNP	367012	rs2297595	N	597A>G	221488A>G	M166V	rs2297595	N	N	A	G										G																			
+DPYD	NCBI dbSNP	366893	rs1042479	N	1175T>A	327751T>A	R358R	rs1042479	N	N	T	A																													
+DPYD	NCBI dbSNP	366246	rs1042478	N	1136T>C	327712T>C	F345F	rs1042478	N	N	T	C																													
+DPYD	NCBI dbSNP	367532	rs6675198	N	857A>G	229300A>G	G252G	rs6675198	N	N	A	G																													
+DPYD	NCBI dbSNP	366894	rs6670886	N	626C>T	221517C>T	S175S	rs6670886	N	N	C	T																													
+DPYD	NCBI dbSNP	367551	rs3918289	N		470964C>T	N635N	rs3918289	N	N	C	T																													
+FMO2	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*2A	Del337G	Ins1589T	D36G	F81S	F182S	R249X	#*1 																					
+FMO2	NCBI dbSNP 	#366239	rs6661174	N	 	1414T>C	X472Q	rs6661174	N	Y	T	C	 							C																					
+FMO2	NCBI dbSNP 	367004	rs2020870	N		571A>G	D36G	rs2020870	N	N	A	G				G																									
+FMO2	2005 Krueger et al.	367365	N/A	N	175G>A	8128G>A		FMO2_G175A	N	N	G	A																													
+FMO2	NCBI dbSNP 	367452	rs2020860	N	359T>C	8195T>C	F81S	rs2020860	N	N	T	C					C																								
+FMO2	2002 Krueger et al. 	368260	N/A	N	Del337G	Del11415	Frame shift	FMO2_Del337G	N	N	INS	DEL		DEL																											
+FMO2	2005 Krueger et al.	368443	N/A	N	Ins1589T	23819InsT	Frame shift	FMO2_Ins1589T	N	N	DEL	INS			INS																										
+FMO2	NCBI dbSNP 	367006	rs2307492	N	662T>C	14157T>C	F182S	rs2307492	N	N	T	C						C																							
+FMO2	2002 Krueger et al. 	366679	N/A	N	713G>A	18701G>A		FMO2_G713A	N	N	G	A																													
+FMO2	NCBI dbSNP 	366891	rs2020866	N	862C>T	18733C>T	R249X	rs2020866	N	N	C	T							T																						
+FMO2	2005 Krueger et al.	367252	N/A	N	1172G>C	20374G>C		FMO2_G1172C	N	N	G	C																													
+FMO2	NCBI dbSNP 	367253	rs6671692	N		22491G>A	E402E	rs6671692	N	N	G	A																													
+FMO2	NCBI dbSNP 	367007	rs2020869	N	1592A>G	23764A>G	3' UTR	rs2020869	N	N	A	G																													
+FMO2	NCBI dbSNP 	367720	rs7512785	N	2728C>T	24899C>T	3' UTR	rs7512785	N	N	C	T																													
+FMO2	NCBI dbSNP 	367582	rs7515157	N	2918C>T	25089C>T	3' UTR	rs7515157	N	N	C	T																													
+FMO3	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	E158K	V257M	V277A	E308G	E362Q	I468M	D132H	L360P																				
+FMO3	NCBI dbSNP	367251	rs2266782	N	472G>A	16930G>A	E158K	rs2266782	N	N	G	A		A																											
+FMO3	NCBI dbSNP	367003	rs1736557	N	769G>A	20044G>A	V257M	rs1736557	N	N	G	A			A																										
+FMO3	NCBI dbSNP	366890	rs2066530	N	923T>C	23113T>C	V277A	rs2066530	N	N	T	C				C																									
+FMO3	NCBI dbSNP	367144	rs2266780	N	999A>G	23206A>G	E308G	rs2266780	N	N	A	G					G																								
+FMO3	NCBI dbSNP	367249	rs2066532	N	1084G>C	23367G>C	E362Q	rs2066532	N	N	G	C						C																							
+FMO3	NCBI dbSNP	366238	rs1050906	N	1551A>G	26405A>G	I468M	rs1050906	N	N	A	G							G																						
+FMO3	NCBI dbSNP	367247	rs12072582	N	394G>C	16852G>C	D132H	FMO3_D132H	Y	N	G	C								C																					
+FMO3	2007_Pubmed_17050781	367468	N/A	N	1079T>C	23362T>C	L360P	FMO3_L360P	Y	N	T	C									C																				
+FMO3	NCBI dbSNP	366677	rs1050902	N	810T>C	19992T>C	F239F	rs1050902	N	N	T	C																													
+FMO3	NCBI dbSNP	367364	rs1800822	N	534C>T	16899C>T	S147S	rs1800822	N	N	C	T																													
+FMO3	NCBI dbSNP	366678	rs2066534	N	Not in mRNA	17336C>G	intron	rs2066534	N	N	C	G																													
+FMO3	NCBI dbSNP	367178	rs2066536	N	982C>T	23189C>T	N302N	rs2066536	N	N	C	T																													
+FMO3	NCBI dbSNP	366889	rs909530	N	948C>T	23138C>T	N285N	rs909530	N	N	C	T																													
+GSTP1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*A	#*B	*C	D147Y																									
+GSTP1	NCBI dbSNP	#366882	rs1695	N	313A>G	313A>G	I105V	rs947894	N	Y	A	G		G	G																										
+GSTP1	NCBI dbSNP	366450	rs1138272	N	341C>T	2293C>T	A114V	rs1138272	Y	Y	C	T			T																										
+GSTP1	NCBI dbSNP	366664	rs4986949	N	2391G>T	2391G>T	D147Y	rs4986949	N	N	G	T				T																									
+GSTP1	NCBI dbSNP	366662	rs8191444	N	338C>G	338C>G	V7V	rs8191444	N	N	C	G																													
+GSTP1	NCBI dbSNP	#365973	rs4891	N	2505T>C	2505T>C	S185S	rs4891	N	N	T	C																													
+GSTP1	NCBI dbSNP	#366235	rs8191448	N	467C>T	467C>T	Y50Y	rs8191448	N	N	C	T																													
+NAT1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*4	*5	*11	*14A	*15	*17	*19	*22	*23																				
+NAT1	NCBI dbSNP	#367578	rs4986988	N	344C>T	11598C>T		NAT1_C344T	N	Y	C	T			T																										
+NAT1	NCBI dbSNP	367594	rs4986989	N	Not in mRNA	-40A>T	promotor	NAT1_A-40T	Y	Y	A	T			T																										
+NAT1	Pharmacogenetics 1998 8(1):67-72.	368410	N/A	*19	97C>T	12038C>T	R33X	NAT1star19	Y	Y	C	T							T																						
+NAT1	Pharmacogenetics 1998 8(1):67-72.	367132	N/A	*17	190C>T	12131C>T	R64W	NAT1star17	Y	Y	C	T						T																							
+NAT1	Medline 7585580	368183	N/A	*5	350GG>CC	12291GG>CC	R117T	NAT1star5_GG350CC	Y	Y	G	C		C																											
+NAT1	Pharmacogenetics 1998 8(1):67-72.	368247	N/A	*5	497GGG>CCC	12438GGG>CCC	R166T	NAT1star5_GGG497CCC	Y	Y	G	C		C																											
+NAT1	NCBI dbSNP	367575	rs13249533	*14	560G>A	12501G>A	R187Q	NAT1star14_G560A	Y	Y	G	A				A																									
+NAT1	NCBI dbSNP	367447	rs4986783	*11	640T>G	12581T>G	S214A	rs4986783	Y	Y	T	G			G																										
+NAT1	Medline 8081359	367658	N/A	*22	752A>T	12693A>T	D251V	NAT1star22	Y	Y	A	T								T																					
+NAT1	NCBI dbSNP	367444	rs4986991	*23	777T>C	12718T>C	S259S	rs4986991	Y	Y	T	C									C																				
+NAT1	Pharmacogenetics 1998 8(1):67-72.	367725	N/A	*5	884A>G	12825A>G	E167Q	NAT1star5_A884G	Y	Y	A	G		G																											
+NAT1	Pharmacogenetics 1998 8(1):67-72.	368240	N/A	*5	del976	del12917	frameshift	NAT1star5_976delA	Y	Y	INS	DEL		DEL																											
+NAT1	NCBI dbSNP	367572	rs5030809	*15		12500C>T	R187X	rs5030839	Y	Y	C	T					T																								
+NAT1	NCBI dbSNP	367358	rs4986990	N	495G>A		T153T	rs4986990	Y	Y	G	A			A																										
+NAT1	NCBI dbSNP	366120	rs4987076	N	445G>A		V149I	rs4987076	Y	Y	G	A			A																										
+NAT1	NCBI dbSNP	367521	rs4986992	N		11962T>G	L7L	rs4986992	N	N	T	G																													
+NAT1	NCBI dbSNP	367729	rs4986993	N		13132G>T	UTR	rs4986993	N	N	G	T																													
+NAT1	NCBI dbSNP	367449	rs4986994	N		12872C>T	UTR	rs4986994	N	N	C	T																													
+NAT1	NCBI dbSNP	366877	rs8190858	N		12304C>T	V121V	rs8190858	N	N	C	T																													
+NAT2	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*4	*5A	*5B	*5C	*5D	#*6A	#*6B	*7B	*12A	*12B	*12C	*13	*14A	*14C	*14D	*5F	*18												
+NAT2	NCBI dbSNP	367175	rs1801279	N	191G>A	8949G>A	R64Q	rs1801279	Y	Y	G	A		 	 	 	 	 	 	 	 	 	 	 	A	A	A														
+NAT2	NCBI dbSNP	367622	rs1041983	N	282C>T	9040C>T	Y94Y	rs1041983	Y	Y	C	T		 	 	 	 	T	 	T	 	T	 	T	 	 	T														
+NAT2	NCBI dbSNP	366656	rs1801280	N	341T>C	9099T>C	I114T	rs1801280	Y	Y	T	C		C	C	C	C	 	 	 	 	 	 	 	 	C	 	C													
+NAT2	NCBI dbSNP	367127	rs1799929	N	481C>T	9239C>T	L161L	rs1799929	Y	Y	C	T		T	T	 	 	 	 	 	 	 	T	 	 	T	 	T													
+NAT2	NCBI dbSNP	367518	rs1208	N	803A>G	9561A>G	R268K	rs1208	Y	Y	A	G		 	G	G	 	 	 	 	G	G	G	 	 	G	 	G													
+NAT2	NCBI dbSNP	367356	rs1799931	N	857G>A		G286E	rs1799931	Y	Y	G	A		 	 	 	 	 	 	A	 	 	 	 	 	 	 														
+NAT2	PubMed_8081359	367621	N/A	N	759C>T	9517C>T		NAT2_C759T	N	Y	C	T																T													
+NAT2	PutMed_8081359	366320	N/A	*18	845A>C	9603A>C		NAT2_A845C	N	Y	A	C																	C												
+NAT2	NCBI dbSNP	#367569	rs1799930	N	590G>A		R197Q	rs1799930	N	Y	G	A		 	 	 	 	A	A	 	 	 	 	 	 	 	A														
+PTGIS	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*4	*3	P500S 	R236C 	F171L 	E154A 																						
+PTGIS	Chevalier et al. 2001	366207		*4	1135C>A	55019C>A	R379S	CYP8A1star4_R379S	N	Y	C	A		A																											
+PTGIS	Chevalier et al. 2001	366611	rs5622	*3	354T>A	20306T>A	S118R	CYP8A1star3_S118R	N	Y	T	A			A																										
+PTGIS	NCBI dbSNP 	366206	rs5584	N	1498C>T 	60245C>T	P500S 	rs5584	N	N	C	T				T																									
+PTGIS	NCBI dbSNP 	366610	rs5626	N	 706C>T	43963C>T	R236C 	rs5626	N	N	C	T					T																								
+PTGIS	NCBI dbSNP 	366205	rs5624	N	511T>C 	23855T>C	F171L 	rs5624	N	N	T	C						C																							
+PTGIS	NCBI dbSNP 	365923	rs5623	N	461A>C 	23805A>C	E154A 	rs5623	N	N	A	C							C																						
+PTGIS	NCBI dbSNP 	#367107	rs5630	N	1293C>G	57023C>G	D413D	rs5630	N	N	C	G																													
+PTGIS	NCBI dbSNP 	#366406	rs5629	N	1171A>C	55001A>C	R373R	rs5629	N	N	C	A																													
+PTGIS	NCBI dbSNP 	#366405	rs5625	N	645C>T	28518C>T	R197R	rs5625	N	N	C	T																													
+PTGIS	NCBI dbSNP 	#366204	rs6067121	N	456C>A	23746C>A	H134Q	rs6067121	N	N	G	T																													
+PTGIS	NCBI dbSNP 	#365922	rs5621	N	312G>T	20210G>T	V86V	rs5621	N	N	G	T																													
+SLC15A2	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	P409S	K509R	F350L	R57H	M704L																							
+SLC15A2	NCBI dbSNP 	365797	rs1143671	N	1269T>C	33999T>C	P409S	rs1143671	Y	N	T	C		C																											
+SLC15A2	NCBI dbSNP 	367287	rs1143672	N	1563A>G	34881A>G	K509R	rs1143672	Y	N	A	G			G																										
+SLC15A2	NCBI dbSNP 	367476	rs2257212	N	1085A>G	30517A>G	F350L	rs2257212	Y	N	T	C				C																									
+SLC15A2	NCBI dbSNP 	366939	rs2293616	N	889C>T	28406C>T	A284A	rs2293616	Y	N	A	G																													
+SLC15A2	NCBI dbSNP 	367288	rs1143669	N	178C>T	2001C>T	A47A	rs1143669	Y	N	C	T																													
+SLC15A2	NCBI dbSNP 	367391	rs1920305	N	207C>T	2030C>T	R57H	rs1920305	Y	N	G	A					A																								
+SLC15A2	NCBI dbSNP 	367286	rs1920313	N	2233A>G	46573A>G	3' UTR	rs1920313	Y	N	C	T																													
+SLC15A2	NCBI dbSNP 	366758	rs1920314	N	2147A>C	46487A>C	M704L	rs1920314	Y	N	A	C						C																							
+SLC15A2	NCBI dbSNP 	366532	rs1143670	N	1198A>G	33354A>G	A387A	rs1143670	Y	N	G	A																													
+SLC15A2	NCBI dbSNP 	367390	rs4388019	N	2373G>T	46713G>T	3' UTR	rs4388019	Y	N	T	G																													
+SLC22A1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	dM420	G220V	G401S	G465R	G38D	L23V	L85F	M440I	R342H	R488M	S14F	S189L	V461I	P341L	#C88R	#R61C												
+SLC22A1	Saito et al. 2002	367167	N/A	N	10582G>T	10582G>T	G220V	OCT1_G220V	Y	N	G	T			T																										
+SLC22A1	Saito et al. 2002	366084	N/A	N	17999G>A	17999G>A	G401S	OCT1_G401S	Y	N	G	A				A																									
+SLC22A1	Saito et al. 2002	367457	N/A	N	33012G>A	33012G>A	G465R	OCT1_G465R	Y	N	G	A					A															
+SLC22A1	NCBI dbSNP 	366087	rs2282143	N	1127C>T	14818C>T	P341L	rs2282143	Y	N	C	T															T					
+SLC22A1	Saito et al. 2002	368436	N/A	N	Del18056	Del18056	M420del	OCT1_M420del	N	N	INS	DEL		DEL																		
+SLC22A1	Saito et al. 2003	366731	N/A	N	36812C>T	36812C>T	3'UTR	OCT1_3UTR2	N	N	C	T																				
+SLC22A1	Saito et al. 2002	366528	N/A	N	18037G>A	18037G>A		OCT1_A413	N	N	G	A																				
+SLC22A1	Saito et al. 2003	366329	N/A	N	255G>A	255G>A	G38D	OCT1_G38D	N	N	G	A						A														
+SLC22A1	Saito et al. 2002	366304	N/A	N	18007C>T	18007C>T		OCT1_I403	N	N	C	T																				
+SLC22A1	Saito et al. 2002	366738	N/A	N	209C>G	209C>G	L23V	OCT1_L23V	N	N	C	G							G													
+SLC22A1	Saito et al. 2002	366097	N/A	N	395C>T	395C>T	L85F	OCT1_L85F	N	N	C	T								T												
+SLC22A1	Saito et al. 2002	367166	N/A	N	21791G>A	21791G>A	M440I	OCT1_M440I	N	N	G	A									A											
+SLC22A1	Saito et al. 2003	366305	N/A	N	10481C>T	10481C>T		OCT1_N186	N	N	C	T																				
+SLC22A1	Saito et al. 2003	366085	N/A	N	14821G>A	14821G>A	R342H	OCT1_R342H	N	N	G	A										A										
+SLC22A1	Saito et al. 2003	366734	N/A	N	33082C>A	33082G>T	R488M	OCT1_R488M	N	N	G	T											T									
+SLC22A1	Saito et al. 2002	366102	N/A	N	183C>T	183C>T	S14F	OCT1_S14F	N	N	C	T												T								
+SLC22A1	Saito et al. 2002	366092	N/A	N	10489C>T	10489C>T	S189L	OCT1_S189L	N	N	C	T													T							
+SLC22A1	Saito et al. 2002	366930	N/A	N	36771A>C	36771A>C		OCT1_S549	N	N	A	C																				
+SLC22A1	Saito et al. 2001	366735	N/A	N	21852G>A	21852G>A	V461I	OCT1_V461I	N	N	G	A														A															
+SLC22A1	Saito et al. 2003	366732	N/A	N	36804G>C	36804G>CG>A	3'UTR	OCT1_3UTR1	N	N	G	A																													
+SLC22A1		#	N/A	N			C88R	OCT1_C88R	N	N																															
+SLC22A1		#	N/A	N			R61C	OCT1_R61C	N	N																															
+SLC22A2	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	A270S	A270T	R400C	K432Q	K463R	#M165I	#P54S	#R50H																				
+SLC22A2	NCBI dbSNP 	367040	rs316019	N	978G>T	32491G>T	A270S	rs316019	Y	N	G	T		T																											
+SLC22A2	NCBI dbSNP 	367040	rs316019	N	978G>A	32491G>A	A270T	rs316019	Y	N	G	A			A																										
+SLC22A2	NCBI dbSNP 	366498	rs8177516	N	1368C>T	26894C>T	R400C	rs8177516	Y	N	C	T				T																									
+SLC22A2	NCBI dbSNP 	367539	rs8177517	N	1464A>C	25629A>C	K432Q	rs8177517	Y	N	A	C					C																								
+SLC22A2	NCBI dbSNP 	366077	rs316003	N	1676C>T	8041C>T	V502V	rs316003	N	N	A	G																													
+SLC22A2	NCBI dbSNP 	367272	rs3907239	N		25535A>G	K463R	rs3907239	N	N	A	G						G																							
+SLC22A2	NCBI dbSNP 	367271	rs8177520	N	1568C>T	24818C>T	G466G	rs8177520	N	N	C	T																													
+SLC22A2	Saito et al. 2002	367542	N/A	N	11507C>G	30492C>G		SLC22A2_11507C>G	N	N	C	G																													
+SLC22A2	Saito et al. 2002	366078	N/A	N	15110C>T	26889C>T		SLC22A2_15110C>T	N	N	C	T																													
+SLC22A2	Saito et al. 2003	368110	N/A	N	2107T>C	39892C>T		SLC22A2_2107T>C	N	N	C	T																													
+SLC22A2	Saito et al. 2003b	368087	N/A	N	2119A>G	39880A>G		SLC22A2_2119A>G	N	N	A	G																													
+SLC22A2	Saito et al. 2003a	367037	N/A	N	7960C>T	34039C>T		SLC22A2_34039C>T	N	N	C	T																													
+SLCO1B1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*2	*3	*4	*6	*7	*8	*9	*10	*11	*12	*1B	*15	*5	*14	*13													
+SLCO1B1	Pubmed_12406649	367688	N/A	N	217T>C	41580T>C	F73L	OATPCstar2_T217C	Y	Y	T	C		C	 	 	 	 	 	 	 	 	C			 															
+SLCO1B1	Pubmed_12406649	367588	N/A	*3	245T>C	43393T>C	V82A	OATPC_T245C	Y	Y	T	C		 	C	 	 	 	 	 	 	 	 			 															
+SLCO1B1	Kim et al. 2003	367379	N/A	*3	467A>G	45681A>G	E156G	OATPC_A467G	Y	Y	A	G		 	G	 	 	 	 	 	 	 	 			 		G													
+SLCO1B1	PubMed_11477075	367463	N/A	*6	1058T>C	69393T>C	I353T	OATPCstar6_T1058C	Y	Y	T	C		 	 	 	C	 	 	 	 	 	 			 															
+SLCO1B1	Kim et al. 2003	366932	N/A	*9	1463G>C	74797G>C	G488A	OATPCstar9_G1463C	Y	Y	G	C		 	 	 	 	 	 	C	 	 	 			 															
+SLCO1B1	Kim et al. 2003	367635	N/A	N	1964A>G	107875A>G	D655G	OATPCstar10_A1964G	Y	Y	A	G		 	 	 	 	 	 	 	G	 	G			 															
+SLCO1B1	Pubmed_12406649	367632	N/A	*11	2000A>G	107911A>G	E667G	OATPC_A2000G	Y	Y	A	G		 	 	 	 	 	 	 	 	G	 			 		G													
+SLCO1B1	NCBI dbSNP	367382	rs11045819	N	463C>A	45677C>A	P155T	OATPC_C463A	Y	Y	C	A		 	 	A	 	 	 	 	 	 	 			 	A														
+SLCO1B1	Pubmed_12406649	367636	N/A	*7	1294A>G	71447A>G	N432D	OATPC_A1294G	Y	Y	A	G		 	 	 	 	G	 	 	 	 	 			 															
+SLCO1B1	Pubmed_12406649	367377	N/A	*8	1385A>G	74719A>G	D462G	OATPC_A1385G	Y	Y	A	G		 	 	 	 	 	G	 	 	 	 			 															
+SLCO1B1	NCBI dbSNP	367686	rs2306283	N	388A>G	45602A>G	N130D	rs2306283	Y	Y	G	A												A	A		A														
+SLCO1B1	Kim et al. 2003	367545	rs4149056	*5	521T>C	45735T>C	V174A	rs4149056	Y	Y	T	C		 		 		 	 	 	 	 	 	 	C	C															
+SLCO2B1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*2	#*3																										
+SLCO2B1	NCBI dbSNP 	366308	rs1621378	*2	1439C>T	1439C>T	I392T	rs1621378	Y	Y	C	T		T																											
+SLCO2B1	NCBI dbSNP 	#	rs2306168	*3	1721C>T		S486F	rs2306168	Y	Y	C	T			T																										
+SLCO2B1	NCBI dbSNP 	#	rs1109407	N	669G>A		P135P	was rs4612837	N	N	G	A																													
+SULT1A1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	K147K	H149Y	E151Q	E73D	Y62F	#*2(H213R)	#*3(M223V)	#*4(R37Q)	#XN																			
+SULT1A1	NCBI dbSNP 	367899	rs1042005	N	551G>A	2319G>A	K147K	rs1042005	N	N	G	A		A																											
+SULT1A1	NCBI dbSNP 	367850	rs1042008	N	559C>T	2323C>T	H149Y	rs1042008	N	N	C	T			T																										
+SULT1A1	NCBI dbSNP 	367770	rs1042011	N	592G>C	2329G>C	E151Q	rs1042011	N	N	G	C				C																									
+SULT1A1	NCBI dbSNP 	367786	rs1042014	N	567G>C	2331G>C	E73D	rs1042014	N	N	G	C					C																								
+SULT1A1	NCBI dbSNP 	366649	rs4987024	N	263A>T	13689A>T	Y62F	rs4987024	N	N	A	T						T																							
+SULT1A1	NCBI dbSNP 	367237	rs1042157	N	1087C>T	3592C>T	3' UTR	rs1042157	N	N	C	T																													
+TBXAS1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*1B	*1D	*2	*3	*4	*5	*7	*8	V125I	K258E	R261G	Q317K	I332T	E388K	G390V	R425C	A430T	A502R	L163I	*3var								
+TBXAS1	"Chevalier et al, 2001"	367220	rs6138	*2	182G>A	43171G>A	R61H	CYP5A1star2	N	Y	G	A				A																									
+TBXAS1	"Chevalier et al, 2001"	366409	N/A	*1B	360G>A	107061G>A		CYP5A1star1B	N	Y	G	A		A																											
+TBXAS1	"Chevalier et al, 2001"	366619	rs5768	*3	483C>A	124244C>A	D161E	CYP5A1star3	N	Y	C	A					A																								
+TBXAS1	NCBI dbSNP 	366619	rs5768	N	483C>G	124244C>G	D161E	CYP5A1star3	N	Y	C	G																					G								
+TBXAS1	"Chevalier et al, 2001"	366407	N/A	*4	737A>G	128526A>G	N246S	CYP5A1star4	N	Y	A	G						G																							
+TBXAS1	"Chevalier et al, 2001"	366618	rs4529	*5	1069C>G	133012C>G	L357V	CYP5A1star5	N	Y	C	G							G																						
+TBXAS1	"Chevalier et al, 2001"	366617	rs8192868	*7	1348G>A	186689G>A	E450K	CYP5A1star7	N	Y	G	A								A																					
+TBXAS1	"Chevalier et al, 2001"	366615	rs5763	*8	1352C>A	186693C>A	T451N	CYP5A1star8	N	Y	C	A									A																				
+TBXAS1	"Chevalier et al, 2001"	367335	N/A	*1D	1727A>G	191068A>G		CYP5A1star1D	N	Y	A	G			G																										
+TBXAS1	NCBI dbSNP	366986	rs8192833	N	373G>A	107074G>A	V125I	rs8192833	N	N	G	A										A																			
+TBXAS1	NCBI dbSNP	367505	rs5769	N	772A>G	128561A>G	K258E	rs5769	N	N	A	G											G																		
+TBXAS1	NCBI dbSNP	367278	rs5770	N	781A>G	128570A>G	R261G	rs5770	N	N	A	G												G																	
+TBXAS1	NCBI dbSNP	365933	rs5771	N	849C>A	132892C>A	Q317K	rs5771	N	N	C	A													A																
+TBXAS1	NCBI dbSNP	366612	rs6140	N	995T>C	132938T>C	I332T	rs6140	N	N	T	C														C															
+TBXAS1	NCBI dbSNP	365931	rs3735354	N	1162G>A	177963G>A	E388K	rs3735354	N	N	G	A															A														
+TBXAS1	NCBI dbSNP	366211	rs5760	N	1169G>T	177970G>T	G390V	rs5760	N	N	G	T																T													
+TBXAS1	NCBI dbSNP	367817	rs5762	N	1273C>T	186614C>T	R425C	rs5762	N	N	C	T																	T												
+TBXAS1	NCBI dbSNP	367803	rs4526	N	1288G>A	186629G>A	A430T	rs4526	N	N	G	A																		A											
+TBXAS1	NCBI dbSNP	365926	rs8192864	N	1740G>A	188656G>A	R502A	rs8192864	N	N	G	A																			A										
+TBXAS1	NCBI dbSNP	366613	rs6137	N	722C>A	124248C>A	L163I	rs6137	N	N	C	A																				A									
+TBXAS1	NCBI dbSNP	365929	rs4527	N	1540C>T	186646C>T	A435A	rs4527	N	N	C	T																													
+TBXAS1	NCBI dbSNP	365934	rs1042561	N	820C>G	126348C>G	A195A	rs1042561	N	N	C	G																													
+TBXAS1	NCBI dbSNP	365930	rs5761	N	1441G>A	178007G>A	L402L	rs5761	N	N	G	A																													
+TPMT	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1	*2	*3A	*3B	*3C	*4	*8	H179Q																					
+TPMT	NCBI dbSNP 	367234	rs1800462	*2	238G>C	11419G>C	A80P	rs1800462	Y	Y	G	C		C	 	 	 	 	 																						
+TPMT	NCBI dbSNP 	367281	rs1800460	N	460G>A	16146G>A	A154T	TPMTstar3B	Y	Y	G	A		 	A	A	 	 	 																						
+TPMT	NCBI dbSNP 	367679	rs1142345	*3C	719A>G	24456A>G	Y240C	rs1142345	Y	Y	A	G		 	G	 	G	 	 																						
+TPMT	NCBI dbSNP 	367652	rs1800584	*4	IVS9AS	24362G>A	splicing defect	rs1800584	Y	Y	G	A		 	 	 	 	A	 																						
+TPMT	2005_Pubmed_16220112 	368264	NA	*8	644G>A	24381G>A	R215H	TPMTstar8	Y	Y	G	A		 	 	 	 	 	A																						
+TPMT	NCBI dbSNP 	367235	rs6921269	N	692A>C	21296A>C	H179Q	rs6921269	N	N	G	T								T																					
+TPMT	NCBI dbSNP 	366871	rs2842934	N	616A>G	16160A>G	I158I	rs2842934	N	N	T	C																													
+TPMT	NCBI dbSNP 	366872	rs2842944	N	2511C>G	26093A>G	3' UTR	rs2842944	N	N	C	G																													
+UGT1A1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	*1A	*6	*7	*27	*29	*43	*62	*28var	*1B	*76	*78	*79	*60	*28-TA7															
+UGT1A1	NCBI dbSNP 	367229	rs4148323	*6	211G>A	31371G>A	G71R	UGT1A1star6	Y	Y	G	A		A	 	 	 	 	 																						
+UGT1A1	2005 Girard Pubmed_16595709	366641	N/A	*62	247T>C	31407T>C	F83L	UGT1A1_T247C	Y	Y	T	C		 	 	 	 	 	C																						
+UGT1A1	2006 Saeki Pubmed_16314888	366435	rs35350960	*27	686C>A	31846C>A	P229Q	UGT1A1star27	Y	Y	C	A		 	 	A	 	 	 																						
+UGT1A1	2005 Girard Pubmed_16595709	366642	N/A	*43	698A>C	31858A>C	L233A	UGT1A1star43	Y	Y	T	G		 	 	 	 	G	 																						
+UGT1A1	2005 Girard Pubmed_16595709	366433	N/A	*29	1099C>G	39107C>G	R367G	UGT1A1star29	Y	Y	C	G		 	 	 	G	 	 																						
+UGT1A1	2006 Saeki Pubmed_16314888	366645	rs34993780	*7	1456T>G	43286T>G	Y486D	UGT1A1star7	Y	Y	T	G		 	G	 	 	 	 																						
+UGT1A1	Pubmed_17728214	368419	N/A	N	Not in mRNA	-3156G>A	promotor	UGT1A1star28-3156GA	Y	Y	G	A								A																					
+UGT1A1	Sai K. et al	368422	N/A	N	1813C>T		3'UTR	UGT1A1star1B_1813CT	Y	Y	C	T									T	T																			
+UGT1A1	Sai K. et al	368425	N/A	N	1941C>G		3'UTR	UGT1A1star1B_1941CG	Y	Y	C	G									G		G																		
+UGT1A1	Sai K. et al	368427	N/A	N	2042C>G		3'UTR	UGT1A1star1B_2042CG	Y	Y	C	G									G			G																	
+UGT1A1	Sai K. et al	367228	rs4124874	N	Not in mRNA	-3279T>G	promotor	UGT1A1_T-3279G	Y	Y	T	G								G					G																
+UGT1A1	Innocenti et al. 2002	1684360		N	Del/Del & Ins/Del co-cluster		TATA-box	UGT1A1star28	Y	N	DEL	INS														INS															
+UGT1A9	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Major Allele	Minor Allele	WT	M212V																											
+UGT1A9	NCBI dbSNP 	368061	rs1126803	N	696A>G	8052A>G	M212V	rs1126803	N	N	A	G		G																											
+UGT1A9	NCBI dbSNP 	366870	rs7577677	N	Not in mRNA	17455C>A	Intron	rs7577677	N	N	C	A																													
+UGT1A9	NCBI dbSNP 	366863	rs6759892	N	Not in mRNA	28508T>C	Intron	rs6759892	N	N	T	G																													
+UGT1A9	NCBI dbSNP 	366999	rs1042707	N	Not in mRNA	28546A>T	Intron	rs1042707	N	N	A	T																													
+UGT1A9	NCBI dbSNP 	367724	rs1042708	N	Not in mRNA	28698C>A	Intron	rs1042708	N	N	C	A																													
+UGT1A9	NCBI dbSNP 	366222	rs2011404	N	Not in mRNA	54776C>T	Intron	rs2011404	N	N	C	T																													
+UGT1A9	NCBI dbSNP 	365957	rs6431625	N	Not in mRNA	64751C>T	Intron	rs6431625	N	N	C	T																													
+UGT1A9	NCBI dbSNP 	367227	rs4148323	N	Not in mRNA	95983G>A	Intron	rs4148323	N	N	G	A																													
+SLC15A1	Reference Link	AssayID	dbSNP	Defining	cDNA	Genomic	Change	External ID	Validated	Haplotype	Reference	Variant	WT	S116R	G418A	V449I	T450N	R458C	P536S	P586L																					
+SLC15A1	NCBI dbSNP rs=8187821	367752	rs8187821	N	407G>T	28728G>T	S116R	rs8187821	Y	N	C	A		A																											
+SLC15A1	NCBI dbSNPrs=4646227	367180	rs4646227	N	1312C>G	46507C>G	G418A	rs4646227	Y	N	G	C			C																										
+SLC15A1	NCBI dbSNPrs=2274828	367971	rs2274828	N	1404C>T	48297C>T	V449I	rs2274828	Y	N	C	T				T																									
+SLC15A1	NCBI dbSNP rs=8187838	367945	rs8187838	N	1408A>C	48301A>C	T450N	rs8187838	Y	N	C	A					A																								
+SLC15A1	NCBI dbSNPrs=2274827	365799	rs2274827	N	1431A>G	48324A>G	R458C	rs2274827	Y	N	G	A						A																							
+SLC15A1	NCBI dbSNP rs=8187830	367289	rs8187830	N	1665A>G	64332A>G	P536S	rs8187830	Y	N	C	T							T																						
+SLC15A1	NCBI dbSNP rs=8187823	367392	rs8187823	N	314G>A	28635A>G	S86S	rs8187823	Y	N	G	A																													
+SLC15A1	NCBI dbSNP rs=8187836	367597	rs8187836	N	1235C>T	46430C>T	N39N	rs8187836	Y	N	C	T																													
+SLC15A1	NCBI dbSNP rs=1339067	368049	rs1339067	N	1403C>T	48296C>T	A449A	rs1339067	Y	N	C	T																													
+SLC15A1	NCBI dbSNP rs=8187832	366942	rs8187832	N	1583C>T	64137C>T	N509N	rs8187832	Y	N	C	T																													
+SLC15A1	Saito et al. 2001	366941	N/A	N	1814C>T	65003C>T	P586L	PEPT1_P586L	Y	N	C	T								T																					
+SLC15A1	NCBI dbSNP rs=8187840	366533	rs8187840	N	1904C>T	66377C>T	S616S	rs8187840	Y	N	G	A																													
+SLC15A1	Saito et al. 2002	366940	N/A	N		26110G>C		SLC15A1_26110G>C	Y	N	G	C																													
+SLC15A1	Saito et al. 2003	366943	N/A	N		26189G>A		SLC15A1_26189G>A	Y	N	G	A																													
+SLC15A1	Saito et al. 2001	367181	N/A	N		26211T>A		SLC15A1_26211T>A	Y	N	T	A																													
+SLC15A1	Saito et al. 2001	366534	N/A	N		28652C>T		SLC15A1_28652C>T	Y	N	C	T																													
+SLC15A1	Saito et al. 2001	367055	N/A	N		50099A>G		SLC15A1_50099A>G	Y	N	A	G																													
+VKORC1	Reference Link	AssayID	refSNP ID	Defining	cDNA Nucleotide Position	Genomic Nucleotide Position	Change	External ID	Validated	Haplotype	Reference	Variant	WT	H1	H2	H3	H4	H5	H6&7	H8	H9	R58G	R98W	V66M	L128R	P83L	#H7														
+VKORC1	NCBI dbSNP 	1684445	rs7196161	N	Not in mRNA	381T>C	Intron	rs7196161	Y	Y	T	C		C	C	C	C																								
+VKORC1	NCBI dbSNP 	1684394	rs17880887	N	Not in mRNA	861C>A	Intron	rs17880887	N	Y	C	A								A	A																				
+VKORC1	NCBI dbSNP 	1684447	rs9923231	N	Not in mRNA	2653G>A	Intron	rs9923231	Y	Y	G	A		A	A			A																							
+VKORC1	NCBI dbSNP 	1684418	rs2884737	N	Not in mRNA	5808T>G	Intron	rs2884737	Y	Y	T	G			G			G																							
+VKORC1	NCBI dbSNP 	1684409	rs17708472	N	Not in mRNA	6009G>A	Intron	rs17708472	Y	Y	G	A									A																				
+VKORC1	2006_Pubmed_16611750	1684424	rs9934438	N	Not in mRNA	6484G>A	Intron	rs9934438	Y	Y	G	A		A	A			A																							
+VKORC1	NCBI dbSNP 	1684431	rs8050894	N	Not in mRNA	6853G>C	Intron	rs8050894	Y	Y	G	C		C	C	C		C																							
+VKORC1	NCBI dbSNP 	1684432	rs2359612	N	Not in mRNA	7566T>C	Intron	rs2359612	Y	Y	T	C				C			C	C	C						C														
+VKORC1	NCBI dbSNP 	#	rs7294	N	Not in mRNA	9041G>A	Intron	rs7294	N	Y	G	A		In H7 and H8						A							A														
+VKORC1	2005_Pubmed_16270629	1684429	N/A	N	172A>G		R58G	VKORC1_A172G	Y	N	A	G										G																			
+VKORC1	2005.Pubmed_15883587	1684393	N/A	N	292C>T		R98W	VKORC1_C292T	Y	N	C	T											T																		
+VKORC1	2006.Pubmed_17049586	1684392	N/A	N	196G>A	3730G>A	V66M	VKORC1_G196A	Y	N	G	A												A																	
+VKORC1	2005_Pubmed_16270629	1684438	N/A	N	383T>G	1574T>G	L128R	VKORC1_T383G	Y	N	T	G													G																
+VKORC1	NCBI dbSNP 	1684422	rs7200749	N	474C>T	1599C>T	P83L	rs7200749	Y	N	C	T														T															
+VKORC1		#	N/A	N	85G>T		V29L	VKORC1_G85T	N	N	G	T																													
+VKORC1		#	N/A	N	134T>C		V45A	VKORC1_T134C	N	N	T	C																													
+VKORC1	NCBI dbSNP 	1684406	rs1046030	N	970T>C	1213T>C	3'UTR	rs1046030	N	N	T	C																													
+VKORC1	NCBI dbSNP 	1684413	rs13338824	N		8952A>T		rs13338824	N	N	A	T																													
+VKORC1	NCBI dbSNP 	1684407	rs17878544	N		6937A>G	5'UTR	rs17878544	N	N	A	G																													
+VKORC1	NCBI dbSNP 	1684412	rs17884850	N	Not in mRNA	3412G>A	Intron	rs17884850	N	N	G	A																													
+VKORC1	NCBI dbSNP 	1684398	rs1895514	N		8352T>G		rs1895514	N	N	T	G																													
+VKORC1	NCBI dbSNP 	1684403	rs17884982	N	Not in mRNA	2555A>T	Intron	rs17884982	N	N	A	T																													
+VKORC1	NCBI dbSNP 	1684411	rs17886199	N		3457T>C		rs17886199	N	N	T	C																													
+VKORC1	NCBI dbSNP 	1684414	rs17884388	N		10074T>C		rs17884388	N	N	T	C																													
+VKORC1	NCBI dbSNP 	1684395	rs11540137	N		1334C>A	3'UTR	rs11540137	N	N	C	A																													

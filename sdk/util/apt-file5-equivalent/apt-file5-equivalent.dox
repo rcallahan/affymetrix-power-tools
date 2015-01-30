@@ -1,0 +1,25 @@
+/**
+\page apt-file5-equivalent MANUAL: apt-file5-equivalent (\aptversion)
+
+\p apt-file5-equivalent will check to see if two HDF5 files contain equivalent values.
+This can be annoying to do with a regular diff as differences in
+precision and compiler rounding errors can lead to representational
+differences for two numbers that are equivalent (i.e. 1.0 == 0.99999981).
+
+\section QuickStart Quick Start
+To compare HDF5 binary files file1.a5 and file2.a5, use:
+
+\verbatim
+apt-file5-equivalent -d datasets.tsv -i setIgnore.txt -e 0.001 -c 0.9999 file1.a5 file2.a5
+\endverbatim
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-file5-equivalent.help.txt
+
+*/

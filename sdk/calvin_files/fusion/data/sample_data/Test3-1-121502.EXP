@@ -1,0 +1,28 @@
+Affymetrix GeneChip Experiment Information
+Version	1
+
+[Sample Info]
+Chip Type	Test3
+Chip Lot	 
+Operator	
+Sample Type	Fetal Brain RNA
+Description	 
+Project	
+Comments	 
+Solution Type	 
+Solution Lot	 
+
+[Fluidics]
+Protocol	EukGE-WS2v3
+Station	1
+Module	1
+Hybridize Date	Aug 16 2001 03:11PM
+
+[Scanner]
+Pixel Size	3
+Filter	570
+Scan Temperature	
+Scan Date	Aug 16 2001 05:28PM
+Scanner ID	
+Number of Scans	
+Scanner Type	

@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+			<h1>Affymetrix® GRD Data File Format</h1>
+
+			<h2>GRD FILE</h2>
+	
+
+ 
+			<p><b>Description</b></p>
+			<p>The GRD (grid) file stores the estimate of the sub-pixel location of the center of every feature in an array.</p>
+
+			<p><b>Format</b></p>
+
+			<p>The format of the GRD file is a binary file with data stored in big-endian format.</p>
+
+			<p>The file consists of the following sections (in order)</p>
+
+			<p><b>Header Section</b></p>
+
+			<p>The file header consists of 36 bytes in total. The values are:</p>
+			
+			<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Magic number used to identify the file:<blockquote>
+		<p>(octal) 211 107 122 104 015 012 032 012<br>(hexadecimal) 89 47 52 44 0d 0a 1a 0a<br>(ASCII C notation) \211 G R D \r \n \032 \n</p>
+	</blockquote>
+	</td>
+	<td height="14" width="141">char[8]</td><td height="14" width="214">8 byte</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">The version 
+	number of the file. The version number is set to 1.</td><td height="14" width="141">
+	float</td><td height="14" width="214">
+	4 bytes</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">The number of 
+	features in the x direction (Nx).</td><td height="14" width="141">unsigned 
+	int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">4</td> <td height="14" width="70%">The number of 
+	features in the y direction (Ny).</td><td height="14" width="141">unsigned 
+	int</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">5</td> <td height="14" width="70%">The 
+	x-direction feature pitch.</td><td height="14" width="141">float</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">6</td> <td height="14" width="70%">The 
+	y-direction feature pitch.</td><td height="14" width="141">float</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">7</td> <td height="14" width="70%">The 
+	x-direction feature setback.</td><td height="14" width="141">
+	float</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">8</td> <td height="14" width="70%">The 
+	y-direction feature setback.</td><td height="14" width="141">
+	float</td><td height="14" width="214">
+	4 bytes</td></tr>  
+</tbody></table>
+
+		<p><b>Tag-Based Header Section</b></p>
+
+		<p>This section contains parameters stored as name/value pairs.</p>
+		
+		<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Total number of bytes in the tag-based header.</td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 
+	bytes</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">Total number 
+	of name-value pairs in the tag-based header.</td><td height="14" width="141">
+	unsigned int</td><td height="14" width="214">
+	4 bytes</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">A series of 
+	ASCII strings in a name-value pair format. For each name-value pair we have 
+	the following 4 entries:<ul>
+		<li>String length of name including the null terminating character, 
+		unsigned integer (4 bytes)</li>
+		<li>A null terminated array of ASCII characters with length as specified 
+		above.</li>
+		<li>String length of value including the null terminating character, 
+		unsigned integer (4 bytes)</li>
+		<li>A null terminated array of ASCII characters with length as specified 
+		above.</li>
+	</ul>
+	</td><td height="14" width="141">see description</td><td height="14" width="214">
+	see description</td></tr>  
+</tbody></table>
+
+<p>Note: The following tags shall be included in version 1 of the format:</p>
+	<ul>
+    <li>"Parent DAT File" - the full name of the DAT file associated with this GRD.</li>
+    <li>"Scan Date Time" - the date and time of the scan from the DAT file.</li>
+    <li>"Scanner ID" - scanner ID from the DAT file.</li>
+	</ul>
+
+<p><b>Optimized Sub-Grid Corner Location Section</b></p>
+
+<p>The optimized sub-grid corner location section shall contain the corner coordinates of each sub-grid as computed during the DAT file analysis. Note: not all DAT file analyses in GCOS will produce a GRD file.</p>
+
+<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Total number of bytes in this section.</td>
+	<td height="14" width="141">unsigned int</td><td height="14" width="214">4 
+	bytes</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">Total number 
+	of subgrids in this section.</td><td height="14" width="141">
+	unsigned int</td><td height="14" width="214">
+	4 bytes</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">For each 
+	sub-grid the following coordinates are stored:<ul>
+		<li>upper left x, float (4 bytes)</li>
+		<li>upper left y, float (4 bytes)</li>
+		<li>upper right x, float (4 bytes)</li>
+		<li>upper right y, float (4 bytes)</li>
+		<li>lower left x, float (4 bytes)</li>
+		<li>lower left y, float (4 bytes)</li>
+		<li>lower right x, float (4 bytes)</li>
+		<li>lower right y, float (4 bytes)</li>
+	</ul>
+	</td><td height="14" width="141">Array of floats</td><td height="14" width="214">
+	#sub-grids * 32 bytes</td></tr>  
+</tbody></table>
+
+<p><b>Feature Center Data Section</b></p>
+
+<p>The feature center data block consists of Nx * Ny pairs of (x,y) coordinates. Every feature on the array is contains an associated (x,y) feature center.</p>
+
+<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">The first sub-pixel coordinate pair stored is 
+	for the feature at cell-coordinate (0,0).</td>
+	<td height="14" width="141">float, float</td><td height="14" width="214">8 byte</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">The first 
+	sub-pixel coordinate pair stored is for the feature at cell-coordinate 
+	(1,0).</td><td height="14" width="141">
+	float, float</td><td height="14" width="214">
+	8 bytes</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">The first 
+	sub-pixel coordinate pair stored is for the feature at cell-coordinate 
+	(2,0).</td><td height="14" width="141">float, float</td><td height="14" width="214">
+	8 bytes</td></tr>  
+<tr> <td height="14" width="38">4</td> <td height="14" width="70%">...</td><td height="14" width="141"></td><td height="14" width="214">
+	</td></tr>  
+</tbody></table>
+			
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+#%this=that						
+#%this=that2						
+#%this=						
+#%testing=good						
+#%love=life						
+Hello	Here	I	am			
+This	row		has	a	null	
+# This is a comment line						
+
+here	is	the	third	line	of	input
+

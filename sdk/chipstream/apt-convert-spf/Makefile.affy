@@ -1,0 +1,215 @@
+#
+# affy/sdk/chipstream/apt-convert-spf/Makefile.affy ---
+#
+
+ACSPF_EXE:=../../output/${CPUCOMSYS}/bin/apt-convert-spf
+ACSPF_SPF_BIG:=../../regression-data/data/lib/GenomeWideSNP_6/GenomeWideSNP_6.spf
+
+#
+GenomeWideSNP_6.spf: ${ACSPF_SPF_BIG}
+	cp ${ACSPF_SPF_BIG} .
+
+GenomeWideSNP_6.spf.small: ${ACSPF_SPF_BIG}
+	head -1000 ${ACSPF_SPF_BIG} > ${@}
+
+#
+_test_apt_convert_spf_help: ${ACSPF_EXE}
+	${ACSPF_EXE} --help
+
+#
+_test_apt_convert_spf: _test_apt_convert_spf_2 _test_apt_convert_spf_3
+
+_test_apt_convert_spf_2: ${ACSPF_EXE} GenomeWideSNP_6.spf.small
+	${ACSPF_EXE} -f v2 GenomeWideSNP_6.spf.small
+
+_test_apt_convert_spf_3: ${ACSPF_EXE} GenomeWideSNP_6.spf.small
+	${ACSPF_EXE} -f v3 GenomeWideSNP_6.spf.small
+
+_test_apt_convert_spf_big_2: ${ACSPF_SPF_BIG}
+	${ACSPF_EXE} -f v2 GenomeWideSNP_6.spf
+
+_test_apt_convert_spf_big_3: ${ACSPF_SPF_BIG}
+	${ACSPF_EXE} -f v3 GenomeWideSNP_6.spf
+
+###
+_test_dmet_small: AllMarkersDmet3bAso1.spf.small.v3.spf
+
+AllMarkersDmet3bAso1.spf.small.v3.spf: ${ACSPF_EXE}
+	${ACSPF_EXE} --dmet-cnvt AllMarkersDmet3bAso1.spf.small
+
+_cnvt_dmet: DmetSpfs/AllMarkersDmet3bAso1.spf.sort.v3.spf
+
+DmetSpfs/AllMarkersDmet3bAso1.spf.sort.v3.spf: ${ACSPF_EXE}
+	${ACSPF_EXE} --dmet-cnvt DmetSpfs/AllMarkersDmet3bAso1.spf.sort
+
+_cnvt_all: ${ACSPF_EXE}
+	for spf in DmetSpfs/All*.spf ; do ${ACSPF_EXE} --dmet-cnvt $$spf ; done
+
+QACF:=\
+chipstream/ProbeListFactory.cpp \
+chipstream/ProbeListStl.cpp \
+chipstream/apt-convert-spf/apt-convert-spf.cpp \
+file/TsvFile/SpfFile.cpp \
+file/TsvFile/TsvFile.cpp \
+util/Convert.cpp \
+util/Err.cpp \
+util/MsgStream.cpp \
+util/PgOptions.cpp \
+util/RowFile.cpp \
+util/TableFile.cpp \
+util/Util.cpp
+
+QACF_PATH:=${QACF:%=../../%}
+
+###
+
+JHG_CC_OPT:=-g -O0
+#JHG_CC_OPT:=-O3
+
+#quick_apt_convert_spf:=./apt-convert-spf
+apt_convert_spf:=${sdk_output_bin}/apt-convert-spf
+#apt_convert_spf:=${quick_apt_convert_spf}
+
+${quick_apt_convert_spf}: ${QACF_PATH} Makefile
+	g++ ${JHG_CC_OPT} \
+	  -o ${@} \
+	  -DAPT_PGOPTIONS_NO_XERCES=1 \
+	  -I../.. -I../../output/share/include \
+	  ${QACF_PATH} \
+	  -L${sdk_output_lib} -lpcrecpp -lpcre
+	cp ${@} ${ACSPF_EXE}
+
+_quick_apt_convert_spf: ${quick_apt_convert_spf}
+
+_apt_convert_spf: ${apt_convert_spf}
+
+_apt_convert_spf_run: _apt_convert_spf_run_2 _apt_convert_spf_run_3 _apt_convert_spf_run_4
+
+_apt_convert_spf_run_2: ${apt_convert_spf}
+	./apt-convert-spf -f 2 GenomeWideSNP_6.spf.small
+_apt_convert_spf_run_3: ./apt-convert-spf
+	./apt-convert-spf -f 3 GenomeWideSNP_6.spf.small
+_apt_convert_spf_run_4: ./apt-convert-spf
+	./apt-convert-spf -f 4 GenomeWideSNP_6.spf.small
+
+cmd:=./apt-convert-spf
+#cmd:=gdb --args ${cmd}
+
+_apt_convert_spf_run_2342: ./apt-convert-spf
+	-rm foo.spf*
+	${cmd} -f 2 -o foo.spf GenomeWideSNP_6.spf.small
+	${cmd} -f 2 foo.spf
+	${cmd} -f 3 foo.spf-v2
+	${cmd} -f 4 foo.spf-v2-v3
+	${cmd} -f 2 foo.spf-v2-v3-v4
+#
+	head -n 50 foo.spf > foo.spf.head
+	head -n 50 foo.spf-v2-v3-v4-v2 > foo.spf-v2-v3-v4-v2.head
+	diff -u foo.spf.head foo.spf-v2-v3-v4-v2.head
+
+_apt_convert_spf_gdb: ./apt-convert-spf
+	gdb --args ./apt-convert-spf -f 2 GenomeWideSNP_6.spf.small
+
+_apt_convert_spf_big: ./apt-convert-spf
+	time ./apt-convert-spf -f 4 -o GenomeWideSNP_6.spf.big-v4 ${ACSPF_SPF_BIG}
+
+#
+#/nfs/falcon-ev-out2/usr/rlu/peg_screen/HTFalconScreen01/nonAS_geno.spf
+#/nfs/falcon-ev-out2/usr/rlu/peg_screen/HTFalconScreen01/AS_lists/norm_AS_HM_AT.spf
+#/nfs/falcon-ev-out2/usr/rlu/peg_screen/HTFalconScreen02/nonAS_geno.spf
+#/nfs/falcon-ev-out2/usr/rlu/peg_screen/HTFalconScreen01/AS_lists/norm_AS_HM_GC.spf
+
+FSCREEN_TOP:=/nfs/falcon-ev-out2/usr/rlu/peg_screen
+FSCREEN_01:=${FSCREEN_TOP}/HTFalconScreen01/AS_lists
+
+#FSCREEN_01_ARGS:=\
+# --merge-nonas ${FSCREEN_01}/nonAS_geno.spf
+
+#FSCREEN_01_ARGS:=\
+# --merge-at ${FSCREEN_01}/norm_AS_HM_AT.spf \
+# --merge-gc ${FSCREEN_01}/norm_AS_HM_GC.spf \
+# --merge-at ${FSCREEN_01}/chrX_AS_HM_AT.spf \
+# --merge-gc ${FSCREEN_01}/chrX_AS_HM_GC.spf \
+# --merge-at ${FSCREEN_01}/chrX_AS_nonHM_AT.spf \
+# --merge-gc ${FSCREEN_01}/chrX_AS_nonHM_GC.spf \
+# --merge-at ${FSCREEN_01}/mito_AS_HM_AT.spf \
+# --merge-gc ${FSCREEN_01}/mito_AS_HM_GC.spf \
+# --merge-at ${FSCREEN_01}/mito_AS_nonHM_AT.spf \
+# --merge-gc ${FSCREEN_01}/mito_AS_nonHM_GC.spf \
+# --merge-at ${FSCREEN_01}/norm_AS_nonHM_AT.spf \
+# --merge-gc ${FSCREEN_01}/norm_AS_nonHM_GC.spf
+
+# these arent there anymore...
+#_falcon_files_01:
+#	cp ${FSCREEN_01}/nonAS_geno.spf HTFalconScreen01-nonAS_geno.spf
+#	cp ${FSCREEN_01}/norm_AS_HM_AT.spf HTFalconScreen01-norm_AS_HM_AT.spf
+#	cp ${FSCREEN_01}/norm_AS_HM_GC.spf HTFalconScreen01-norm_AS_HM_GC.spf
+
+_test_falcon_small_inputs:
+	head -1000 HTFalconScreen01-nonAS_geno.spf    > HTFalconScreen01-nonAS_geno.spf.small
+	head -1000 HTFalconScreen01-norm_AS_HM_AT.spf > HTFalconScreen01-norm_AS_HM_AT.spf.small
+	head -1000 HTFalconScreen01-norm_AS_HM_GC.spf > HTFalconScreen01-norm_AS_HM_GC.spf.falcon
+
+g:=
+#g:=gdb --args
+
+_test_falcon_small: ${apt_convert_spf}
+	-rm falcon-01.spf.small
+	${g} ${apt_convert_spf} \
+	  --output falcon-01.spf.small \
+	  --merge-nonas HTFalconScreen01-nonAS_geno.spf.small \
+	  --merge-at HTFalconScreen01-norm_AS_HM_AT.spf.small \
+	  --merge-gc HTFalconScreen01-norm_AS_HM_GC.spf.small
+
+_test_falcon_small_sort:
+	-rm falcon-01.spf.small
+	${g} ${apt_convert_spf} \
+	  --output falcon-01.spf.small \
+	  --sort \
+	  --merge-nonas HTFalconScreen01-nonAS_geno.spf.small \
+	  --merge-at HTFalconScreen01-norm_AS_HM_AT.spf.small \
+	  --merge-gc HTFalconScreen01-norm_AS_HM_GC.spf.small
+
+falcon-01.spf: ${apt_convert_spf}
+	${g} ${apt_convert_spf} \
+	  --output ${@} \
+	  --merge-nonas HTFalconScreen01-nonAS_geno.spf \
+	  --merge-at HTFalconScreen01-norm_AS_HM_AT.spf \
+	  --merge-gc HTFalconScreen01-norm_AS_HM_GC.spf
+
+_test_falcon: _test_falcon_small falcon-01.spf
+
+###
+
+HG_U133_SPF4:=${regression_data}/lib/HG-U133_Plus_2/HG-U133_Plus_2.spf4
+HG_U133_SPF4:=${sdk_root}/HG-U133_Plus_2.spf4
+
+_HG-U133_Plus_2.spf4: ${HG_U133_SPF4}
+
+${HG_U133_SPF4}: ${apt_convert_spf}
+	${apt_convert_spf} -f 4 --no-extra-columns \
+	  -o $(notdir ${@}) \
+	  ${regression_data}/lib/HG-U133_Plus_2/HG-U133_Plus_2.spf
+	cp $(notdir ${@}) ${@}
+
+test_ray_1_dir:=/nfs/falcon/lib/HTFalconScreening_01/CDF
+test-ray-1.spf: ${apt_convert_spf} Makefile
+	-rm ${@}
+	${apt_convert_spf} \
+	--output ${@} \
+	  --merge-nonas ${test_ray_1_dir}/HT_falcon_screen_01.spf \
+	  --merge-at ${test_ray_1_dir}/HT_falcon_screen_01_AS_AT.spf \
+	  --merge-gc ${test_ray_1_dir}/HT_falcon_screen_01_AS_GC.spf
+
+# like above with sorting
+test_ray_2_dir:=/nfs/falcon/lib/HTFalconScreening_02/CDF
+test-ray-2.spf: ${apt_convert_spf} Makefile
+	-rm ${@}
+	${apt_convert_spf} \
+	--output ${@} \
+	--sort \
+	  --merge-nonas ${test_ray_2_dir}/HT_falcon_screen_02.spf \
+	  --merge-at ${test_ray_2_dir}/HT_falcon_screen_02_AS_AT.spf \
+	  --merge-gc ${test_ray_2_dir}/HT_falcon_screen_02_AS_GC.spf
+
+_test_ray: test-ray-1.spf test-ray-2.spf

@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ "${#}" = "0" ]
+then
+  echo "Usage: $0 fileToConvert"
+  exit 1
+fi
+ 
+for arg in "${@}"
+do
+  echo "Processing '${arg}'..."
+  if sed 's/\(^[A-Za-z0-9_-]*\)-[A-Z0-9][ \t]/\1\t/' "${arg}"  > "${arg}.translated.tmp"
+  then
+    mv "${arg}.translated.tmp" "${arg}.translated" 
+  else 
+    echo "Command failed.  Temporary output left in '${arg}.translated.tmp'"
+    exit 1
+  fi
+done 
+

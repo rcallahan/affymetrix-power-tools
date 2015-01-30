@@ -1,0 +1,59 @@
+#
+# sdk/apt2/calvinlite/CalvinLite_README.dox ---
+#
+# $Id: CalvinLite_README.dox,v 1.1 2009-10-27 16:53:53 harley Exp $
+#
+
+# NOTE: please keep in sync with the infowiki page.
+# http://infowiki.ev.affymetrix.com/index.php/CalvinLite_Main
+ 
+CalvinLite is a library for reading and writing Calvin
+files.  It presents a simplier and easy to use interface for
+IO to Calvin, modeled after TsvFile.  The file format is the
+same as the original Calvin; Calvin Lite should be
+completely compatible. (If not, file a bug.)
+
+CalvinLite does not fix the many shortcomings of the
+Calvin format. (no checksums, 32bit offsets, utf-16, etc)
+But it does fix the user interface.
+
+The utility program "apt-calvinlite-util" can export and
+import calvin files to TsvFile formats.  A number of headers
+are written to the exported files so the calvin file can be
+recreated.
+
+==Features==
+
+* Simple interface with "get()" and "set()". (Modeled after TsvFile)
+
+* no seperate reader/writer.
+
+* Can add columns on the fly; Even after data has been added.
+
+* Simple memory management; All memory and objects are owned
+by CL_File.  The programmer only "new"s and "delete"s the
+top level CL_File.  The rest is "magic".
+
+==Unfeatures==
+
+* Currently the entire file is held in memory.
+  (But this can be fixed later.)
+
+==Reference Spec==
+
+
+* Based on the spec on the website and an assortment of calvin files.
+http://www.affymetrix.com/support/developer/powertools/changelog/gcos-agcc/generic.html
+
+==TODO==
+
+* Add MS project file.
+* use examples
+* ownership (everything should be owned by CL_File.)
+* row reserve 
+* revert to realloc
+* write cache / dirty rowcnt buffer
+* map of start-len
+
+[[Category: CalvinLite]]
+[[Category: APT2]]

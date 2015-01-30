@@ -1,0 +1,159 @@
+/**
+\page apt-copynumber-workflow MANUAL: apt-copynumber-workflow (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#quickstart">Quick Start</a></li>
+<li><a href="#runtimeperformance">Runtime Performance</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+apt-copynumber-workflow is a program for find de novo copy number
+changes and Loss of Heterozygosity (LOH) on a per sample basis with
+respect to a reference set of samples.  The copy number algorithm it implements
+assumes that the reference set comprises a mix of normal human males
+(with XY chromosomes) and normal human females (with XX chromosomes).
+The algorithms assume that in this reference for each autosomal marker
+(SNP or Copy Number probe) the predominant Copy Number is 2, and for
+the sex chromosomes the copy number is determined by the gender.
+
+apt-copynumber-workflow implements two distinct workflows, a batch worflow that uses as a
+reference the set of CEL files that are input; and conceptually, a single-sample workflow that
+compares each CEL file to a pre-computed reference.  For efficiency of computation the
+"single-sample workflow" operates on a set of input CEL files at a time, but the output for any
+CEL file is unaffected by any of the other CEL files.
+
+<a name="quickstart">
+\section QuickStart Quick Start
+
+The basic requirements for a run of apt-probeset-genotype are:
+
+-     A collection of CEL files to process. Note
+      that the program will run much faster if the CEL files are
+      located on a local disk as opposed to being read across a
+      network.
+
+-     The CDF file corresponding to the array type of the CELs. CDF
+      files can be downloaded from
+      http://www.affymetrix.com/support/technical/libraryfilesmain.affx
+
+-     A chrX (GenomeWide SNP 6.0) file consisting of probes from the
+      X chromosome which are used to compute the sample gender. This 
+      file is included with the CDF file in the library file package.
+
+-     A chrY (GenomeWide SNP 6.0) file consisting of probes from the
+      Y chromosome which are used to compute the sample gender. This
+      file is included with the CDF file in the library file package.
+
+-     A specialSNPs (GenomeWide SNP 6.0) file consisting of the SNP
+      IDs for all SNPs with non-diploid copy number (chrX, chrY,
+      Mitochondria). Note that Mitochondrial and Random chromosome
+      markers are ignored by the copy number algorithm. This file
+      is included with the CDF file in the library file package.
+
+-     Annotation files (GenomeWide SNP 6.0) consisting of the SNP IDs
+      annotated by chromosome, position, and other covariates needed
+      in normalization; and Copy Number IDs annotated similarly. These files
+      can be downloaded from the Affymetrix array support page at
+      http://www.affymetrix.com/support/technical/byproduct.affx?cat=dnaarrays
+
+-     A reference file built using 270 Affymetrix Hapmap samples run
+      at Affymetrix. This file can be downloaded from the Affymetrix
+      array support page at
+      http://www.affymetrix.com/support/technical/byproduct.affx?cat=dnaarrays
+
+-     A directory where results will be stored. For this example it is
+      called 'results_dir'
+
+
+On unix systems a basic command using the default parameters to do a
+batch run on GenomeWide SNP 6.0 data would look like:
+
+\verbatim
+apt-copynumber-workflow \
+	-v 1 \
+	--cnchp-output true \
+	--cdf-file GenomeWideSNP_6.cdf \
+	--chrX-probes GenomeWideSNP_6.chrXprobes \
+	--chrY-probes GenomeWideSNP_6.chrYprobes \
+	--special-snps GenomeWideSNP_6.specialsnps \
+	--annotation-file GenomeWideSNP_6.na28.annot.db \
+	--reference-input GenomeWideSNP_6.hapmap270.na28.r1.a5.ref \
+    --o results_dir \
+	*.CEL
+\endverbatim
+
+The output will consist of a report file with some summary statistics
+about each chip analyzed, a text file per chip, and reference file.  The
+'a5' is a convention used by APT to refer to binary files saved in
+HDF5 format.
+
+To output cnchp files instead of text files, remove the argument --cnchp-output false
+To suppress text file output remove the argument --text-output
+
+WARNING: apt-copynumber-workflow will overwrite any existing output
+files it finds. If you wish to keep existing results make sure to
+specify a different output directory name.
+
+NOTE: On windows the DOS prompt does not support wildcard expansion
+and the preferred method is to supply a text file with the path to the
+cel files via the '--cel-files' option (see below for details of file
+format).
+
+NOTE: The windows DOS prompt also does not allow a continuation of a
+command with the '\' character, unlike unix. So in the examples shown
+here the '\' character should be omitted and everything entered on a 
+single line.
+
+NOTE: Enabling text output will slow down the runtime. You can dump the
+CHP files as text after the fact using apt-chp-to-txt as an alternative
+to using the text output option.
+
+To run in single-sample workflow using an existing reference, replace
+
+\verbatim
+--reference-output
+\endverbatim
+
+with
+
+\verbatim
+--reference-input ExistingReference.a5.ref
+\endverbatim
+
+where "ExistingReference.a5.ref" is the filename of an existing reference,
+
+<a name="runtimeperformance">
+\section RunTimePerformance Runtime Performance
+
+As a performance estimate, running the 270 Hapmap samples on local
+disk on a 8 processor 2GHz Dual-Core AMD Opteron Processor 870 with
+16G of RAM on a 64-bit linux OS took 801 minutes. RAM usage was 14 GB
+memory.
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-copynumber-workflow.help.txt
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. Some question? For example:
+<pre>
+	example
+</pre>
+
+A. The answer.
+
+*/

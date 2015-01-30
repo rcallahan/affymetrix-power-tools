@@ -1,0 +1,23 @@
+# This is a test of "CSV" reading.  All these lines are
+#valid.  We expect quotes inside a string to be quoted.  The
+#data shouldnt be changed as the reference data is compiled
+#into "tsv-test"
+#
+"header-01","header-02","header-03"
+1,2,3
+# comment flush left
+1 , 2 , 3
+# comment (spaces)
+"1","2","3"
+# comment (tabs)
+"1" , "2" , "3"
+# escaped quotes
+"\"1\"","\"2\"","\"3\""
+"\"1\"" , "\"2\"" , "\"3\""
+# mixed up line
+"\,1",\,,\"
+# escaped field seps
+'1,"',",2'","3,4"
+'1,"',",2'",3\,4
+# this is the end of the file
+end-of-file

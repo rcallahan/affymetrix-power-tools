@@ -1,0 +1,51 @@
+/**
+
+\page CREDITS CREDITS
+
+<h2>Core Development Team</h2>
+- Harley Gorrell
+- Ray Wheeler
+- Martin Gilchrist
+- Jan Bielawski
+- Mybrid Spalding
+- Anthony Kosky
+
+<h2>Core Development Team -- Alumni</h2>
+- Chuck Sugnet
+- Alan Williams
+
+<h2>Contributors</h2>
+- Patricia Chan: XDA and Calvin file support
+- Xiaojun Di: DM, geno-qc
+- Earl Hubbell: BRLMM-P and BRLMM-P Plus 
+- Luis Jevons: XDA and Calvin file support
+- Peter Klosterman: MiDAS, other accessory APT tools
+- Joshua Korn: Birdseed 
+- Finny Kuruvilla: Birdseed 
+- David Le: XDA and Calvin file support
+- Antonio Piccolboni: normalization code
+- Alec Wysoker: Birdseed 
+- Conrad Sheppy: CytoScanHD
+- Richard Sheppy: QA
+- Vlad Libershteyn: QA
+- Walt Short
+- Ellen Jacobs
+- Harry Zuzan
+
+
+<h2>Acknowledgments</h2>
+
+We thank <a href="http://www.robertnz.net/">Robert Davies</a> 
+for providing the <a href="http://www.robertnz.net/nm_intro.htm">newmat</a> 
+matrix library. This library is used by a number of APT applications for
+matrix manipulations.
+
+Thanks goes out to many Affymetrix colleagues for making it possible to
+release this software as open source. 
+
+<h2>Quotes</h2>
+
+"Compatibility means deliberately repeating other people's mistakes." - David Wheeler
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

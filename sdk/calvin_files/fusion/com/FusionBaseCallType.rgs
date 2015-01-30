@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.FusionBaseCallType.1 = s 'FusionBaseCallType Class'
+	{
+		CLSID = s '{3E564C76-52E8-472B-81CA-B110B53A6B31}'
+	}
+	affx_fusion_com.FusionBaseCallType = s 'FusionBaseCallType Class'
+	{
+		CLSID = s '{3E564C76-52E8-472B-81CA-B110B53A6B31}'
+		CurVer = s 'affx_fusion_com.FusionBaseCallType.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {3E564C76-52E8-472B-81CA-B110B53A6B31} = s 'FusionBaseCallType Class'
+		{
+			ProgID = s 'affx_fusion_com.FusionBaseCallType.1'
+			VersionIndependentProgID = s 'affx_fusion_com.FusionBaseCallType'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

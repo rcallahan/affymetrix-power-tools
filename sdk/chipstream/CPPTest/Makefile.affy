@@ -1,0 +1,6 @@
+#
+# affy/sdk/chipstream/CPPTest/Makefile.affy ---
+#
+
+_test_gdb: ${sdk_output_bin}/test-chipstream
+	gdb --args ${sdk_output_bin}/test-chipstream

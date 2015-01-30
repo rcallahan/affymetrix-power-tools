@@ -1,0 +1,179 @@
+#!/usr/bin/env perl
+#
+# /nfs/ss11/harley/Exact/python-merge-broad-3-update/affy/sdk/birdseed/apt-birdseed-priors-to-tsv ---
+#
+# $Id: apt-birdseed-priors-to-tsv,v 1.3 2007-08-15 18:57:09 harley Exp $
+#
+
+#use strict;
+use Getopt::Long;
+use File::Basename;
+
+use vars qw($opt_chip_type $opt_tsv $opt_verbose);
+
+#
+$opt_help=0;
+$opt_verbose=1;
+#
+$opt_force=0;
+$opt_dont_strip_trailing_m=0;
+$opt_tsv=undef;
+{
+  $|=1;
+
+  if (!GetOptions(
+         "help|h",
+         "verbose|v",
+         #
+         "priors|p=s",
+         "tsv|o=s",
+         "force|f!",
+         "dont_strip_trailing_m|m!",
+         "chip-type|ct=s",
+       )) {
+    usage(1);
+  }
+
+  # 
+  if ($opt_help) {
+    usage(0);
+  }
+
+  @PTT_OPTS=(chip_type=>$opt_chip_type,force=>$opt_force,
+             dont_strip_trailing_m=>$opt_dont_strip_trailing_m);
+
+  if ($opt_priors) {
+    priors_to_tsv(@PTT_OPTS,in=>$opt_priors,out=>$opt_tsv);
+    exit (0);
+  }
+
+  foreach $arg (@ARGV) {
+    priors_to_tsv(@PTT_OPTS,in=>$arg);
+  }
+}
+
+sub priors_to_tsv {
+  my(%param)=@_;
+  my($chip_type,$date,$fname_priors,$fname_tsv,$force,$l); #
+  my($f_copy_number,$f_probeset,$f_1,$f_2,$f_3,$f_aa,$f_ab,$f_bb);
+  my($ab_placeholder,$dont_skip_trailing_m,$dont_strip_trailing_m,$f_canary,$guid); #
+
+  $fname_priors=$param{in}||die "No input filename";
+  $fname_tsv=$param{out}||$fname_priors.".tsv";
+  $force=$param{force}||0;
+  $chip_type=$param{chip_type}||"unknown";
+  $dont_strip_trailing_m=$param{dont_strip_trailing_m}||0;
+
+  if (-f $fname_tsv) {
+    if ($param{force}==1) {
+      unlink($fname_tsv);
+    }
+    else {
+      die "Tsv output file '$fname_tsv' exists";
+    }
+  }
+
+  open(FI,"<$fname_priors") || die "Cant open '$fname_priors'";
+  open(FO,">$fname_tsv")    || die "Cant open '$fname_tsv'";
+
+  $date=`date`;
+  chomp($date);
+
+  #$ab_placeholder="haploid...................................";
+  $ab_placeholder="null";
+  $guid=gen_guid();
+
+  # Write the header text
+  print FO "#%chip-type=$chip_type
+#%algorithm_name=birdseed
+#%converted_guid=$guid
+#%converted_by=apt-birdseed-priors-to-tsv
+#%converted_from=$fname_priors
+#%converted_date=$date
+#%data_order=mean[0],mean[1],covarMatrix[0][0],covarMatrix[1][0],covarMatrix[1][1],numObservations
+probeset_id\tcopy_number\tBB\tAB\tAA
+";
+
+  while ($l=<FI>) {
+    chomp($l);
+    ($f_probeset,$f_1,$f_2,$f_3,$f_canary)=split(/;/,$l);
+    # 
+    if (($f_probeset eq "") or ($f_2 eq "")) {
+      die "Bad line. '$l'"; 
+    }
+    if ($f_canary ne "") {
+      die "To many fields in '$l'";
+    }
+
+    # NOTE: The text priors file is in the order BB,AB,AA 
+    # or B,A for haploid
+
+    # clean up probeset name
+    # Dont drop "m" suffix for now -- birdseed uses it.
+    if (($f_probeset=~m/m$/) or ($f_3 eq "")) {
+      # BAD: set from the last line if no match if $f_3 is ""
+      if (!$dont_skip_trailing_m) {
+        if ($f_probeset=~m/(.*)m$/) {
+          $f_probeset=$1;
+        }
+      }
+      $f_copy_number=1;
+      # JHG: or just "none"
+      # The dots are to get the columns to line up.
+      ($f_bb,$f_ab,$f_aa)=($f_1,$ab_placeholder,$f_2);
+    } else {
+      $f_copy_number=2;
+      ($f_bb,$f_ab,$f_aa)=($f_1,$f_2,$f_3);
+    }
+    
+    #
+    prior_cvt_data(\$f_aa);
+    prior_cvt_data(\$f_ab);
+    prior_cvt_data(\$f_bb);
+
+    print FO join("\t",$f_probeset,$f_copy_number,$f_bb,$f_ab,$f_aa),"\n";
+  }
+}
+
+sub prior_cvt_data {
+  my($ref)=shift;
+
+  $$ref=~s/ /,/g;
+}
+
+sub sys {
+  print join(" ",@_),"\n";
+  system(@_);
+}
+
+# Make a guid for the file header.
+sub gen_guid {
+  sprintf("%010d-%010d-%010d-%010d-%010d",
+          int(rand(1000000000)),
+          int(rand(1000000000)),
+          int(rand(1000000000)),
+          int(rand(1000000000)),
+          int(rand(1000000000)));
+}
+
+sub usage {
+    print "
+   apt-birdseed-priors-to-tsv ---
+
+   -h     = this help message.
+   -v     = be verbose in output
+
+   --chip-type = chip type to put in the header
+   --force     = overwrite the output file if it exists
+   --dont_strip_trailing_m = recover legacy behaviour of not
+                 stripping trailing m from probeset_id
+
+EXAMPLE:
+   apt-birdseed-priors-to-tsv  --priors filename --tsv filename.priors.tsv  --chip-type=foo
+
+";
+    exit(shift);
+}
+# Local Variables:
+# mode: perl
+# End:

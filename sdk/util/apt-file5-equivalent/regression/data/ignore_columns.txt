@@ -1,0 +1,3 @@
+IgnoreColumns
+Cyto2.Parameters.Parameter
+Cyto2.AntigenomicProbes.ProbeID

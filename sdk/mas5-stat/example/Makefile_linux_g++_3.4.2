@@ -1,0 +1,97 @@
+#
+# Ben Lai created this Makefile by hand to compile using g++ version 3.4.2.
+# He did this for Pathwork Diagnostics, one of the PbA (Powered by Affymetrix) partners
+# of our Molecular Diagnostics product line, who run their MAS5 algorithms on Linux.
+# The purpose of this Makefile was primarily to demonstrate how to successfully build
+# the MAS5 SDK, not necessarily to build a useful application.
+# 
+# The default target of this Makefile is an application called "mas5app".
+#
+
+CPPFLAGS=-D_USE_MEM_MAPPING_ \
+	-I../.. \
+	-I../src \
+	-I../../portability \
+	-I../../file \
+	-I../../rawq/src \
+	-I../../calvin_files/array/src \
+	-I../../calvin_files/fusion/src \
+	-I../../calvin_files/data/src \
+	-I../../calvin_files/parsers/src \
+	-I../../calvin_files/writers/src \
+	-I../../calvin_files/utils/src \
+	-I../../calvin_files/portability/src \
+	-I../../calvin_files/exception/src \
+	-I../../calvin_files/parameter/src \
+	-I../../calvin_files/fusion/src/CalvinAdapter \
+	-I../../calvin_files/fusion/src/GCOSAdapter
+
+CC=g++
+
+SOURCES.mas5=\
+	RunAlgorithm.cpp \
+	../src/ExpStatAlgSettings.cpp \
+	../src/ExpressionAlgorithmImplementation.cpp \
+	../src/IntensityFileType.cpp \
+	../src/mathLib.cpp \
+	../src/pTable.cpp \
+	../../calvin_files/data/src/CDFData.cpp \
+	../../calvin_files/data/src/CDFProbeGroupInformation.cpp \
+	../../calvin_files/data/src/CDFProbeInformation.cpp \
+	../../calvin_files/data/src/CDFProbeSetInformation.cpp \
+	../../calvin_files/data/src/CDFQCProbeInformation.cpp \
+	../../calvin_files/data/src/CDFQCProbeSetInformation.cpp \
+	../../calvin_files/data/src/CELData.cpp \
+	../../calvin_files/data/src/DataGroup.cpp \
+	../../calvin_files/data/src/DataGroupHeader.cpp \
+	../../calvin_files/data/src/DataSet.cpp \
+	../../calvin_files/data/src/DataSetHeader.cpp \
+	../../calvin_files/data/src/FileHeader.cpp \
+	../../calvin_files/data/src/GenericData.cpp \
+	../../calvin_files/data/src/GenericDataHeader.cpp \
+	../../calvin_files/exception/src/ExceptionBase.cpp \
+	../../calvin_files/fusion/src/CalvinAdapter/CalvinCELDataAdapter.cpp \
+	../../calvin_files/fusion/src/FusionCDFData.cpp \
+	../../calvin_files/fusion/src/FusionCDFQCProbeSetNames.cpp \
+	../../calvin_files/fusion/src/FusionCELData.cpp \
+	../../calvin_files/fusion/src/GCOSAdapter/GCOSCELDataAdapter.cpp \
+	../../calvin_files/parameter/src/ParameterNameValueType.cpp \
+	../../calvin_files/parsers/src/CDFFileReader.cpp \
+	../../calvin_files/parsers/src/CelFileReader.cpp \
+	../../calvin_files/parsers/src/DataGroupHeaderReader.cpp \
+	../../calvin_files/parsers/src/DataGroupReader.cpp \
+	../../calvin_files/parsers/src/DataSetHeaderReader.cpp \
+	../../calvin_files/parsers/src/DataSetReader.cpp \
+	../../calvin_files/parsers/src/FileHeaderReader.cpp \
+	../../calvin_files/parsers/src/FileInput.cpp \
+	../../calvin_files/parsers/src/GenericDataHeaderReader.cpp \
+	../../calvin_files/parsers/src/GenericFileReader.cpp \
+	../../calvin_files/utils/src/AffymetrixGuid.cpp \
+	../../calvin_files/utils/src/DateTime.cpp \
+	../../calvin_files/utils/src/FileUtils.cpp \
+	../../calvin_files/utils/src/StringUtils.cpp \
+	../../calvin_files/utils/src/checksum.cpp \
+	../../file/CDFFileData.cpp \
+	../../file/CELFileData.cpp \
+	../../file/CELFileWriter.cpp \
+	../../file/FileIO.cpp \
+	../../file/FileWriter.cpp \
+	../../file/MSKFileData.cpp \
+	../../rawq/src/RawQ.cpp \
+	../../util/Convert.cpp \
+	../../util/MsgStream.cpp \
+	../../util/RowFile.cpp \
+	../../util/TableFile.cpp \
+	../../util/Util.cpp
+
+OBJECTS.mas5=$(SOURCES.mas5:.cpp=.o)
+TEST.mas5=mas5-stat
+PATH.mas5=.
+
+all: $(TEST.mas5)
+
+$(TEST.mas5): $(OBJECTS.mas5)
+	$(CC) $(CPPFLAGS) $(OBJECTS.mas5) $(LDFLAGS) -o $(PATH.mas5)/mas5app
+
+clean:
+	-rm -rf $(OBJECTS.mas5) $(PATH.mas5)/$(TEST.mas5)

@@ -1,0 +1,36 @@
+/**
+\page apt-chp-to-table MANUAL: apt-chp-to-table (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+blah, blah...
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-chp-to-table.help.txt
+
+\endverbatim
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. Foo?
+
+A. Bar.
+
+*/

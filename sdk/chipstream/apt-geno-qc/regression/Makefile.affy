@@ -1,0 +1,43 @@
+#
+# affy/sdk/chipstream/apt-geno-qc/regression/Makefile.affy ---
+#
+
+#
+valgrind_exe:=/nfs/ss11/harley/disk/${CPUCOMSYS}/bin/valgrind
+#
+apt_geno_qc_exe:=../../../output/${CPUCOMSYS}/bin/apt-geno-qc
+data_dir:=../../../regression-data/data
+cel_files_txt:=${data_dir}/geno-qc/Mapping250K_Sty/cel-files.txt
+cel_files_txt:=./cel-files-1.txt
+out_file=test-generated/doGenoQCTest500k/geno-qc-sty-test.gqcapt-geno-qc
+
+cel_dir:=../../../regression-data/data/cel/Mapping250K_Sty
+
+_valgrind_500k: ${apt_geno_qc_exe}
+	-rm -rf test-generated/doGenoQCTest500k
+	${valgrind_exe} -v --tool=memcheck --leak-check=full --show-reachable=yes --num-callers=32 \
+	${apt_geno_qc_exe} \
+	 --dm-out test-generated/doGenoQCTest500k \
+	 --cdf-file ${data_dir}/lib/Mapping250K_Sty/Mapping250K_Sty.cdf \
+	 --qca-file ${data_dir}/lib/Mapping250K_Sty/Mapping250K_Sty.qca \
+	 --qcc-file ${data_dir}/lib/Mapping250K_Sty/Mapping250K_Sty.qcc \
+	 --out-file ${out_file} \
+	 ${cel_dir}/NA06985_B01_Sty_Plate1.CEL \
+	 ${cel_dir}/NA06991_B03_Sty_Plate1.CEL \
+	 ${cel_dir}/NA06993_B02_Sty_Plate1.CEL \
+	 ${cel_dir}/NA06994_A11_Sty_Plate1.CEL \
+	 ${cel_dir}/NA07000_A10_Sty_Plate1.CEL
+
+_test_temp_dir: ${apt_geno_qc_exe}
+	-rm -rf test-generated/doGenoQCTest500k
+	${apt_geno_qc_exe} \
+	 --dm-out test-generated/doGenoQCTest500k \
+	 --cdf-file ${data_dir}/lib/Mapping250K_Sty/Mapping250K_Sty.cdf \
+	 --qca-file ${data_dir}/lib/Mapping250K_Sty/Mapping250K_Sty.qca \
+	 --qcc-file ${data_dir}/lib/Mapping250K_Sty/Mapping250K_Sty.qcc \
+	 --out-file ${out_file} \
+	 ${cel_dir}/NA06985_B01_Sty_Plate1.CEL \
+	 ${cel_dir}/NA06991_B03_Sty_Plate1.CEL \
+	 ${cel_dir}/NA06993_B02_Sty_Plate1.CEL \
+	 ${cel_dir}/NA06994_A11_Sty_Plate1.CEL \
+	 ${cel_dir}/NA07000_A10_Sty_Plate1.CEL

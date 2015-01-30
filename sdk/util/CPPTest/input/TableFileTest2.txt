@@ -1,0 +1,7 @@
+#%this=header
+#%for=some
+#%stuff=cool
+colName1	colName2	colName3	colName2
+row1	4.1	1	1.0	1.1
+row2	4.2	2	2.0	2.1
+row4	4.2	3	3.0	3.1

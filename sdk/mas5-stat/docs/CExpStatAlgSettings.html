@@ -1,0 +1,115 @@
+<html><head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<title>MAS5 Statistical Algorithm SDK</title>
+<LINK href="style.css" type=text/css rel=stylesheet>
+</head>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#EE0000" ALINK="#808080" VLINK="#808080">
+<span class="content">
+<P>
+<span class="header2">CExpStatAlgSettings</span><P>
+This class provides storage for the algorithm parameters.<P>
+<span class="header3">Enumerants</span><blockquote>
+	NormalizationOptionsEnum - Defines the type of normalization to perform.<blockquote>
+		NORM_TO_ALL_PROBE_SETS - Normalize to all probe sets on the array.<br>NORM_TO_SELECTED_PROBE_SETS - Normalize to a select set of probe sets.<br>DEFINED_NORMALIZATION_FACTOR - Use a defined normalization factor.</blockquote>
+	ScalingOptionsEnum - Defines the scaling to perform.<blockquote>
+		SCALE_TO_ALL_PROBE_SETS - Scale to all probe sets on the array.<br>SCALE_TO_SELECTED_PROBE_SETS - Scale to a select set of probe sets.<br>DEFINED_SCALING_FACTOR - Scale to a defined scaling factor.</blockquote>
+</blockquote>
+<P>
+<span class="header3">Properties</span><blockquote>
+	NormalizationOptionsEnum NormMethod - Indicates which normalization method to use.<p>ScalingOptionsEnum SFMethod 
+	- Indicates which scaling method to use.</p>
+	list&lt;string&gt; ScaleGenes - The list of probe sets to use when scaling. This is used 
+		when the SFMethod is set to SCALE_TO_SELECTED_PROBE_SETS.<p>list&lt;string&gt; NormGenes 
+	- The list of probe sets to use when normalizing. This is 
+		used when the NormMethod is set to NORM_TO_SELECTED_PROBE_SETS.</p>
+	float NumberHorZones - The number of horizontal zones to use for calculating 
+		the background.<p>float NumberVertZones - The number of vertical zones to use for calculating the 
+		background.</p>
+	float NumberBGCells - The percentage of features in each zone to use for 
+		calculating the background.<p>float NormFactor - The multiplier used to adjust the signal values for a 
+		comparison analysis.</p>
+	float ScaleFactor - The multiplier used to adjust the signal value.<p>float TGT 
+	- The target signal value used for scaling.</p>
+	float&nbsp; IntensityLowPercent - The percentage of features (low intensity features) to 
+		exclude of those being used in the background calculation. 
+	<p>float IntensityHighPercent - The percentage of features (high intensity features) to 
+		exclude of those being used in the background calculation.</p>
+	float Alpha1 - Significance level used to define 
+		a p-value cutoff for present detection calls.<p>float Alpha2 - Significance level used to define 
+		a p-value cutoff for absent detection calls.</p>
+	float Tau - A small positive number that can be adjusted to increase 
+		of decrease sensitivity and/or specificity of the analysis.<p>float SaturatedIntensity 
+	- An intensity cutoff to determine 
+		the saturation point of the acquisition system (change calls). </p>
+	float Epsilon - Tuning constant to avoid divide by 
+		zero in background preprocessing.
+	<p>float ContrastTau - The tau value for the construction 
+		of ideal mismatches (see SADD). Used when the ideal MM approaches the 
+		value of the PM.</p>
+	float TuningConstantCSB - The tuning constant for the Tukey 
+		Biweight rejection of outliers in computing Specific Background. Usually 
+		set to the standard value of 5 (5*MAD).
+	<p>float TuningConstantCAvgLogInten - The tuning constant for the Tukey 
+		Biweight rejection of outliers when computing Signal. </p>
+	float TuningConstantCAvgLogRatio - The tuning constant for the Tukey 
+		biweight rejection of outliers when computing Signal Log Ratio.
+	<p>float TuningConstantCGammas - Tuning constant for Tukey biweight 
+		used in computing background for change calls. </p>
+	float EpsilonSB - Constant used to division by zero 
+		variance when computing Specific Background.
+	<p>float EpsilonAvgLogInten - Constant used to avoid division by 
+		zero variance values when computing Signal. </p>
+	float EpsilonAvgLogRatio - Constant used to avoid division by 
+		zero variance when computing Signal-Log-Ratio.
+	<p>float EpsilonGammas - Constant used to avoid dividing by 
+		zero variances when computing change calls </p>
+	float SmoothFactorBG - Controls the smoothness of 
+		interpolation between zones for Background.
+	<p>float NoiseFrac - Controls preprocessing Background 
+		subtraction (how close to zero to approach). </p>
+	float ScaleTau - Controls the rate of approach of 
+		the ideal MM to PM. See formula in SADD.
+	<p>float Delta - Smallest change in values allowed 
+		(Specific Background) between ideal MM and PM. </p>
+	float Gamma1H - Significance level used to define 
+		a &quot;Changed&quot; p-value cutoff for change calls for high-range intensities.
+	<p>float Gamma1L - Significance level used to define a &quot;Changed&quot; 
+p-value cutoff for change calls for low intensities. </p>
+	float Gamma2H - Significance level used to define a &quot;Marginal&quot; 
+p-value cutoff for change calls for high intensities.
+	<p>float Gamma2L - Significance level used to define a &quot;Marginal&quot; 
+p-value cutoff for change calls for low intensities. </p>
+	float Perturbation - The range by which the 
+		normalization factor is adjusted up or down for change calls.
+	<p>float CMultiplier - This value scales PM-B values used 
+		in change calls to be comparable in magnitude to PM-MM values. </p>
+	float BHCoef - High intensity for change call 
+		gamma interpolation is defined to be BHCoef * trimmed mean of PM on the 
+		chip(s).
+	<p>float BLCoef - Low intensity for change call 
+		gamma interpolation is defined to be BLCoef * trimmed mean of PM on the 
+		chip(s) </p>
+	float BiasCorrect - Multiplies the log signal by 
+		(1+BiasCorrect) to correct the log-log slope of signal-concentration 
+		towards 1.0.
+	<p>float RelConfInterval - The desired coverage of the 
+		confidence interval for Signal Log Ratio. </p>
+	float STP - The number of standard deviations away from the mean 
+		intensity difference. This value is used when computing the 
+		normalization factor.</blockquote>
+<P>
+<P>
+<span class="header3">Methods</span><blockquote>
+	<P>None</blockquote>
+<P>
+<span class="header3">Constructor/Destructor</span><blockquote>
+	<P>CExpStatAlgSettings() - Sets the properties of the class to a default set of 
+		values.</blockquote>
+<P>
+
+
+
+
+
+</body>
+</html>

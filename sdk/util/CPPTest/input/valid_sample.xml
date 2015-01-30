@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<ParameterFile company="Affymetrix, Inc." userName="default" contentVersion="3.1.1" guid="7A573B45-BAED-4931-9BE5-6A845F9BA670">
+  <Implementation name="single_sample" version="1.0" description="Single Sample Analysis">
+    <ArrayType name="Cytogenetics_Array" displayname="Cytogenetics Array" version="1.0.0" description="Cytogenetics Whole Genome 2.7M Array" />
+    <Algorithm name="cn_loh_singlesample" displayname="ChAS Single Sample Analysis" executablename="[currently not used]" version="ChAS - Analysis Manager v1.1" description=""></Algorithm>
+  </Implementation>
+  <Parameter name="verbose" displayName="verbose" category="[internal-use-only]" isEditable="false" type="Int32" currentValue="1" minValue="0" maxValue="10" defaultValue="1" precision="0" maxLength="0" description="" index="-1">
+    <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+  <Parameter name="chrX-probes" displayName="chrX-probes" category="[internal-use-only]" isEditable="false" type="String8" currentValue="../../../regression-data/data/lib/Cytogenetics_Array/NA30.2/Cytogenetics_Array.chrXprobes" minValue="0" maxValue="0" defaultValue="Cytogenetics_Array.chrXprobes" precision="0" maxLength="0" description="" index="-1">
+    <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+  <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/Cancer07002728_F_01_Cyto_SN_20090115.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+      <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+  <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/Cancer07014885_F_01_Cyto_SN_20090115.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+      <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+ <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/Cancer07015875_F_01_Cyto_SN_20090115.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+       <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+  <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/Cancer07017424_F_01_Cyto_SN_20090115.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+        <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+  <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/Cancer07017684_F_01_Cyto_SN_20090115.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+        <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+ </Parameter>
+  <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/Cancer08000082_F_01_Cyto_SN_20090115.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+        <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+ <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/CancerA37922_F_01_Cyto_SN_20090116.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+        <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+  <Parameter name="cels" displayName="cels" category="[internal-use-only-runtime]" isEditable="false" type="String8" currentValue="../../../regression-data/data/cel/Cytogenetics_Array/cancer/CancerA37923_F_01_Cyto_SN_20090116.CEL" minValue="0" maxValue="0" defaultValue="" precision="0" maxLength="0" description="" index="-1">
+          <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+   </Parameter>
+  <Parameter name="chrY-probes" displayName="chrY-probes" category="[internal-use-only]" isEditable="false" type="String8" currentValue="../../../regression-data/data/lib/Cytogenetics_Array/NA30.2//Cytogenetics_Array.v2.chrYprobes" minValue="0" maxValue="0" defaultValue="Cytogenetics_Array.v2.chrYprobes" precision="0" maxLength="0" description="" index="-1">
+    <MetaData lastChangedOn="0001-01-01T00:00:00" isReadOnly="true" />
+  </Parameter>
+  <Parameter name="male-gender-ratio-cutoff" displayName="Male Gender Ratio Cutoff" category="internal-use-only:APT error check gender call" isEditable="false" type="Float" currentValue="1.3" minValue="0" maxValue="3" defaultValue="1.3" precision="6" maxLength="0" description="" index="-1">
+  </Parameter>
+  <Parameter name="female-gender-ratio-cutoff" displayName="Female Gender Ratio Cutoff" category="internal-use-only:APT error check gender call" isEditable="false" type="Float" currentValue="1.0" minValue="0" maxValue="3" defaultValue="1.0" precision="6" maxLength="0" description="" index="-1">
+  </Parameter>
+</ParameterFile>

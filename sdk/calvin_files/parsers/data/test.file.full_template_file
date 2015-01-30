@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ArrayFile SYSTEM "Array.dtd">
+<ArrayFile ID="file-id" Type="affymetrix-calvin-template" Version="1">
+    <PhysicalArrays>
+        <PhysicalArray ID="array1-id">
+            <Attribute Name="array-att-name-1" Value="array-att-value-1"/>
+            <Attribute Name="array-att-name-2" Value="array-att-value-2"/>
+        </PhysicalArray>
+    </PhysicalArrays>
+    <UserAttributes>
+        <Attribute Name="user-att-name-1" Value="user-att-value-1"/>
+        <Attribute Name="user-att-name-2" Value="user-att-value-2"/>
+        <Attribute Name="user-att-name-3" Value="user-att-value-3">
+            <Control Value="control1"/>
+            <Control Value="control2"/>
+        </Attribute>
+    </UserAttributes>
+</ArrayFile>

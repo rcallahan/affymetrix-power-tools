@@ -1,0 +1,4 @@
+# testing
+data/1-002_JH_20080522_HapMapSampleRun_09.dummy.CHP
+data/1-003_JH_20080522_HapMapSampleRun_21.dummy.CHP
+data/1-004_JH_20080522_HapMapSampleRun_33.dummy.CHP

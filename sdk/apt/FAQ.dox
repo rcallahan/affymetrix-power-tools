@@ -1,0 +1,82 @@
+/**
+
+\page FAQ FAQ
+
+Additional FAQ items specific to particular programs or applications are listed in 
+program manuals and application vignettes.
+
+Q. Does APT support 32 bit platforms?
+
+A. As of version 1.14.3, we have moved the primary platform for the released binary and library files from 32 to 64 bit. 
+All compiled binaries and libraries provided are for 64-bit platforms.  However, the APT source code package and the source code included in the 
+Fusion SDK can be used to build 32-bit versions of the binaries and libraries.  We will continue to provide support for 32 bit platforms with this release. 
+APT 1.14.3 has been compiled and tested on both Windows 7 Pro 64 bit and 32 bit releases.  For large data sets and for certain chip designs we recommend
+using a 64 bit platform.  Analysis of CytoScan HD array, for example, is not supported on 32 bit platforms due to memory constraints.
+
+Q. What compute platforms are supported by APT?
+
+A. See the <a href="PLATFORMS.html">Platforms</a> page for more information.
+
+Q. Is source code available?
+
+A. Yes. Source code for APT is available under the GPL (version 2).
+   A commercial override is also available via devnet@affymetrix.com.
+   See the <a href="LICENSE.html">License</a> page for more information.
+
+Q. Can APT handle Unicode paths and file names?
+
+A. Unicode file and path names are not supported at this time.
+
+Q. Why do wild cards do not work on windows? For example:
+\verbatim
+    apt-cel-transformer ... *.CEL
+\endverbatim
+
+A. APT relies on the command shell to do the wild card expansion (e.g. bash shell on 
+   *NIX systems). The windows shell does not support wild card expansion, so there is no 
+   wild card expansion for APT when run from the windows shell. You may want to try 
+   a different windows shell or perhaps bash via cygwin.
+
+<a name="probe_id_faq">
+Q. What are Probe IDs?
+
+A. Probe IDs (also called probe indexes) are the same 1 based indexes as used in the Bioconductor affy package.  
+   This is equivalent to the FusionCELData::XYToIndex() function result with 1 added to each index. The XYToIndex() 
+   function calculates the index as (y*c) + x where y is the y coordinate of a probe, x is the x coordinate of the 
+   probe on the array and c is the number of columns on the array. For example to get the correct index for a 
+   SNP6 chip (2572 rows and 2680 cols) the index for probe at position x=1000, y=500 is 
+   1 + (500 * 2680 + 1000) = 1341001.
+
+   So Computing Probe ID from X/Y:
+\verbatim
+        probe_id = y * num_cols + x + 1
+\endverbatim
+
+   and X/Y from Probe ID:
+\verbatim
+        x = (probe_id - 1) % num_cols
+        y = floor( (probe_id - 1) / num_cols )   // floor == round down
+\endverbatim
+
+   where:
+\verbatim
+        x = the x (horizontal) coordinate of the probe in the CEL file. 0 based.
+        y = the y (vertical) coordinate of the probe in the CEL file. 0 based.
+        num_cols = the number of columns (width) in the CEL file
+        probe_id = 1-based probe ID
+\endverbatim
+   
+   For developers, most of the internal code uses base 0. IE a probe ID or index in the software APIs is the
+   same as the value above minus 1. Internal the value '-1' is used to represent the 'null probe' which 
+   indicates no probe for that place. Examples of the null probe usage include a probeset with only MM 
+   probes or where only certain PM probes have matching MM probes.
+
+<a name="old_kernel_faq">
+Q. Why are my APT executables crashing with the message "set_thread_area failed"?
+
+A. Your machine has a very old kernel. The APT programs
+provided by Affymetrix are for generally newer (2.6)
+kernels.  See the <a href="PLATFORMS.html">Platforms</a> page.
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

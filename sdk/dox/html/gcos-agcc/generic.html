@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+				<h1>Affymetrix® GeneChip Command Console Generic Data File Format</h1>
+
+				<h2>COMMAND CONSOLE GENERIC DATA FILE</h2>
+	
+
+				<p><b>Description</b></p>
+				<p>The Command Console generic data file format is a file format developed by Affymetrix for storing a variety of Affymetrix data and results including scanner acquisition data and intensity and probe array analysis results. Unlike previous Affymetrix files which stores only one type of information, this file is designed to store multiple data types where the contents of the file are self describing within its header.</p>
+
+<p>This format was also developed to support localization. Strings stored within the file are stored as 2 byte UNICODE characters.</p>
+
+<p>Another design criteria with the file is to be able to uniquely identify a file and its parentage independent of the file name. This was accomplished by the use of unique identifiers that are part of the file header.</p>
+
+<p><b>Format</b></p>
+<p>The format of the file is a binary file with data stored in network byte order (big-endian format). The file is divided into "<a href="#FILE_HEADER">file header</a>", "<a href="#GENERIC_DATA_HEADER">generic data header</a>" and "<a href="#GROUP">data</a>" sections. Each section is described below.</p>
+
+<p>The order of the sections are described as:</p>
+		
+
+    <p class="indent">File Header</p>
+
+    <p class="indent">Generic Data Header (for the file)</p>
+
+        <p class="indent_2">Generic Data Header (for the files 1<sup>st</sup> parent)</p>
+
+            <p class="indent_3">Generic Data Header (for the files 1<sup>st</sup> parents 1<sup>st</sup> parent)<br />
+
+            Generic Data Header (for the files 1<sup>st</sup> parents 2<sup>nd</sup> parent)<br />
+
+            ...<br />
+
+            Generic Data Header (for the files 1<sup>st</sup> parents M<sup>th</sup> parent)<br />
+
+            (<i>assuming there are M parents for the files 1<sup>st</sup> parent</i>)</p>
+
+        <p class="indent_2">Generic Data Header (for the files 2<sup>nd</sup> parent)<br />
+
+        ...<br />
+
+        Generic Data Header (for the files N<sup>th</sup> parent)<br />
+
+        (<i>assuming the file was created from N parent files</i>)</p>
+
+    <p class="indent">Data Group #1
+
+        <p class="indent_2">Data Set #1
+
+            <p class="indent_3">Parameters<br />
+
+            Column definitions<br />
+
+            Matrix of data</p>
+
+        <p class="indent_2">Data Set #2<br />
+
+        ...<br />
+
+        Data Set #L<br />
+
+        (<i>assuming there are L data sets in the group</i>)</p>
+
+    <p class="indent">Data Group #2<br />
+
+    ...<br />
+
+    Data Group #K<br />
+
+    (<i>assuming there are K groups in the file</i>)</p>
+
+<p><b>Data Types</b></p>
+<p>The following table defines the data types used in the file format description below.</p>
+
+<table>
+			<tbody><tr>
+				<th><b>Type</b></th>
+				<th><b>Description</b></th>
+			</tr>
+			<tr>
+					<td>BYTE</td>
+					<td>8 bit signed integral number</td>
+			</tr>
+			<tr>
+					<td>UBYTE</td>
+					<td>8 bit unsigned integral number</td>
+			</tr>
+			<tr>
+					<td>SHORT</td>
+					<td>16 bit signed integral number</td>
+			</tr>
+			<tr>
+					<td>USHORT</td>
+					<td>16 bit unsigned integral number</td>
+			</tr>
+			<tr>
+					<td>INT</td>
+					<td>32 bit signed integral number</td>
+			</tr>
+			<tr>
+					<td>UINT</td>
+					<td>32 bit unsigned integral number</td>
+			</tr>
+			<tr>
+					<td>FLOAT</td>
+					<td>32 bit signed floating point number</td>
+			</tr>
+			<tr>
+					<td>DOUBLE</td>
+					<td>64 bit signed floating point number</td>
+			</tr>
+			<tr>
+					<td>GUID</td>
+					<td>STRING (see below)</td>
+			</tr>
+			<tr>
+					<td>[ ]</td>
+					<td>Indicates array of data</td>
+			</tr>
+			<tr>
+					<td>DATETIME</td>
+					<td>ISO 8601 date time in WSTRING format based on Universal Time 
+					Clock UTC (UTC is also known as GMT, or Greenwich Mean Time)
+					<br>E.g. "2005-11-23T13:45:53Z"</td>
+			</tr>
+			<tr>
+					<td>LOCALE</td>
+					<td>ISO 639 (two-character code) and ISO 3166 (two-character 
+					code).&nbsp; Use only the language part of the 
+					specification.</td>
+			</tr>
+			<tr>
+					<td>PARAMETER</td>
+					<td>BYTE (value type) / INT (size) / value object (depending on 
+			the data type and size).</td>
+			</tr>
+			<tr>
+					<td>STRING</td>
+					<td>A 1 byte character string. A string object is stored as an INT (to store 
+				the string length) followed by the CHAR array (to store the string 
+				contents).</td>
+				</tr>
+			<tr>
+					<td>WSTRING</td>
+					<td>A UNICODE string. A string object is stored as an INT (to store 
+				the string length) followed by the WCHAR array (to store the string 
+				contents).</td>
+			</tr>
+			<tr>
+					<td>WCHAR</td>
+					<td>2 byte character.</td>
+			</tr>
+			<tr>
+				<td>CHAR</td>
+				<td>1 byte character.</td>
+			</tr>
+			<tr>
+					<td>CONTROLLEDLIST</td>
+					<td>An array of WSTRING's.</td>
+			</tr>
+			<tr>
+					<td>TYPE</td>
+					<td>A MIME type stored in a WSTRING.<p>The possible MIME 
+					types used are:</p>
+					<ul>
+						<li>text/x-calvin-integer-8</li>
+						<li>text/x-calvin-unsigned-integer-8</li>
+						<li>text/x-calvin-integer-16</li>
+						<li>text/x-calvin-unsigned-integer-16</li>
+						<li>text/x-calvin-integer-32</li>
+						<li>text/x-calvin-unsigned-integer-32</li>
+						<li>text/x-calvin-float</li>
+						<li>text/plain</li>
+					</ul>
+					</td>
+			</tr>
+			<tr>
+					<td>VALUE</td>
+					<td>A MIME encoded strings stored in a STRING.</td>
+			</tr>
+			<tr>
+					<td>ROW</td>
+					<td>An array of data type values that make up a data set 
+					row.&nbsp; The data types in a row is defined in the data 
+					set header.</td>
+			</tr>
+		</tbody></table>
+		
+		<p><b>Value Types</b></p>
+<p>The following table defines the numeric values for the value types. The value type is used to representing the type of value stored in the file.</p>
+		<table>
+			<tbody><tr>
+				<th><b>Value</b></th>
+				<th><b>Type</b></th>
+			</tr>
+			<tr>
+				<td>0</td>
+				<td width="95">BYTE</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td width="95">UBYTE</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td width="95">SHORT</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td width="95">USHORT</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td width="95">INT</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td width="95">UINT</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td width="95">FLOAT</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td width="95">STRING</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td width="95">WSTRING</td>
+			</tr>
+		</tbody></table>
+		
+		<p><b><a NAME="FILE_HEADER">File Header</a></b></p>
+<p>The file header section is the first section of the file. This section is used to identify the type of file (i.e. Command Console data file), its version number (for the file format) and the number of data <a href="#GROUP">groups</a> stored within the file. Information about the contents of the file such as the data type identifier, the parameters used to create the file and its parentage is stored within the <a href="#GENERIC_DATA_HEADER">generic data header</a> section.</p>
+
+<table>
+			<tbody><tr>
+				<th><b>Item</b></th>
+				<th><b>Description</b></th>
+				<th><b>Type</b></th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Magic number. A value to identify that this is a Command 
+				Console data 
+				file. The value will be fixed to 59.</td>
+				<td>UBYTE</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>The version number of the file. This is the version of the 
+				file format. It is currently fixed to 1.</td>
+				<td>UBYTE</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>The number of data groups.</td>
+				<td>INT</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>File position of the first data <a href="#GROUP">group</a>.</td>
+				<td>UINT</td>
+			</tr>
+			</tbody></table>
+			
+			<p>Following this section in the file is the generic data header section.</p>
+
+<p><b><a name="GENERIC_DATA_HEADER">Generic Data Header</a></b></p>
+<p>This section stores the file and file type identifiers, data to describe the contents of the file, parameters on how it was created and information about its parentage. This section contains a circular dependency so as to traverse across the entire parentage of a file. This information will provide the entire history of how a file came to be.</p>
+
+<p>The first data header section immediately follows the <a href="#FILE_HEADER">file header</a> section.</p>
+
+<table>
+			<tbody><tr>
+				<th><b>Item</b></th>
+				<th><b>Description</b></th>
+				<th><b>Type</b></th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>The data type identifier. This is used to identify the type of data 
+		stored in the file. For example:<ul>
+					<li>acquisition data (affymetrix-calvin-scan-acquisition)</li>
+					<li>intensity data (affymetrix-calvin-intensity)</li>
+					<li>expression results&nbsp; generated by MAS5 (affymetrix-probeset-analysis)</li>
+					<li>expression results generated by RMA or PLIER (affymetrix-quantification-analysis)</li>
+					<li>expression results generated by RMA or PLIER with DABG (affymetrix-quantification-detection-analysis)</li>
+					<li>genotyping, copy number, copy number variation, DMET results (affymetrix-multi-data-type-analysis)<br></li>
+				</ul>
+				</td><td>STRING</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Unique file identifier. This is the identifier to use to 
+				link the file with parent files. This identifier will be updated whenever 
+				the contents of the file change.<p>Example: When a&nbsp; user 
+				manually aligns the grid in a DAT file the grid coordinates are 
+				updated in the DAT file and the file is given a new file 
+				identifier.</p></td>
+				<td>GUID</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Date and time of file creation.</td>
+				<td>DATETIME</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>The locale of the operating system that the file was created 
+				on.</td>
+				<td>LOCALE</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>The number of name/type/value parameters.</td>
+				<td>INT</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>Array of parameters stored as name/value/type triplets.</td>
+				<td>(WSTRING / VALUE / TYPE ) [ ] <br>
+			</td></tr><tr>
+				<td>7</td>
+				<td>Number of parent file headers.</td>
+				<td>INT</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>Array of parent file headers.</td>
+				<td>Generic Data Header [ ]</td>
+			</tr>
+		</tbody></table>
+		
+		<p><b><a name="GROUP">Data Group</a></b></p>
+<p>This section describes the data group. A data group is a group of data sets. The file supports one or more data groups in a file. </p>
+<table>
+		<tbody><tr>
+			<th><b>Item</b></th>
+			<th><b>Description</b></th>
+			<th><b>Type</b></th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>File position of the next data group. When this is the last data group 
+	in the file, the value should be 0.</td>
+			<td>UINT</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>File position of the first data set within the data group.</td>
+			<td>UINT</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>The number of data sets within the data group.</td>
+			<td>INT</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>The data group name.</td>
+			<td>WSTRING</td>
+		</tr>
+		</tbody></table>
+		
+		<p><b>Data Set</b></p>
+<p>This section describes the data for a single data set item (probe set, sequence, allele, etc.). The file supports one or more data sets within a data group.</p>
+		<table>
+		<tbody><tr>
+			<th><b>Item</b></th>
+			<th><b>Description</b></th>
+			<th><b>Type</b></th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>The file position of the first data element in the data set. This is 
+		the first byte after the data set header.</td>
+			<td>UINT</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>The file position of the next data set within the data group. When 
+		this is the last data set in the data group the value shall be 1 byte 
+		past the end of the data set. This way the size of the data set may be 
+		determined.</td>
+			<td>UINT</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>The data set name.</td>
+			<td>WSTRING</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>The number of name/value/type parameters.</td>
+			<td>INT</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Array of name/value/type parameters.</td>
+			<td>(WSTRING / VALUE / TYPE) [ ]</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>Number of columns in the data set.<br>
+		Example: For expression arrays, columns may include signal, p-value, 
+		detection call and for genotyping arrays columns may include allele 
+		call, and confidence value. For universal arrays, columns may include 
+		probe set intensities and background.</td>
+			<td>UINT</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>An array of column names, column value types and column type sizes (one per column).<br>
+		The value type shall be represented by the value from the value type 
+		table. The size shall be the size of the type in bytes. For strings, 
+		this value shall be the size of the string in bytes plus 4 bytes for the 
+		string length written before the string in the file.</td>
+			<td>(WSTRING / BYTE / INT) [ ]</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>The number of rows in the data set.</td>
+			<td>UINT</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td>The data set table, consisting of rows of columns (data values). The 
+		specific type and size of each column is described by the data and size 
+		types above.</td>
+		<td>ROW [ ]</td>
+		</tr>
+		</tbody></table>
+		
+		<p><b>Affymetrix GUIDs</b></p>
+<p>Affymetrix GUIDs are universal unique identifiers (UUIDs) used to identify files and retain relationships between files. For example, "lineage GUIDS" are used to establish parent-child relationships between files. "Execution GUIDs" are used to identify CHP files generated during the same analysis run.</p>
+
+<p>To allow flexibity with our software, Affymetrix does not require GUIDs to be compliant with an established format such as RFC 4122. It is the responsility of the users of our software to ensure that UUIDs are unique. </p>
+		
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

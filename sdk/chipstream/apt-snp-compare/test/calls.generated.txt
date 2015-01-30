@@ -1,0 +1,100 @@
+#Calls: -1=NN, 0=AA, 1=AB, 2=BB
+#chiptype=Mapping250K_Sty,program-name=apt-probeset-genotype,program-version=NON-OFFICIAL-RELEASE,alg-name=brlmm,alg-version=1.0,analysis-guid=0000010946-1153256763-2136661825-0958737282-1745714857,exec-guid=0000010946-1153256738-1755517406-2067773122-1291470307,het-mult=1,iterations=0,iter-thresh=0.3,K=4,transform=CCS,prior-weight=40,prior-mincall=2,lowprecision=0,prior-size=10000,chrX-file=data/250k-sty/data/Mapping250K_Sty.chrx,max-score=0.5,dm-thresh=0.17,dm-het-mult=0,feat-effect-file=,target-sketch-file=,qmethod-spec=plier.optmethod=1,prior-file=,chrX-force=0,force=0,analysis=brlmm,cel-count=20,cvs-id=$Id: calls.generated.txt,v 1.1 2006-07-19 21:19:45 pklost Exp $,model-file=,time-str=Tue Jul 18 14:05:38 2006,analysis-text=quant-norm.sketch=50000,pm-only,brlmm.transform=ccs.K=4
+#guid=0000010946-1153257216-1879099670-1471330315-0774808340
+#exec_guid=0000010946-1153256738-1755517406-2067773122-1291470307
+#exec_version=$Id: calls.generated.txt,v 1.1 2006-07-19 21:19:45 pklost Exp $-NON-OFFICIAL-RELEASE
+#create_date=Tue Jul 18 14:05:38 2006
+#cmd=./apt-probeset-genotype --chp-output --table-output --txt-output --chrX-snps data/250k-sty/data/Mapping250K_Sty.chrx -c data/250k-sty/data/Mapping250K_Sty.cdf -o test-generated --cel-files data/250k-sty/data/cel-files.txt 
+#chip_type=Mapping250K_Sty
+#lib_set_name=data/250k-sty/data/Mapping250K_Sty.cdf
+#lib_set_version=data/250k-sty/data/Mapping250K_Sty.cdf
+probeset_id	data/250k-sty/data/NA06985_B01_Sty_Plate1.CEL	data/250k-sty/data/NA06991_B03_Sty_Plate1.CEL	data/250k-sty/data/NA06993_B02_Sty_Plate1.CEL	data/250k-sty/data/NA06994_A11_Sty_Plate1.CEL	data/250k-sty/data/NA07000_A10_Sty_Plate1.CEL	data/250k-sty/data/NA07019_A09_Sty_Plate1.CEL	data/250k-sty/data/NA07022_A08_Sty_Plate1.CEL	data/250k-sty/data/NA07029_A12_Sty_Plate1.CEL	data/250k-sty/data/NA07034_B05_Sty_Plate1.CEL	data/250k-sty/data/NA07048_B06_Sty_Plate1.CEL	data/250k-sty/data/NA07055_B04_Sty_Plate1.CEL	data/250k-sty/data/NA07056_A07_Sty_Plate1.CEL	data/250k-sty/data/NA07345_B10_Sty_Plate1.CEL	data/250k-sty/data/NA07348_B12_Sty_Plate1.CEL	data/250k-sty/data/NA07357_B11_Sty_Plate1.CEL	data/250k-sty/data/NA10846_A06_Sty_Plate1.CEL	data/250k-sty/data/NA10847_A03_Sty_Plate1.CEL	data/250k-sty/data/NA10851_B09_Sty_Plate1.CEL	data/250k-sty/data/NA10854_C09_Sty_Plate1.CEL	data/250k-sty/data/NA10855_C12_Sty_Plate1.CEL
+AFFX-2315060	1	2	2	1	1	1	1	2	1	1	2	2	0	1	1	1	0	1	1	0
+AFFX-2315061	2	1	1	1	1	1	1	0	1	1	2	2	1	0	1	1	1	1	2	1
+AFFX-2315062	1	2	1	0	1	0	1	1	0	1	1	1	2	2	2	0	1	1	0	1
+AFFX-2315057	1	0	0	0	1	2	2	1	0	1	2	1	2	-1	1	1	1	2	1	2
+AFFX-2315058	0	0	1	1	0	0	0	1	0	1	1	1	0	0	0	0	0	0	0	0
+AFFX-2315059	1	1	1	2	1	1	1	2	1	0	0	2	1	1	0	1	1	1	2	1
+AFFX-2315063	1	1	1	1	0	0	0	1	0	0	0	1	1	1	1	0	2	0	1	0
+AFFX-2315064	0	1	2	0	-1	1	1	1	1	1	-1	1	0	0	0	-1	1	0	-1	1
+AFFX-2315065	1	1	1	0	1	0	0	0	0	0	0	1	0	0	1	2	0	1	1	0
+AFFX-2315066	1	1	1	1	-1	1	2	2	0	1	2	1	2	2	1	2	2	1	1	2
+AFFX-2315067	1	1	2	2	1	2	1	2	1	1	2	2	1	1	2	2	1	2	1	1
+AFFX-2315068	0	0	0	0	0	2	1	0	1	0	1	2	0	0	1	0	1	1	2	1
+AFFX-2315069	0	0	0	1	0	1	1	0	1	1	1	0	0	0	1	0	1	0	1	0
+AFFX-2315070	1	0	0	1	2	0	1	1	1	1	1	0	1	1	1	2	0	0	1	1
+AFFX-2315071	0	0	1	1	1	0	1	1	2	1	0	1	1	2	2	1	1	1	2	2
+AFFX-2315072	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+AFFX-2315073	1	1	0	0	1	0	0	1	0	0	1	1	0	1	1	1	0	1	1	1
+AFFX-2315074	2	2	2	1	1	1	2	1	1	2	1	1	1	1	2	2	2	2	2	2
+AFFX-2315075	1	0	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	1
+AFFX-2315076	2	1	1	1	1	0	0	1	2	2	2	0	1	0	1	1	1	2	1	1
+AFFX-2315077	2	2	1	2	1	1	1	1	2	2	2	1	2	1	1	1	1	2	1	2
+AFFX-2315078	1	1	1	1	1	1	0	1	0	1	2	1	1	1	1	1	1	2	1	0
+AFFX-2315079	2	2	2	1	1	1	0	2	0	0	0	2	0	0	0	1	2	0	1	2
+AFFX-2315080	1	0	1	2	1	0	1	1	1	0	0	1	1	0	0	0	0	1	1	2
+AFFX-2315081	1	1	2	0	1	2	2	0	2	2	2	2	1	2	1	2	1	2	0	2
+AFFX-2315082	1	1	2	1	0	1	1	0	2	1	0	1	1	2	1	1	1	2	1	2
+AFFX-2315083	0	1	1	0	2	0	0	1	1	1	1	0	1	0	0	1	1	1	1	1
+AFFX-2315084	1	1	1	1	1	1	0	0	1	0	0	1	0	1	1	0	0	0	1	0
+AFFX-2315085	0	0	0	2	1	0	0	1	1	1	1	0	1	0	1	1	0	2	0	0
+AFFX-2315086	2	1	0	1	0	2	2	1	1	2	2	2	2	2	2	2	2	2	1	1
+AFFX-2315087	0	1	2	1	1	1	2	0	1	2	1	1	2	1	0	1	0	2	1	1
+AFFX-2315088	1	1	0	1	1	1	1	1	1	1	2	2	0	1	0	2	2	1	2	-1
+AFFX-2315089	0	1	2	2	1	1	2	1	1	0	1	0	1	1	1	2	1	1	2	2
+AFFX-2315090	0	1	2	1	2	0	0	1	1	1	0	0	0	1	1	0	1	0	1	2
+AFFX-2315091	1	0	1	1	2	2	1	1	1	2	2	2	2	2	1	1	0	1	1	2
+AFFX-2315092	1	1	1	1	0	1	1	0	1	2	1	2	2	2	1	1	2	0	1	1
+AFFX-2315093	0	0	0	1	0	1	1	0	1	1	0	0	2	1	0	0	0	1	0	0
+AFFX-2315094	1	1	1	2	1	2	1	2	1	2	2	2	0	1	0	1	1	2	2	1
+AFFX-2315095	1	1	0	1	2	0	0	2	2	1	0	0	0	0	0	0	2	0	1	0
+AFFX-2315096	0	1	1	0	1	1	1	1	1	1	0	0	0	1	1	0	1	1	0	0
+AFFX-2315047	1	1	2	2	2	1	1	2	2	2	1	1	2	-1	2	1	1	2	2	1
+AFFX-2315048	2	2	1	1	1	2	2	2	2	2	2	2	1	0	0	2	2	2	2	1
+AFFX-2315049	1	1	2	1	0	1	0	0	2	2	2	1	1	1	0	1	1	1	1	2
+AFFX-2315050	1	1	2	2	1	1	1	2	1	2	1	1	1	1	1	2	2	2	2	2
+AFFX-2315051	2	2	1	2	1	1	2	1	1	1	2	1	1	2	1	2	2	0	1	1
+AFFX-2315052	1	0	0	0	1	1	0	1	1	1	0	2	0	0	0	2	0	1	1	0
+AFFX-2315053	2	2	2	2	2	2	2	2	2	2	2	2	2	2	1	2	2	1	2	2
+AFFX-2315054	1	2	2	2	1	2	2	2	0	0	0	2	0	-1	1	1	0	1	1	1
+AFFX-2315055	1	1	0	0	2	0	0	1	0	0	0	1	1	1	1	0	0	1	1	0
+AFFX-2315056	0	1	2	1	0	2	2	1	0	1	1	1	1	0	1	0	0	1	2	0
+SNP_A-1855402	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-4249904	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-2174835	1	0	1	1	0	0	1	-1	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1880271	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-2313232	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1790918	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1812820	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1825137	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1855057	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1855068	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-4249854	-1	2	-1	1	2	2	1	2	2	2	2	2	2	2	2	1	-1	2	2	2
+SNP_A-4249855	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1855365	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1856257	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1862900	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1894450	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1900543	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1905760	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1907304	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1941504	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	-1	2	2	2
+SNP_A-2069996	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	2	1	0	0	0
+SNP_A-2124936	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-2229904	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-2234886	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-2314375	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1871182	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1796078	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1855691	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1868282	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-1876457	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1891846	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-1931056	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	2	2	2	2
+SNP_A-4259019	1	2	1	1	2	2	-1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-2023829	1	2	1	1	2	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2
+SNP_A-2036140	1	0	1	1	0	0	-1	0	0	0	0	0	0	-1	0	1	1	0	0	0
+SNP_A-2044923	1	0	2	-1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-2050849	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-2052180	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0
+SNP_A-2067333	1	2	1	1	-1	2	1	2	2	2	2	2	2	2	2	1	1	2	2	2

@@ -1,0 +1,7 @@
+IgnoreColumns
+Cyto2.WaveCorrection.X1
+Cyto2.WaveCorrection.X2
+Cyto2.WaveCorrection.X3
+Cyto2.WaveCorrection.X4
+Cyto2.WaveCorrection.X5
+Cyto2.WaveCorrection.X6

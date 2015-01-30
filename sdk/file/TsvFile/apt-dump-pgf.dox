@@ -1,0 +1,29 @@
+/**
+\page apt-dump-pgf MANUAL: apt-dump-pgf (\aptversion)
+
+\p apt-dump-pgf will dump information from a pgf and clf file.
+
+\section QuickStart Quick Start
+To dump information from a pgf file, use:
+
+\verbatim
+apt-dump-pgf -c file.clf -p file.pgf \
+  [--probeset-type=type [--probeset-type=...]]
+
+apt-dump-pgf -c file.clf -p file.pgf \
+  [--probeset-ids=file [--probeset-ids=...]]
+
+apt-dump-pgf -c file.clf -p file.pgf \
+  [--probe-ids=file [--probe-ids=...]]
+\endverbatim
+
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-dump-pgf.help.txt
+
+*/

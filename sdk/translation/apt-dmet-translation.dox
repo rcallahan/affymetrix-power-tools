@@ -1,0 +1,117 @@
+/**
+\page apt-dmet-translation MANUAL: apt-dmet-translation (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#quickstart">Quick Start - getting up and running.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#exampleUsage">Example Usages.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+apt-dmet-translation is a part of the DMET Console software
+responsible for translating CHP file gene experiment data into the
+allele translation lingua franca of biologists. As a convenience this
+tool can be run from the command line independent of the GUI.
+
+<a name="quickstart">
+\section QuickStart Quick Start
+
+The translation tool always requires the following three options.
+
+\verbatim
+Translation Table ("-t" or "--translate-file")
+Annotation File ("-a" or "--annotate-file" )
+CHP file[s] ("-e" or "--experiment-list", "-E" or "--experiment-list-file" )
+\endverbatim
+
+\verbatim
+apt-dmet-translation -a /path/to/DMET_Plus.v1.20110329.dc_annot.csv \
+  -t /path/to/DMET_Plus.v1.20110329.translation \
+  -e /path/to/experiment1.CHP:/path/to/experiment2.CHP
+\endverbatim
+
+OR
+
+\verbatim
+apt-dmet-translation -a /path/to/DMET_Plus.v1.20110329.dc_annot.csv \\
+  -t /path/to/DMET_Plus.v1.20110329.translation \\
+  -E /path/to/experiment-files-CHP.txt
+\endverbatim
+
+WHERE
+
+experiment-files-CHP.txt is a TsvFile with header "chp_files":
+
+\verbatim
+chp_files
+/path/to/experiment1.CHP
+/path/to/experiment2.CHP
+#/path/to/commented/out/experimentN.CHP
+\endverbatim
+
+<a name="options">
+\section options Program Options
+
+<a name="options">
+\subsection manualOptions Options:
+
+\verbinclude apt-dmet-translation.help.txt
+
+<a name="exampleUsage">
+\subsection manualExamples Example Usages:
+
+Override file
+
+\verbatim
+apt-dmet-translation -a /path/to/DMET_Plus.v1.20110329.dc_annot.csv \
+  -t /path/to/DMET_Plus.v1.20110329.translation \
+  -E /path/to/experiment-files-CHP.txt \
+  -n /path/to/report_uncalled.rpt \
+  -o /path/to/output/directory \
+  -b output-basename
+\endverbatim
+
+Sample info
+
+\verbatim
+apt-dmet-translation -a /path/to/DMET_Plus.v1.20110329.dc_annot.csv \
+  -t /path/to/DMET_Plus.v1.20110329.translation \
+  -E /path/to/experiment-files-CHP.txt \
+  -n /path/to/sample-info.txt \
+  -o /path/to/output/directory \
+  -b output-basename
+\endverbatim
+
+Marker list
+
+\verbatim
+apt-dmet-translation -a /path/to/DMET_Plus.v1.20110329.dc_annot.csv \
+  -t /path/to/DMET_Plus.v1.20110329.translation \
+  -E /path/to/experiment-files-CHP.txt \
+  -m /path/to/marker-list-file.txt \
+  -use-first-dup-allele-def true \
+  -o /path/to/output/directory \
+  -b output-basename
+\endverbatim
+
+Phenotype report with marker list
+
+Note: When both a metabolizer-file and marker list are supplied in DMET Console, use-first-dup-allele-def = true.
+
+\verbatim
+apt-dmet-translation -a /path/to/DMET_Plus.v1.20110329.dc_annot.csv \
+  -t /path/to/DMET_Plus.v1.20110329.translation \
+  -metabolizer-file /path/to/DMET_Plus.v1.20110329.translation \
+  -E /path/to/experiment-files-CHP.txt \
+  -m /path/to/marker-list-file.txt \
+  -use-first-dup-allele-def true \
+  -o /path/to/output/directory \
+  -b output-basename
+\endverbatim
+
+*/

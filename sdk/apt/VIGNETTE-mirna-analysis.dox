@@ -1,0 +1,131 @@
+/**
+
+\page VIGNETTE-mirna-analysis VIGNETTES: Use of APT to Analyze miRNA v2 and above Expression Arrays
+
+\date 2011-12-02
+
+\section content Contents
+
+- <a href="#intro">Introduction</a>
+    - <a href="#introFiles">Analysis Library Files</a>
+- <a href="#quickStart">Quick Start for miRNA Arrays</a>
+    - <a href="#quickStartDownload">Download the analysis library files</a>
+    - <a href="#quickStartAnalysis">Use apt-probeset-summarize to compute signal and detection p-values</a>
+- <a href="#otherOptions">Other Command Line Options</a>
+
+<a name="intro">
+\section intro Introduction
+
+You can use the APT program, apt-probeset-summarize, to compute miRNA signal estimates and detection p-values
+from miRNA v2 and above array data.
+
+<a name="introFiles">
+\subsection introFiles Analysis Library Files
+
+To use apt-probeset-summarize to analyze miRNA expression arrays you
+first need to obtain the necessary library files:
+
+- PGF: The Probe Group File indicates which probes are grouped together into a probeset.
+- CLF: The Cel Layout File indicates where the probes are located in the CEL file.
+- BGP: The BackGround Probe file indicates which probes are to be used for computing background.
+- QCC: Quality Control Contents file indicates which probesets should be treated as controls and
+       how they are group together for quality assessment reporting purposes.
+- PS:  The probe set file. This indicates which probe sets of the PGF file to analyze.
+
+Note: Do not use the CDF and QCC file that were distributed with the miRNA QC Tool software. You will not be able to generate detection p-values and the signal estimate
+results will differ, albeit very slightly, as compared to those obtained from within the miRNA QC Tool or within the Expression Console software applications.
+
+<a name="quickStart">
+\section quickStart Quick Start miRNA Array
+
+<a name="quickStartDownload">
+\subsection quickStartDownload Step 1: Download the analysis library files
+
+All of the files needed are in the analysis library file
+package (zip archive file) that can be downloaded from the respective 
+<a href="http://www.affymetrix.com/support/technical/byproduct.affx?product=miRNAGalaxy">array support page</a>. 
+
+NOTE: If you have Expression Console (EC) installed on a Windows system, you can use EC to download the library
+files and then simply copy the library files you need from the EC library file folder.
+
+<a name="quickStartAnalysis">
+\subsection quickStartAnalysis Step 2: Use apt-probeset-summarize to compute signal estimates and detection p-values
+
+You will need to run APT twice, once to obtain the signal estimates and a second time for the detection p-values.
+
+Use the following command, run from the bash *NIX shell, for computing signal estimates:
+\verbatim
+    apt-probeset-summarize \
+        -p miRNA-2_0_v2.pgf \
+        -c miRNA-2_0_v2.clf \
+        -b miRNA-2_0_v2.bgp \
+        -s miRNA-2_0_v2.ps \
+        -a rma-bg,quant-norm.sketch=0.usepm=true.bioc=true,pm-only,med-polish \
+        --qc-probesets miRNA-2_0_v2.qcc \
+		--use-pgf-names true \
+	-o output \
+        *.CEL
+\endverbatim
+
+Use the following command, run from the bash *NIX shell, for computing detection p-values:
+\verbatim
+    apt-probeset-summarize \
+        -p miRNA-2_0_v2.pgf \
+        -c miRNA-2_0_v2.clf \
+        -b miRNA-2_0_v2.bgp \
+        -s miRNA-2_0_v2.ps \
+        -a pm-only,dabg.adjust-dof=1 \
+        --qc-probesets miRNA-2_0_v2.qcc \
+		--use-pgf-names true \
+	-o output \
+        *.CEL
+\endverbatim
+
+Note: You must include the "adjust-dof" parameter set to 1 (the default is 0 which is what is used for exon array analysis). You must also set
+the "use-pgf-names" parameter to true. This will instruct APT to use the probe set names column, versus the probe set id column, for the probe set identifiers in
+the output files.
+
+The commands listed above assume that apt-probeset-summarize is in your PATH.
+
+Note under Windows you need to make a couple changes compared to the *NIX command line. First everything must be on the same line (no "\" continuations). Second, the wild card "*.CEL" will not work. You need to either list every CEL file on the command line or use the --cel-files option. Here is an example using the later:
+\verbatim
+    ./apt-probeset-summarize ... --cel-files celfiles.txt
+\endverbatim
+
+The format of the file specified with the --cel-files option is a tab-separated file with a header line containing "cel_files". For example:
+\verbatim
+cel_files
+heart1.CEL
+heart2.CEL
+heart3.CEL
+brain1.CEL
+brain2.CEL
+brain3.CEL
+\endverbatim
+
+Output files will be generated in the folder specified by the "-o" option. In the above examples the output folder is "output". <b>WARNING:</b> apt-probeset-summarize
+will overwrite previously generated results. With the example commands above, the following output
+files will be created:
+
+- *.summary.txt: This tab separated text file contains a row for each probeset and a row for each chip.
+- *.report.txt: This tab separated test file contains a row for each chip and a column for each quality assessment metric.
+- apt-probeset-summarize.log: This is a log file with various runtime information.
+
+<a name="#otherOptions">
+\section otherOptions Other Command Line Options
+
+apt-probeset-summarize also has a number of other options.
+As you get more comfortable using
+APT, you should take some time to familiarize yourself with these options. Some of the options that you may
+want to use include:
+
+- cc-chp-output: This option enable AGCC CHP output files (in addition to the text summary.txt file). Note that
+                 you cannot use the --xda-chp-output option with miRNA based arrays. This is because some of the
+                 assumptions made in the XDA file format are not valid for these arrays.
+
+See the <a href="apt-probeset-summarize.html">apt-probeset-summarize Manual</a>
+and the online help (run "apt-probeset-summarize -h") for more information.
+
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

@@ -1,0 +1,198 @@
+/**
+
+\page VIGNETTE-snp6-copy-number VIGNETTES: SNP6 Copy Number Workflows
+
+\date 2007-06-27
+
+\section content Contents
+
+- <a href="#workflow1a">Workflow 1a: 1.8M Copy Number Estimates</a>
+- <a href="#workflow1b">Workflow 1b: 2.7M Copy Number Estimates (treat A and B alleles separately)</a>
+- <a href="#workflow2">Workflow 2: Summarization of CN Probes Over Known Copy Number Regions [experimental]</a>
+- <a href="#faq">FAQ - Frequently Asked Questions.</a>
+
+<a name="introCnOld">
+\section introCnOld Introduction
+
+[2008-06-18] This vignette describes a low level workflow for extracting probe level data off of SNP6 with an eye
+toward copynumber analysis. More recently, apt-copynumber-workflow has been released which provides
+a more complete copynumber analysis solution. Most people should probably use apt-copynumber-workflow
+rather than the workflows described here.
+
+<a name="workflow1a">
+\section workflow1a Workflow 1a: 1.8M Copy Number Estimates
+ 
+APT supports output of Copy Number (CN) estimates on a per SNP 
+or per CN probeset basis.  The default analysis recommends 
+quantile normalization (quant-norm) across all chips.
+  
+The default analysis string is 
+\verbatim
+    quant-norm.sketch=50000,pm-sum,med-polish,expr.genotype=true.allele-a=true
+\endverbatim
+
+For SNP 6 CN probesets (which contain a single probe) no further 
+summarization is done after normalization. log2 values are reported.
+    
+For SNPs, in SNP 6 chips SNP probes are spatially arranged 
+in pairs where each A-allele probe is paired with a B-allele 
+probe.  "expr.genotype-true" causes an expression probeset
+to be created using one allele as the PM probes and the other 
+allele as the MM probes. "pm-sum" then causes those values
+to be added and then the log2 of the sums (for all allele probe
+pairs in the same SNP) are median polished to produce a single
+value for the SNP.  For SNPs, there are 2 alleles that each 
+will have identical values (given this analysis string). 
+"expr.allele-a=true" forces output of only the A allele.
+     
+The output file contains log2 transformed signal estimates 
+arranged in a table with SNP probeset names and CN probeset 
+names labeling rows and Chip file names labeling columns.
+
+You can use "apt-probeset-summarize --help" for more information
+on command line arguments and any of the following to get
+more information about the various analysis stream components:
+
+\verbatim
+    apt-probeset-summarize --explain quant-norm
+    apt-probeset-summarize --explain pm-sum
+    apt-probeset-summarize --explain med-polish
+    apt-probeset-summarize --explain expr
+\endverbatim
+      
+This is an example of how to a do CN run using APT:
+   
+\verbatim
+    apt-probeset-summarize \
+        --cdf-file lib_directory_name/GenomeWideSNP_6.cdf \
+        --analysis quant-norm.sketch=50000,pm-sum,med-polish,expr.genotype=true.allele-a=true \
+        --out-dir  output_directory_name \
+        celfile_directory/*.CEL
+\endverbatim
+
+Note that the use of wild cards (*.CEL) is dependent on the 
+shell from which the command is run.  For example, the default
+shell on Windows does not support wild card expansions, so you will
+probably want to use the "--cel-files" option instead.
+
+Also note that the output file will also contain other control probesets 
+(including some control SNPs) that can be removed (in UNIX) using 
+the following commands:
+
+\verbatim
+    grep SNP quant-norm.pm-sum.med-polish.expr.summary.txt | grep -v AFFX > snp-and-cn-only.txt
+    grep CN quant-norm.pm-sum.med-polish.expr.summary.txt >> snp-and-cn-only.txt
+\endverbatim
+
+<a name="workflow1b">
+\section workflow1b Workflow 1b: 2.7M Copy Number Estimates (treat A and B alleles separately)
+                   
+If SNP-A and SNP-B alleles are desired to be summarized separately, 
+use the analysis string: 
+
+\verbatim
+    quant-norm.sketch=50000,pm-only,med-polish,expr.genotype=true
+\endverbatim
+
+to obtain 2 output lines per SNP, with each allele summarized separately.
+There are two changes here. First we drop "allele-a=true" so that there
+will be results for both the A and B allele. Secondly we use "pm-only" rather
+than "pm-sum". In short, we only want values based on the particular allele;
+we do not want to add in the other allele which was converted to a mismatch
+probe.
+                    
+This is an example of how to a do CN run summarizing SNP alleles separately using APT:
+
+\verbatim
+    apt-probeset-summarize \
+        --cdf-file lib_directory_name/GenomeWideSNP_6.cdf \
+        --analysis quant-norm.sketch=50000,pm-only,med-polish,expr.genotype=true \
+        --out-dir  output_directory_name \
+        celfile_directory/*.CEL
+\endverbatim
+
+Note that the use of wildcards (*.CEL) is dependent on the 
+shell from which the command is run.  For example, the default
+shell on Windows does not support wild card expansions, so you will
+probably want to use the "--cel-files" option instead.
+
+The output file will also contain CN probeset names and other control probesets 
+(including some control SNPs) which can be removed (in UNIX) using a command such as:
+                              
+\verbatim
+    grep SNP quant-norm.pm-sum.med-polish.expr.summary.txt | grep -v AFFX > snp-only.txt
+\endverbatim
+
+<a name="workflow2">
+\section workflow2 Workflow 2: Summarization of CN Probes Over Known Copy Number Regions [experimental]
+
+<b>This is an experimental workflow for the analysis of known copy 
+number regions. Do your own due diligence in using this workflow
+and interpreting the results.</b>
+
+APT supports output of Copy Number (CN) estimates for known copy number regions 
+that are specified in a meta-probeset file.  A meta-probeset file allows the
+definition of new probesets (in the probeset_id column of the file) as a group
+of existing probesets (space delimited in the probeset_list column). The 
+meta-probeset file we are supplying in this release contains only CN probes.  
+The default analysis recommends quantile normalization across all chips and 
+med-polish on probes selected as most informative with no background correction.
+
+The CN output file contains log2 transformed signal estimates arranged in a table 
+with CNV regions labeling rows and Chip file names labeling columns.
+
+The default analysis string is 
+\verbatim
+    quant-norm.sketch=50000,pm-only,med-polish,pca-select
+\endverbatim
+
+The pca-select is an Analysis Stream method which does feature selection prior to
+computing the summaries. In short, the first principal component of the quantile 
+normalized probe intensities are used to select out those probes which are near
+the first principal component. Summarization (median polish in this case) is
+applied to only those probes. An extra report files (with pca-select listed
+twice in the name) will be generated indicating which probes were used.
+
+This is an example of how to do a CNV specific run using APT.  
+
+\verbatim
+    apt-probeset-summarize \
+        --cdf-file lib_directory_name/GenomeWideSNP_6.cdf \
+        --analysis quant-norm.sketch=50000,pm-only,med-polish,pca-select \
+        --meta-probesets lib_directory_name/GenomeWideSNP_6.na22.dgv-cnvMay07.mps \
+        --out-dir output_directory_name \
+        celfile_directory/*.CEL
+\endverbatim
+
+The MPS file is available from the SNP6 array support page 
+(http://www.affymetrix.com/support/technical/byproduct.affx?product=genomewidesnp_6);
+
+Note that the use of wildcards (*.CEL) is dependent on the 
+shell from which the command is run.  For example, the default
+shell on Windows does not support wild card expansions, so you will
+probably want to use the "--cel-files" option instead.
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. Are there similar recommendations for snp array 5?
+
+A.  Please note that the copy number workflow for SNP 6.0 in APT is experimental and 
+    unsupported and users need to do their own due-dilligence. Keeping that in mind, 
+    it is possible to leverage the SNP 6.0 copy number APT workflow for SNP 5.0 
+    (experimental and unsupported) with the following caveats:
+
+    -  For SNP 5.0 you will ONLY get the CN probes included if you use the .Full version of the CDF
+    -  Unlike the workflow for SNP 6.0, the .Full CDF for SNP 5.0 represents CN probes as probesets 
+       of all CN probes on the same Nsp restriction fragment, and so while there are ~420K CN probes 
+       the workflow will report ~320K CN probesets (most of which consist of just one probe).
+    -  The way the CN probes are represented in the .Full CDF for SNP 5.0 is considered experimental 
+       and may change to be consistent with SNP 6.0 in future
+
+    Affymetrix has no immediate plans to develop and validate a copy number solution in APT or any 
+    other software for SNP 5.0. If you are interested in copy number analysis software that can be 
+    used for SNP 5.0 arrays, please contact Partek http://www.partek.com/ or the Ogawa group 
+    at Univ of Tokyo working on CNAG http://www.genome.umin.jp/.
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

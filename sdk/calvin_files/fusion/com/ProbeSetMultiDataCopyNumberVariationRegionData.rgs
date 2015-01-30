@@ -1,0 +1,27 @@
+HKCR
+{
+	affx_fusion_com.ProbeSetMultiDataCopy.1 = s 'ProbeSetMultiDataCopyNumberVariationRegionData Class'
+	{
+		CLSID = s '{937A202B-A171-429F-950D-2EF2E0E0F112}'
+	}
+	affx_fusion_com.ProbeSetMultiDataCopyNu = s 'ProbeSetMultiDataCopyNumberVariationRegionData Class'
+	{
+		CLSID = s '{937A202B-A171-429F-950D-2EF2E0E0F112}'
+		CurVer = s 'affx_fusion_com.ProbeSetMultiDataCopy.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {937A202B-A171-429F-950D-2EF2E0E0F112} = s 'ProbeSetMultiDataCopyNumberVariationRegionData Class'
+		{
+			ProgID = s 'affx_fusion_com.ProbeSetMultiDataCopy.1'
+			VersionIndependentProgID = s 'affx_fusion_com.ProbeSetMultiDataCopyNu'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{05760AA6-8312-4AC3-A990-3581F2994BED}'
+		}
+	}
+}

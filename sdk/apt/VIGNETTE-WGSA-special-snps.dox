@@ -1,0 +1,69 @@
+/**
+
+\page VIGNETTE-WGSA-special-snps VIGNETTES: Special Treatment for Sex-Chromosome and Mitochondrial SNPs in the Whole Genome Sampling Assay
+
+\date 2007-11-20
+
+\section content Contents
+
+- <a href="#intro">Introduction</a>
+- <a href="#fileChrX">The chrx file</a>
+- <a href="#fileSpecialSNPs">The specialSNPs file</a>
+
+\section intro Introduction
+
+Most SNPs assayed to-date with the WGSA approach have been autosomal and sample genders have no impact on clustering such SNPs - they are always clustered assuming that the chromosome copy number is always two.  However for sex chromsomes and mitochondrial SNPs this assumption does not hold true and such SNPs should be treated differently.  When the expected chromosomal copy number is one there are only two clusters that one expects to see, and to accommodate this the BRLMM-P algorithm has a haploid mode that can be engaged to enforce appropriate treatment. 
+- <b>Chromosome X SNPs:</b> Since males have only one copy of the X chromosome male samples are clustered together with the haploid (2-cluster) model and female samples are clustered together with the diploid (3-cluster) model.  This treatment applied only to the non-pseudo-autosomal region of chrX, the pseudo-autosomal region is treated just like all the autosomes: all samples are clustered together with the diploid model, regardless of gender.
+- <b>Chromosome Y SNPs:</b> Since males have only one Y chromosome and females have none, male samples are clustered together with the haploid model and female samples are just assigned a no-call, without even looking at any signal intensities.
+- <b>Mitochondrial SNPs:</b> All samples are clustered together with the haploid model, regardless of gender.
+
+The Human Mapping 100K, 500K and Genome Wide SNP 5.0 products all includes both autosomal and chrX SNPs but no chrY or mitochondrial SNPs.  For these designs apt-probeset-genotype enables identification of the chrX SNPs in a chrx file specified with the --chrX-snps option.  See the section below on <a href="#fileChrX">the chrx file</a> for details on the file format, contents and usage.
+
+The Genome Wide SNP 6.0 Array was the first WGSA chip to also include chrY and mitochondrial SNPs.  In order to supply apt-probeset-genotype with the information on SNP types a new specialSNPs file was created, supplied with the --special-snps option.  See the section below on <a href="#fileSpecialSNPs">the specialSNPs file</a> for details on the file format, contents and usage.
+
+If neither the --chrX-snps nor the --special-snps option is supplied to apt-probeset-genotype it will exit with an error - this is to prevent accidentally running while ommitting this information, which would end up treating all SNPs as autosomal.  If however the user does indeed want to treat all SNPs as autosomal and to ignore gender the run can be forced to proceed with the "--no-gender-force" option.
+
+\section fileChrX The chrx file
+
+The chrX file uses the <a href="file-format-tsv.html">TSV</a> format.  It should be tab-delimited text and it should contain a column (which may be the only column) with the heading "all_chrx_no_par".  This column should specify the SNPs that are in the non-pseudo-autosomal region of chromosome X.  As an example, the .chrx file from the Genome Wide SNP 5.0 Array can be found in the library file installation available at the <a href="http://www.affymetrix.com/support/technical/byproduct.affx?product=genomewidesnp_5">product support materials</a> page.  Here is an example usage based on the Genome Wide SNP 5.0 Array:
+
+\verbatim
+apt-probeset-genotype \
+  --cdf-file            lib/GenomeWideSNP_5.cdf \
+  --chrX-snps           lib/GenomeWideSNP_5.chrx \
+  --read-models-brlmmp  lib/GenomeWideSNP_5.models \
+  --analysis            brlmm-p \
+  --out-dir             out \
+  --cel-files           cel.txt
+\endverbatim
+
+\section fileSpecialSNPs The specialSNPs file
+
+The specialSNPs file uses the <a href="file-format-tsv.html">TSV</a> format.  It should be tab-delimited text and it should contain the four columns explained below.  There should be one row for each chromosme X (non-pseudo-autosomal), chromosome Y and mitochondrial SNP.  The four required columns are:
+- <b>probeset_id:</b> The SNP identifier from the CDF file.
+- <b>chr:</b> The classification of the SNP.  Example values (from the Genome Wide SNP 6.0 Array) are:
+  - <b>MT:</b> for Mitochondrial SNPs
+  - <b>PAR:</b> for SNPs on the pseudo-autosomal region of chromosome X.  Such SNPs are treated just like autosomes and in fact can be omitted from the specialSNPs file.  However some users may still wish to list such SNPs in the specialSNPs file, finding it convenient to have all non-autosomal SNP accounted for in one place
+  - <b>X:</b> for SNPs on the non-pseudo-autosomal region of chromosome X
+  - <b>Y:</b> for SNPs on chromosome Y
+- <b>copy_male:</b> The number of chromosomal copies expected in a male sample (1,2,1,1 for MT,PAR,X,Y respectively)
+- <b>copy_female:</b> The number of chromosomal copies expected in a female sample (1,2,2,0 for MT,PAR,X,Y respectively)
+An example of a specialSNPs file is the specialSNPs file for the Genome Wide SNP 6.0 Array, found in the library file installation available at the <a href="http://www.affymetrix.com/support/technical/byproduct.affx?product=genomewidesnp_6">product support materials</a> page.
+
+Here is an example usage based on the Genome Wide SNP 6.0 Array:
+
+\verbatim
+apt-probeset-genotype \
+  --cdf-file             lib/GenomeWideSNP_6.cdf \
+  --special-snps         lib/GenomeWideSNP_6.specialSNPs \
+  --read-models-birdseed lib/GenomeWideSNP_6.birdseed.models \
+  --chrX-probes          lib/GenomeWideSNP_6.chrXprobes \
+  --chrY-probes          lib/GenomeWideSNP_6.chrYprobes \
+  --set-gender-method    cn-probe-chrXY-ratio \
+  --analysis             birdseed \
+  --out-dir              out \
+  --cel-files            cel.txt
+\endverbatim
+
+<b><pre>Affymetrix Power Tools (APT) Release \aptversion</pre></b>
+*/

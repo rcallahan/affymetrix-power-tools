@@ -1,0 +1,20 @@
+; start input properties
+
+LogFile:				"O:/vliber/DesignRequestChecker/4.1/data/period/<SW:ARRAYNAME>/ExpressionDesignRequestChecker_<SW:ARRAYNAME>_<SW:TIMESTAMP>.log"
+ConfigurationFile:			"P:/ProgramRelatedFiles/Expression.ini"
+DesignPath:				"O:/vliber/DesignRequestChecker/4.1/data/period\<SW:ARRAYNAME>/run1/"
+ArrayName:				"test.Period"
+ArrayFormat:				049
+FeatureSize:				11x11
+Forward:				true
+AssayType:				"Eukaryotic antisense RNA"
+DesignsPerMask:				1
+SynthesisSteps:				75
+ProbeSetScoreCutoffUseDefault:		true
+ProbeSetScoreCutoff:			0.0
+StartingUnitProbeInstructions:		1
+StartingUnitProbeSetRequests:		1
+StartingUnitProposal:			1
+ApplyMappingNamingRules:	false
+
+; end input properties

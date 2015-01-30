@@ -1,0 +1,39 @@
+/**
+\page apt-cel-convert MANUAL: apt-cel-convert (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+apt-cel-convert will convert cel files between the following formats:
+
+- text: GCOS Text file format (version 3)
+- xda: GCOS XDA binary file format (version 4)
+- agcc: AGCC binary format
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-cel-convert.help.txt
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. Can apt-cel-convert handle the CCEL and BCEL formats
+   which were in ExACT?
+
+A. No.
+
+*/

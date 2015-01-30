@@ -1,0 +1,36 @@
+#
+# external/APT-README ---
+#
+# $Id: APT-README,v 1.2 2008-08-28 17:38:25 harley Exp $
+#
+
+This describes the contents of "external", where third party
+software is kept.  These sw packages are normaly configured
+and built by the Makefiles under "affy/sdk".
+
+--------------------
+
+HDF5 == http://hdf.ncsa.uiuc.edu/products/hdf5
+
+Used for the File5/A5 file IO.
+
+
+PCRE == http://www.pcre.org/
+
+Perl compatable regular expressions used in various places.
+
+
+NEWMAT == http://www.robertnz.net/nm_intro.htm
+
+A C++ matrix library.  (This is actually in robertnz/newmat,
+but should be relocated here.)
+
+
+XERCES == http://xerces.apache.org/xerces-c/
+
+Used to parse XML documents in DMET.
+
+
+ZLIB == http://www.zlib.net/
+
+Imported for use by the HDF5 library.

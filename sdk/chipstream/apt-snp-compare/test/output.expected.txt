@@ -1,0 +1,7 @@
+Reading file: test/calls.gold.txt
+Reading file: test/calls.generated.txt
+Comparing tables.
+Call rate: 100 For SNPs with known type: 100
+Overall Accuracy: 100
+Het Accuracy: 100
+Hom Accuracy: 100

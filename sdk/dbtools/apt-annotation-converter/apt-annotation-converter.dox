@@ -1,0 +1,37 @@
+/**
+\page apt-annotation-converter MANUAL: apt-annotation-converter (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+The Annotation Converter enables you to create custom SQLite format annotations
+(annot.db) for use in Affymetrix® Genotyping Console software (GTC) and
+Affymetrix Power Tools (APT). You can customize annotations for Affymetrix®
+catalog genotyping arrays or generate annotations Axiom™ custom genotyping
+arrays such as the Affymetrix® myDesign array plates.
+
+The steps to create custom annotations include:
+- Download Affymetrix®-provided annot.csv file(s) from the Affymetrix website for catalog genotyping arrays
+- Download Affymetrix®-provided annot.csv file(s) and the related Annotation Converter library file package from the myDesign webpage at the Affymetrix website
+- Create text file(s) of custom annotations (.csv, .txt, .tsv).
+
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-annotation-converter.help.txt
+
+
+*/

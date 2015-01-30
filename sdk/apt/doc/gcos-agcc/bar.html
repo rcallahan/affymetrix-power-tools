@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+      Affymetrix Developer Network
+    </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="page">
+			<div id="header">
+				<img alt="Affymetrix.com" src="images/header_banner.jpg" />
+			</div>
+			<div id="content">
+				<h1>Affymetrix&#174; BAR Data File Format</h1>
+					<h2>BAR FILE</h2>
+	
+
+						<p><b>Description</b></p>
+						<p>The BAR file contains one and two sample analysis results (signal and p-values) from the tiling array software.</p>
+
+						<p><b>Format</b></p>
+						<p>The format of the BAR file is a binary file with data stored in big-endian format. The format of the file is a header section followed by sequences sections (one section per sequence defined).</p>
+
+						<p><b>Section Definitions</b></p>
+						
+						<p><b>File Header</b></p>
+
+						<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">Magic number. A value to identify the file type. 
+	The value is set to "barr\r\n\032\n”.</td>
+	<td height="14" width="141">char</td><td height="14" width="214">8 bytes</td></tr> <tr> 
+	<td height="14" width="38">2</td> <td height="14" width="70%">The version 
+	number of the file. The version number is either 1.0 or 2.0.</td><td height="14" width="141">
+	float</td><td height="14" width="214">
+	4 bytes</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">Number of 
+	sequences stored in the file. This will be referred to as NSEQ.</td><td height="14" width="141">
+	integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">4</td> <td height="14" width="70%">Number of 
+	columns per data point. This will be referred to as NCOL.</td><td height="14" width="141">
+	integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">5</td> <td height="14" width="70%">The field 
+	types, one per column of data. The possible values are:<blockquote>
+		<p>0 &ndash; Double<br>
+		1 &ndash; Float<br>
+		2 &ndash; 4 byte signed integer<br>
+		3 &ndash; 2 byte signed integer<br>
+		4 &ndash; 1 byte signed integer<br>
+		5 &ndash; 4 byte unsigned integer<br>
+		6 &ndash; 2 byte unsigned integer<br>
+		7 &ndash; 1 byte unsigned integer</p>
+	</blockquote>
+	<p>Currently only types 1 and 2 are used in Affymetrix BAR files.</p></td><td height="14" width="141">
+	integer</td><td height="14" width="214">
+	4*NCOL</td></tr>  
+<tr> <td height="14" width="38">6</td> <td height="14" width="70%">The number of 
+	parameter name/value pairs. The parameter names and values are stored as 
+	strings.<p>Note: Items 7-10 are repeated for each parameter.</p></td><td height="14" width="141">
+	integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">7</td> <td height="14" width="70%">The length of 
+	the parameter name.</td><td height="14" width="141">integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">8</td> <td height="14" width="70%">The parameter 
+	name.</td><td height="14" width="141">char</td><td height="14" width="214">
+	Specified by item #7.</td></tr>  
+<tr> <td height="14" width="38">9</td> <td height="14" width="70%">The length of 
+	the parameter value.</td><td height="14" width="141">integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">10</td> <td height="14" width="70%">The 
+	parameter value.</td><td height="14" width="141">char</td><td height="14" width="214">
+	Specified by item #9.</td></tr>  
+</tbody></table>
+				
+				<p><b>Sequence</b></p>
+				
+				<table> 
+<tbody><tr> <th><b>Item</b></th> <th><b>
+	Description</b></th><th><b>Type</b></th><th>
+	<b>Size</b></th></tr> <tr> <td height="14" width="38">1</td> 
+	<td height="14" width="70%">The length of the sequence name. Referred to as 
+	SEQNAMELEN.</td>
+	<td height="14" width="141">integer</td><td height="14" width="214">4 
+	bytes</td></tr> <tr> <td height="14" width="38">2</td> 
+	<td height="14" width="70%">The sequence name.</td>
+	<td height="14" width="141">char</td><td height="14" width="214">Specified 
+	by item #1</td></tr> 
+<tr> <td height="14" width="38">3</td> <td height="14" width="70%">The length of 
+	the sequence group name. <b>(only for version 2.0 and above files).</b></td><td height="14" width="141">
+	integer</td><td height="14" width="214">4 bytes</td></tr>  
+<tr> <td height="14" width="38">4</td> <td height="14" width="70%">The name of 
+	the group which the sequence is a member (for example, often specifies 
+	organism). <b>(only for version 2.0 and above files).</b></td><td height="14" width="141">
+	char</td><td height="14" width="214">
+	Specified by item #3</td></tr>  
+<tr> <td height="14" width="38">5</td> <td height="14" width="70%">The length of 
+	the sequence version.</td><td height="14" width="141">integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">6</td> <td height="14" width="70%">The sequence 
+	version.</td><td height="14" width="141">char</td><td height="14" width="214">
+	Specified by item #5</td></tr>  
+<tr> <td height="14" width="38">7</td> <td height="14" width="70%">The number of 
+	parameter name/value pairs. <b>(only for version 2.0 and above files).</b><p>
+	Note: Items 8-11 are repeated for each parameter.</p></td><td height="14" width="141">
+	integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">8</td> <td height="14" width="70%">The length of 
+	the parameter name. <b>(only for version 2.0 and above files).</b></td><td height="14" width="141">
+	integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">9</td> <td height="14" width="70%">The name of 
+	the parameter. <b>(only for version 2.0 and above files).</b></td><td height="14" width="141">
+	char</td><td height="14" width="214">
+	Specified by item #8</td></tr>  
+<tr> <td height="14" width="38">10</td> <td height="14" width="70%">The length 
+	of the parameter value. <b>(only for version 2.0 and above files).</b></td><td height="14" width="141">
+	integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">11</td> <td height="14" width="70%">The value of 
+	the parameter.<b> (only for version 2.0 and above files).</b></td><td height="14" width="141">
+	char</td><td height="14" width="214">
+	Specified by item #10</td></tr>  
+<tr> <td height="14" width="38">12</td> <td height="14" width="70%">The number 
+	of data points defined in the sequence. Each data point will contain NCOL 
+	column values.</td><td height="14" width="141">integer</td><td height="14" width="214">
+	4 bytes</td></tr>  
+<tr> <td height="14" width="38">13</td> <td height="14" width="70%">The next set 
+	of values in the file is the data points for the sequence. Each data point 
+	contains NCOL column values. The type, thus the size, of each column is 
+	defined above in the field types section.</td><td height="14" width="141">
+	see description.</td><td height="14" width="214">
+	see description.</td></tr>  
+</tbody></table>
+	
+			</div>
+			<div id="footer">
+				&#169; 2009 Affymetrix, Inc. All rights reserved.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

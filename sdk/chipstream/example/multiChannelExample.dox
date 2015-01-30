@@ -1,0 +1,18 @@
+/**
+\page multiChannelExample MANUAL: multiChannelExample (\aptversion)
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section. 
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude multiChannelExample.help.txt
+
+Q. Do you have a question?
+
+A. No, I do not.
+
+*/

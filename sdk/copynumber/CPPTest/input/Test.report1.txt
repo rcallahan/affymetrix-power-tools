@@ -1,0 +1,76 @@
+#%guid=0000020303-1209500872-0000030413-0000004757-0000024732
+#%affymetrix-algorithm-param-apt-engine=ProbesetGenotypeEngine
+#%affymetrix-algorithm-param-apt-program-name=apt-copynumber-workflow.exe
+#%affymetrix-algorithm-param-apt-command-line=C:\apt_test\apt-copynumber-workflow.exe -v 3 --mem-usage 0 --block-size 2000000 --delete-files false --cnchp-output true --adapter-type-normalization true --reference-output C:\apt_test\BatchTest\test1\test\CNReference.a5 --normalization-type 1 --set-analysis-name Test --probeset-ids C:\apt_test\GenomeWideSNP_6.probeset-ids.txt --cdf-file C:\apt_test\GenomeWideSNP_6.cdf --qca-file C:\apt_test\GenomeWideSNP_6.qca --qcc-file C:\apt_test\GenomeWideSNP_6.qcc --chrX-probes C:\apt_test\GenomeWideSNP_6.chrXprobes --chrY-probes C:\apt_test\GenomeWideSNP_6.chrYprobes --special-snps C:\apt_test\GenomeWideSNP_6.specialsnps --netaffx-snp-annotation-file C:\apt_test\GenomeWideSNP_6.na23.annot.csv --netaffx-cn-annotation-file C:\apt_test\GenomeWideSNP_6.cn.na23.annot.csv -o C:\apt_test\BatchTest\test1\test\ C:\apt_test\cels\NA06985_GW6_C.CEL c:\apt_test\cels\NA06991_GW6_C.CEL C:\apt_test\cels\NA06993_GW6_C.CEL C:\apt_test\cels\NA06994_GW6_C.CEL C:\apt_test\cels\NA07000_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-exec-guid=0000065503-1209500286-0000011097-0000022022-0000028163
+#%affymetrix-algorithm-param-apt-analysis-guid=0000065391-1209500444-0000022392-0000017477-0000031254
+#%affymetrix-algorithm-param-apt-time-str=Tue Apr 29 13:18:06 2008
+#%affymetrix-algorithm-param-apt-version=NON-OFFICIAL-RELEASE
+#%affymetrix-algorithm-param-apt-cvs-id=$Id: Test.report1.txt,v 1.2 2008-06-17 22:02:56 wshort Exp $
+#%affymetrix-algorithm-param-apt-free-mem=10284573081
+#%affymetrix-algorithm-param-apt-opt-chip-type=GenomeWideSNP_6
+#%affymetrix-algorithm-param-apt-opt-probe-count=6892960
+#%affymetrix-algorithm-param-apt-opt-force=true
+#%affymetrix-algorithm-param-apt-opt-block-size=2000000
+#%affymetrix-algorithm-param-apt-opt-mem-usage=1739
+#%affymetrix-algorithm-param-apt-opt-out-dir=C:\apt_test\BatchTest\test1\test
+#%affymetrix-algorithm-param-apt-opt-cc-md-chp-out-dir=
+#%affymetrix-algorithm-param-apt-opt-xda-chp-out-dir=
+#%affymetrix-algorithm-param-apt-opt-cdf-file=GenomeWideSNP_6.cdf
+#%affymetrix-algorithm-param-apt-opt-ps-list-file=GenomeWideSNP_6.probeset-ids.txt
+#%affymetrix-algorithm-param-apt-opt-kill-list=
+#%affymetrix-algorithm-param-apt-opt-use-disk=false
+#%affymetrix-algorithm-param-apt-opt-disk-dir=
+#%affymetrix-algorithm-param-apt-opt-diskCache=0
+#%affymetrix-algorithm-param-apt-opt-cel-count=5
+#%affymetrix-algorithm-param-apt-opt-cel-1=NA06985_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-2=NA06991_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-3=NA06993_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-4=NA06994_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-cel-5=NA07000_GW6_C.CEL
+#%affymetrix-algorithm-param-apt-opt-analysis-name=Test
+#%affymetrix-algorithm-param-apt-opt-set-analysis-name=Test
+#%affymetrix-algorithm-param-apt-opt-analysis-spec=adapter-type-norm.StyOnlySnpRatio=0.8287.NspOnlySnpRatio=0.796.NspOnlyCnRatio=1.4218.NspBothSnpRatio=0.9954.NspBothCnRatio=1.6392,quant-norm.sketch=-1.bioc=false.lowprecision=false.usepm=false.target=0.doavg=false.subsetmd5=d41d8cd98f00b204e9800998ecf8427e,pm-only,brlmm-p.K=4.transform=MvA.lowprecision=false.KX=1.KH=1.5.KXX=0.5.KAH=-0.6.KHB=-0.6.V=10.AAM=2.ABM=0.BBM=-2.AAV=0.06.ABV=0.06.BBV=0.06.COMVAR=1.HARD=3.SB=0.45.CM=1.MS=0.05.bins=100.hints=0.override=0.mix=1.bic=2.lambda=1.wobble=0.05.copyqc=0.CP=16.Hok=0.em_thresh=0.05.em_cutoff=0.5.gender_cutoff=0.1,
+#%affymetrix-algorithm-param-apt-opt-feat-effect-file=
+#%affymetrix-algorithm-param-apt-opt-target-sketch-file=
+#%affymetrix-algorithm-param-apt-opt-do-residuals=false
+#%affymetrix-algorithm-param-apt-opt-do-feature-effects=false
+#%affymetrix-algorithm-param-apt-opt-write-sketch=false
+#%affymetrix-algorithm-param-apt-opt-a5-write-sketch=true
+#%affymetrix-algorithm-param-apt-opt-set-gender-method=cn-probe-chrXY-ratio
+#%affymetrix-algorithm-param-apt-opt-chrXProbeFile=C:\apt_test\GenomeWideSNP_6.chrXprobes
+#%affymetrix-algorithm-param-apt-opt-chrYProbeFile=C:\apt_test\GenomeWideSNP_6.chrYprobes
+#%affymetrix-algorithm-param-apt-opt-read-priors-brlmm=
+#%affymetrix-algorithm-param-apt-opt-initial-calls=false
+#%affymetrix-algorithm-param-apt-opt-output-summaries=false
+#%affymetrix-algorithm-param-apt-opt-list-sample=false
+#%affymetrix-algorithm-param-apt-opt-write-prior=false
+#%affymetrix-algorithm-param-apt-opt-chrX-file=
+#%affymetrix-algorithm-param-apt-opt-chrX-snps=
+#%affymetrix-algorithm-param-apt-opt-no-gender-force=false
+#%affymetrix-algorithm-param-apt-opt-special-snps=GenomeWideSNP_6.specialsnps
+#%affymetrix-algorithm-param-apt-opt-compute-prior=10000
+#%affymetrix-algorithm-param-apt-opt-norm-size=0
+#%affymetrix-algorithm-param-apt-opt-dm-thresh=0.17
+#%affymetrix-algorithm-param-apt-opt-dm-het-mult=0
+#%affymetrix-algorithm-param-apt-opt-read-genders=
+#%affymetrix-algorithm-param-apt-opt-model-file-brlmm=
+#%affymetrix-algorithm-param-apt-opt-model-file-brlmmp=
+#%affymetrix-algorithm-param-apt-opt-model-file-birdseed=
+#%affymetrix-algorithm-param-apt-opt-genotypes-file=
+#%affymetrix-algorithm-param-apt-opt-dm-calls-out=false
+#%affymetrix-algorithm-param-apt-opt-qmethod-spec=plier.optmethod=1.FixFeatureEffect=true
+#%affymetrix-algorithm-param-apt-opt-genotype-only=false
+#%affymetrix-algorithm-param-quantification-name=brlmm-p
+#%affymetrix-algorithm-param-quantification-version=1.0
+#%affymetrix-algorithm-param-quantification-scale=linear
+#%affymetrix-algorithm-param-quantification-type=signal
+#%affymetrix-algorithm-param-min-thresh=-inf
+#%affymetrix-algorithm-param-max-thresh=0.05
+#%affymetrix-algorithm-param-gender_method_used=cn-probe-chrXY-ratio
+cel_files	computed_gender	call_rate	het_rate	hom_rate	cluster_distance_mean	cluster_distance_stdev	raw_intensity_mean	raw_intensity_stdev	allele_summarization_mean	allele_summarization_stdev	allele_deviation_mean	allele_deviation_stdev	allele_mad_residuals_mean	allele_mad_residuals_stdev	em-cluster-chrX-het-contrast_gender	em-cluster-chrX-het-contrast_gender_chrX_het_rate	cn-probe-chrXY-ratio_gender_meanX	cn-probe-chrXY-ratio_gender_meanY	cn-probe-chrXY-ratio_gender_ratio	cn-probe-chrXY-ratio_gender
+NA06985_GW6_C.CEL	female	99.57422	25.85560	73.71862	0.61340	0.47772	9.11434	1.29259	9.52244	1.19592	0.23718	0.42507	0.02961	0.04872	female	0.25415	1214.97180	258.86542	0.21306	female
+NA06991_GW6_C.CEL	female	99.56413	26.79998	72.76415	0.63036	0.48776	9.64440	1.30187	9.53706	1.19417	0.19228	0.34563	0.03200	0.04731	female	0.26545	1691.27405	367.92789	0.21754	female
+NA06993_GW6_C.CEL	male	99.19687	25.12108	74.07579	0.74706	0.56384	8.85483	1.22315	9.54345	1.19005	0.26690	0.42366	0.03477	0.05678	male	0.02853	603.41241	667.34094	1.10594	male
+NA06994_GW6_C.CEL	male	99.54395	26.32174	73.22221	0.60838	0.47569	9.36662	1.25374	9.55650	1.19653	0.27443	0.50279	0.02740	0.04468	male	0.01780	899.87744	959.86554	1.06666	male
+NA07000_GW6_C.CEL	female	99.46929	28.02486	71.44443	0.67820	0.51352	9.65508	1.19111	9.53578	1.18330	0.29394	0.48646	0.03026	0.04628	female	0.26009	1593.09131	377.89407	0.23721	female

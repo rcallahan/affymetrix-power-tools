@@ -1,0 +1,200 @@
+/** \page ChipStreamDesign Architecture: ChipStream Design Notes
+
+\section chipstreamContent Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#designGoals">Design Goals.</a></li>
+<li><a href="#chipstreamPhases">ChipStream phases of computation.</a></li>
+<li><a href="#getttingStarted">Classes to get started with.</a></li>
+</ul>
+
+<a name="intro">
+\section chipstreamIntro Introduction
+
+Originally the ChipStream code was just a mechanism for normalization,
+background subtraction, etc. While it is still useful in that context
+(see \link apt-cel-transformer apt-cel-transformer \endlink for example) the
+codebase has grown into doing more data analysis jobs which are can be
+seen by the applications \link apt-probeset-summarize
+apt-probeset-summarize \endlink and \link apt-probeset-genotype
+apt-probeset-genotype \endlink. Each of these applications uses the
+AnalysisStream framework to compartmentalize the different steps of
+the data analysis:
+
+- Raw data modifications that happen at the chip level like
+normalization, background subtraction, etc. happen in the ChipStream
+step.
+
+- Data modifications specific to the PM probes (i.e. subtracting MM
+value) are encapsulated in the PmAdjuster step.
+
+- Summarization of the data such as genotype calls for mapping chips
+or RMA's median polish for expression arrays, or PLIER's iterative
+summary method for expression arrays happen in the QuantMethod
+(Quantification Method) step.
+
+Some microarray applications like tiling arrays don't have a notion of
+a probeset and so the AnalysisStream framework doesn't really apply to
+them. The ChipStream and PmAdjuster steps are quite generic though and
+could in theory be reused for many different applications.
+
+
+<a name="designGoals">
+\section chipstreamDesignGoals Design Goals
+
+Design goals for this module were to:
+
+  - Minimize memory impact to allow large number of chips to be
+    processed at one time. It may be that only a smaller number of
+    probesets can be processed at one time, but a large number of chips
+    are still possible.
+
+  - Allow multiple analysis at once. Previously data transformations
+    (i.e. normalization or background subtraction) were performed serially
+    in core, meaning that it was not possible to use two different forms of
+    normalization at one time.
+
+  - Increase speed compared to hybrid c++/perl implementation. The
+    heavy lifting of computation has been pushed down to the c++ code
+    for speed increases. Additionally many objects have their own memory
+    cache to avoid millions of new's and deletes.
+
+  - Provide flexibility for new summary methods, data transformations, and
+    background estimators.
+
+<a name="chipstreamPhases">
+\section chipstreamPhases ChipStream Phases 
+
+The design has three main phases: 1) initiation, 2) data caching and
+parameter estimation, and 3) data summarization. The goal is to not
+need to have more than one complete cel file's worth of data open at
+one time. Each cel file is opened and used to estimate necessary
+parameters for that chip (i.e. RMA background - RmaBgTran, median
+normalization - MedNormTran) and data to be used is cached in memory
+in an IntensityMart such as SparseMart. That way the amount of memory
+is dependent on the number of probeset specified to summarize and the
+number of chips, rather than requiring having all probeset data in
+memory. Additional memory will be required for annotation of chip, and
+other parameters like sketches in quantile normalization (SketchQuantNormTran), but these
+should be much smaller than the size of a cel file.
+
+Below are visual representations of the different phases:
+
+@image html phase1_intiation.png "Phase 1: Objects to do analysis are created and linked together."
+
+Objects are initialized using chip annotation provided by the pgf or
+cdf and encapsulated in the ChipLayout file which specify ProbeSet
+groupings, Probe locations, mismatch probes, etc. ChipStream objects
+are connected to each other to form data transformation paths.
+
+@image html phase2_dat-ext_param-est.png "Phase 2: Cel files opened one at a time and used for parameter estimation."
+
+Having one cel file opened at a time reduces memory impact. Only data
+that will actually be used in computation (i.e. not pixel number,
+stdev ) is stored in memory and then cel file is closed. Further, only
+data for which results are desired are stored in memory. If all of the
+probe sets are desired multiple runs with a smaller number of probe
+sets might be necessary, but large numbers of chips can be analyzed
+together. It can be algorithmically challenging to require that
+parameter estimation happens one cel file at a time. Quantile
+normalization (SketchQuantNormTran) must see all the chips before a
+target profile can be generated, if doing a full normalization this
+means that all data from all chips is loaded into memory. Using a
+sketch normalization gets around this problem. Raw data from cel files
+is stored in matrix such as SparseMart. Note that in addition to
+requested probesets other data, such as gc background probes (i.e for
+GcAdjust), must be loaded into the memory cache.
+
+@image html phase3_data-tran_ps-summarize.png "Phase 3: Generate summary estimations using data transformations requested."
+
+For each probe set data is extracted from the memory cache and
+transformed through the ChipStream pathway to be summarized by the
+requested QuantMethod (i.e. plier - QuantPlier, median polish -
+QuantRma). What value to use for a mismatch probe is determined by the
+PmAdjuster class such as GcAdjuster or MmAdjuster. As data in memory
+cache is original raw data, multiple transformation pathways,
+background estimates and summary methods can be specified.
+
+All three classes of objects ChipStream, PmAdjuster and QuantMethod
+know how to make themselves via SelfCreate and are self documenting
+via SelfDoc. This helps to standardize their creation in the classes
+ChipStreamFactory, PmAdjusterFactory and QuantMethodFactory. To create
+a new type of transformation, PM adjustment class, or summary methods
+one must supply the class with all of the necessary methods then
+register the explainSelf() and newObject() classes with the
+constructor of the correct factory class (i.e. ChipStreamFactory).
+
+<a name="gettingStarted">
+\section chipstreamGettingStarted Getting Started...
+
+There are two essential things you need to implement any Affymetrix algorithm:
+
+-# A notion of what individual probes on the array are detecting,
+traditionally a ProbeSet for Expression and Genotyping arrays. Tiling
+arrays use a different mechanism which is currently unsupported in
+this module.
+
+-# The intensity data stored in a CEL file, possibly after modifications such
+as normalization or background subtraction.
+
+Knowing the probes to use and having the intensity data from the
+experiment are the two cornerstones to any algorithm analysis.
+
+\subsection ProbeSets ProbeSets
+
+A ProbeSet, or group of Probes, both perfect match (PM) and possibly
+mismatch (MM) that detect a particular target. Each ProbeSet has an
+Atom vector which in turn has a Probe vector. The Atom is represents a
+collection of probes that are used to get an estimate for a particular
+portion of a sequence target. For example an Atom may consist of a PM
+probe and an MM probe for an expression array (corresponding to the
+concept of "list" in a CDF file) or an Atom could contain probes
+interrogating each possible target base in a resequencing array. A
+Probe corresponds to the feature present at physical position x,y on
+the array. Each Probe's id is actually the index into a vector
+representing all the Probes on the array based on their physical x,y
+position based on the transformation \f$ index = (y*NumColumns) + x
+\f$ where NumColumns is the number of columns on that array. For speed
+and simplicity the ProbeSet class is a essentially a fancy struct with
+data publicly available.
+
+APT applications use the ChipLayout class to read in the desired
+ProbeSets from either a CDF file (traditional arrays like U133 or
+500K) or PGF file (Exon arrays). Having the RAM representation
+independent of the disk representation allows us to support multiple
+different file formats and more easily accommodate future formats. The ProbeSets
+read by a ChipLayout object can be accessed serially by functions like
+ChipLayout::getProbeSetIndex() or randomly using functions like ChipLayout::getProbeSetByName().
+
+\subsection Intensity Data
+
+After the hybridization, scanning, griding the raw intensity data is
+stored in CEL files. These CEL files are the beginning for most
+analyses. When doing mulitchip algorithms these CEL files can quickly
+add up to a lot of data. For example the 5 micron chips (i.e. Exon and
+500K Mapping) each have 6.5 million features each and so having the
+intensity data for 100 CEL files requires about 6.5 million * 100 * 4
+bytes per float requires 2.6 Gig of RAM. 
+
+Most of the current APT applications use a combination of CelReader to
+read the CEL file data and SparseMart to store the data in
+RAM. SparseMart has the benefit of being able to store a subset of the
+total data in a CEL file compactly so when computing a subset of
+ProbeSets it allows an application to fit in a much smaller amount of
+RAM.
+
+Running the raw intensity data in a SparseMart through a ChipStream
+set of transformations via ChipStream::transformData() allows common
+work flows such as normalization and background subtraction. See the
+\link apt-cel-transformer apt-cel-transformer \endlink program for an example
+usage of the ChipStream framework in a real, yet relatively simple,
+application.
+
+Once you have the ProbeSet specifying the probe of interest and the
+accompanying intensity data via SparseMart::getProbeIntensity() many
+algorithms, such as RMA (QuantRMA), plier (QuantPlier), BRLMM
+(QuantBRLMM), etc. can be implemented in a relatively efficient
+method.
+
+ */

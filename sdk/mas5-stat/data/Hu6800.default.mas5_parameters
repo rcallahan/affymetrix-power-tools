@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ParameterFile company="Affymetrix" userName="Affymetrix" contentVersion="1">
+  <Implementation name="MAS5 Parameters" version="1.0" executableFileName="ExpressionConsole.EXE" description="MAS5 Parameters 16-20 probe pairs" />
+  <Parameter name="Alpha1" isEditable="true" type="Float" currentValue="0.04" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Alpha2" isEditable="true" type="Float" currentValue="0.06" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Tau" isEditable="true" type="Float" currentValue="0.015" precision="0" maxLength="0" index="-1" />
+  <Parameter name="ScaleFactor" isEditable="true" type="Float" currentValue="1" precision="0" maxLength="0" index="-1" />
+  <Parameter name="TGT" isEditable="true" type="Float" currentValue="500" precision="0" maxLength="0" index="-1" />
+  <Parameter name="SFMethod" isEditable="true" type="String8" currentValue="SCALE_TO_ALL_PROBE_SETS" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Gamma1L" isEditable="true" type="Float" currentValue="0.0025" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Gamma1H" isEditable="true" type="Float" currentValue="0.0025" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Gamma2L" isEditable="true" type="Float" currentValue="0.003" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Gamma2H" isEditable="true" type="Float" currentValue="0.003" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Perturbation" isEditable="true" type="Float" currentValue="1.1" precision="0" maxLength="0" index="-1" />
+  <Parameter name="NFMethod" isEditable="true" type="String8" currentValue="DEFINED_NORMALIZATION_FACTOR" precision="0" maxLength="0" index="-1" />
+  <Parameter name="NormFactor" isEditable="true" type="Float" currentValue="1" precision="0" maxLength="0" index="-1" />
+  <Parameter name="ProbeMaskFile" isEditable="true" type="String8" currentValue="probemaskfile" precision="0" maxLength="0" index="-1" />
+  <Parameter name="ScaleMaskFile" isEditable="true" type="String8" currentValue="scalemaskfile" precision="0" maxLength="0" index="-1" />
+  <Parameter name="NormMaskFile" isEditable="true" type="String8" currentValue="normmaskfile" precision="0" maxLength="0" index="-1" />
+  <Parameter name="BHCoef" isEditable="false" type="Float" currentValue="7.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="BiasCorrect" isEditable="false" type="Float" currentValue="0.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="BLCoef" isEditable="false" type="Float" currentValue="0.8" precision="0" maxLength="0" index="-1" />
+  <Parameter name="CMultiplier" isEditable="false" type="Float" currentValue="0.2" precision="0" maxLength="0" index="-1" />
+  <Parameter name="ContrastTau" isEditable="false" type="Float" currentValue="0.03" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Delta" isEditable="false" type="Float" currentValue="0.0000009536743" precision="0" maxLength="0" index="-1" />
+  <Parameter name="Epsilon" isEditable="false" type="Float" currentValue="0.5" precision="0" maxLength="0" index="-1" />
+  <Parameter name="EpsilonAvgLogInten" isEditable="false" type="Float" currentValue=" 0.0001" precision="0" maxLength="0" index="-1" />
+  <Parameter name="EpsilonAvgLogRatio" isEditable="false" type="Float" currentValue="0.0001" precision="0" maxLength="0" index="-1" />
+  <Parameter name="EpsilonGammas" isEditable="false" type="Float" currentValue="0.0001" precision="0" maxLength="0" index="-1" />
+  <Parameter name="EpsilonSB" isEditable="false" type="Float" currentValue="0.0001" precision="0" maxLength="0" index="-1" />
+  <Parameter name="IntensityHighPercent" isEditable="false" type="Float" currentValue="2.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="IntensityLowPercent" isEditable="false" type="Float" currentValue="2.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="NoiseFrac" isEditable="false" type="Float" currentValue=".5" precision="0" maxLength="0" index="-1" />
+  <Parameter name="NumberBGCells" isEditable="false" type="Float" currentValue="2.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="NumberHorZones" isEditable="false" type="Int32" currentValue="4" precision="0" maxLength="0" index="-1" />
+  <Parameter name="NumberVertZones" isEditable="false" type="Int32" currentValue="4" precision="0" maxLength="0" index="-1" />
+  <Parameter name="RelConfInterval" isEditable="false" type="Float" currentValue="0.975" precision="0" maxLength="0" index="-1" />
+  <Parameter name="SaturatedIntensity" isEditable="false" type="Float" currentValue="65000.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="HPSaturatedIntensity" isEditable="false" type="Float" currentValue="48000.0" precision="0" maxLength="0" index="-1"/>
+  <Parameter name="ScaleTau" isEditable="false" type="Float" currentValue="10.0f" precision="0" maxLength="0" index="-1" />
+  <Parameter name="SmoothFactorBG" isEditable="false" type="Float" currentValue="100.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="STP" isEditable="false" type="Float" currentValue="3.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="TuningConstantCAvgLogInten" isEditable="false" type="Float" currentValue="5.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="TuningConstantCAvgLogRatio" isEditable="false" type="Float" currentValue="5.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="TuningConstantCGammas" isEditable="false" type="Float" currentValue="5.0" precision="0" maxLength="0" index="-1" />
+  <Parameter name="TuningConstantCSB" isEditable="false" type="Float" currentValue="5.0" precision="0" maxLength="0" index="-1" />
+</ParameterFile>

@@ -1,0 +1,488 @@
+/**
+\page apt-probeset-summarize MANUAL: apt-probeset-summarize (\aptversion)
+
+\section Contents Contents
+
+<ul>
+<li><a href="#intro">Introduction.</a></li>
+<li><a href="#quickstart">Quick Start - getting up and running.</a></li>
+<li><a href="#options">Program Options - command line options.</a></li>
+<li><a href="#exampleUsage">Example Usages.</a></li>
+<li><a href="#advancedTopics">Advanced Topics</a></li>
+  <ul>
+  <li><a href="#paramVsOpts">A Word about Program Options vs Analysis Parameters.</a></li>
+  <li><a href="#concepts">Some Important Concepts.</a></li>
+  <li><a href="#analysisSpecification">Custom Analysis Specfication.</a></li>
+  <li><a href="#normalization">Normalization.</a></li>
+  </ul>
+<li><a href="#errors">When Problems Occur and Bugs Arise.</a></li>
+<li><a href="#faq">FAQ - Frequently Asked Questions.</a></li>
+</ul>
+
+<a name="intro">
+\section intro Introduction
+
+\p apt-probeset-summarize is a program for doing background subtraction,
+normalization and summarizing probe sets from Affymetrix expression microarrays.
+It implements analysis algorithms such as
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Retrieve&dopt=AbstractPlus&list_uids=12582260&query_hl=2&itool=pubmed_docsum">RMA</a>,
+<a href="http://www.affymetrix.com/support/technical/technotes/plier_technote.pdf">Plier</a>,
+and DABG (detected above background).
+
+The main features of apt-probeset-summarize not common in other implementations are:
+
+- Quantile normalization using a subset (sketch) of the data which
+  results in much smaller memory usage.
+- Analyze microarray in chunks of probesets, which when combined with the sketch
+  quantile normalization above allows the analysis thousands of chips
+  on a single computer or in parallel across a cluster of computers.
+- Save target normalizations and probe (feature) effects for use later.
+- Ability to group probesets into larger "meta" probesets as specified
+  by the user via a text file. This is particularly for the exon level
+  microarrays where gene or transcript level estimates are desired.
+
+<a name="quickstart">
+\section QuickStart Quick Start
+
+Most users will just want to generate summaries using RMA and/or
+Plier for each probeset on the microarray. We provide both 'rma' and
+'rma-sketch' where 'rma-sketch' will closely approximate a full
+quantile normalization using a much smaller amount of memory.
+
+On unix systems a command to do both rma-sketch and plier-sketch
+analysis at the same time with the default parameters looks like:
+
+\verbatim
+apt-probeset-summarize -a rma-sketch -a plier-mm-sketch -d chip.cdf -o output-dir *.cel
+\endverbatim
+
+when using a CDF file or alternatively a PGF and CLF files can be specified:
+
+\verbatim
+apt-probeset-summarize -a rma-sketch -a plier-mm-sketch -p chip.pgf -c chip.clf -o output-dir *.cel
+\endverbatim
+
+As the windows command prompt does not natively support
+wild card expansion the preferred method is to supply a text file list
+via the --cel-files option (see below for details of file format). A
+windows a command using the default parameters looks like:
+
+\verbatim
+apt-probeset-summarize -a rma-sketch -a plier-mm-sketch -d chip.cdf -o output-dir --cel-files cel_list.txt
+\endverbatim
+
+Where \c -a specifies an analysis to do and \c -o specifies a
+directory to put the output files in. You can specify the probesets on
+a chip with either a CDF file via a \c -d or using a PGF/CLF file pair
+via the \c -p and \c -c flags.
+
+If the microarray does not have mismatch probes you can specify use a
+surrogate mismatch based on probes with similar GC content by using
+the \c plier-gcbg analysis and specifying the background probes using
+the --bgp-file flag.
+
+WARNING: apt-probeset-summarize will overwrite any existing output
+files it finds.  If you wish to keep existing results make sure to
+specify a different output directory name. It is also important to note that
+consistent with the Bioconductor implementation all RMA output has
+been log2 transformed.
+
+<a name="options">
+\subsection manualOptions Options:
+
+<!-- Do not edit this verbatim section.
+     It will be replaced automatically w/ the results
+     of running this program with the -h option
+     --->
+
+\verbinclude apt-probeset-summarize.help.txt
+<a name="exampleUsage">
+\subsection manualExamples Example Usages:
+
+Do an RMA and Plier using PM-MM analysis at the same time for a set of chips
+\verbatim
+apt-probeset-summarize -a rma -a plier-mm-sketch -p chip.pgf -c chip.clf -o output-dir *.cel
+\endverbatim
+
+Do an RMA-sketch analysis and Plier using PM-MM analysis at the same
+time for a set of chips. Here RMA-sketch means use a subset of the
+chip to closely approximate the full quantile normalization while
+using much less memory. See <a href="#normalization">Normalization</a>
+for more details.
+\verbatim
+apt-probeset-summarize -a rma-sketch -a plier-mm-sketch -p chip.pgf -c chip.clf -o output-dir *.cel
+\endverbatim
+
+Do an RMA and Plier using PM-MM analysis at the same time for a set of chips for a subset of
+probesets, this can significantly lower memory usage.
+\verbatim
+apt-probeset-summarize -s probesetList.txt -a rma-sketch -a plier-mm-sketch -p chip.pgf -c chip.clf -o output-dir *.cel
+\endverbatim
+
+
+Do an RMA and Plier using surrogate mismatch based on GC background
+probes analysis at the same time for a set of chips on the meta
+probesets that represent the RefSeq transcripts.
+\verbatim
+apt-probeset-summarize  -a plier-gcbg-sketch -a rma-sketch -p HuEx-1_0-st-v2.pgf \
+    -c HuEx-1_0-st-v2.clf -b backgroundProbes.bgp -s map.refseq.txt -o results-dir *.CEL
+\endverbatim
+
+Replicate the results of RMA from bioconductor.
+\verbatim
+apt-probeset-summarize -a rma -d chip.cdf -o output-dir *.cel
+\endverbatim
+
+Split up an analysis batch to run on a server. With the great
+diversity of unix shells and cluster job servers there are many
+possible ways to do split up jobs to run on a compute cluster. The
+example below is using the
+<a href="http://www.gnu.org/software/bash/bash.html">bash</a> shell
+and the <a href="http://www.openpbs.org/">Portable Batch System</a>
+job queuing system via the qsub command.
+\verbatim
+# Make a directory for our output files.
+mkdir output
+# Run on a single cel file to get full list of probesets
+apt-probeset-summarize -a rma -d HG-U133_Plus_2.cdf -o names data/heart-rep1.cel
+# Cut out list of probesets
+cat names/rma.summary.txt | cut -f 1 | grep -E '_[sa]{1}t' > probesets.txt
+# About 55,000 probesets do in 10 jobs with 5,500 probesets each
+wc probesets.txt
+mkdir lists
+split -d -l 5500 probesets.txt lists/probes_
+# Prepend the required header 'probeset_id' to each file.
+for list in `find lists -name "probes_*"`; do
+   echo "probeset_id" >> $list.sub;
+   cat $list >> $list.sub;
+done;
+
+# Submit a job for each file.
+rm jobsToRun.txt
+for list in `find lists -name "probes_*.sub"`; do
+   cwd=`pwd`
+   base=`basename $list`
+   echo "Doing $base"
+   echo "apt-probeset-summarize -s $cwd/$list -a rma-sketch -d $cwd/HG-U133_Plus_2.cdf  -o $cwd/output/$base-dir $cwd/data/ *.cel" | qsub
+# Then grab everything but the header info from all the files.
+cat `find ./output -name "rma-sketch.summary.txt" | sort` | grep -v -E '#|probeset_id'  >> allResults.txt
+\endverbatim
+
+<a name="advancedTopics">
+\section Manual Concept Manual:
+
+<a name="paramVsOpts">
+\subsection paramVsOptions A Word about Program Options vs Analysis Parameters:
+
+The results generated by apt-probeset-genotype can be affected by both
+the program level <b>options</b> (like --target-sketch,
+--meta-probesets, --bgp-file) and the analysis <b>parameters</b> used
+to create an analysis specification as supplied via the --analysis
+option (like quant-norm.usepm=true.bioc=true,pm-only,med-polish). The
+analysis level parameters are aimed at advanced users and others are
+encouraged to stick with the "Standard Methods" described above in the
+<a href="#options">Options</a> section.
+
+The ability to specify parameters to an analysis via the analysis
+specification provides a powerful mechanism to construct custom
+analysis, but can be confusing at first as the output from most
+programs is controlled only by the program level options. In spirit
+the ability to specify analysis level parameters is analogous to
+providing a custom regular expression to the unix program 'grep'. The
+available parameters for a particular step of an analysis can be seen
+using the --explain option (i.e. apt-probeset-summarize --explain
+quant-norm). See <a href="#analysisSpecification">below</a> for
+details on the comma and period separated format.
+
+<a name="concepts">
+\subsection manualConcepts Some Concepts:
+
+An analysis of Affymetrix microarrays usually starts with some
+combination of background subtraction, normalization, and
+summarization of all the probes from a particular probeset. There are
+a variety of different methods to perform each one of these
+steps. apt-probeset-summarize aims to provide a flexible way to
+specify an analysis and compute them efficiently. Key concepts for
+understanding what apt-probeset-summarize does and how it does it are:
+
+- Analysis Specification: While aliases for very common analysis
+  such as RMA and Plier are provided, it is possible to specify your
+  own custom analysis. For example RMA usually uses a quantile
+  normalization and the RMA alias analysis is:
+  'rma-bg,quant-norm.sketch=0.usepm=true.bioc=true,pm-only,med-polish'
+  which is a comma separated list of different analysis modules making
+  up the analysis specification. Every analysis portion must terminate
+  with a PM modification module (pm-only in this case) and a probeset
+  summarization step (med-polish in this case).
+
+- Probeset Specification: Probesets must be specified either using a
+  combination of PGF and CLF files or a single CDF file. As CDF files
+  don't usually have sequences in them it is not possible to use the
+  GC background model with CDF files.
+
+- Meta Probesets: It is possible to define meta probesets which are
+  the combination of multiple probesets by specifying a
+  'probeset_list' column in addition to the usual 'probeset_id' column
+  in the 'probeset-ids' file. This of particular interest for the Exon
+  microarray as the individual exon probesets can be put together to
+  generate a transcript level estimate.
+
+- Full Quantile vs Sketch Quantile: A full quantile normalization is
+  generally memory intensive as the typical implementation loads the
+  all of the data for all of the chips into memory.  It is possible to
+  use a subsample, or sketch, of the data to approximate the full
+  quantile normalization. Thus, using a sketch normalization means that
+  you are no longer limited by the number of chips that you wish to
+  analyze, but rather by the number of probesets that you wish to
+  analyze at once.
+
+- Analyzing a subset of probesets: It is possible to divide an
+  individual analysis run into smaller jobs by specifying a subset of
+  probesets to analyze via the 'probeset-ids' file.
+
+- Using a surrogate mismatch: Some chips don't have a specific MM
+  probe, instead they have thousands of probes that shouldn't
+  hybridize to anything else in the genome. These background probes
+  are used to estimate a surrogate mismatch probe value. Using these
+  background probes to generate more sophisticated background models
+  is an area of active research.
+
+<a name="analysisSpecification">
+\subsection manualAnalysis Custom Analysis Specification:
+
+  As discussed above an analysis specification via a comma separated
+  list of different analysis modules making up the analysis. Every
+  analysis path must terminate with a PM modification module
+  (i.e. pm-only or pm-mm) and a probeset summarization step
+  (i.e. median polish for RMA or Plier). Different parameters for a
+  particular module can be specified using a 'key=value' syntax.  In
+  the case of RMA the analysis specification
+  'quant-norm.sketch=0.usepm=true.bioc=true' means the 'sketch=0'
+  parameter indicate sketch size should be all the data, 'usepm=true'
+  indicates that only the perfect match probes should be used for
+  normalization, and 'bioc=true' means that the Bioconductor method of
+  resolving ties in the quantile normalization should be used.
+
+  As an example, RMA usually uses a quantile normalization and the
+  RMA alias analysis is: \c
+  rma-bg,quant-norm.sketch=0.usepm=true.bioc=true,pm-only,med-polish
+  If it was desired to do an RMA style analysis, but with a linear
+  normalization instead of the more aggressive quantile the analysis
+  specification would look like:
+  'rma-bg,med-norm,pm-only,med-polish'
+
+  They types of data transformations, PM intensity adjustments, and
+  quantification methods supported by apt-probeset-summarize can be
+  seen by calling apt-probeset-summarize with the --help flag. The
+  parameters available for a particular method can be seen by calling
+  apt-probeset-summarize with the --explain flag (i.e. --explain quant-norm)
+
+<a name="normalization">
+\subsection manNorm Normalization:
+
+  Normalization is one of those topics where one can get 10 different
+  opinions from 10 different people. The focus of this section is not
+  to tell you which normalization method to use, but rather to alert
+  you to some of the potential pitfalls in implementation.
+
+  Quantile normalization makes the entire distribution of data from
+  different chips the same. One of the first steps of doing a quantile
+  normalization is to sort the data from the chip. This leads to an
+  implementation issue of what to do when ties occur (which often happens).
+  The Bioconductor normalize.quantile() function from the affy package
+  resolves ties by setting all the ties to have the value of the data
+  point at the middle of the run of ties. The limma package has a
+  function called normalizeQuantiles() that by default arbitrarily
+  breaks ties by ignoring the fact that they are occurring. If the
+  ties=TRUE flag is set normalizeQuantiles() will do the mathematically
+  "correct" thing and use the average value of all of the ties as the
+  final value to use, but incurs a significant slowdown in run
+  time. By default the apt-probeset-summarize implementation does the
+  mathematically correct method of taking the average of all the tied
+  values, but has been optimized to not incur a significant
+  performance cost. For compatibility with the RMA method in
+  Bioconductor the quant-norm module in apt-probeset-summarize has an
+  optional parameter 'bioc' which can be set to true to get the
+  normalize.quantiles() version of quantile normalization.
+
+  A full quantile normalization is generally memory intensive as the
+  typical implementation loads the all of the data for all of the
+  chips into memory. It is possible to use a subsample, or sketch, of
+  the data to approximate the full quantile normalization. As we
+  expect the data to be continuous we use linear interpolation when a
+  data point falls in between the samples in the sketch. In practice,
+  the sketch approximation is very close to the full quantile as long
+  as sketch is reasonably dense (default to 1% of probes or 50,000 data
+  points, whichever is larger). Thus, using a sketch normalization
+  means that you are no longer limited by the number of chips that you
+  wish to analyze, but rather by the number of probesets that you wish
+  to analyze at once.
+
+  Linear normalization doesn't have as many implementation pitfalls as
+  quantile normalization, but the determination of the target value to
+  adjust the arrays to and the summary metric for an array can vary
+  from method to method. Sometimes the summary metric used is the
+  average and other times the median is used. The target value to
+  adjust the chips to is sometimes generated by designating one chip
+  as the 'reference chip' and adjusting all the other chips linearly
+  to have the same mean (or median) as the reference chip. Another
+  approach is to calculate a summary value from all of the chips
+  (i.e. a virtual average chip). By default apt-probeset-summarize will
+  normalize all the chips to the median value of the medians from each
+  chip. One gotcha with any linear normalization is to make sure that
+  you are normalizing to the signal of the array and not the background.
+  This is especially true for arrays with a large number of speculative
+  content such as tiling arrays and the exon array.
+
+<a name="errors">
+\section manErrors When Problems Occur and Bugs Arise.
+
+Should a problem arise that isn't addressed by the FAQ or this documentation please
+post a question at the APT <a href="https://www.affymetrix.com/community/forums/forum.jspa?forumID=43">
+devnet</a> forum. Note that you'll need to register (at no cost) to use the Affymetrix devnet forums.
+
+Please be as descriptive as possible of your issue. It is also very helpful to post
+the apt-probeset-summarize.log file (found in the output directory) and the command
+line your using.
+
+<a name="faq">
+\section manFaq Frequently Asked Questions
+
+Q. What do I do when I don't have enough memory to process all the data?
+
+A. You can use a sketch quantile normalization rather than full quantile normalization. 
+   For example, using 'rma-sketch' (via --analysis option) instead of 'rma' will
+   significantly reduce memory footprint while having a minimal impact on the results.
+
+Q. I get slightly different value than RMA using the PGF file rather than the CDF
+   file, why is that?
+
+A. The CDF file excludes certain probesets that are contained in the PGF file. The
+   inclusion of these probes changes slightly the RMA background subtraction parameters
+   and the normalization results to produce slightly different results, which should
+   not be significant.
+
+Q. I get slightly different values with Plier when I use the
+   precomputed feature effects than when I learn them on the same data
+   set, Why is that?
+
+A. Plier is an iterative algorithm that stops searching for a better
+   solution once a "good" fit has been found. When the feature effects
+   are specified rather than learned the fit may be slightly
+   different, but in the view of plier it is just as "good" as the
+   original fit.
+
+Q. How do I get probe level (rather than probeset level) p-values from dabg?
+
+A. Use the --feature-details option. For most methods --feature-details outputs
+   the residuals, but for dabg it will output the probe level p-values.
+
+Q. How do I get more precision in the output than the 3 decimal places provided?
+
+A. Use the --precision option to get more precision to the program. this will result
+   in larger text files.
+
+Q. Can I get more precision especially for dabg as I need to set a low threshold
+   to address multiple testing concerns?
+
+A. Try using the 'neglog10' parameter with dabg which will report -1 * log_10(p-value).
+   See 'apt-probeset-summarize --explain dabg' for details, but an example analysis
+   specification would be: '--analysis pm-only,dabg.neglog10=true'
+
+Q. The output using RMA looks odd, Why are the values so small (in 0-16 range)?
+   Plier and Mas5 give much larger values.
+
+A. As with the original RMA implementation the values are on the log2 scale. You
+   can use the 'expon' parameter to med-polish to exponentiate them back to
+   the scale used by Plier and Mas5. See 'apt-probeset-summarize --explain med-polish'
+   for details. An example usage would be to change from the default RMA analysis
+   specification of '--analysis rma' which is a alias for '--analysis
+   rma-bg,quant-norm.sketch=0.usepm=true.bioc=true,pm-only,med-polish' to
+   '--analysis rma-bg,quant-norm.sketch=0.usepm=true.bioc=true,pm-only,med-polish.expon=true'
+   (note the small expon=true at end of specification).
+
+Q. I get the an error, "Error: Didn't find required column: 'cel_files' in file: 'cel_file_groups.tsv'",
+   when using apt-probeset-summarize with data previous analyzed using ExACT.
+
+A. apt-probeset-summarize expects the list of cel file names (provided with the --cel-files option)
+   to have a header, "cel_files". ExACT expected/generated a header value of "cel_file". To use your
+   ExACT cel file listing files with APT you will need to remove the "s" from "cel_files" in the
+   header.
+
+Q. I get slightly different answers when I normalize with exact-normalize.pl and then
+   generate summary estimates vs. normalizing directly with apt-probeset-summarize - what is
+   going on?
+
+A. When exact-normalize.pl writes the normalized values to cel files
+   the floating point values are truncated for storage reasons. If you
+   use XDA as the output format and specify 'lowprecision=true' to the
+   apt-probeset-summarize normalization modules
+   (i.e. rma-bg,quant-norm.lowprecision=true,pm-gcbg,plier') you
+   should get the same values.
+
+Q. Where can I get more information on the pca-select feature?
+
+A. Currently there is a talk from at the Affymetrix Low Level
+   Analysis Workshop by Chuck Sugnet on the method. See
+   <a href="https://www.affymetrix.com/corporate/events/low_level_workshop/2007_04_low_level_workshop.affx">
+   Dynamically Selecting Probes for Gene-Level Expression Estimates Using a Principal Components Based Approach</a>
+
+Q. How is the mask section in the CEL file used?
+
+A. It is not. The contents of this section of the CEL file are ignored.
+
+Q. How can I find out more information about the analysis string:
+<pre>
+    rma-bg,quant-norm.sketch=0.usepm=true.bioc=true,pm-only,med-polish
+</pre>
+
+A. Start with the included manual for apt-probeset-summarize. Usage information is also provided
+   if you run apt-probeset-summarize without any arguments. Lastly, use the "--explain" option
+   for more information about particular analysis methods. IE:
+<pre>
+    apt-probeset-summarize --explain quant-norm.
+</pre>
+
+Q. Wild cards do not work on windows. For example:
+<pre>
+    apt-probeset-summarize ... *.CEL
+</pre>
+
+A. APT relies on the command shell to do the wild card expansion (ie bash shell on
+   *NIX systems). The windows shell does not do wild card expansion, so there is no
+   wild card expansion for APT when run from the windows shell. You may want to try
+   a different windows shell or perhaps bash via cygwin. See the --cel-files option
+   as an alternative to specify CEL files for analysis.
+
+Q. In expression console I can select the option "Scale to all probe sets" and specify
+   a target (e.g. 200).  How can I specify this in apt-probeset-summarize ?
+
+Q. Are APT CHP files compatible with EC? Are they identical to what EC generates?
+
+A. See the <a href="VIGNETTE-chp-file-output-differences.html">CHP File Differences between EC, GC, and APT</a>
+   vignette for more information.
+
+Q. Does apt-probeset-summarize generate a quality assessment report like EC?
+
+A. Yes. There will be a report.txt output file (ie rma-sketch.report.txt) which includes many of
+   the same quality assessment metrics.
+
+Q. What happens to non-pm probes when pulled through the rma-bg chipstream?
+
+A. The background parameterization is based only on PM probes. If methods
+   request an intensity value for a non-PM probe, then the probe itensity
+   of that non-PM probe will be background adjusted just as if it were
+   a PM probe. The following is an example of an analysis stream where
+   this would occur:
+   \verbatim
+        rma-bg,quant-norm,pm-mm,plier
+   \endverbatim
+   Of course combining the global background correction from RMA with
+   PLIER and a probe specific correction using the MM may result in
+   poor results.
+
+Q. What is a probe_id? 
+
+A. See the <a href="FAQ.html#probe_id_faq">FAQ item on probe IDs</a> for more info.
+
+*/
